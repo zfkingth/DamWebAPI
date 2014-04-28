@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ALGraph</name>
+    </assembly>
+    <members>
+        <member name="T:ALGraph.ArcNode">
+            <summary>
+            ArcNode 的摘要说明。弧结点的结构
+            </summary>
+        </member>
+        <member name="F:ALGraph.ArcNode.adjvex">
+            <summary>
+            该弧所指向的顶点
+            </summary>
+        </member>
+        <member name="F:ALGraph.ArcNode.nextarc">
+            <summary>
+            下一条弧的引用
+            </summary>
+        </member>
+        <member name="F:ALGraph.ArcNode.weight">
+            <summary>
+            与弧相关的权值，无权则为0
+            </summary>
+        </member>
+        <member name="F:ALGraph.ArcNode.info">
+            <summary>
+            弧的相关信息的引用
+            </summary>
+        </member>
+        <member name="M:ALGraph.ArcNode.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ALGraph.MyGraph">
+            <summary>
+            MyGraph 的摘要说明。图的邻接表结构定义
+            </summary>
+        </member>
+        <member name="F:ALGraph.MyGraph.startSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALGraph.MyGraph.vertices">
+            <summary>
+            顶点数组
+            </summary>
+        </member>
+        <member name="F:ALGraph.MyGraph.Arcnum">
+            <summary>
+            图的当前弧数
+            </summary>
+        </member>
+        <member name="M:ALGraph.MyGraph.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ALGraph.MyGraph.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ALGraph.MyGraph.addVNode(System.Object)">
+            <summary>
+             向顶点数组中添加一个新的顶点
+            </summary>
+            <param name="nodeData">顶点的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ALGraph.MyGraph.getVNode(System.Object)">
+            <summary>
+            根据顶点的数据信息，查找顶点
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALGraph.MyGraph.addArcNode(ALGraph.ArcNode,System.Object,System.Object)">
+            <summary>
+            添加弧
+            </summary>
+            <param name="arcNode"></param>
+            <param name="fromData"></param>
+            <param name="toData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALGraph.MyGraph.topSort">
+            <summary>
+            拓扑排序
+            </summary>
+            <returns>返回输出顶点数组</returns>
+        </member>
+        <member name="P:ALGraph.MyGraph.Vexnum">
+            <summary>
+            图的当前顶点数
+            </summary>
+        </member>
+        <member name="T:ALGraph.VNode">
+            <summary>
+            VNode 的摘要说明。顶点结点的结构
+            </summary>
+        </member>
+        <member name="F:ALGraph.VNode.data">
+            <summary>
+            顶点信息
+            </summary>
+        </member>
+        <member name="F:ALGraph.VNode.firstarc">
+            <summary>
+            依附于该顶点的第一条弧
+            </summary>
+        </member>
+        <member name="F:ALGraph.VNode.endarc">
+            <summary>
+            依附于该顶点的最后一条弧
+            </summary>
+        </member>
+        <member name="F:ALGraph.VNode.inDegree">
+            <summary>
+            入度:指向该顶点的弧的个数
+            </summary>
+        </member>
+        <member name="F:ALGraph.VNode.outDegree">
+            <summary>
+            出度:从该顶点出发的弧的个数
+            </summary>
+        </member>
+        <member name="M:ALGraph.VNode.Clone">
+            <summary>
+            克隆顶点
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ALGraph.VNode.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+    </members>
+</doc>

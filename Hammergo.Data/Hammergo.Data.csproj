@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBE3B5D8-F573-4B9B-87C4-E50CF1A9A6A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hammergo.Data</RootNamespace>
+    <AssemblyName>Hammergo.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Logic\ParamsValidatation.cs" />
+    <Compile Include="Migrations\201404270249106_initial.cs" />
+    <Compile Include="Migrations\201404270249106_initial.Designer.cs">
+      <DependentUpon>201404270249106_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404270249332_check.cs" />
+    <Compile Include="Migrations\201404270249332_check.Designer.cs">
+      <DependentUpon>201404270249332_check.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404280428474_dateToOffset.cs" />
+    <Compile Include="Migrations\201404280428474_dateToOffset.Designer.cs">
+      <DependentUpon>201404280428474_dateToOffset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\App.cs" />
+    <Compile Include="Models\ApparatusType.cs" />
+    <Compile Include="Models\AppCollection.cs" />
+    <Compile Include="Models\AppParam.cs" />
+    <Compile Include="Models\CalculateParam.cs" />
+    <Compile Include="Models\CalculateValue.cs" />
+    <Compile Include="Models\ConstantParam.cs" />
+    <Compile Include="DamWCFContext.cs" />
+    <Compile Include="Models\Formula.cs" />
+    <Compile Include="Models\Mapping\ApparatusTypeMap.cs" />
+    <Compile Include="Models\Mapping\AppCollectionMap.cs" />
+    <Compile Include="Models\Mapping\AppMap.cs" />
+    <Compile Include="Models\Mapping\AppParamMap.cs" />
+    <Compile Include="Models\Mapping\CalculateValueMap.cs" />
+    <Compile Include="Models\Mapping\FormulaMap.cs" />
+    <Compile Include="Models\Mapping\MessureValueMap.cs" />
+    <Compile Include="Models\Mapping\ProjectPartMap.cs" />
+    <Compile Include="Models\Mapping\RemarkMap.cs" />
+    <Compile Include="Models\Mapping\TaskAppMap.cs" />
+    <Compile Include="Models\Mapping\TaskTypeMap.cs" />
+    <Compile Include="Models\MessureParam.cs" />
+    <Compile Include="Models\MessureValue.cs" />
+    <Compile Include="Models\ProjectPart.cs" />
+    <Compile Include="Models\Remark.cs" />
+    <Compile Include="Models\TaskApp.cs" />
+    <Compile Include="Models\TaskType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ALGraph\ALGraph.csproj">
+      <Project>{6b4d92da-b5a5-402e-b25d-39d359960e56}</Project>
+      <Name>ALGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\calculator\calculator.csproj">
+      <Project>{3142f2d7-9a05-480f-a4ce-804b61ad011d}</Project>
+      <Name>calculator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201404270249106_initial.resx">
+      <DependentUpon>201404270249106_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404270249332_check.resx">
+      <DependentUpon>201404270249332_check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404280428474_dateToOffset.resx">
+      <DependentUpon>201404280428474_dateToOffset.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
