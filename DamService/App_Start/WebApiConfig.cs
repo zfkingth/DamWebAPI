@@ -53,9 +53,7 @@ namespace DamService
                .Function("First")
                .Returns<Transaction>();
 
-            transType.Collection
-            .Function("Test")
-           .Returns<ApparatusType>();
+   ;
 
 
             return builder.GetEdmModel();

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.OData;
 using Hammergo.Data;
+using System;
 
 namespace DamService.Controllers
 {
@@ -28,7 +29,7 @@ namespace DamService.Controllers
             return Created(entity);
         }
 
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, [FromBody] ApparatusType entity)
+        public async Task<IHttpActionResult> Put([FromODataUri] Guid key, [FromBody] ApparatusType entity)
         {
             if (!ModelState.IsValid)
             {

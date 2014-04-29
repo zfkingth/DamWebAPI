@@ -1,5 +1,6 @@
 namespace DamService2.Migrations
 {
+    using Hammergo.Data;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +27,12 @@ namespace DamService2.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            var type = new ApparatusType();
+            type.Id = Guid.NewGuid();
+            type.TypeName = "第一种类型";
+
+            context.ApparatusTypes.Add(type);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Hammergo.Data
     {
         static DamWCFContext()
         {
-            Database.SetInitializer<DamWCFContext>(new  DamContextInitializer());
+            Database.SetInitializer<DamWCFContext>(null);
         }
 
         public DamWCFContext():this(true)

@@ -39,13 +39,6 @@ namespace DamService.Controllers
             return Ok(retval);
         }
 
-        [HttpGet]
-        public IHttpActionResult Test()
-        {
-            var retval = new Hammergo.Data.ApparatusType() { ApparatusTypeID = Guid.NewGuid(), TypeName = "测试名称" };
 
-
-            return Ok(retval);
-        }
     }
 }
