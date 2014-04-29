@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections;
 using DamService.Test.Hammergo.Data;
 using DamContext = DamService.Test.Default.DamContext;
-using DamService.Test.Hammergo.Data;
 using System.Collections.Generic;
 using Microsoft.OData.Client;
 using System.Linq;

@@ -69,8 +69,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DamClient.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>DamClient.tt</DependentUpon>
     </Compile>
     <Compile Include="TestConfig.cs" />
@@ -78,7 +78,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="DamClient.odata.config" />
     <None Include="DamClient.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
