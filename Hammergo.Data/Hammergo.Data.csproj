@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DamContextInitializer.cs" />
     <Compile Include="Logic\ParamsValidatation.cs" />
     <Compile Include="Migrations\201404270249106_initial.cs" />
     <Compile Include="Migrations\201404270249106_initial.Designer.cs">

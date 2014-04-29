@@ -14,17 +14,27 @@ namespace Hammergo.Data
     {
         static DamWCFContext()
         {
-            Database.SetInitializer<DamWCFContext>(null);
+            Database.SetInitializer<DamWCFContext>(new  DamContextInitializer());
         }
 
-        public DamWCFContext()
+        public DamWCFContext():this(true)
+        {
+           
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="checkLogic">在数据库操作中是否检查应用逻辑</param>
+        public DamWCFContext(bool checkLogic)
             : base("Data Source=.;Initial Catalog=DamWebApi;Integrated Security=True;MultipleActiveResultSets=True")
         {
-            var objCtx = ((IObjectContextAdapter)this).ObjectContext;
-            objCtx.SavingChanges += objCtx_SavingChanges;
+            if (checkLogic)
+            {
+                var objCtx = ((IObjectContextAdapter)this).ObjectContext;
+                objCtx.SavingChanges += objCtx_SavingChanges;
+            }
         }
-
-
 
         #region Business Logic
         void objCtx_SavingChanges(object sender, System.EventArgs e)
