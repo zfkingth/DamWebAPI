@@ -14,7 +14,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -39,7 +39,7 @@ namespace WpfApplication1.Import
                             foreach (var item in query)
                             {
 
-                                newItem.ID = Guid.NewGuid();
+                                newItem.Id = Guid.NewGuid();
                                 newItem.ParamId = item.calculateParamID;
                                 newItem.Date = item.Date;
                                 newItem.Val = item.Val;

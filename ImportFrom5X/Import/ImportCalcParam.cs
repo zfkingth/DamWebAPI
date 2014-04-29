@@ -13,7 +13,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -25,14 +25,14 @@ namespace WpfApplication1.Import
                         {
                             var id = (from i in dam6Entities.Apps.AsNoTracking()
                                       where i.AppName == item.appName
-                                      select i).First().AppId;
+                                      select i).First().Id;
 
-                            if (dam6Entities.CalculateParams.FirstOrDefault(i => i.ParamId == item.CalculateParamID) == null)
+                            if (dam6Entities.CalculateParams.FirstOrDefault(i => i.Id == item.CalculateParamID) == null)
                             {
                                 var newItem = new CalculateParam();
 
                                 newItem.AppId =id;
-                                newItem.ParamId = item.CalculateParamID;
+                                newItem.Id = item.CalculateParamID;
                                 newItem.Description = item.Description;
                                 newItem.Order = item.Order==null?(byte)0:item.Order.Value;
                                 newItem.ParamName = item.ParamName;
@@ -41,7 +41,7 @@ namespace WpfApplication1.Import
                                 newItem.UnitSymbol = item.UnitSymbol;
 
                                 var formula = new Formula();
-                                formula.FormulaID = Guid.NewGuid();
+                                formula.Id = Guid.NewGuid();
                                 formula.ParamId = item.CalculateParamID;
                                 formula.FormulaExpression = item.CalculateExpress;
                                 byte calcOrder = 1;

@@ -14,7 +14,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
                     
@@ -24,10 +24,10 @@ namespace WpfApplication1.Import
                         _allRowCnt = dam5Entities.ApparatusTypes.Count();
                         foreach (var item in dam5Entities.ApparatusTypes.AsNoTracking())
                         {
-                            if (dam6Entities.ApparatusTypes.FirstOrDefault(i => i.ApparatusTypeID == item.ApparatusTypeID) == null)
+                            if (dam6Entities.ApparatusTypes.FirstOrDefault(i => i.Id == item.ApparatusTypeID) == null)
                             {
                                 ApparatusType newItem = new ApparatusType();
-                                newItem.ApparatusTypeID = item.ApparatusTypeID;
+                                newItem.Id = item.ApparatusTypeID;
                                 newItem.TypeName = item.TypeName;
 
                                 dam6Entities.ApparatusTypes.Add(newItem);

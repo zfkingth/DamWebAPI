@@ -13,7 +13,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -24,7 +24,7 @@ namespace WpfApplication1.Import
                         foreach (var taskType in dam5Entities.TaskTypes)
                         {
                             var newTaskType = new TaskType();
-                            newTaskType.TaskTypeID = taskType.TaskTypeID;
+                            newTaskType.Id = taskType.TaskTypeID;
                             newTaskType.TypeName = taskType.TypeName;
 
                             dam6Entities.TaskTypes.Add(newTaskType);
@@ -39,7 +39,7 @@ namespace WpfApplication1.Import
 
                         foreach (var oldItem in dam5Entities.AppCollections)
                         {
-                            newAppCol.AppCollectionID = oldItem.AppCollectionID;
+                            newAppCol.Id = oldItem.AppCollectionID;
                             newAppCol.CollectionName = oldItem.CollectionName;
                             newAppCol.Description = oldItem.Description;
                             newAppCol.Order = oldItem.Order;
@@ -50,15 +50,15 @@ namespace WpfApplication1.Import
                             dam6Entities.Entry(newAppCol).State = System.Data.Entity.EntityState.Detached;;
 
                             var query = from i in dam5Entities.TaskAppratus
-                                        where i.appCollectionID == newAppCol.AppCollectionID
+                                        where i.appCollectionID == newAppCol.Id
                                         select i;
                     
                             foreach (var item in query)
                             {
                                 var id = (from i in dam6Entities.Apps
                                           where i.AppName == item.appName
-                                          select i).First().AppId;
-                                newTaskApp.ID = Guid.NewGuid();
+                                          select i).First().Id;
+                                newTaskApp.Id = Guid.NewGuid();
                                newTaskApp.AppId =id;
                                newTaskApp.Order = item.Order;
                                newTaskApp.AppCollectionID = item.appCollectionID;

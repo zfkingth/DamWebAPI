@@ -154,7 +154,7 @@ namespace WpfApplication1.Import
                     dam5xEntities.Database.Connection.Open();
                     dam5xEntities.Database.Connection.Close();
                 }
-                using (DamWCFContext dam6xEntities = new DamWCFContext())
+                using (DamWCFContext dam6xEntities = new DamWCFContext(false))
                 {
                     //dam6xEntities.Database.Connection.ConnectionString = ConnectionString6x;
                     dam6xEntities.Database.Connection.Open();

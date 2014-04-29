@@ -13,7 +13,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -38,7 +38,7 @@ namespace WpfApplication1.Import
                             {
 
 
-                                newItem.ID = Guid.NewGuid();
+                                newItem.Id = Guid.NewGuid();
                                 newItem.ParamId = item.messureParamID;
                                 newItem.Date = item.Date;
                                 newItem.Val = item.Val;

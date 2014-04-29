@@ -13,7 +13,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -25,14 +25,14 @@ namespace WpfApplication1.Import
                         {
                             var id = (from i in dam6Entities.Apps.AsNoTracking()
                                       where i.AppName == item.appName
-                                      select i).First().AppId;
+                                      select i).First().Id;
 
-                            if (dam6Entities.ConstantParams.FirstOrDefault(i => i.ParamId == item.ConstantParamID) == null)
+                            if (dam6Entities.ConstantParams.FirstOrDefault(i => i.Id == item.ConstantParamID) == null)
                             {
                                 var newItem = new ConstantParam();
 
                                 newItem.AppId = id;
-                                newItem.ParamId = item.ConstantParamID;
+                                newItem.Id = item.ConstantParamID;
                                 newItem.Description = item.Description;
                             
                                 newItem.Order = item.Order==null?(byte)0:item.Order.Value;

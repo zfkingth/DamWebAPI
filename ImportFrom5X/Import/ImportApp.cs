@@ -14,7 +14,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -28,7 +28,7 @@ namespace WpfApplication1.Import
                             {
                                 var newItem = new Hammergo.Data.App();
 
-                                newItem.AppId = Guid.NewGuid();
+                                newItem.Id = Guid.NewGuid();
                                 newItem.AppName = item.AppName;
                                 newItem.CalculateName = item.CalculateName;
                                 newItem.AppTypeID = item.AppTypeID;

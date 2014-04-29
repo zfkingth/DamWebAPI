@@ -13,7 +13,7 @@ namespace WpfApplication1.Import
         {
             try
             {
-                using (DamWCFContext dam6Entities = new DamWCFContext())
+                using (DamWCFContext dam6Entities = new DamWCFContext(false))
                 {
                     ResetConnectionString(dam6Entities);
 
@@ -29,7 +29,7 @@ namespace WpfApplication1.Import
                             //寻找已有数据中的最大date
                             var id = (from i in dam6Entities.Apps.AsNoTracking()
                                      where i.AppName == paramItem.AppName
-                                     select i).First().AppId; 
+                                      select i).First().Id; 
                             DateTimeOffset maxDate = (from i in dam6Entities.Remarks.AsNoTracking()
                                                 where i.AppId==id
                                                 select i.Date).DefaultIfEmpty(minDate).Max();
@@ -40,7 +40,7 @@ namespace WpfApplication1.Import
                             foreach (var item in query)
                             {
 
-                                newItem.ID = Guid.NewGuid();
+                                newItem.Id = Guid.NewGuid();
                                 newItem.AppId =id;
                                 newItem.Date = item.Date;
                                 newItem.RemarkText = item.RemarkText;
