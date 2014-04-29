@@ -5,7 +5,7 @@ namespace Hammergo.Data
 {
     public partial class Remark
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         public Guid AppId { get; set; }
         public System.DateTimeOffset Date { get; set; }
         public string RemarkText { get; set; }

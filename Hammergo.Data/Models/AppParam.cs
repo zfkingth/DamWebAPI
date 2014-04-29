@@ -10,7 +10,7 @@ namespace Hammergo.Data
     {
   
         [Key]
-        public Guid ParamId { get; set; }
+        public Guid Id { get; set; }
 
         public Guid AppId { get; set; }
 

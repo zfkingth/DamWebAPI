@@ -48,17 +48,13 @@
   <ItemGroup>
     <Compile Include="DamContextInitializer.cs" />
     <Compile Include="Logic\ParamsValidatation.cs" />
-    <Compile Include="Migrations\201404270249106_initial.cs" />
-    <Compile Include="Migrations\201404270249106_initial.Designer.cs">
-      <DependentUpon>201404270249106_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201404290227482_initial.cs" />
+    <Compile Include="Migrations\201404290227482_initial.Designer.cs">
+      <DependentUpon>201404290227482_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201404270249332_check.cs" />
-    <Compile Include="Migrations\201404270249332_check.Designer.cs">
-      <DependentUpon>201404270249332_check.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201404280428474_dateToOffset.cs" />
-    <Compile Include="Migrations\201404280428474_dateToOffset.Designer.cs">
-      <DependentUpon>201404280428474_dateToOffset.cs</DependentUpon>
+    <Compile Include="Migrations\201404290228087_check.cs" />
+    <Compile Include="Migrations\201404290228087_check.Designer.cs">
+      <DependentUpon>201404290228087_check.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\App.cs" />
@@ -104,14 +100,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201404270249106_initial.resx">
-      <DependentUpon>201404270249106_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404290227482_initial.resx">
+      <DependentUpon>201404290227482_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404270249332_check.resx">
-      <DependentUpon>201404270249332_check.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404280428474_dateToOffset.resx">
-      <DependentUpon>201404280428474_dateToOffset.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404290228087_check.resx">
+      <DependentUpon>201404290228087_check.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

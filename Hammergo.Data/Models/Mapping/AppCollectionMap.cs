@@ -8,7 +8,7 @@ namespace Hammergo.Data.Mapping
         public AppCollectionMap()
         {
             // Primary Key
-            this.HasKey(t => t.AppCollectionID);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.CollectionName)
@@ -20,7 +20,7 @@ namespace Hammergo.Data.Mapping
 
             // Table & Column Mappings
             this.ToTable("AppCollection");
-            this.Property(t => t.AppCollectionID).HasColumnName("AppCollectionID");
+            this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.TaskTypeID).HasColumnName("TaskTypeID");
             this.Property(t => t.CollectionName).HasColumnName("CollectionName");
             this.Property(t => t.Description).HasColumnName("Description");

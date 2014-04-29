@@ -8,10 +8,10 @@ namespace Hammergo.Data.Mapping
         public TaskTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.TaskTypeID);
+            this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.TaskTypeID)
+            this.Property(t => t.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.TypeName)
@@ -19,7 +19,7 @@ namespace Hammergo.Data.Mapping
 
             // Table & Column Mappings
             this.ToTable("TaskType");
-            this.Property(t => t.TaskTypeID).HasColumnName("TaskTypeID");
+            this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.TypeName).HasColumnName("TypeName");
         }
     }

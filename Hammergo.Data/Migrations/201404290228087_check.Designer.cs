@@ -13,7 +13,7 @@ namespace DamService2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201404270249332_check"; }
+            get { return "201404290228087_check"; }
         }
         
         string IMigrationMetadata.Source

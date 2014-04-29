@@ -11,16 +11,16 @@ namespace DamService2.Migrations
                 "dbo.ApparatusType",
                 c => new
                     {
-                        ApparatusTypeID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         TypeName = c.String(nullable: false, maxLength: 20),
                     })
-                .PrimaryKey(t => t.ApparatusTypeID);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.App",
                 c => new
                     {
-                        AppId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         AppName = c.String(nullable: false, maxLength: 20),
                         CalculateName = c.String(nullable: false, maxLength: 20),
                         ProjectPartID = c.Guid(),
@@ -28,10 +28,10 @@ namespace DamService2.Migrations
                         X = c.String(maxLength: 50),
                         Y = c.String(maxLength: 50),
                         Z = c.String(maxLength: 50),
-                        BuriedTime = c.DateTimeOffset(),
+                        BuriedTime = c.DateTimeOffset(precision: 7),
                         OtherInfo = c.String(maxLength: 200),
                     })
-                .PrimaryKey(t => t.AppId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ApparatusType", t => t.AppTypeID)
                 .ForeignKey("dbo.ProjectPart", t => t.ProjectPartID)
                 .Index(t => t.ProjectPartID)
@@ -41,7 +41,7 @@ namespace DamService2.Migrations
                 "dbo.AppParam",
                 c => new
                     {
-                        ParamId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         AppId = c.Guid(nullable: false),
                         ParamName = c.String(nullable: false, maxLength: 20),
                         ParamSymbol = c.String(nullable: false, maxLength: 10),
@@ -52,7 +52,7 @@ namespace DamService2.Migrations
                         Val = c.Double(),
                         TypeNum = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ParamId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.App", t => t.AppId, cascadeDelete: true)
                 .Index(t => t.AppId);
             
@@ -60,12 +60,12 @@ namespace DamService2.Migrations
                 "dbo.CalculateValue",
                 c => new
                     {
-                        ID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         ParamId = c.Guid(nullable: false),
-                        Date = c.DateTimeOffset(nullable: false),
+                        Date = c.DateTimeOffset(nullable: false, precision: 7),
                         Val = c.Double(),
                     })
-                .PrimaryKey(t => t.ID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AppParam", t => t.ParamId, cascadeDelete: true)
                 .Index(t => t.ParamId);
             
@@ -73,14 +73,14 @@ namespace DamService2.Migrations
                 "dbo.Formula",
                 c => new
                     {
-                        FormulaID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         ParamId = c.Guid(nullable: false),
-                        StartDate = c.DateTimeOffset(nullable: false),
-                        EndDate = c.DateTimeOffset(nullable: false),
+                        StartDate = c.DateTimeOffset(nullable: false, precision: 7),
+                        EndDate = c.DateTimeOffset(nullable: false, precision: 7),
                         FormulaExpression = c.String(nullable: false, maxLength: 200),
                         CalculateOrder = c.Byte(nullable: false),
                     })
-                .PrimaryKey(t => t.FormulaID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AppParam", t => t.ParamId, cascadeDelete: true)
                 .Index(t => t.ParamId);
             
@@ -88,12 +88,12 @@ namespace DamService2.Migrations
                 "dbo.MessureValue",
                 c => new
                     {
-                        ID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         ParamId = c.Guid(nullable: false),
-                        Date = c.DateTimeOffset(nullable: false),
+                        Date = c.DateTimeOffset(nullable: false, precision: 7),
                         Val = c.Double(),
                     })
-                .PrimaryKey(t => t.ID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AppParam", t => t.ParamId, cascadeDelete: true)
                 .Index(t => t.ParamId);
             
@@ -101,22 +101,22 @@ namespace DamService2.Migrations
                 "dbo.ProjectPart",
                 c => new
                     {
-                        ProjectPartID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         PartName = c.String(nullable: false, maxLength: 50),
                         ParentPart = c.Guid(),
                     })
-                .PrimaryKey(t => t.ProjectPartID);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Remark",
                 c => new
                     {
-                        ID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         AppId = c.Guid(nullable: false),
-                        Date = c.DateTimeOffset(nullable: false),
+                        Date = c.DateTimeOffset(nullable: false, precision: 7),
                         RemarkText = c.String(maxLength: 80),
                     })
-                .PrimaryKey(t => t.ID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.App", t => t.AppId, cascadeDelete: true)
                 .Index(t => t.AppId);
             
@@ -124,12 +124,12 @@ namespace DamService2.Migrations
                 "dbo.TaskApp",
                 c => new
                     {
-                        ID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         AppCollectionID = c.Guid(nullable: false),
                         AppId = c.Guid(nullable: false),
                         Order = c.Int(),
                     })
-                .PrimaryKey(t => t.ID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.App", t => t.AppId, cascadeDelete: true)
                 .ForeignKey("dbo.AppCollection", t => t.AppCollectionID, cascadeDelete: true)
                 .Index(t => t.AppCollectionID)
@@ -139,7 +139,7 @@ namespace DamService2.Migrations
                 "dbo.AppCollection",
                 c => new
                     {
-                        AppCollectionID = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         TaskTypeID = c.Int(nullable: false),
                         CollectionName = c.String(nullable: false, maxLength: 30),
                         Description = c.String(maxLength: 50),
@@ -151,7 +151,7 @@ namespace DamService2.Migrations
                         AVG = c.Double(),
                         CNT = c.Int(),
                     })
-                .PrimaryKey(t => t.AppCollectionID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.TaskType", t => t.TaskTypeID, cascadeDelete: true)
                 .Index(t => t.TaskTypeID);
             
@@ -159,10 +159,10 @@ namespace DamService2.Migrations
                 "dbo.TaskType",
                 c => new
                     {
-                        TaskTypeID = c.Int(nullable: false),
+                        Id = c.Int(nullable: false),
                         TypeName = c.String(maxLength: 30),
                     })
-                .PrimaryKey(t => t.TaskTypeID);
+                .PrimaryKey(t => t.Id);
             
         }
         

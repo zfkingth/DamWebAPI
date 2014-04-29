@@ -10,7 +10,7 @@ namespace Hammergo.Data
             this.Apps = new List<App>();
         }
 
-        public System.Guid ProjectPartID { get; set; }
+        public System.Guid Id { get; set; }
         public string PartName { get; set; }
         public Nullable<System.Guid> ParentPart { get; set; }
         public virtual ICollection<App> Apps { get; set; }

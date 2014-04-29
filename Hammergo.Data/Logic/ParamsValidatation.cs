@@ -45,15 +45,15 @@ namespace Hammergo.Data.Logic
             //需要验证公式更新的逻辑，这是整个app最复杂的问题之一，其它有公式解析和拓扑排序
             //获取参数列表
             var paramList = (from i in dbcontext.AppParams
-                             where i.AppId == _modifiedApp.AppId
+                             where i.AppId == _modifiedApp.Id
                              select i).AsNoTracking().ToList();
             //获取该测点的所有计算公式
 
             //当前数据库中的参数列表
             var formulaList = (from p in dbcontext.AppParams.OfType<CalculateParam>()
-                               where p.AppId == _modifiedApp.AppId
+                               where p.AppId == _modifiedApp.Id
                                join f in dbcontext.Formulae
-                               on p.ParamId equals f.ParamId
+                               on p.Id equals f.ParamId
                                select f).ToList(); //需要更新formula的计算次序
 
 
@@ -62,10 +62,10 @@ namespace Hammergo.Data.Logic
             foreach (var entry in _paramsEntries)
             {
                 var entity = entry.Entity as AppParam;
-                if (entity.AppId == _modifiedApp.AppId)
+                if (entity.AppId == _modifiedApp.Id)
                 {
                     //只能是modified或deleted
-                    int index = paramList.FindIndex(s => s.ParamId == entity.ParamId);
+                    int index = paramList.FindIndex(s => s.Id == entity.Id);
                     if (index >= 0)
                         paramList.RemoveAt(index);
                     if (entry.State == EntityState.Modified || entry.State == EntityState.Added)
@@ -76,7 +76,7 @@ namespace Hammergo.Data.Logic
                     {
                         //在删除参数时，会级联删除公式
 
-                        formulaList.RemoveAll(s => s.ParamId == entity.ParamId);
+                        formulaList.RemoveAll(s => s.ParamId == entity.Id);
                     }
                 }
             }
@@ -86,7 +86,7 @@ namespace Hammergo.Data.Logic
                 var entity = entry.Entity as Formula;
                 //公式必须依附于参数
                 //paramList中的参数有可以是新增的参数，即数据库还没有记录
-                if (paramList.Exists(s => s.ParamId == entity.ParamId))
+                if (paramList.Exists(s => s.Id == entity.Id))
                 {
 
                     int index = formulaList.FindIndex(s => s.ParamId == entity.ParamId&&s.StartDate==entity.StartDate);
@@ -143,7 +143,7 @@ namespace Hammergo.Data.Logic
                 //公式和参数要一一对应，检查对应关系 
                 var compositList = (from ci in paramList.OfType<CalculateParam>()
                                     join f in item.AsEnumerable()
-                                    on ci.ParamId equals f.ParamId
+                                    on ci.Id equals f.Id
                                     select new
                                     {
                                         Param = ci,
@@ -304,13 +304,13 @@ namespace Hammergo.Data.Logic
         {
             foreach (App child in getChildApp(app))
             {
-                if (loopCheckList.Exists(s => s == app.AppId))
+                if (loopCheckList.Exists(s => s == app.Id))
                 {
                     throw new Exception("测点公式中引用了其它测点的公式，但是存在循环引用的问题");
                 }
                 else
                 {
-                    loopCheckList.Add(app.AppId);
+                    loopCheckList.Add(app.Id);
                 }
                 graph.addArcNode(new ALGraph.ArcNode(), app.CalculateName, child.CalculateName);
                 constructGraph(app, graph, loopCheckList);
@@ -336,9 +336,9 @@ namespace Hammergo.Data.Logic
             //同一个子测点的计算公式可能多次引用父测点的计算编号
             var children = (from i in dbcontext.Apps
                             join p in dbcontext.CalculateParams
-                            on i.AppId equals p.AppId
+                            on i.Id equals p.Id
                             join calcID in ids
-                            on p.ParamId equals calcID
+                            on p.Id equals calcID
                             select i).AsNoTracking().Distinct().ToList();
 
             return children;

@@ -12,7 +12,7 @@ namespace Hammergo.Data
         protected override void Seed(DamWCFContext context)
         {
             var type = new ApparatusType();
-            type.ApparatusTypeID = Guid.NewGuid();
+            type.Id = Guid.NewGuid();
             type.TypeName = "第一种类型";
 
             context.ApparatusTypes.Add(type);

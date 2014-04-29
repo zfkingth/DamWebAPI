@@ -17,7 +17,7 @@ namespace Hammergo.Data
             this.AppParams = new List<AppParam>();
         }
 
-        public Guid AppId { get; set; }
+        public Guid Id { get; set; }
 
 
         [RegularExpression(@"^[^\s]+$", ErrorMessage = "测点编号不能包括空格、tab、回车等非可见字符")]

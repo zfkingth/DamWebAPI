@@ -93,7 +93,7 @@ namespace Hammergo.Data
                                 select (f.Entity as Formula).ParamId
                              ).Distinct();
                     ids2 = (from p in this.AppParams
-                            where pids.Contains(p.ParamId)
+                            where pids.Contains(p.Id)
                             select p.AppId).Distinct();
                 }
 
@@ -118,11 +118,11 @@ namespace Hammergo.Data
                 //在添加测点时从数据库中查不到app
                 //首先从local查询
                 var appList = (from i in this.Apps.Local
-                               where appIds.Contains(i.AppId)
+                               where appIds.Contains(i.Id)
                                select i).ToList();
 
                 var idsInLocal = (from i in appList
-                                  select i.AppId).ToList();
+                                  select i.Id).ToList();
 
                 var idsInDb = appIds.Except(idsInLocal).ToList();
 
@@ -130,7 +130,7 @@ namespace Hammergo.Data
                 {
                     //有测点数据在数据库中,//没有查询到的从数据库中查询
                     var appIndb = (from i in this.Apps
-                                   where idsInDb.Contains(i.AppId)
+                                   where idsInDb.Contains(i.Id)
                                    select i).AsNoTracking().ToList();
                     appList = appList.Union(appIndb).ToList();
                 }

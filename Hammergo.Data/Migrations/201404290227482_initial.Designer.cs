@@ -7,13 +7,13 @@ namespace DamService2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class dateToOffset : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(dateToOffset));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201404280428474_dateToOffset"; }
+            get { return "201404290227482_initial"; }
         }
         
         string IMigrationMetadata.Source

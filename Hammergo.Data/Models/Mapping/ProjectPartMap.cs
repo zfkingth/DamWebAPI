@@ -8,7 +8,7 @@ namespace Hammergo.Data.Mapping
         public ProjectPartMap()
         {
             // Primary Key
-            this.HasKey(t => t.ProjectPartID);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.PartName)
@@ -17,7 +17,7 @@ namespace Hammergo.Data.Mapping
 
             // Table & Column Mappings
             this.ToTable("ProjectPart");
-            this.Property(t => t.ProjectPartID).HasColumnName("ProjectPartID");
+            this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.PartName).HasColumnName("PartName");
             this.Property(t => t.ParentPart).HasColumnName("ParentPart");
         }

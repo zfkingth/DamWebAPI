@@ -5,7 +5,7 @@ namespace Hammergo.Data
 {
     public partial class Formula
     {
-        public System.Guid FormulaID { get; set; }
+        public System.Guid Id { get; set; }
         public System.Guid ParamId { get; set; }
         public System.DateTimeOffset StartDate { get; set; }
         public System.DateTimeOffset EndDate { get; set; }

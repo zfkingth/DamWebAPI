@@ -8,7 +8,7 @@ namespace Hammergo.Data.Mapping
         public ApparatusTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.ApparatusTypeID);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.TypeName)
@@ -17,7 +17,7 @@ namespace Hammergo.Data.Mapping
 
             // Table & Column Mappings
             this.ToTable("ApparatusType");
-            this.Property(t => t.ApparatusTypeID).HasColumnName("ApparatusTypeID");
+            this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.TypeName).HasColumnName("TypeName");
         }
     }

@@ -10,7 +10,7 @@ namespace Hammergo.Data
             this.Apps = new List<App>();
         }
 
-        public System.Guid ApparatusTypeID { get; set; }
+        public System.Guid Id { get; set; }
         public string TypeName { get; set; }
         public virtual ICollection<App> Apps { get; set; }
     }

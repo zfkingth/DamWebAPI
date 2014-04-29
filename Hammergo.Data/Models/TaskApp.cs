@@ -5,7 +5,7 @@ namespace Hammergo.Data
 {
     public partial class TaskApp
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         public System.Guid AppCollectionID { get; set; }
         public Guid AppId { get; set; }
         public Nullable<int> Order { get; set; }

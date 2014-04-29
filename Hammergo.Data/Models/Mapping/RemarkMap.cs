@@ -8,7 +8,7 @@ namespace Hammergo.Data.Mapping
         public RemarkMap()
         {
             // Primary Key
-            this.HasKey(t => new {t.ID});
+            this.HasKey(t => new { t.Id });
 
             // Properties
 

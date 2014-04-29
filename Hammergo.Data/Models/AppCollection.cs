@@ -10,7 +10,7 @@ namespace Hammergo.Data
             this.TaskApps = new List<TaskApp>();
         }
 
-        public System.Guid AppCollectionID { get; set; }
+        public System.Guid Id { get; set; }
         public int TaskTypeID { get; set; }
         public string CollectionName { get; set; }
         public string Description { get; set; }
