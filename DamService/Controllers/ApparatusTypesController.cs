@@ -18,6 +18,12 @@ namespace DamService.Controllers
             return Ok(context.ApparatusTypes);
         }
 
+        public IHttpActionResult Get(Guid key)
+        {
+            return Ok(context.ApparatusTypes.Single(e=>e.Id==key));
+        }
+
+
         public async Task<IHttpActionResult> Post([FromBody] ApparatusType entity)
         {
             if (!ModelState.IsValid)

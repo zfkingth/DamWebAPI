@@ -33,6 +33,11 @@ namespace DamService2.Migrations
             type.TypeName = "第一种类型";
 
             context.ApparatusTypes.Add(type);
+
+            type = new ApparatusType();
+            type.Id = Guid.NewGuid();
+            type.TypeName = "第二种类型";
+            context.ApparatusTypes.Add(type);
         }
     }
 }
