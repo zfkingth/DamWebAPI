@@ -18,9 +18,10 @@ namespace DamService.Controllers
             return Ok(context.ApparatusTypes);
         }
 
+
         public IHttpActionResult Get(Guid key)
         {
-            return Ok(context.ApparatusTypes.Single(e=>e.Id==key));
+            return Ok(context.ApparatusTypes.Single(e => e.Id == key));
         }
 
 
