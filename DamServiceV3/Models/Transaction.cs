@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DamService.Models
+namespace DamServiceV3.Models
 {
     public class Transaction
     {

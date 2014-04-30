@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DamService.Test
+namespace DamServiceV3.Test
 {
     internal class TestConfig
     {
-        public static readonly string serviceUrl = "http://localhost:55765/odata";
+        public static readonly string serviceUrl = "http://localhost:53317/odata";
     }
 }
