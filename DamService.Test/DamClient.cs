@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 2014/4/30 10:52:48
+// Generation date: 2014/4/30 12:15:08
 namespace DamService.Test.Hammergo.Data
 {
     /// <summary>
