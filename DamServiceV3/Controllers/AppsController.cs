@@ -50,9 +50,9 @@ namespace DamServiceV3.Controllers
         }
 
 
-        public HttpResponseMessage GetCount(ODataQueryOptions<ApparatusType> queryOptions)
+        public HttpResponseMessage GetCount(ODataQueryOptions<App> queryOptions)
         {
-            IQueryable<ApparatusType> queryResults = queryOptions.ApplyTo(GetApps()) as IQueryable<ApparatusType>;
+            IQueryable<App> queryResults = queryOptions.ApplyTo(GetApps()) as IQueryable<App>;
             int count = queryResults.Count();
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StringContent(count.ToString(), Encoding.UTF8, "text/plain");
