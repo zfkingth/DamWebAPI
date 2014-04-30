@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 2014/4/29 20:56:53
+// Generation date: 2014/4/30 10:52:48
 namespace DamService.Test.Hammergo.Data
 {
     /// <summary>
@@ -2300,46 +2300,46 @@ namespace DamService.Test.DamService.Models
     /// There are no comments for Transaction in the schema.
     /// </summary>
     /// <KeyProperties>
-    /// ID
+    /// Id
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("ID")]
+    [global::Microsoft.OData.Client.Key("Id")]
     public partial class Transaction : global::System.ComponentModel.INotifyPropertyChanged
     {
         /// <summary>
         /// Create a new Transaction object.
         /// </summary>
-        /// <param name="ID">Initial value of ID.</param>
+        /// <param name="ID">Initial value of Id.</param>
         /// <param name="createTime">Initial value of CreateTime.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "1.0.0")]
         public static Transaction CreateTransaction(global::System.Guid ID, global::System.DateTimeOffset createTime)
         {
             Transaction transaction = new Transaction();
-            transaction.ID = ID;
+            transaction.Id = ID;
             transaction.CreateTime = createTime;
             return transaction;
         }
         /// <summary>
-        /// There are no comments for Property ID in the schema.
+        /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "1.0.0")]
-        public global::System.Guid ID
+        public global::System.Guid Id
         {
             get
             {
-                return this._ID;
+                return this._Id;
             }
             set
             {
-                this.OnIDChanging(value);
-                this._ID = value;
-                this.OnIDChanged();
-                this.OnPropertyChanged("ID");
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+                this.OnPropertyChanged("Id");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "1.0.0")]
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
-        partial void OnIDChanged();
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Property CreateTime in the schema.
         /// </summary>
@@ -2952,9 +2952,9 @@ namespace DamService.Test.Default
     <Schema Namespace=""DamService.Models"" xmlns=""http://docs.oasis-open.org/odata/ns/edm"">
       <EntityType Name=""Transaction"">
         <Key>
-          <PropertyRef Name=""ID"" />
+          <PropertyRef Name=""Id"" />
         </Key>
-        <Property Name=""ID"" Type=""Edm.Guid"" Nullable=""false"" />
+        <Property Name=""Id"" Type=""Edm.Guid"" Nullable=""false"" />
         <Property Name=""CreateTime"" Type=""Edm.DateTimeOffset"" Nullable=""false"" />
       </EntityType>
     </Schema>

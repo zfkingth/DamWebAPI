@@ -7,7 +7,7 @@ namespace DamService.Models
 {
     public class Transaction
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         public DateTimeOffset CreateTime { get; set; }
     }
 }
