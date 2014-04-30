@@ -28,16 +28,34 @@ namespace DamService2.Migrations
             //    );
             //
 
-            var type = new ApparatusType();
-            type.Id = Guid.NewGuid();
-            type.TypeName = "第一种类型";
+            var type1 = new ApparatusType();
+            type1.Id = Guid.NewGuid();
+            type1.TypeName = "第一种类型";
 
-            context.ApparatusTypes.Add(type);
+            context.ApparatusTypes.Add(type1);
 
-            type = new ApparatusType();
-            type.Id = Guid.NewGuid();
-            type.TypeName = "第二种类型";
-            context.ApparatusTypes.Add(type);
+            var type2 = new ApparatusType();
+            type2.Id = Guid.NewGuid();
+            type2.TypeName = "第二种类型";
+            context.ApparatusTypes.Add(type2);
+
+            //添加仪器
+            var app1 = new App();
+            app1.Id = Guid.NewGuid();
+            app1.AppName = "第一支仪器";
+            app1.CalculateName = "FirstApp";
+            app1.AppTypeID = type1.Id;
+
+            var app2 = new App();
+            app2.Id = Guid.NewGuid();
+            app2.AppName = "第二支仪器";
+            app2.CalculateName = "SecondApp";
+            app2.AppTypeID = type2.Id;
+
+            context.Apps.Add(app1);
+            context.Apps.Add(app2);
+
+
         }
     }
 }

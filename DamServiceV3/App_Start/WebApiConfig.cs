@@ -23,7 +23,10 @@ namespace DamServiceV3
             builder.EntitySet<ApparatusType>("ApparatusTypes");
             builder.EntitySet<App>("Apps");
 
-
+            builder.EntitySet<AppParam>("AppParams");
+            builder.EntitySet<ProjectPart>("ProjectParts");
+            builder.EntitySet<Remark>("Remarks");
+            builder.EntitySet<TaskApp>("TaskApps"); 
 
 
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
