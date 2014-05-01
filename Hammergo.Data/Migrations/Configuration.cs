@@ -82,6 +82,33 @@ namespace DamService2.Migrations
 
             context.ProjectParts.AddOrUpdate(root, p1, p2);
 
+
+            var remark1 = new Remark()
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                RemarkText = "remark",
+                AppId = app1.Id,
+            };
+
+            var remark2 = new Remark()
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                RemarkText = "remark",
+                AppId = app1.Id,
+            };
+
+            var remark3 = new Remark()
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                RemarkText = "remark",
+                AppId = app2.Id,
+            };
+
+            context.Remarks.AddOrUpdate(remark1, remark2, remark3);
+ 
         }
     }
 }

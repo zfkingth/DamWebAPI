@@ -35,7 +35,7 @@ namespace DamServiceV3.Test
 
             int cnt3 = context.ApparatusTypes.Where(s => s.TypeName == "第一种类型").Count();
 
-            Assert.IsTrue(cnt1 != cnt2, "插入仪器类型失败");
+            Assert.IsTrue(cnt1 != cnt2, "插入 失败");
 
             //在单独查询
 
@@ -62,7 +62,7 @@ namespace DamServiceV3.Test
             context.SaveChanges();
             int fCnt = context.Apps.Count();
 
-            Assert.IsTrue(cnt1 == fCnt, "删除仪器类型失败");
+            Assert.IsTrue(cnt1 == fCnt, "删除 失败");
 
 
         }
@@ -92,7 +92,7 @@ namespace DamServiceV3.Test
             int cnt2 = context.Apps.Count();
 
 
-            Assert.IsTrue(cnt1 + 1 == cnt2, "插入仪器类型失败");
+            Assert.IsTrue(cnt1 + 1 == cnt2, "插入 失败");
 
             //在单独查询
 
@@ -121,7 +121,7 @@ namespace DamServiceV3.Test
             context.SaveChanges();
             int fCnt = context.ApparatusTypes.Count();
 
-            Assert.IsTrue(cnt1 == fCnt, "删除仪器类型失败");
+            Assert.IsTrue(cnt1 == fCnt, "删除 失败");
 
 
         }
@@ -154,7 +154,7 @@ namespace DamServiceV3.Test
             int cnt2 = context.ProjectParts.Count();
 
 
-            Assert.IsTrue(cnt1 + 1 == cnt2, "插入仪器类型失败");
+            Assert.IsTrue(cnt1 + 1 == cnt2, "插入 失败");
 
             //在单独查询
 
@@ -183,10 +183,76 @@ namespace DamServiceV3.Test
             context.SaveChanges();
             int fCnt = context.ProjectParts.Count();
 
-            Assert.IsTrue(cnt1 == fCnt, "删除仪器类型失败");
+            Assert.IsTrue(cnt1 == fCnt, "删除 失败");
+
+
+        }
+
+
+
+        [TestMethod]
+        public void TestODataV3_Remark()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var itemList = context.Remarks.ToList();
+
+
+            int cnt1 = context.Remarks.Count();
+
+            var app = context.Apps.Take(1).SingleOrDefault();//top 1
+
+
+            var newItem = new Remark();
+            newItem.Id = Guid.NewGuid();
+            newItem.RemarkText = "测试";
+            newItem.Date = DateTime.Now;
+            newItem.AppId =app.Id;
+
+            context.AddToRemarks(newItem);
+            context.SaveChanges();
+
+            int cnt2 = context.Remarks.Count();
+
+
+            Assert.IsTrue(cnt1 + 1 == cnt2, "插入 失败");
+
+            //在单独查询
+
+            context.Detach(newItem);
+
+            var itemInDb = context.Remarks.Where(s => s.Id == newItem.Id).SingleOrDefault();
+
+            Assert.AreEqual(itemInDb.Id, newItem.Id, "插入失败");
+
+            //更新
+
+            itemInDb.RemarkText = newItem.RemarkText + "modify";
+
+            context.UpdateObject(itemInDb);
+            context.SaveChanges();
+
+            context.Detach(itemInDb);
+
+            var itemUpdated = context.Remarks.Where(s => s.Id == itemInDb.Id).SingleOrDefault();
+
+            Assert.AreEqual(itemUpdated.RemarkText, itemInDb.RemarkText, "更新失败");
+
+            //删除
+            context.DeleteObject(itemUpdated);
+
+            context.SaveChanges();
+            int fCnt = context.Remarks.Count();
+
+            Assert.IsTrue(cnt1 == fCnt, "删除 失败");
 
 
         } 
+
+
 
     }
 }
