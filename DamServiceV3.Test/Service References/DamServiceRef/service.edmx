@@ -29,6 +29,20 @@
         <NavigationProperty Name="TaskApps" Relationship="Hammergo.Data.Hammergo_Data_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner" ToRole="TaskApps" FromRole="TaskAppsPartner" />
         <NavigationProperty Name="AppParams" Relationship="Hammergo.Data.Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartner" ToRole="AppParams" FromRole="AppParamsPartner" />
       </EntityType>
+      <EntityType Name="AppParam" Abstract="true">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="AppId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ParamName" Type="Edm.String" Nullable="false" />
+        <Property Name="ParamSymbol" Type="Edm.String" Nullable="false" />
+        <Property Name="UnitSymbol" Type="Edm.String" />
+        <Property Name="PrecisionNum" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Order" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <NavigationProperty Name="App" Relationship="Hammergo.Data.Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner" ToRole="App" FromRole="AppPartner" />
+      </EntityType>
       <EntityType Name="ProjectPart">
         <Key>
           <PropertyRef Name="Id" />
@@ -84,20 +98,6 @@
         <Property Name="Id" Type="Edm.Int32" Nullable="false" />
         <Property Name="TypeName" Type="Edm.String" />
         <NavigationProperty Name="AppCollections" Relationship="Hammergo.Data.Hammergo_Data_TaskType_AppCollections_Hammergo_Data_AppCollection_AppCollectionsPartner" ToRole="AppCollections" FromRole="AppCollectionsPartner" />
-      </EntityType>
-      <EntityType Name="AppParam" Abstract="true">
-        <Key>
-          <PropertyRef Name="Id" />
-        </Key>
-        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
-        <Property Name="AppId" Type="Edm.Guid" Nullable="false" />
-        <Property Name="ParamName" Type="Edm.String" Nullable="false" />
-        <Property Name="ParamSymbol" Type="Edm.String" Nullable="false" />
-        <Property Name="UnitSymbol" Type="Edm.String" />
-        <Property Name="PrecisionNum" Type="Edm.Byte" Nullable="false" />
-        <Property Name="Order" Type="Edm.Byte" Nullable="false" />
-        <Property Name="Description" Type="Edm.String" />
-        <NavigationProperty Name="App" Relationship="Hammergo.Data.Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner" ToRole="App" FromRole="AppPartner" />
       </EntityType>
       <EntityType Name="CalculateParam" BaseType="Hammergo.Data.AppParam">
         <NavigationProperty Name="CalculateValues" Relationship="Hammergo.Data.Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner" ToRole="CalculateValues" FromRole="CalculateValuesPartner" />
@@ -165,6 +165,10 @@
         <End Type="Hammergo.Data.AppParam" Role="AppParams" Multiplicity="*" />
         <End Type="Hammergo.Data.App" Role="AppParamsPartner" Multiplicity="0..1" />
       </Association>
+      <Association Name="Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner">
+        <End Type="Hammergo.Data.App" Role="App" Multiplicity="0..1" />
+        <End Type="Hammergo.Data.AppParam" Role="AppPartner" Multiplicity="0..1" />
+      </Association>
       <Association Name="Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner">
         <End Type="Hammergo.Data.App" Role="Apps" Multiplicity="*" />
         <End Type="Hammergo.Data.ProjectPart" Role="AppsPartner" Multiplicity="0..1" />
@@ -192,10 +196,6 @@
       <Association Name="Hammergo_Data_TaskType_AppCollections_Hammergo_Data_AppCollection_AppCollectionsPartner">
         <End Type="Hammergo.Data.AppCollection" Role="AppCollections" Multiplicity="*" />
         <End Type="Hammergo.Data.TaskType" Role="AppCollectionsPartner" Multiplicity="0..1" />
-      </Association>
-      <Association Name="Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner">
-        <End Type="Hammergo.Data.App" Role="App" Multiplicity="0..1" />
-        <End Type="Hammergo.Data.AppParam" Role="AppPartner" Multiplicity="0..1" />
       </Association>
       <Association Name="Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner">
         <End Type="Hammergo.Data.CalculateValue" Role="CalculateValues" Multiplicity="*" />
@@ -226,6 +226,10 @@
       <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
         <EntitySet Name="ApparatusTypes" EntityType="Hammergo.Data.ApparatusType" />
         <EntitySet Name="Apps" EntityType="Hammergo.Data.App" />
+        <EntitySet Name="AppParams" EntityType="Hammergo.Data.AppParam" />
+        <EntitySet Name="ProjectParts" EntityType="Hammergo.Data.ProjectPart" />
+        <EntitySet Name="Remarks" EntityType="Hammergo.Data.Remark" />
+        <EntitySet Name="TaskApps" EntityType="Hammergo.Data.TaskApp" />
         <AssociationSet Name="Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner">
           <End Role="AppsPartner" EntitySet="ApparatusTypes" />
           <End Role="Apps" EntitySet="Apps" />
@@ -233,6 +237,38 @@
         <AssociationSet Name="Hammergo_Data_App_ApparatusType_Hammergo_Data_ApparatusType_ApparatusTypePartnerSet" Association="Hammergo.Data.Hammergo_Data_App_ApparatusType_Hammergo_Data_ApparatusType_ApparatusTypePartner">
           <End Role="ApparatusTypePartner" EntitySet="Apps" />
           <End Role="ApparatusType" EntitySet="ApparatusTypes" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_App_ProjectPart_Hammergo_Data_ProjectPart_ProjectPartPartnerSet" Association="Hammergo.Data.Hammergo_Data_App_ProjectPart_Hammergo_Data_ProjectPart_ProjectPartPartner">
+          <End Role="ProjectPartPartner" EntitySet="Apps" />
+          <End Role="ProjectPart" EntitySet="ProjectParts" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_App_Remarks_Hammergo_Data_Remark_RemarksPartnerSet" Association="Hammergo.Data.Hammergo_Data_App_Remarks_Hammergo_Data_Remark_RemarksPartner">
+          <End Role="RemarksPartner" EntitySet="Apps" />
+          <End Role="Remarks" EntitySet="Remarks" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner">
+          <End Role="TaskAppsPartner" EntitySet="Apps" />
+          <End Role="TaskApps" EntitySet="TaskApps" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartnerSet" Association="Hammergo.Data.Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartner">
+          <End Role="AppParamsPartner" EntitySet="Apps" />
+          <End Role="AppParams" EntitySet="AppParams" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartnerSet" Association="Hammergo.Data.Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner">
+          <End Role="AppPartner" EntitySet="AppParams" />
+          <End Role="App" EntitySet="Apps" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner">
+          <End Role="AppsPartner" EntitySet="ProjectParts" />
+          <End Role="Apps" EntitySet="Apps" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_Remark_App_Hammergo_Data_App_AppPartnerSet" Association="Hammergo.Data.Hammergo_Data_Remark_App_Hammergo_Data_App_AppPartner">
+          <End Role="AppPartner" EntitySet="Remarks" />
+          <End Role="App" EntitySet="Apps" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartnerSet" Association="Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartner">
+          <End Role="AppPartner" EntitySet="TaskApps" />
+          <End Role="App" EntitySet="Apps" />
         </AssociationSet>
       </EntityContainer>
     </Schema>

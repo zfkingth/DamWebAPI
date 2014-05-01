@@ -32,12 +32,15 @@ namespace DamService2.Migrations
             type1.Id = Guid.NewGuid();
             type1.TypeName = "第一种类型";
 
-            context.ApparatusTypes.Add(type1);
+           
 
             var type2 = new ApparatusType();
             type2.Id = Guid.NewGuid();
             type2.TypeName = "第二种类型";
-            context.ApparatusTypes.Add(type2);
+
+            context.ApparatusTypes.AddOrUpdate(type1, type2);
+
+
 
             //添加仪器
             var app1 = new App();
@@ -51,10 +54,33 @@ namespace DamService2.Migrations
             app2.AppName = "第二支仪器";
             app2.CalculateName = "SecondApp";
             app2.AppTypeID = type2.Id;
+ 
+            context.Apps.AddOrUpdate(app1, app2);
+            //添加工程部位
+            var root = new ProjectPart()
+            {
+                Id = Guid.NewGuid(),
+                PartName = "root",
+                ParentPart = null,
 
-            context.Apps.Add(app1);
-            context.Apps.Add(app2);
+            };
 
+            var p1 = new ProjectPart()
+            {
+                Id = Guid.NewGuid(),
+                PartName = "p1",
+                ParentPart = root.Id,
+            };
+
+            var p2 = new ProjectPart()
+            {
+                Id = Guid.NewGuid(),
+                PartName = "p2",
+                ParentPart = root.Id,
+            };
+
+
+            context.ProjectParts.AddOrUpdate(root, p1, p2);
 
         }
     }

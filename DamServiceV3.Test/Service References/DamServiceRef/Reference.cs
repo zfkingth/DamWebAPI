@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 2014/4/30 15:54:20
+// Generation date: 2014/5/1 7:49:33
 namespace DamServiceV3.Test.DamServiceRef
 {
     
@@ -95,6 +95,74 @@ namespace DamServiceV3.Test.DamServiceRef
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private global::System.Data.Services.Client.DataServiceQuery<App> _Apps;
         /// <summary>
+        /// There are no comments for AppParams in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Data.Services.Client.DataServiceQuery<AppParam> AppParams
+        {
+            get
+            {
+                if ((this._AppParams == null))
+                {
+                    this._AppParams = base.CreateQuery<AppParam>("AppParams");
+                }
+                return this._AppParams;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Data.Services.Client.DataServiceQuery<AppParam> _AppParams;
+        /// <summary>
+        /// There are no comments for ProjectParts in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Data.Services.Client.DataServiceQuery<ProjectPart> ProjectParts
+        {
+            get
+            {
+                if ((this._ProjectParts == null))
+                {
+                    this._ProjectParts = base.CreateQuery<ProjectPart>("ProjectParts");
+                }
+                return this._ProjectParts;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Data.Services.Client.DataServiceQuery<ProjectPart> _ProjectParts;
+        /// <summary>
+        /// There are no comments for Remarks in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Data.Services.Client.DataServiceQuery<Remark> Remarks
+        {
+            get
+            {
+                if ((this._Remarks == null))
+                {
+                    this._Remarks = base.CreateQuery<Remark>("Remarks");
+                }
+                return this._Remarks;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Data.Services.Client.DataServiceQuery<Remark> _Remarks;
+        /// <summary>
+        /// There are no comments for TaskApps in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Data.Services.Client.DataServiceQuery<TaskApp> TaskApps
+        {
+            get
+            {
+                if ((this._TaskApps == null))
+                {
+                    this._TaskApps = base.CreateQuery<TaskApp>("TaskApps");
+                }
+                return this._TaskApps;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Data.Services.Client.DataServiceQuery<TaskApp> _TaskApps;
+        /// <summary>
         /// There are no comments for ApparatusTypes in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -109,6 +177,38 @@ namespace DamServiceV3.Test.DamServiceRef
         public void AddToApps(App app)
         {
             base.AddObject("Apps", app);
+        }
+        /// <summary>
+        /// There are no comments for AppParams in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public void AddToAppParams(AppParam appParam)
+        {
+            base.AddObject("AppParams", appParam);
+        }
+        /// <summary>
+        /// There are no comments for ProjectParts in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public void AddToProjectParts(ProjectPart projectPart)
+        {
+            base.AddObject("ProjectParts", projectPart);
+        }
+        /// <summary>
+        /// There are no comments for Remarks in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public void AddToRemarks(Remark remark)
+        {
+            base.AddObject("Remarks", remark);
+        }
+        /// <summary>
+        /// There are no comments for TaskApps in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public void AddToTaskApps(TaskApp taskApp)
+        {
+            base.AddObject("TaskApps", taskApp);
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private abstract class GeneratedEdmModel
@@ -142,52 +242,52 @@ namespace DamServiceV3.Test.DamServiceRef
                 "a_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner\" ToRole=\"TaskApps\" FromRole" +
                 "=\"TaskAppsPartner\" /><NavigationProperty Name=\"AppParams\" Relationship=\"Hammergo" +
                 ".Data.Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartner\" ToRol" +
-                "e=\"AppParams\" FromRole=\"AppParamsPartner\" /></EntityType><EntityType Name=\"Proje" +
-                "ctPart\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" " +
-                "Nullable=\"false\" /><Property Name=\"PartName\" Type=\"Edm.String\" /><Property Name=" +
-                "\"ParentPart\" Type=\"Edm.Guid\" /><NavigationProperty Name=\"Apps\" Relationship=\"Ham" +
-                "mergo.Data.Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner\" ToRole=" +
-                "\"Apps\" FromRole=\"AppsPartner\" /></EntityType><EntityType Name=\"Remark\"><Key><Pro" +
-                "pertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" " +
-                "/><Property Name=\"AppId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Date" +
-                "\" Type=\"Edm.DateTimeOffset\" Nullable=\"false\" /><Property Name=\"RemarkText\" Type=" +
-                "\"Edm.String\" /><NavigationProperty Name=\"App\" Relationship=\"Hammergo.Data.Hammer" +
-                "go_Data_Remark_App_Hammergo_Data_App_AppPartner\" ToRole=\"App\" FromRole=\"AppPartn" +
-                "er\" /></EntityType><EntityType Name=\"TaskApp\"><Key><PropertyRef Name=\"Id\" /></Ke" +
-                "y><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"AppColl" +
-                "ectionID\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"AppId\" Type=\"Edm.Gu" +
-                "id\" Nullable=\"false\" /><Property Name=\"Order\" Type=\"Edm.Int32\" /><NavigationProp" +
-                "erty Name=\"App\" Relationship=\"Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_D" +
-                "ata_App_AppPartner\" ToRole=\"App\" FromRole=\"AppPartner\" /><NavigationProperty Nam" +
-                "e=\"AppCollection\" Relationship=\"Hammergo.Data.Hammergo_Data_TaskApp_AppCollectio" +
-                "n_Hammergo_Data_AppCollection_AppCollectionPartner\" ToRole=\"AppCollection\" FromR" +
-                "ole=\"AppCollectionPartner\" /></EntityType><EntityType Name=\"AppCollection\"><Key>" +
-                "<PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"fal" +
-                "se\" /><Property Name=\"TaskTypeID\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property " +
-                "Name=\"CollectionName\" Type=\"Edm.String\" /><Property Name=\"Description\" Type=\"Edm" +
-                ".String\" /><Property Name=\"Order\" Type=\"Edm.Int32\" /><Property Name=\"ParentColle" +
-                "ction\" Type=\"Edm.Guid\" /><Property Name=\"SUM\" Type=\"Edm.Double\" /><Property Name" +
-                "=\"MAX\" Type=\"Edm.Double\" /><Property Name=\"MIN\" Type=\"Edm.Double\" /><Property Na" +
-                "me=\"AVG\" Type=\"Edm.Double\" /><Property Name=\"CNT\" Type=\"Edm.Int32\" /><Navigation" +
-                "Property Name=\"TaskType\" Relationship=\"Hammergo.Data.Hammergo_Data_AppCollection" +
-                "_TaskType_Hammergo_Data_TaskType_TaskTypePartner\" ToRole=\"TaskType\" FromRole=\"Ta" +
-                "skTypePartner\" /><NavigationProperty Name=\"TaskApps\" Relationship=\"Hammergo.Data" +
-                ".Hammergo_Data_AppCollection_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner\" ToR" +
-                "ole=\"TaskApps\" FromRole=\"TaskAppsPartner\" /></EntityType><EntityType Name=\"TaskT" +
-                "ype\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Int32\" Nu" +
-                "llable=\"false\" /><Property Name=\"TypeName\" Type=\"Edm.String\" /><NavigationProper" +
-                "ty Name=\"AppCollections\" Relationship=\"Hammergo.Data.Hammergo_Data_TaskType_AppC" +
-                "ollections_Hammergo_Data_AppCollection_AppCollectionsPartner\" ToRole=\"AppCollect" +
-                "ions\" FromRole=\"AppCollectionsPartner\" /></EntityType><EntityType Name=\"AppParam" +
-                "\" Abstract=\"true\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"" +
-                "Edm.Guid\" Nullable=\"false\" /><Property Name=\"AppId\" Type=\"Edm.Guid\" Nullable=\"fa" +
-                "lse\" /><Property Name=\"ParamName\" Type=\"Edm.String\" Nullable=\"false\" /><Property" +
-                " Name=\"ParamSymbol\" Type=\"Edm.String\" Nullable=\"false\" /><Property Name=\"UnitSym" +
-                "bol\" Type=\"Edm.String\" /><Property Name=\"PrecisionNum\" Type=\"Edm.Byte\" Nullable=" +
-                "\"false\" /><Property Name=\"Order\" Type=\"Edm.Byte\" Nullable=\"false\" /><Property Na" +
-                "me=\"Description\" Type=\"Edm.String\" /><NavigationProperty Name=\"App\" Relationship" +
-                "=\"Hammergo.Data.Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner\" ToRole=" +
-                "\"App\" FromRole=\"AppPartner\" /></EntityType><EntityType Name=\"CalculateParam\" Bas" +
+                "e=\"AppParams\" FromRole=\"AppParamsPartner\" /></EntityType><EntityType Name=\"AppPa" +
+                "ram\" Abstract=\"true\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Typ" +
+                "e=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"AppId\" Type=\"Edm.Guid\" Nullable=" +
+                "\"false\" /><Property Name=\"ParamName\" Type=\"Edm.String\" Nullable=\"false\" /><Prope" +
+                "rty Name=\"ParamSymbol\" Type=\"Edm.String\" Nullable=\"false\" /><Property Name=\"Unit" +
+                "Symbol\" Type=\"Edm.String\" /><Property Name=\"PrecisionNum\" Type=\"Edm.Byte\" Nullab" +
+                "le=\"false\" /><Property Name=\"Order\" Type=\"Edm.Byte\" Nullable=\"false\" /><Property" +
+                " Name=\"Description\" Type=\"Edm.String\" /><NavigationProperty Name=\"App\" Relations" +
+                "hip=\"Hammergo.Data.Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner\" ToRo" +
+                "le=\"App\" FromRole=\"AppPartner\" /></EntityType><EntityType Name=\"ProjectPart\"><Ke" +
+                "y><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"f" +
+                "alse\" /><Property Name=\"PartName\" Type=\"Edm.String\" /><Property Name=\"ParentPart" +
+                "\" Type=\"Edm.Guid\" /><NavigationProperty Name=\"Apps\" Relationship=\"Hammergo.Data." +
+                "Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner\" ToRole=\"Apps\" From" +
+                "Role=\"AppsPartner\" /></EntityType><EntityType Name=\"Remark\"><Key><PropertyRef Na" +
+                "me=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property" +
+                " Name=\"AppId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Date\" Type=\"Edm" +
+                ".DateTimeOffset\" Nullable=\"false\" /><Property Name=\"RemarkText\" Type=\"Edm.String" +
+                "\" /><NavigationProperty Name=\"App\" Relationship=\"Hammergo.Data.Hammergo_Data_Rem" +
+                "ark_App_Hammergo_Data_App_AppPartner\" ToRole=\"App\" FromRole=\"AppPartner\" /></Ent" +
+                "ityType><EntityType Name=\"TaskApp\"><Key><PropertyRef Name=\"Id\" /></Key><Property" +
+                " Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"AppCollectionID\" T" +
+                "ype=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"AppId\" Type=\"Edm.Guid\" Nullabl" +
+                "e=\"false\" /><Property Name=\"Order\" Type=\"Edm.Int32\" /><NavigationProperty Name=\"" +
+                "App\" Relationship=\"Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_Data_App_App" +
+                "Partner\" ToRole=\"App\" FromRole=\"AppPartner\" /><NavigationProperty Name=\"AppColle" +
+                "ction\" Relationship=\"Hammergo.Data.Hammergo_Data_TaskApp_AppCollection_Hammergo_" +
+                "Data_AppCollection_AppCollectionPartner\" ToRole=\"AppCollection\" FromRole=\"AppCol" +
+                "lectionPartner\" /></EntityType><EntityType Name=\"AppCollection\"><Key><PropertyRe" +
+                "f Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Prop" +
+                "erty Name=\"TaskTypeID\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"Colle" +
+                "ctionName\" Type=\"Edm.String\" /><Property Name=\"Description\" Type=\"Edm.String\" />" +
+                "<Property Name=\"Order\" Type=\"Edm.Int32\" /><Property Name=\"ParentCollection\" Type" +
+                "=\"Edm.Guid\" /><Property Name=\"SUM\" Type=\"Edm.Double\" /><Property Name=\"MAX\" Type" +
+                "=\"Edm.Double\" /><Property Name=\"MIN\" Type=\"Edm.Double\" /><Property Name=\"AVG\" Ty" +
+                "pe=\"Edm.Double\" /><Property Name=\"CNT\" Type=\"Edm.Int32\" /><NavigationProperty Na" +
+                "me=\"TaskType\" Relationship=\"Hammergo.Data.Hammergo_Data_AppCollection_TaskType_H" +
+                "ammergo_Data_TaskType_TaskTypePartner\" ToRole=\"TaskType\" FromRole=\"TaskTypePartn" +
+                "er\" /><NavigationProperty Name=\"TaskApps\" Relationship=\"Hammergo.Data.Hammergo_D" +
+                "ata_AppCollection_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner\" ToRole=\"TaskAp" +
+                "ps\" FromRole=\"TaskAppsPartner\" /></EntityType><EntityType Name=\"TaskType\"><Key><" +
+                "PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Int32\" Nullable=\"fal" +
+                "se\" /><Property Name=\"TypeName\" Type=\"Edm.String\" /><NavigationProperty Name=\"Ap" +
+                "pCollections\" Relationship=\"Hammergo.Data.Hammergo_Data_TaskType_AppCollections_" +
+                "Hammergo_Data_AppCollection_AppCollectionsPartner\" ToRole=\"AppCollections\" FromR" +
+                "ole=\"AppCollectionsPartner\" /></EntityType><EntityType Name=\"CalculateParam\" Bas" +
                 "eType=\"Hammergo.Data.AppParam\"><NavigationProperty Name=\"CalculateValues\" Relati" +
                 "onship=\"Hammergo.Data.Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data" +
                 "_CalculateValue_CalculateValuesPartner\" ToRole=\"CalculateValues\" FromRole=\"Calcu" +
@@ -241,31 +341,31 @@ namespace DamServiceV3.Test.DamServiceRef
                 "ergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartner\"><End Type=\"Hamm" +
                 "ergo.Data.AppParam\" Role=\"AppParams\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data" +
                 ".App\" Role=\"AppParamsPartner\" Multiplicity=\"0..1\" /></Association><Association N" +
-                "ame=\"Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner\"><End Type=\"Ha" +
-                "mmergo.Data.App\" Role=\"Apps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.Project" +
-                "Part\" Role=\"AppsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"" +
-                "Hammergo_Data_Remark_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data." +
-                "App\" Role=\"App\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.Remark\" Role=\"App" +
-                "Partner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_Ta" +
-                "skApp_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"App\"" +
-                " Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.TaskApp\" Role=\"AppPartner\" Multi" +
-                "plicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_TaskApp_AppColle" +
-                "ction_Hammergo_Data_AppCollection_AppCollectionPartner\"><End Type=\"Hammergo.Data" +
-                ".AppCollection\" Role=\"AppCollection\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.D" +
-                "ata.TaskApp\" Role=\"AppCollectionPartner\" Multiplicity=\"0..1\" /></Association><As" +
-                "sociation Name=\"Hammergo_Data_AppCollection_TaskType_Hammergo_Data_TaskType_Task" +
-                "TypePartner\"><End Type=\"Hammergo.Data.TaskType\" Role=\"TaskType\" Multiplicity=\"0." +
-                ".1\" /><End Type=\"Hammergo.Data.AppCollection\" Role=\"TaskTypePartner\" Multiplicit" +
-                "y=\"0..1\" /></Association><Association Name=\"Hammergo_Data_AppCollection_TaskApps" +
-                "_Hammergo_Data_TaskApp_TaskAppsPartner\"><End Type=\"Hammergo.Data.TaskApp\" Role=\"" +
-                "TaskApps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.AppCollection\" Role=\"TaskA" +
-                "ppsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data" +
-                "_TaskType_AppCollections_Hammergo_Data_AppCollection_AppCollectionsPartner\"><End" +
-                " Type=\"Hammergo.Data.AppCollection\" Role=\"AppCollections\" Multiplicity=\"*\" /><En" +
-                "d Type=\"Hammergo.Data.TaskType\" Role=\"AppCollectionsPartner\" Multiplicity=\"0..1\"" +
-                " /></Association><Association Name=\"Hammergo_Data_AppParam_App_Hammergo_Data_App" +
-                "_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"App\" Multiplicity=\"0..1\" /><End" +
-                " Type=\"Hammergo.Data.AppParam\" Role=\"AppPartner\" Multiplicity=\"0..1\" /></Associa" +
+                "ame=\"Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammerg" +
+                "o.Data.App\" Role=\"App\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.AppParam\" " +
+                "Role=\"AppPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammerg" +
+                "o_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner\"><End Type=\"Hammergo.Data." +
+                "App\" Role=\"Apps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.ProjectPart\" Role=\"" +
+                "AppsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Dat" +
+                "a_Remark_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"A" +
+                "pp\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.Remark\" Role=\"AppPartner\" Mul" +
+                "tiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_TaskApp_App_Ha" +
+                "mmergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"App\" Multiplicit" +
+                "y=\"0..1\" /><End Type=\"Hammergo.Data.TaskApp\" Role=\"AppPartner\" Multiplicity=\"0.." +
+                "1\" /></Association><Association Name=\"Hammergo_Data_TaskApp_AppCollection_Hammer" +
+                "go_Data_AppCollection_AppCollectionPartner\"><End Type=\"Hammergo.Data.AppCollecti" +
+                "on\" Role=\"AppCollection\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.TaskApp\"" +
+                " Role=\"AppCollectionPartner\" Multiplicity=\"0..1\" /></Association><Association Na" +
+                "me=\"Hammergo_Data_AppCollection_TaskType_Hammergo_Data_TaskType_TaskTypePartner\"" +
+                "><End Type=\"Hammergo.Data.TaskType\" Role=\"TaskType\" Multiplicity=\"0..1\" /><End T" +
+                "ype=\"Hammergo.Data.AppCollection\" Role=\"TaskTypePartner\" Multiplicity=\"0..1\" /><" +
+                "/Association><Association Name=\"Hammergo_Data_AppCollection_TaskApps_Hammergo_Da" +
+                "ta_TaskApp_TaskAppsPartner\"><End Type=\"Hammergo.Data.TaskApp\" Role=\"TaskApps\" Mu" +
+                "ltiplicity=\"*\" /><End Type=\"Hammergo.Data.AppCollection\" Role=\"TaskAppsPartner\" " +
+                "Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_TaskType_Ap" +
+                "pCollections_Hammergo_Data_AppCollection_AppCollectionsPartner\"><End Type=\"Hamme" +
+                "rgo.Data.AppCollection\" Role=\"AppCollections\" Multiplicity=\"*\" /><End Type=\"Hamm" +
+                "ergo.Data.TaskType\" Role=\"AppCollectionsPartner\" Multiplicity=\"0..1\" /></Associa" +
                 "tion><Association Name=\"Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Da" +
                 "ta_CalculateValue_CalculateValuesPartner\"><End Type=\"Hammergo.Data.CalculateValu" +
                 "e\" Role=\"CalculateValues\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.CalculateP" +
@@ -291,20 +391,52 @@ namespace DamServiceV3.Test.DamServiceRef
                 "hema><Schema Namespace=\"Default\" xmlns=\"http://schemas.microsoft.com/ado/2009/11" +
                 "/edm\"><EntityContainer Name=\"Container\" m:IsDefaultEntityContainer=\"true\"><Entit" +
                 "ySet Name=\"ApparatusTypes\" EntityType=\"Hammergo.Data.ApparatusType\" /><EntitySet" +
-                " Name=\"Apps\" EntityType=\"Hammergo.Data.App\" /><AssociationSet Name=\"Hammergo_Dat" +
-                "a_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet\" Association=\"Hammergo.Dat" +
-                "a.Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner\"><End Role=\"App" +
-                "sPartner\" EntitySet=\"ApparatusTypes\" /><End Role=\"Apps\" EntitySet=\"Apps\" /></Ass" +
-                "ociationSet><AssociationSet Name=\"Hammergo_Data_App_ApparatusType_Hammergo_Data_" +
-                "ApparatusType_ApparatusTypePartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_" +
-                "App_ApparatusType_Hammergo_Data_ApparatusType_ApparatusTypePartner\"><End Role=\"A" +
-                "pparatusTypePartner\" EntitySet=\"Apps\" /><End Role=\"ApparatusType\" EntitySet=\"App" +
-                "aratusTypes\" /></AssociationSet></EntityContainer></Schema></edmx:DataServices><" +
-                "/edmx:Edmx>";
+                " Name=\"Apps\" EntityType=\"Hammergo.Data.App\" /><EntitySet Name=\"AppParams\" Entity" +
+                "Type=\"Hammergo.Data.AppParam\" /><EntitySet Name=\"ProjectParts\" EntityType=\"Hamme" +
+                "rgo.Data.ProjectPart\" /><EntitySet Name=\"Remarks\" EntityType=\"Hammergo.Data.Rema" +
+                "rk\" /><EntitySet Name=\"TaskApps\" EntityType=\"Hammergo.Data.TaskApp\" /><Associati" +
+                "onSet Name=\"Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet\" A" +
+                "ssociation=\"Hammergo.Data.Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_App" +
+                "sPartner\"><End Role=\"AppsPartner\" EntitySet=\"ApparatusTypes\" /><End Role=\"Apps\" " +
+                "EntitySet=\"Apps\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_App_Appa" +
+                "ratusType_Hammergo_Data_ApparatusType_ApparatusTypePartnerSet\" Association=\"Hamm" +
+                "ergo.Data.Hammergo_Data_App_ApparatusType_Hammergo_Data_ApparatusType_ApparatusT" +
+                "ypePartner\"><End Role=\"ApparatusTypePartner\" EntitySet=\"Apps\" /><End Role=\"Appar" +
+                "atusType\" EntitySet=\"ApparatusTypes\" /></AssociationSet><AssociationSet Name=\"Ha" +
+                "mmergo_Data_App_ProjectPart_Hammergo_Data_ProjectPart_ProjectPartPartnerSet\" Ass" +
+                "ociation=\"Hammergo.Data.Hammergo_Data_App_ProjectPart_Hamme";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart2 = "rgo_Data_ProjectPart_ProjectPartPartner\"><End Role=\"ProjectPartPartner\" EntitySet" +
+                "=\"Apps\" /><End Role=\"ProjectPart\" EntitySet=\"ProjectParts\" /></AssociationSet><A" +
+                "ssociationSet Name=\"Hammergo_Data_App_Remarks_Hammergo_Data_Remark_RemarksPartne" +
+                "rSet\" Association=\"Hammergo.Data.Hammergo_Data_App_Remarks_Hammergo_Data_Remark_" +
+                "RemarksPartner\"><End Role=\"RemarksPartner\" EntitySet=\"Apps\" /><End Role=\"Remarks" +
+                "\" EntitySet=\"Remarks\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_App" +
+                "_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartnerSet\" Association=\"Hammergo.Data.H" +
+                "ammergo_Data_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner\"><End Role=\"Task" +
+                "AppsPartner\" EntitySet=\"Apps\" /><End Role=\"TaskApps\" EntitySet=\"TaskApps\" /></As" +
+                "sociationSet><AssociationSet Name=\"Hammergo_Data_App_AppParams_Hammergo_Data_App" +
+                "Param_AppParamsPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_App_AppParam" +
+                "s_Hammergo_Data_AppParam_AppParamsPartner\"><End Role=\"AppParamsPartner\" EntitySe" +
+                "t=\"Apps\" /><End Role=\"AppParams\" EntitySet=\"AppParams\" /></AssociationSet><Assoc" +
+                "iationSet Name=\"Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartnerSet\" Asso" +
+                "ciation=\"Hammergo.Data.Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner\">" +
+                "<End Role=\"AppPartner\" EntitySet=\"AppParams\" /><End Role=\"App\" EntitySet=\"Apps\" " +
+                "/></AssociationSet><AssociationSet Name=\"Hammergo_Data_ProjectPart_Apps_Hammergo" +
+                "_Data_App_AppsPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_ProjectPart_A" +
+                "pps_Hammergo_Data_App_AppsPartner\"><End Role=\"AppsPartner\" EntitySet=\"ProjectPar" +
+                "ts\" /><End Role=\"Apps\" EntitySet=\"Apps\" /></AssociationSet><AssociationSet Name=" +
+                "\"Hammergo_Data_Remark_App_Hammergo_Data_App_AppPartnerSet\" Association=\"Hammergo" +
+                ".Data.Hammergo_Data_Remark_App_Hammergo_Data_App_AppPartner\"><End Role=\"AppPartn" +
+                "er\" EntitySet=\"Remarks\" /><End Role=\"App\" EntitySet=\"Apps\" /></AssociationSet><A" +
+                "ssociationSet Name=\"Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartnerSet\" A" +
+                "ssociation=\"Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartner" +
+                "\"><End Role=\"AppPartner\" EntitySet=\"TaskApps\" /><End Role=\"App\" EntitySet=\"Apps\"" +
+                " /></AssociationSet></EntityContainer></Schema></edmx:DataServices></edmx:Edmx>";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
             private static string GetConcatenatedEdmxString()
             {
-                return string.Concat(ModelPart0, ModelPart1);
+                return string.Concat(ModelPart0, ModelPart1, ModelPart2);
             }
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
             public static global::Microsoft.Data.Edm.IEdmModel GetInstance()
@@ -769,11 +901,227 @@ namespace DamServiceV3.Test.DamServiceRef
         }
     }
     /// <summary>
+    /// There are no comments for Hammergo.Data.AppParam in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("AppParams")]
+    [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
+    public abstract partial class AppParam : global::System.ComponentModel.INotifyPropertyChanged
+    {
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+                this.OnPropertyChanged("Id");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+        /// <summary>
+        /// There are no comments for Property AppId in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Guid AppId
+        {
+            get
+            {
+                return this._AppId;
+            }
+            set
+            {
+                this.OnAppIdChanging(value);
+                this._AppId = value;
+                this.OnAppIdChanged();
+                this.OnPropertyChanged("AppId");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Guid _AppId;
+        partial void OnAppIdChanging(global::System.Guid value);
+        partial void OnAppIdChanged();
+        /// <summary>
+        /// There are no comments for Property ParamName in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string ParamName
+        {
+            get
+            {
+                return this._ParamName;
+            }
+            set
+            {
+                this.OnParamNameChanging(value);
+                this._ParamName = value;
+                this.OnParamNameChanged();
+                this.OnPropertyChanged("ParamName");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _ParamName;
+        partial void OnParamNameChanging(string value);
+        partial void OnParamNameChanged();
+        /// <summary>
+        /// There are no comments for Property ParamSymbol in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string ParamSymbol
+        {
+            get
+            {
+                return this._ParamSymbol;
+            }
+            set
+            {
+                this.OnParamSymbolChanging(value);
+                this._ParamSymbol = value;
+                this.OnParamSymbolChanged();
+                this.OnPropertyChanged("ParamSymbol");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _ParamSymbol;
+        partial void OnParamSymbolChanging(string value);
+        partial void OnParamSymbolChanged();
+        /// <summary>
+        /// There are no comments for Property UnitSymbol in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string UnitSymbol
+        {
+            get
+            {
+                return this._UnitSymbol;
+            }
+            set
+            {
+                this.OnUnitSymbolChanging(value);
+                this._UnitSymbol = value;
+                this.OnUnitSymbolChanged();
+                this.OnPropertyChanged("UnitSymbol");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _UnitSymbol;
+        partial void OnUnitSymbolChanging(string value);
+        partial void OnUnitSymbolChanged();
+        /// <summary>
+        /// There are no comments for Property PrecisionNum in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public byte PrecisionNum
+        {
+            get
+            {
+                return this._PrecisionNum;
+            }
+            set
+            {
+                this.OnPrecisionNumChanging(value);
+                this._PrecisionNum = value;
+                this.OnPrecisionNumChanged();
+                this.OnPropertyChanged("PrecisionNum");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private byte _PrecisionNum;
+        partial void OnPrecisionNumChanging(byte value);
+        partial void OnPrecisionNumChanged();
+        /// <summary>
+        /// There are no comments for Property Order in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public byte Order
+        {
+            get
+            {
+                return this._Order;
+            }
+            set
+            {
+                this.OnOrderChanging(value);
+                this._Order = value;
+                this.OnOrderChanged();
+                this.OnPropertyChanged("Order");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private byte _Order;
+        partial void OnOrderChanging(byte value);
+        partial void OnOrderChanged();
+        /// <summary>
+        /// There are no comments for Property Description in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string Description
+        {
+            get
+            {
+                return this._Description;
+            }
+            set
+            {
+                this.OnDescriptionChanging(value);
+                this._Description = value;
+                this.OnDescriptionChanged();
+                this.OnPropertyChanged("Description");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _Description;
+        partial void OnDescriptionChanging(string value);
+        partial void OnDescriptionChanged();
+        /// <summary>
+        /// There are no comments for App in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public App App
+        {
+            get
+            {
+                return this._App;
+            }
+            set
+            {
+                this._App = value;
+                this.OnPropertyChanged("App");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private App _App;
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if ((this.PropertyChanged != null))
+            {
+                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
+            }
+        }
+    }
+    /// <summary>
     /// There are no comments for Hammergo.Data.ProjectPart in the schema.
     /// </summary>
     /// <KeyProperties>
     /// Id
     /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("ProjectParts")]
     [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
     public partial class ProjectPart : global::System.ComponentModel.INotifyPropertyChanged
     {
@@ -889,6 +1237,7 @@ namespace DamServiceV3.Test.DamServiceRef
     /// <KeyProperties>
     /// Id
     /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("Remarks")]
     [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
     public partial class Remark : global::System.ComponentModel.INotifyPropertyChanged
     {
@@ -1030,6 +1379,7 @@ namespace DamServiceV3.Test.DamServiceRef
     /// <KeyProperties>
     /// Id
     /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("TaskApps")]
     [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
     public partial class TaskApp : global::System.ComponentModel.INotifyPropertyChanged
     {
@@ -1576,220 +1926,6 @@ namespace DamServiceV3.Test.DamServiceRef
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private global::System.Data.Services.Client.DataServiceCollection<AppCollection> _AppCollections = new global::System.Data.Services.Client.DataServiceCollection<AppCollection>(null, global::System.Data.Services.Client.TrackingMode.None);
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for Hammergo.Data.AppParam in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
-    public abstract partial class AppParam : global::System.ComponentModel.INotifyPropertyChanged
-    {
-        /// <summary>
-        /// There are no comments for Property Id in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public global::System.Guid Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this._Id = value;
-                this.OnIdChanged();
-                this.OnPropertyChanged("Id");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private global::System.Guid _Id;
-        partial void OnIdChanging(global::System.Guid value);
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for Property AppId in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public global::System.Guid AppId
-        {
-            get
-            {
-                return this._AppId;
-            }
-            set
-            {
-                this.OnAppIdChanging(value);
-                this._AppId = value;
-                this.OnAppIdChanged();
-                this.OnPropertyChanged("AppId");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private global::System.Guid _AppId;
-        partial void OnAppIdChanging(global::System.Guid value);
-        partial void OnAppIdChanged();
-        /// <summary>
-        /// There are no comments for Property ParamName in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public string ParamName
-        {
-            get
-            {
-                return this._ParamName;
-            }
-            set
-            {
-                this.OnParamNameChanging(value);
-                this._ParamName = value;
-                this.OnParamNameChanged();
-                this.OnPropertyChanged("ParamName");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private string _ParamName;
-        partial void OnParamNameChanging(string value);
-        partial void OnParamNameChanged();
-        /// <summary>
-        /// There are no comments for Property ParamSymbol in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public string ParamSymbol
-        {
-            get
-            {
-                return this._ParamSymbol;
-            }
-            set
-            {
-                this.OnParamSymbolChanging(value);
-                this._ParamSymbol = value;
-                this.OnParamSymbolChanged();
-                this.OnPropertyChanged("ParamSymbol");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private string _ParamSymbol;
-        partial void OnParamSymbolChanging(string value);
-        partial void OnParamSymbolChanged();
-        /// <summary>
-        /// There are no comments for Property UnitSymbol in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public string UnitSymbol
-        {
-            get
-            {
-                return this._UnitSymbol;
-            }
-            set
-            {
-                this.OnUnitSymbolChanging(value);
-                this._UnitSymbol = value;
-                this.OnUnitSymbolChanged();
-                this.OnPropertyChanged("UnitSymbol");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private string _UnitSymbol;
-        partial void OnUnitSymbolChanging(string value);
-        partial void OnUnitSymbolChanged();
-        /// <summary>
-        /// There are no comments for Property PrecisionNum in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public byte PrecisionNum
-        {
-            get
-            {
-                return this._PrecisionNum;
-            }
-            set
-            {
-                this.OnPrecisionNumChanging(value);
-                this._PrecisionNum = value;
-                this.OnPrecisionNumChanged();
-                this.OnPropertyChanged("PrecisionNum");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private byte _PrecisionNum;
-        partial void OnPrecisionNumChanging(byte value);
-        partial void OnPrecisionNumChanged();
-        /// <summary>
-        /// There are no comments for Property Order in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public byte Order
-        {
-            get
-            {
-                return this._Order;
-            }
-            set
-            {
-                this.OnOrderChanging(value);
-                this._Order = value;
-                this.OnOrderChanged();
-                this.OnPropertyChanged("Order");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private byte _Order;
-        partial void OnOrderChanging(byte value);
-        partial void OnOrderChanged();
-        /// <summary>
-        /// There are no comments for Property Description in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public string Description
-        {
-            get
-            {
-                return this._Description;
-            }
-            set
-            {
-                this.OnDescriptionChanging(value);
-                this._Description = value;
-                this.OnDescriptionChanged();
-                this.OnPropertyChanged("Description");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private string _Description;
-        partial void OnDescriptionChanging(string value);
-        partial void OnDescriptionChanged();
-        /// <summary>
-        /// There are no comments for App in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public App App
-        {
-            get
-            {
-                return this._App;
-            }
-            set
-            {
-                this._App = value;
-                this.OnPropertyChanged("App");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private App _App;
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]

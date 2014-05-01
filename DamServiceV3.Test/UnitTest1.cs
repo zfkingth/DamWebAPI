@@ -10,6 +10,9 @@ namespace DamServiceV3.Test
     [TestClass]
     public class UnitTest1
     {
+
+    
+
         [TestMethod]
         public void TestODataV3_type()
         {
@@ -57,7 +60,7 @@ namespace DamServiceV3.Test
             context.DeleteObject(type2);
 
             context.SaveChanges();
-            int fCnt = context.ApparatusTypes.Count();
+            int fCnt = context.Apps.Count();
 
             Assert.IsTrue(cnt1 == fCnt, "删除仪器类型失败");
 
@@ -122,5 +125,68 @@ namespace DamServiceV3.Test
 
 
         }
+
+
+        [TestMethod]
+        public void TestODataV3_projectPart()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var itemList = context.ProjectParts.ToList();
+
+
+            int cnt1 = context.ProjectParts.Count();
+
+            var root = context.ProjectParts.Where(s => s.ParentPart == null).SingleOrDefault();
+
+
+            var newItem = new ProjectPart();
+            newItem.Id = Guid.NewGuid();
+            newItem.PartName = "测试部位";
+            newItem.ParentPart =root.Id;
+
+            context.AddToProjectParts(newItem);
+            context.SaveChanges();
+
+            int cnt2 = context.ProjectParts.Count();
+
+
+            Assert.IsTrue(cnt1 + 1 == cnt2, "插入仪器类型失败");
+
+            //在单独查询
+
+            context.Detach(newItem);
+
+            var itemInDb = context.ProjectParts.Where(s => s.Id == newItem.Id).SingleOrDefault();
+
+            Assert.AreEqual(itemInDb.Id, newItem.Id, "插入失败");
+
+            //更新
+
+            itemInDb.PartName = newItem.PartName + "modify";
+
+            context.UpdateObject(itemInDb);
+            context.SaveChanges();
+
+            context.Detach(itemInDb);
+
+            var itemUpdated = context.ProjectParts.Where(s => s.Id == itemInDb.Id).SingleOrDefault();
+
+            Assert.AreEqual(itemUpdated.PartName, itemInDb.PartName, "更新失败");
+
+            //删除
+            context.DeleteObject(itemUpdated);
+
+            context.SaveChanges();
+            int fCnt = context.ProjectParts.Count();
+
+            Assert.IsTrue(cnt1 == fCnt, "删除仪器类型失败");
+
+
+        } 
+
     }
 }
