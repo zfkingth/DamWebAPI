@@ -108,6 +108,8 @@ namespace DamService2.Migrations
             };
 
             context.Remarks.AddOrUpdate(remark1, remark2, remark3);
+
+
  
         }
     }

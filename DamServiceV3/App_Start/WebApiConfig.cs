@@ -30,6 +30,12 @@ namespace DamServiceV3
 
 
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
+
+            config.Routes.MapHttpRoute(
+            name: "DefaultApi",
+            routeTemplate: "api/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional });
+
         }
     }
 }

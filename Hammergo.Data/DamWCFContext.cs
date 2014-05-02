@@ -29,11 +29,12 @@ namespace Hammergo.Data
         public DamWCFContext(bool checkLogic)
             : base("Data Source=.;Initial Catalog=DamWebApi;Integrated Security=True;MultipleActiveResultSets=True")
         {
-            if (checkLogic)
-            {
-                var objCtx = ((IObjectContextAdapter)this).ObjectContext;
-                objCtx.SavingChanges += objCtx_SavingChanges;
-            }
+            //在业务逻辑中检查
+            //if (checkLogic)
+            //{
+            //    var objCtx = ((IObjectContextAdapter)this).ObjectContext;
+            //    objCtx.SavingChanges += objCtx_SavingChanges;
+            //}
         }
 
         #region Business Logic
