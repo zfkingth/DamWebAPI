@@ -109,7 +109,51 @@ namespace DamService2.Migrations
 
             context.Remarks.AddOrUpdate(remark1, remark2, remark3);
 
+            var conParam1 = new ConstantParam()
+            {
+                Id = Guid.NewGuid(),
+                AppId = app1.Id,
+                ParamName = "c1",
+                ParamSymbol = "c1",
+                PrecisionNum = 2,
+                UnitSymbol = "no",
+                Val = 1,
+                Order = 1,
+                Description = "no description",
 
+
+            };
+
+            var mesParam1 = new  MessureParam()
+            {
+                Id = Guid.NewGuid(),
+                AppId = app1.Id,
+                ParamName = "m1",
+                ParamSymbol = "m1",
+                PrecisionNum = 2,
+                UnitSymbol = "no",
+                Order = 1,
+                Description = "no description",
+
+
+            };
+
+
+            var calcParam1 = new CalculateParam()
+            {
+                Id = Guid.NewGuid(),
+                AppId = app1.Id,
+                ParamName = "cal1",
+                ParamSymbol = "cal1",
+                PrecisionNum = 2,
+                UnitSymbol = "no",
+                Order = 1,
+                Description = "no description",
+
+
+            };
+
+            context.AppParams.AddOrUpdate(conParam1, mesParam1, calcParam1);
  
         }
     }

@@ -128,6 +128,29 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
+        public void TestODataV3_appNav()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+            context.LoadProperty<AppParam>(app, "AppParams", null);
+
+            int cnt = app.AppParams.Count;
+
+            Assert.AreEqual(3, cnt, "参数数目不一致");
+
+            
+           
+
+
+        }
+
+
+        [TestMethod]
         public void TestODataV3_projectPart()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);

@@ -27,6 +27,9 @@ namespace DamServiceV3
             builder.EntitySet<ProjectPart>("ProjectParts");
             builder.EntitySet<Remark>("Remarks");
             builder.EntitySet<TaskApp>("TaskApps");
+            builder.EntitySet<MessureValue>("MessureValues");
+            builder.EntitySet<CalculateValue>("CalculateValue");
+            builder.EntitySet<Formula>("Formulae");
 
 
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
