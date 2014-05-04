@@ -14,7 +14,7 @@ using System.Web.Http.OData.Routing;
 using Hammergo.Data;
 using System.Web.Http.OData.Query;
 using System.Text;
-using DamServiceV3.Models;
+using Newtonsoft.Json.Linq;
 
 namespace DamServiceV3.Controllers
 {
@@ -24,17 +24,17 @@ namespace DamServiceV3.Controllers
 
         // GET odata/Apps
         [Queryable]
-        public IQueryable<int> Get()
+        public SingleResult<int> Get()
         {
 
-            return (new int[] { 1 }).AsQueryable();
+            return SingleResult.Create((new int[]{ 1}).AsQueryable());
         }
 
 
 
         private DamWCFContext db = null;
         // POST odata/Apps
-        public async Task<IHttpActionResult> Post(ParamsDTO dto)
+        public async Task<IHttpActionResult> Post(JObject dto)
         {
 
             if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace DamServiceV3.Controllers
 
             }
 
-            return ex
+            return Created<string>("", "");
             //return Created(dto);
         }
 

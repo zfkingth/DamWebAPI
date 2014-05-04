@@ -1,14 +1,14 @@
-﻿using Hammergo.Data;
+﻿using DamServiceV3.Test.DamServiceRef;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DamServiceV3.Models
+namespace DamServiceV3.Test.DTO
 {
     public class ParamsDTO
     {
-
         //app id
         public Guid Id { get; set; }
 
@@ -19,6 +19,5 @@ namespace DamServiceV3.Models
         public ICollection<Formula> AddedFormulae { get; set; }
         public ICollection<Formula> UpdatedFormulae { get; set; }
         public ICollection<Formula> DeletedFormulae { get; set; }
-
     }
 }

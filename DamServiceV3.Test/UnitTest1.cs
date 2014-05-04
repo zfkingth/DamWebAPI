@@ -4,6 +4,9 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using DamServiceV3.Test.DamServiceRef;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace DamServiceV3.Test
 {
@@ -11,7 +14,7 @@ namespace DamServiceV3.Test
     public class UnitTest1
     {
 
-    
+
 
         [TestMethod]
         public void TestODataV3_type()
@@ -143,8 +146,8 @@ namespace DamServiceV3.Test
 
             Assert.AreEqual(3, cnt, "参数数目不一致");
 
-            
-           
+
+
 
 
         }
@@ -169,7 +172,7 @@ namespace DamServiceV3.Test
             var newItem = new ProjectPart();
             newItem.Id = Guid.NewGuid();
             newItem.PartName = "测试部位";
-            newItem.ParentPart =root.Id;
+            newItem.ParentPart = root.Id;
 
             context.AddToProjectParts(newItem);
             context.SaveChanges();
@@ -233,7 +236,7 @@ namespace DamServiceV3.Test
             newItem.Id = Guid.NewGuid();
             newItem.RemarkText = "测试";
             newItem.Date = DateTime.Now;
-            newItem.AppId =app.Id;
+            newItem.AppId = app.Id;
 
             context.AddToRemarks(newItem);
             context.SaveChanges();
@@ -273,8 +276,33 @@ namespace DamServiceV3.Test
             Assert.IsTrue(cnt1 == fCnt, "删除 失败");
 
 
-        } 
+        }
 
+
+        [TestMethod]
+        public async Task TestODataV3_paramsLogic1()
+        {
+            using (var client = new HttpClient())
+            {
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("api/ParamsDTOs/1");
+                if (response.IsSuccessStatusCode)
+                {
+                    var val = await response.Content.ReadAsAsync<int>();
+
+                }
+
+            }
+
+
+
+
+
+        }
 
 
     }
