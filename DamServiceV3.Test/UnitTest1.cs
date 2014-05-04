@@ -7,6 +7,7 @@ using DamServiceV3.Test.DamServiceRef;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using DamServiceV3.Test.DTO;
 
 namespace DamServiceV3.Test
 {
@@ -298,11 +299,53 @@ namespace DamServiceV3.Test
 
             }
 
+        }
+
+
+        [TestMethod]
+        public async Task TestODataV3_paramsLogic2()
+        {
+            using (var client = new HttpClient())
+            {
+                //get app
+
+                Uri uri = new Uri(TestConfig.serviceUrl);
+                var context = new DamServiceRef.Container(uri);
+
+                context.Format.UseJson();
+
+                var appItem = context.Apps.Expand("AppParams").Where(s => s.AppName == "第一支仪器").SingleOrDefault();
 
 
 
+
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                ParamsDTO dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                dto.AddedParams = new List<AppParam>() { appItem.AppParams[0]};
+                dto.UpdatedParams = new List<AppParam>() { appItem.AppParams[1]};
+                dto.DeletedParams = new List<AppParam>() { appItem.AppParams[2]};
+
+
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs",dto);
+                if (response.IsSuccessStatusCode)
+                {
+                    var val = await response.Content.ReadAsAsync<int>();
+
+                }
+
+            }
 
         }
+
 
 
     }

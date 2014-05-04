@@ -42,6 +42,12 @@ namespace DamServiceV3.Controllers
                 return BadRequest(ModelState);
             }
 
+            dynamic jdata = dto;
+
+            JObject jAddedParams = jdata.AddedParams;
+
+            var addedParams = jAddedParams.ToArray<AppParam>();
+
             //delay load
             db = new DamWCFContext();
 
@@ -67,6 +73,7 @@ namespace DamServiceV3.Controllers
         {
             if (disposing)
             {
+                if(db!=null)
                 db.Dispose();
             }
             base.Dispose(disposing);
