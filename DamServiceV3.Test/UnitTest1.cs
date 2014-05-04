@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using DamServiceV3.Test.DTO;
+using Newtonsoft.Json;
 
 namespace DamServiceV3.Test
 {
@@ -329,18 +330,15 @@ namespace DamServiceV3.Test
                     Id = appItem.Id,
                 };
 
-                dto.AddedParams = new List<AppParam>() { appItem.AppParams[0]};
-                dto.UpdatedParams = new List<AppParam>() { appItem.AppParams[1]};
-                dto.DeletedParams = new List<AppParam>() { appItem.AppParams[2]};
+                //dto.AddedParams = new List<AppParam>() { appItem.AppParams[0]};
+                //dto.UpdatedParams = new List<AppParam>() { appItem.AppParams[1]};
+                //dto.DeletedParams = new List<AppParam>() { appItem.AppParams[2]};
 
-
+                
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs",dto);
-                if (response.IsSuccessStatusCode)
-                {
-                    var val = await response.Content.ReadAsAsync<int>();
-
-                }
+                Assert.IsTrue(response.IsSuccessStatusCode, "测试失败");
+        
 
             }
 

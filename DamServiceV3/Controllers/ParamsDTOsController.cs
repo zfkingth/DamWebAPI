@@ -15,6 +15,8 @@ using Hammergo.Data;
 using System.Web.Http.OData.Query;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using DamServiceV3.Models;
 
 namespace DamServiceV3.Controllers
 {
@@ -41,12 +43,10 @@ namespace DamServiceV3.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var converter=new Helper.AppParamConverter();
+         //   var item = JsonConvert.DeserializeObject<ParamsDTO>(dto,converter );
 
-            dynamic jdata = dto;
-
-            JObject jAddedParams = jdata.AddedParams;
-
-            var addedParams = jAddedParams.ToArray<AppParam>();
+            
 
             //delay load
             db = new DamWCFContext();

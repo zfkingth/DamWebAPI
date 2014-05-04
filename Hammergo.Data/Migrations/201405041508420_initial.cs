@@ -49,6 +49,7 @@ namespace DamService2.Migrations
                         PrecisionNum = c.Byte(nullable: false),
                         Order = c.Byte(nullable: false),
                         Description = c.String(),
+                        CalcOrder = c.Byte(),
                         Val = c.Double(),
                         TypeNum = c.Int(nullable: false),
                     })

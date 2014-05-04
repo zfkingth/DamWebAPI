@@ -1,11 +1,10 @@
-﻿using DamServiceV3.Test.DamServiceRef;
+﻿using Hammergo.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace DamServiceV3.Test.DTO
+namespace DamServiceV3.Models
 {
     public class ParamsDTO
     {

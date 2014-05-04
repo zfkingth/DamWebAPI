@@ -47,13 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\ParamsValidatation.cs" />
-    <Compile Include="Migrations\201404290227482_initial.cs" />
-    <Compile Include="Migrations\201404290227482_initial.Designer.cs">
-      <DependentUpon>201404290227482_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201405041508420_initial.cs" />
+    <Compile Include="Migrations\201405041508420_initial.Designer.cs">
+      <DependentUpon>201405041508420_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201404290228087_check.cs" />
-    <Compile Include="Migrations\201404290228087_check.Designer.cs">
-      <DependentUpon>201404290228087_check.cs</DependentUpon>
+    <Compile Include="Migrations\201405041509302_check.cs" />
+    <Compile Include="Migrations\201405041509302_check.Designer.cs">
+      <DependentUpon>201405041509302_check.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\App.cs" />
@@ -99,11 +99,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201404290227482_initial.resx">
-      <DependentUpon>201404290227482_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405041508420_initial.resx">
+      <DependentUpon>201405041508420_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404290228087_check.resx">
-      <DependentUpon>201404290228087_check.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405041509302_check.resx">
+      <DependentUpon>201405041509302_check.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

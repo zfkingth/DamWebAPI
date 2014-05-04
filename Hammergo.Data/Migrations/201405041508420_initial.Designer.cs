@@ -13,7 +13,7 @@ namespace DamService2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201404290227482_initial"; }
+            get { return "201405041508420_initial"; }
         }
         
         string IMigrationMetadata.Source
