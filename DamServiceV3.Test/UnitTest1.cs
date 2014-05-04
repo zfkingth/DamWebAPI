@@ -330,13 +330,14 @@ namespace DamServiceV3.Test
                     Id = appItem.Id,
                 };
 
-                //dto.AddedParams = new List<AppParam>() { appItem.AppParams[0]};
-                //dto.UpdatedParams = new List<AppParam>() { appItem.AppParams[1]};
-                //dto.DeletedParams = new List<AppParam>() { appItem.AppParams[2]};
+                dto.AddedParams = new List<AppParam>() { appItem.AppParams[0] };
+                dto.UpdatedParams = new List<AppParam>() { appItem.AppParams[1] };
+                dto.DeletedParams = new List<AppParam>() { appItem.AppParams[2] };
 
                 
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs",dto);
+                
                 Assert.IsTrue(response.IsSuccessStatusCode, "测试失败");
         
 

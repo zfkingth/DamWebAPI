@@ -73,6 +73,38 @@
         <NavigationProperty Name="App" Relationship="Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartner" ToRole="App" FromRole="AppPartner" />
         <NavigationProperty Name="AppCollection" Relationship="Hammergo.Data.Hammergo_Data_TaskApp_AppCollection_Hammergo_Data_AppCollection_AppCollectionPartner" ToRole="AppCollection" FromRole="AppCollectionPartner" />
       </EntityType>
+      <EntityType Name="MessureValue">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ParamId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Date" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="Val" Type="Edm.Double" />
+        <NavigationProperty Name="MessureParam" Relationship="Hammergo.Data.Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner" ToRole="MessureParam" FromRole="MessureParamPartner" />
+      </EntityType>
+      <EntityType Name="CalculateValue">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ParamId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Date" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="Val" Type="Edm.Double" />
+        <NavigationProperty Name="CalculateParam" Relationship="Hammergo.Data.Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner" ToRole="CalculateParam" FromRole="CalculateParamPartner" />
+      </EntityType>
+      <EntityType Name="Formula">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ParamId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="StartDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="EndDate" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="FormulaExpression" Type="Edm.String" />
+        <Property Name="CalculateOrder" Type="Edm.Byte" Nullable="false" />
+        <NavigationProperty Name="CalculateParam" Relationship="Hammergo.Data.Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner" ToRole="CalculateParam" FromRole="CalculateParamPartner" />
+      </EntityType>
       <EntityType Name="AppCollection">
         <Key>
           <PropertyRef Name="Id" />
@@ -100,46 +132,15 @@
         <NavigationProperty Name="AppCollections" Relationship="Hammergo.Data.Hammergo_Data_TaskType_AppCollections_Hammergo_Data_AppCollection_AppCollectionsPartner" ToRole="AppCollections" FromRole="AppCollectionsPartner" />
       </EntityType>
       <EntityType Name="CalculateParam" BaseType="Hammergo.Data.AppParam">
+        <Property Name="CalcOrder" Type="Edm.Byte" Nullable="false" />
         <NavigationProperty Name="CalculateValues" Relationship="Hammergo.Data.Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner" ToRole="CalculateValues" FromRole="CalculateValuesPartner" />
         <NavigationProperty Name="Formulae" Relationship="Hammergo.Data.Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartner" ToRole="Formulae" FromRole="FormulaePartner" />
-      </EntityType>
-      <EntityType Name="CalculateValue">
-        <Key>
-          <PropertyRef Name="Id" />
-        </Key>
-        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
-        <Property Name="ParamId" Type="Edm.Guid" Nullable="false" />
-        <Property Name="Date" Type="Edm.DateTimeOffset" Nullable="false" />
-        <Property Name="Val" Type="Edm.Double" />
-        <NavigationProperty Name="CalculateParam" Relationship="Hammergo.Data.Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner" ToRole="CalculateParam" FromRole="CalculateParamPartner" />
-      </EntityType>
-      <EntityType Name="Formula">
-        <Key>
-          <PropertyRef Name="Id" />
-        </Key>
-        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
-        <Property Name="ParamId" Type="Edm.Guid" Nullable="false" />
-        <Property Name="StartDate" Type="Edm.DateTimeOffset" Nullable="false" />
-        <Property Name="EndDate" Type="Edm.DateTimeOffset" Nullable="false" />
-        <Property Name="FormulaExpression" Type="Edm.String" />
-        <Property Name="CalculateOrder" Type="Edm.Byte" Nullable="false" />
-        <NavigationProperty Name="CalculateParam" Relationship="Hammergo.Data.Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner" ToRole="CalculateParam" FromRole="CalculateParamPartner" />
       </EntityType>
       <EntityType Name="ConstantParam" BaseType="Hammergo.Data.AppParam">
         <Property Name="Val" Type="Edm.Double" Nullable="false" />
       </EntityType>
       <EntityType Name="MessureParam" BaseType="Hammergo.Data.AppParam">
         <NavigationProperty Name="MessureValues" Relationship="Hammergo.Data.Hammergo_Data_MessureParam_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartner" ToRole="MessureValues" FromRole="MessureValuesPartner" />
-      </EntityType>
-      <EntityType Name="MessureValue">
-        <Key>
-          <PropertyRef Name="Id" />
-        </Key>
-        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
-        <Property Name="ParamId" Type="Edm.Guid" Nullable="false" />
-        <Property Name="Date" Type="Edm.DateTimeOffset" Nullable="false" />
-        <Property Name="Val" Type="Edm.Double" />
-        <NavigationProperty Name="MessureParam" Relationship="Hammergo.Data.Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner" ToRole="MessureParam" FromRole="MessureParamPartner" />
       </EntityType>
       <Association Name="Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner">
         <End Type="Hammergo.Data.App" Role="Apps" Multiplicity="*" />
@@ -185,6 +186,18 @@
         <End Type="Hammergo.Data.AppCollection" Role="AppCollection" Multiplicity="0..1" />
         <End Type="Hammergo.Data.TaskApp" Role="AppCollectionPartner" Multiplicity="0..1" />
       </Association>
+      <Association Name="Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner">
+        <End Type="Hammergo.Data.MessureParam" Role="MessureParam" Multiplicity="0..1" />
+        <End Type="Hammergo.Data.MessureValue" Role="MessureParamPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
+        <End Type="Hammergo.Data.CalculateParam" Role="CalculateParam" Multiplicity="0..1" />
+        <End Type="Hammergo.Data.CalculateValue" Role="CalculateParamPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
+        <End Type="Hammergo.Data.CalculateParam" Role="CalculateParam" Multiplicity="0..1" />
+        <End Type="Hammergo.Data.Formula" Role="CalculateParamPartner" Multiplicity="0..1" />
+      </Association>
       <Association Name="Hammergo_Data_AppCollection_TaskType_Hammergo_Data_TaskType_TaskTypePartner">
         <End Type="Hammergo.Data.TaskType" Role="TaskType" Multiplicity="0..1" />
         <End Type="Hammergo.Data.AppCollection" Role="TaskTypePartner" Multiplicity="0..1" />
@@ -205,21 +218,9 @@
         <End Type="Hammergo.Data.Formula" Role="Formulae" Multiplicity="*" />
         <End Type="Hammergo.Data.CalculateParam" Role="FormulaePartner" Multiplicity="0..1" />
       </Association>
-      <Association Name="Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
-        <End Type="Hammergo.Data.CalculateParam" Role="CalculateParam" Multiplicity="0..1" />
-        <End Type="Hammergo.Data.CalculateValue" Role="CalculateParamPartner" Multiplicity="0..1" />
-      </Association>
-      <Association Name="Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
-        <End Type="Hammergo.Data.CalculateParam" Role="CalculateParam" Multiplicity="0..1" />
-        <End Type="Hammergo.Data.Formula" Role="CalculateParamPartner" Multiplicity="0..1" />
-      </Association>
       <Association Name="Hammergo_Data_MessureParam_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartner">
         <End Type="Hammergo.Data.MessureValue" Role="MessureValues" Multiplicity="*" />
         <End Type="Hammergo.Data.MessureParam" Role="MessureValuesPartner" Multiplicity="0..1" />
-      </Association>
-      <Association Name="Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner">
-        <End Type="Hammergo.Data.MessureParam" Role="MessureParam" Multiplicity="0..1" />
-        <End Type="Hammergo.Data.MessureValue" Role="MessureParamPartner" Multiplicity="0..1" />
       </Association>
     </Schema>
     <Schema Namespace="Default" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -230,6 +231,9 @@
         <EntitySet Name="ProjectParts" EntityType="Hammergo.Data.ProjectPart" />
         <EntitySet Name="Remarks" EntityType="Hammergo.Data.Remark" />
         <EntitySet Name="TaskApps" EntityType="Hammergo.Data.TaskApp" />
+        <EntitySet Name="MessureValues" EntityType="Hammergo.Data.MessureValue" />
+        <EntitySet Name="CalculateValue" EntityType="Hammergo.Data.CalculateValue" />
+        <EntitySet Name="Formulae" EntityType="Hammergo.Data.Formula" />
         <AssociationSet Name="Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner">
           <End Role="AppsPartner" EntitySet="ApparatusTypes" />
           <End Role="Apps" EntitySet="Apps" />
@@ -258,6 +262,18 @@
           <End Role="AppPartner" EntitySet="AppParams" />
           <End Role="App" EntitySet="Apps" />
         </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartnerSet" Association="Hammergo.Data.Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner">
+          <End Role="CalculateValuesPartner" EntitySet="AppParams" />
+          <End Role="CalculateValues" EntitySet="CalculateValue" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartnerSet" Association="Hammergo.Data.Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartner">
+          <End Role="FormulaePartner" EntitySet="AppParams" />
+          <End Role="Formulae" EntitySet="Formulae" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_MessureParam_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartnerSet" Association="Hammergo.Data.Hammergo_Data_MessureParam_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartner">
+          <End Role="MessureValuesPartner" EntitySet="AppParams" />
+          <End Role="MessureValues" EntitySet="MessureValues" />
+        </AssociationSet>
         <AssociationSet Name="Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner">
           <End Role="AppsPartner" EntitySet="ProjectParts" />
           <End Role="Apps" EntitySet="Apps" />
@@ -269,6 +285,18 @@
         <AssociationSet Name="Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartnerSet" Association="Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartner">
           <End Role="AppPartner" EntitySet="TaskApps" />
           <End Role="App" EntitySet="Apps" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartnerSet" Association="Hammergo.Data.Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner">
+          <End Role="MessureParamPartner" EntitySet="MessureValues" />
+          <End Role="MessureParam" EntitySet="AppParams" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartnerSet" Association="Hammergo.Data.Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
+          <End Role="CalculateParamPartner" EntitySet="CalculateValue" />
+          <End Role="CalculateParam" EntitySet="AppParams" />
+        </AssociationSet>
+        <AssociationSet Name="Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartnerSet" Association="Hammergo.Data.Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
+          <End Role="CalculateParamPartner" EntitySet="Formulae" />
+          <End Role="CalculateParam" EntitySet="AppParams" />
         </AssociationSet>
       </EntityContainer>
     </Schema>

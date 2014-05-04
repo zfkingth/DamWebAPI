@@ -20,7 +20,7 @@ using DamServiceV3.Models;
 
 namespace DamServiceV3.Controllers
 {
-    public class ParamsDTOsController :ApiController 
+    public class ParamsDTOsController : ApiController
     {
 
 
@@ -29,7 +29,7 @@ namespace DamServiceV3.Controllers
         public SingleResult<int> Get()
         {
 
-            return SingleResult.Create((new int[]{ 1}).AsQueryable());
+            return SingleResult.Create((new int[] { 1 }).AsQueryable());
         }
 
 
@@ -43,10 +43,10 @@ namespace DamServiceV3.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var converter=new Helper.AppParamConverter();
-         //   var item = JsonConvert.DeserializeObject<ParamsDTO>(dto,converter );
+            var converter = new Helper.AppParamConverter();
+            var item = JsonConvert.DeserializeObject<ParamsDTO>(dto.ToString(), converter);
 
-            
+
 
             //delay load
             db = new DamWCFContext();
@@ -63,8 +63,8 @@ namespace DamServiceV3.Controllers
 
             }
 
-            return Created<string>("", "");
-            //return Created(dto);
+            return Created<ParamsDTO>(this.Url.ToString(), item);
+             //return Created(dto);
         }
 
 
@@ -73,8 +73,8 @@ namespace DamServiceV3.Controllers
         {
             if (disposing)
             {
-                if(db!=null)
-                db.Dispose();
+                if (db != null)
+                    db.Dispose();
             }
             base.Dispose(disposing);
         }
