@@ -143,7 +143,7 @@ namespace Hammergo.Data.Logic
                 //公式和参数要一一对应，检查对应关系 
                 var compositList = (from ci in paramList.OfType<CalculateParam>()
                                     join f in item.AsEnumerable()
-                                    on ci.Id equals f.Id
+                                    on ci.Id equals f.ParamId
                                     select new
                                     {
                                         Param = ci,

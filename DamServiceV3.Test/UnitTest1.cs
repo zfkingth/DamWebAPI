@@ -521,18 +521,17 @@ namespace DamServiceV3.Test
                 mesParam1.ParamSymbol = "modify";
 
                 Exception ex = null;
-                try
-                {
-                    response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
-                }
-                catch (Exception ex1)
-                {
-                    ex = ex1;
-                }
 
-                Assert.IsNotNull(ex, "acid test fail");
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                context.Detach(mesParam1);
+
+
+                Assert.IsFalse(response.IsSuccessStatusCode, "test formulae fail");
 
                 //reload mesparam
+
+                
 
                 var itemInDb = context.AppParams.Where(s => s.Id == mesParam1.Id).SingleOrDefault();
 

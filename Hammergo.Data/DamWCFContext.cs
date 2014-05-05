@@ -17,9 +17,10 @@ namespace Hammergo.Data
             Database.SetInitializer<DamWCFContext>(null);
         }
 
-        public DamWCFContext():this(true)
+        public DamWCFContext()
+            : this(false)
         {
-           
+
         }
 
         /// <summary>
@@ -129,7 +130,6 @@ namespace Hammergo.Data
 
                 if (idsInDb.Count > 0)
                 {
-                    //有测点数据在数据库中,//没有查询到的从数据库中查询
                     var appIndb = (from i in this.Apps
                                    where idsInDb.Contains(i.Id)
                                    select i).AsNoTracking().ToList();
