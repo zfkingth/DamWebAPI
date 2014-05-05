@@ -86,7 +86,7 @@ namespace Hammergo.Data.Logic
                 var entity = entry.Entity as Formula;
                 //公式必须依附于参数
                 //paramList中的参数有可以是新增的参数，即数据库还没有记录
-                if (paramList.Exists(s => s.Id == entity.Id))
+                if (paramList.Exists(s => s.Id == entity.ParamId))
                 {
 
                     int index = formulaList.FindIndex(s => s.ParamId == entity.ParamId&&s.StartDate==entity.StartDate);

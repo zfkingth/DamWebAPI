@@ -37,24 +37,34 @@ namespace DamServiceV3.Controllers
 
         private DamWCFContext db = null;
         // POST odata/Apps
-        public async Task<IHttpActionResult> Post(JObject rdto)
+        public IHttpActionResult Post(JObject rdto)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+          //  Newtonsoft.Json.Serialization.ITraceWriter traceWriter = new Newtonsoft.Json.Serialization.MemoryTraceWriter();
             var converter = new Helper.AppParamConverter();
-            var dto = JsonConvert.DeserializeObject<ParamsDTO>(rdto.ToString(), converter);
 
+            ParamsDTO dto = null;
 
-
+            try
+            {
+                //TraceWriter = traceWriter,
+                dto = JsonConvert.DeserializeObject<ParamsDTO>(rdto.ToString(), new JsonSerializerSettings {  NullValueHandling = NullValueHandling.Ignore, Converters = { converter } });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             //delay load
             //check logic in entity context
             db = new DamWCFContext(true);
 
-            if (dto.AddedParams!=null)
-            db.AppParams.AddRange(dto.AddedParams);
+            if (dto.AddedParams != null)
+                db.AppParams.AddRange(dto.AddedParams);
 
             if (dto.UpdatedParams != null)
             {
@@ -77,7 +87,7 @@ namespace DamServiceV3.Controllers
             };
 
             if (dto.AddedFormulae != null)
-            db.Formulae.AddRange(dto.AddedFormulae);
+                db.Formulae.AddRange(dto.AddedFormulae);
 
             if (dto.UpdatedFormulae != null)
             {
@@ -111,11 +121,11 @@ namespace DamServiceV3.Controllers
 
             }
 
-            return Created< string>(this.Url.Request.RequestUri, "ok");
-             //return Created(dto);
+            return Created<string>(this.Url.Request.RequestUri, "ok");
+            //return Created(dto);
         }
 
-    
+
 
         protected override void Dispose(bool disposing)
         {

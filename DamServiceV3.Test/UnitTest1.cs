@@ -19,7 +19,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public void TestODataV3_type()
+        public void T_type()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
             var context = new DamServiceRef.Container(uri);
@@ -74,7 +74,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public void TestODataV3_app()
+        public void T_app()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
             var context = new DamServiceRef.Container(uri);
@@ -133,7 +133,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public void TestODataV3_appNav()
+        public void T_appNav()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
             var context = new DamServiceRef.Container(uri);
@@ -156,7 +156,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public void TestODataV3_projectPart()
+        public void T_projectPart()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
             var context = new DamServiceRef.Container(uri);
@@ -219,7 +219,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public void TestODataV3_Remark()
+        public void T_Remark()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
             var context = new DamServiceRef.Container(uri);
@@ -282,7 +282,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public async Task TestODataV3_paramsLogic1()
+        public async Task T_paramsLogic1()
         {
             using (var client = new HttpClient())
             {
@@ -306,7 +306,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public async Task TestODataV3_paramsConst()
+        public async Task T_paramsConst()
         {
             using (var client = new HttpClient())
             {
@@ -388,7 +388,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public async Task TestODataV3_paramsMes()
+        public async Task T_paramsMes()
         {
             using (var client = new HttpClient())
             {
@@ -469,7 +469,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public async Task TestODataV3_paramsUpdate()
+        public async Task T_paramsUpdate()
         {
             using (var client = new HttpClient())
             {
@@ -531,11 +531,129 @@ namespace DamServiceV3.Test
 
                 //reload mesparam
 
-                
+
 
                 var itemInDb = context.AppParams.Where(s => s.Id == mesParam1.Id).SingleOrDefault();
 
                 Assert.AreNotEqual(mesParam1.ParamSymbol, itemInDb.ParamSymbol, "acid test fail");
+
+
+
+            }
+
+        }
+
+
+        [TestMethod]
+        public async Task T_params_Added_Delete()
+        {
+            using (var client = new HttpClient())
+            {
+                //get app
+
+                Uri uri = new Uri(TestConfig.serviceUrl);
+                var context = new DamServiceRef.Container(uri);
+
+                context.Format.UseJson();
+
+                var appItem = context.Apps.Where(s => s.AppName == "第二支仪器").SingleOrDefault();
+
+
+                var conParam1 = new ConstantParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "c1",
+                    ParamSymbol = "c1",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Val = 1,
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+                var mesParam1 = new MessureParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "m1",
+                    ParamSymbol = "m1",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+
+                var calParam1 = new CalculateParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "cal1",
+                    ParamSymbol = "cal1",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+
+                var formula = new Formula()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId = calParam1.Id,
+                    StartDate = DateTimeOffset.MinValue,
+                    EndDate = DateTimeOffset.MaxValue,
+                    CalculateOrder = 1,
+                    FormulaExpression = "c1+m1"
+                };
+
+                ParamsDTO dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                dto.AddedParams = new List<AppParam>() { conParam1, mesParam1, calParam1 };
+                dto.AddedFormulae = new List<Formula>() { formula };
+
+
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, " insert param fail");
+
+                //delete all params
+
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                dto.DeletedParams = new List<AppParam>() { conParam1, mesParam1, calParam1 };
+                dto.DeletedFormulae= new List<Formula>() { formula };
+
+                Assert.IsFalse(response.IsSuccessStatusCode, "delete formulae fail");
+
+                //reload mesparam
+
+                context.Detach(conParam1);
+                context.Detach(mesParam1);
+                context.Detach(calParam1);
+
+
+                var cnt = context.AppParams.Where(s => s.Id == mesParam1.Id).Count();
+
+                Assert.AreEqual(0, cnt, "delete test fail");
 
 
 
