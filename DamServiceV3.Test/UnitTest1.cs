@@ -303,6 +303,8 @@ namespace DamServiceV3.Test
         }
 
 
+
+
         [TestMethod]
         public async Task TestODataV3_paramsConst()
         {
@@ -351,7 +353,7 @@ namespace DamServiceV3.Test
 
                 Assert.IsTrue(response.IsSuccessStatusCode, "add param fail");
 
-         
+
 
                 //modify
                 dto = new ParamsDTO()
@@ -412,7 +414,7 @@ namespace DamServiceV3.Test
                     Id = appItem.Id,
                 };
 
-                var param = new  MessureParam()
+                var param = new MessureParam()
                 {
                     Id = Guid.NewGuid(),
                     AppId = appItem.Id,
@@ -461,6 +463,83 @@ namespace DamServiceV3.Test
                 response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
 
                 Assert.IsTrue(response.IsSuccessStatusCode, "delete param fail");
+            }
+
+        }
+
+
+        [TestMethod]
+        public async Task TestODataV3_paramsUpdate()
+        {
+            using (var client = new HttpClient())
+            {
+                //get app
+
+                Uri uri = new Uri(TestConfig.serviceUrl);
+                var context = new DamServiceRef.Container(uri);
+
+                context.Format.UseJson();
+
+                var appItem = context.Apps.Expand("AppParams").Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+
+
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+
+
+                ParamsDTO dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                var conParam1 = appItem.AppParams.OfType<ConstantParam>().SingleOrDefault();
+                var mesParam1 = appItem.AppParams.OfType<MessureParam>().SingleOrDefault();
+                var calParam1 = appItem.AppParams.OfType<CalculateParam>().SingleOrDefault();
+
+
+                conParam1.Order += 1;
+                mesParam1.Order += 1;
+                calParam1.Order += 1;
+
+
+                dto.UpdatedParams = new List<AppParam>() { conParam1, mesParam1, calParam1 };
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, " update param fail");
+
+                //all update success
+
+                //test  acid
+
+                mesParam1.ParamSymbol = "modify";
+
+                Exception ex = null;
+                try
+                {
+                    response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+                }
+                catch (Exception ex1)
+                {
+                    ex = ex1;
+                }
+
+                Assert.IsNotNull(ex, "acid test fail");
+
+                //reload mesparam
+
+                var itemInDb = context.AppParams.Where(s => s.Id == mesParam1.Id).SingleOrDefault();
+
+                Assert.AreNotEqual(mesParam1.ParamSymbol, itemInDb.ParamSymbol, "acid test fail");
+
+
+
             }
 
         }
