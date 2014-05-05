@@ -154,6 +154,19 @@ namespace DamService2.Migrations
             };
 
             context.AppParams.AddOrUpdate(conParam1, mesParam1, calcParam1);
+
+
+            var formula = new Formula()
+            {
+                Id = Guid.NewGuid(),
+                ParamId = calcParam1.Id,
+                StartDate = DateTimeOffset.MinValue,
+                EndDate = DateTimeOffset.MaxValue,
+                CalculateOrder = 1,
+                FormulaExpression = "c1+m1"
+            };
+
+            context.Formulae.AddOrUpdate(formula);
  
         }
     }
