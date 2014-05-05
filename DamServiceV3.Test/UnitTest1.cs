@@ -330,17 +330,41 @@ namespace DamServiceV3.Test
                     Id = appItem.Id,
                 };
 
-                dto.AddedParams = new List<AppParam>() { appItem.AppParams[0] };
-                dto.UpdatedParams = new List<AppParam>() { appItem.AppParams[1] };
-                dto.DeletedParams = new List<AppParam>() { appItem.AppParams[2] };
+                var conParam1 = new ConstantParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "c2",
+                    ParamSymbol = "c2",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Val = 1,
+                    Order = 1,
+                    Description = "no description",
 
-                
 
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs",dto);
-                
-                Assert.IsTrue(response.IsSuccessStatusCode, "测试失败");
-        
+                };
 
+                dto.AddedParams = new List<AppParam>() { conParam1 };
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "add param fail");
+
+                //now deleted added param
+
+
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+
+                dto.DeletedParams = new List<AppParam>() { conParam1 };
+
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "delete param fail");
             }
 
         }

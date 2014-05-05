@@ -17,6 +17,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using DamServiceV3.Models;
+using System.Data.Entity.Core.Objects;
 
 namespace DamServiceV3.Controllers
 {
@@ -36,7 +37,7 @@ namespace DamServiceV3.Controllers
 
         private DamWCFContext db = null;
         // POST odata/Apps
-        public async Task<IHttpActionResult> Post(JObject dto)
+        public async Task<IHttpActionResult> Post(JObject rdto)
         {
 
             if (!ModelState.IsValid)
@@ -44,12 +45,59 @@ namespace DamServiceV3.Controllers
                 return BadRequest(ModelState);
             }
             var converter = new Helper.AppParamConverter();
-            var item = JsonConvert.DeserializeObject<ParamsDTO>(dto.ToString(), converter);
+            var dto = JsonConvert.DeserializeObject<ParamsDTO>(rdto.ToString(), converter);
 
 
 
             //delay load
-            db = new DamWCFContext();
+            //check logic in entity context
+            db = new DamWCFContext(true);
+
+            if (dto.AddedParams!=null)
+            db.AppParams.AddRange(dto.AddedParams);
+
+            if (dto.UpdatedParams != null)
+            {
+                foreach (var item in dto.UpdatedParams)
+                {
+                    db.AppParams.Attach(item);
+
+                    db.Entry<AppParam>(item).State = EntityState.Modified;
+                }
+            }
+
+            if (dto.DeletedParams != null)
+            {
+                foreach (var item in dto.DeletedParams)
+                {
+                    db.AppParams.Attach(item);
+
+                    db.Entry<AppParam>(item).State = EntityState.Deleted;
+                }
+            };
+
+            if (dto.AddedFormulae != null)
+            db.Formulae.AddRange(dto.AddedFormulae);
+
+            if (dto.UpdatedFormulae != null)
+            {
+                foreach (var item in dto.UpdatedFormulae)
+                {
+                    db.Formulae.Attach(item);
+
+                    db.Entry<Formula>(item).State = EntityState.Modified;
+                }
+            }
+
+            if (dto.DeletedFormulae != null)
+            {
+                foreach (var item in dto.DeletedFormulae)
+                {
+                    db.Formulae.Attach(item);
+
+                    db.Entry<Formula>(item).State = EntityState.Deleted;
+                }
+            }
 
 
             try
