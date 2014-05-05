@@ -351,9 +351,24 @@ namespace DamServiceV3.Test
 
                 Assert.IsTrue(response.IsSuccessStatusCode, "add param fail");
 
+         
+
+                //modify
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                conParam1.Order += 1;
+
+                dto.UpdatedParams = new List<AppParam>() { conParam1 };
+
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "delete param fail");
+
+
                 //now deleted added param
-
-
                 dto = new ParamsDTO()
                 {
                     Id = appItem.Id,
