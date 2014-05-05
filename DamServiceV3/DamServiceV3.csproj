@@ -113,7 +113,6 @@
     </Compile>
     <Compile Include="Helper\AppParamConverter.cs" />
     <Compile Include="Helper\Class1.cs" />
-    <Compile Include="Logic\ParamsValidatation.cs" />
     <Compile Include="Models\ParamsDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
