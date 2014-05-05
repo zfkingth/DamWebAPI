@@ -63,7 +63,7 @@ namespace DamServiceV3.Controllers
 
             }
 
-            return Created<ParamsDTO>(this.Url.ToString(), item);
+            return Created< string>(this.Url.Request.RequestUri, "ok");
              //return Created(dto);
         }
 
