@@ -304,7 +304,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public async Task TestODataV3_paramsLogic2()
+        public async Task TestODataV3_paramsConst()
         {
             using (var client = new HttpClient())
             {
@@ -315,7 +315,7 @@ namespace DamServiceV3.Test
 
                 context.Format.UseJson();
 
-                var appItem = context.Apps.Expand("AppParams").Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+                var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
 
 
 
@@ -385,6 +385,84 @@ namespace DamServiceV3.Test
         }
 
 
+        [TestMethod]
+        public async Task TestODataV3_paramsMes()
+        {
+            using (var client = new HttpClient())
+            {
+                //get app
 
+                Uri uri = new Uri(TestConfig.serviceUrl);
+                var context = new DamServiceRef.Container(uri);
+
+                context.Format.UseJson();
+
+                var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+
+
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                ParamsDTO dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                var param = new  MessureParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "mtest2",
+                    ParamSymbol = "mtest2",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+                dto.AddedParams = new List<AppParam>() { param };
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "add param fail");
+
+
+
+                //modify
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                param.Order += 1;
+
+                dto.UpdatedParams = new List<AppParam>() { param };
+
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "delete param fail");
+
+
+                //now deleted added param
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+
+                dto.DeletedParams = new List<AppParam>() { param };
+
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "delete param fail");
+            }
+
+        }
     }
 }
