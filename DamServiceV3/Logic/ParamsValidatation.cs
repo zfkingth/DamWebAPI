@@ -8,34 +8,16 @@ using Hammergo.Data;
 using System;
 using System.Data;
 using System.Data.Entity.Core.Objects;
+using DamServiceV3.Models;
 
-namespace Hammergo.Data.Logic
+namespace DamServiceV3.Logic
 {
     public class ParamsValidatation
     {
 
-        //不要使用这个上下文保存数据调用savechanges，否则有可能造成循环
-        DamWCFContext dbcontext = null;
+ 
 
-        App _modifiedApp = null;
-        List<ObjectStateEntry> _paramsEntries = null;
-        List<ObjectStateEntry> _formulaEntries = null;
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="context">数据上下文</param>
-        /// <param name="modifiedApp">参数被修改的测点</param>
-        /// <param name="paramsEntries">修改的参数entry，可能包含其它测点的entry</param>
-        /// <param name="formulaEntries">修改的公式参数entry，可能包含其它测点的entry</param>
-        public ParamsValidatation(DamWCFContext context,App modifiedApp, List<ObjectStateEntry> paramsEntries, List<ObjectStateEntry> formulaEntries)
-        {
-            dbcontext = context;
-            _modifiedApp = modifiedApp;
-            _paramsEntries = paramsEntries;
-            _formulaEntries = formulaEntries;
-        }
-
-        public void Validate()
+        public static void Validate(DamWCFContext dbContext, ParamsDTO dto)
         {
             List<string> nameList = new List<string>(20);
             List<string> symbolList = new List<string>(20);
@@ -89,7 +71,7 @@ namespace Hammergo.Data.Logic
                 if (paramList.Exists(s => s.Id == entity.Id))
                 {
 
-                    int index = formulaList.FindIndex(s => s.ParamId == entity.ParamId&&s.StartDate==entity.StartDate);
+                    int index = formulaList.FindIndex(s => s.ParamId == entity.ParamId && s.StartDate == entity.StartDate);
                     if (index >= 0)
                     {
                         //entity已被修改，或增加，删除，得先从列表中先先移除
@@ -158,7 +140,7 @@ namespace Hammergo.Data.Logic
 
                 endDate = item.ElementAt(0).EndDate;
 
-                if (startDate >=endDate)
+                if (startDate >= endDate)
                 {
                     throw new Exception("分段公式的开始时间必须小于结束时间");
                 }
@@ -180,7 +162,7 @@ namespace Hammergo.Data.Logic
 
 
 
-               // 简单的判断公式的依赖关系，只能精确到仪器,不能精确的量（如n01cf14.e的依赖关系，过于复杂）
+                // 简单的判断公式的依赖关系，只能精确到仪器,不能精确的量（如n01cf14.e的依赖关系，过于复杂）
 
 
                 //生成新的图
@@ -196,7 +178,7 @@ namespace Hammergo.Data.Logic
                     string formulaString = cp.Formula.FormulaExpression;
                     string symbol = cp.Param.ParamSymbol;
 
-                    if (formulaString == null||formulaString.Trim().Length==0)
+                    if (formulaString == null || formulaString.Trim().Length == 0)
                     {
                         throw new Exception(string.Format("计算参数 {0} 的计算公式不能为空", cp.Param.ParamName));
                     }
@@ -220,11 +202,11 @@ namespace Hammergo.Data.Logic
 
                 graph = new ALGraph.MyGraph();
 
-                for (int j = 0; j< calcNameList.Length; j++)
+                for (int j = 0; j < calcNameList.Length; j++)
                 {
                     graph.addArcNode(new ALGraph.ArcNode(), calcNameList.getKey(j), _modifiedApp.CalculateName);//全部使用计算名称
                     var loopCheckList = new List<Guid>(5);
-                    constructGraph( _modifiedApp, graph,loopCheckList);//递归加入其子结点
+                    constructGraph(_modifiedApp, graph, loopCheckList);//递归加入其子结点
                 }
 
                 toplist = graph.topSort();
@@ -265,7 +247,7 @@ namespace Hammergo.Data.Logic
 
                     for (int k = 0; k < paList.Count; k++)
                     {
-                        var pi = paList[k] ;
+                        var pi = paList[k];
 
                         list.add(calcName + "." + pi.ParamSymbol, k + 1);
                     }

@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Helper\AppParamConverter.cs" />
     <Compile Include="Helper\Class1.cs" />
+    <Compile Include="Logic\ParamsValidatation.cs" />
     <Compile Include="Models\ParamsDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -126,6 +127,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ALGraph\ALGraph.csproj">
+      <Project>{6b4d92da-b5a5-402e-b25d-39d359960e56}</Project>
+      <Name>ALGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\calculator\calculator.csproj">
+      <Project>{3142f2d7-9a05-480f-a4ce-804b61ad011d}</Project>
+      <Name>calculator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hammergo.Data\Hammergo.Data.csproj">
       <Project>{fbe3b5d8-f573-4b9b-87c4-e50cf1a9a6a4}</Project>
       <Name>Hammergo.Data</Name>
