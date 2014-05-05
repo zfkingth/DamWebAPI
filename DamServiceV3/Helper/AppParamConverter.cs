@@ -26,7 +26,7 @@ namespace DamServiceV3.Helper
             {
                 return item.ToObject< ConstantParam>();
             }
-            else if (item["CalcOrder"] !=null)
+            else if (item["CalculateValues"] != null)
             {
                 return item.ToObject< CalculateParam>();
             }else

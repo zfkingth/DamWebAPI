@@ -132,7 +132,6 @@
         <NavigationProperty Name="AppCollections" Relationship="Hammergo.Data.Hammergo_Data_TaskType_AppCollections_Hammergo_Data_AppCollection_AppCollectionsPartner" ToRole="AppCollections" FromRole="AppCollectionsPartner" />
       </EntityType>
       <EntityType Name="CalculateParam" BaseType="Hammergo.Data.AppParam">
-        <Property Name="CalcOrder" Type="Edm.Byte" Nullable="false" />
         <NavigationProperty Name="CalculateValues" Relationship="Hammergo.Data.Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner" ToRole="CalculateValues" FromRole="CalculateValuesPartner" />
         <NavigationProperty Name="Formulae" Relationship="Hammergo.Data.Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartner" ToRole="Formulae" FromRole="FormulaePartner" />
       </EntityType>

@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 2014/5/4 23:23:08
+// Generation date: 2014/5/5 9:45:56
 namespace DamServiceV3.Test.DamServiceRef
 {
     
@@ -386,159 +386,158 @@ namespace DamServiceV3.Test.DamServiceRef
                 "sPartner\" ToRole=\"AppCollections\" FromRole=\"AppCollectionsPartner\" /></EntityTyp" +
                 "e><EntityType Name=\"CalculateParam\" BaseType=\"Hammergo.Data";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart1 = ".AppParam\"><Property Name=\"CalcOrder\" Type=\"Edm.Byte\" Nullable=\"false\" /><Navigat" +
-                "ionProperty Name=\"CalculateValues\" Relationship=\"Hammergo.Data.Hammergo_Data_Cal" +
-                "culateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner\"" +
-                " ToRole=\"CalculateValues\" FromRole=\"CalculateValuesPartner\" /><NavigationPropert" +
-                "y Name=\"Formulae\" Relationship=\"Hammergo.Data.Hammergo_Data_CalculateParam_Formu" +
-                "lae_Hammergo_Data_Formula_FormulaePartner\" ToRole=\"Formulae\" FromRole=\"FormulaeP" +
-                "artner\" /></EntityType><EntityType Name=\"ConstantParam\" BaseType=\"Hammergo.Data." +
-                "AppParam\"><Property Name=\"Val\" Type=\"Edm.Double\" Nullable=\"false\" /></EntityType" +
-                "><EntityType Name=\"MessureParam\" BaseType=\"Hammergo.Data.AppParam\"><NavigationPr" +
-                "operty Name=\"MessureValues\" Relationship=\"Hammergo.Data.Hammergo_Data_MessurePar" +
-                "am_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartner\" ToRole=\"Messur" +
-                "eValues\" FromRole=\"MessureValuesPartner\" /></EntityType><Association Name=\"Hamme" +
-                "rgo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner\"><End Type=\"Hammergo.D" +
-                "ata.App\" Role=\"Apps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.ApparatusType\" " +
-                "Role=\"AppsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammer" +
-                "go_Data_App_ApparatusType_Hammergo_Data_ApparatusType_ApparatusTypePartner\"><End" +
-                " Type=\"Hammergo.Data.ApparatusType\" Role=\"ApparatusType\" Multiplicity=\"0..1\" /><" +
-                "End Type=\"Hammergo.Data.App\" Role=\"ApparatusTypePartner\" Multiplicity=\"0..1\" /><" +
-                "/Association><Association Name=\"Hammergo_Data_App_ProjectPart_Hammergo_Data_Proj" +
-                "ectPart_ProjectPartPartner\"><End Type=\"Hammergo.Data.ProjectPart\" Role=\"ProjectP" +
-                "art\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.App\" Role=\"ProjectPartPartne" +
-                "r\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_App_Rema" +
-                "rks_Hammergo_Data_Remark_RemarksPartner\"><End Type=\"Hammergo.Data.Remark\" Role=\"" +
-                "Remarks\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.App\" Role=\"RemarksPartner\" " +
-                "Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_App_TaskApp" +
-                "s_Hammergo_Data_TaskApp_TaskAppsPartner\"><End Type=\"Hammergo.Data.TaskApp\" Role=" +
-                "\"TaskApps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.App\" Role=\"TaskAppsPartne" +
-                "r\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_App_AppP" +
-                "arams_Hammergo_Data_AppParam_AppParamsPartner\"><End Type=\"Hammergo.Data.AppParam" +
-                "\" Role=\"AppParams\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.App\" Role=\"AppPar" +
-                "amsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data" +
-                "_AppParam_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"" +
-                "App\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.AppParam\" Role=\"AppPartner\" " +
-                "Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_ProjectPart" +
-                "_Apps_Hammergo_Data_App_AppsPartner\"><End Type=\"Hammergo.Data.App\" Role=\"Apps\" M" +
-                "ultiplicity=\"*\" /><End Type=\"Hammergo.Data.ProjectPart\" Role=\"AppsPartner\" Multi" +
-                "plicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_Remark_App_Hamme" +
-                "rgo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"App\" Multiplicity=\"" +
-                "0..1\" /><End Type=\"Hammergo.Data.Remark\" Role=\"AppPartner\" Multiplicity=\"0..1\" /" +
-                "></Association><Association Name=\"Hammergo_Data_TaskApp_App_Hammergo_Data_App_Ap" +
-                "pPartner\"><End Type=\"Hammergo.Data.App\" Role=\"App\" Multiplicity=\"0..1\" /><End Ty" +
-                "pe=\"Hammergo.Data.TaskApp\" Role=\"AppPartner\" Multiplicity=\"0..1\" /></Association" +
-                "><Association Name=\"Hammergo_Data_TaskApp_AppCollection_Hammergo_Data_AppCollect" +
-                "ion_AppCollectionPartner\"><End Type=\"Hammergo.Data.AppCollection\" Role=\"AppColle" +
-                "ction\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.TaskApp\" Role=\"AppCollecti" +
-                "onPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_" +
-                "MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner\"><End T" +
-                "ype=\"Hammergo.Data.MessureParam\" Role=\"MessureParam\" Multiplicity=\"0..1\" /><End " +
-                "Type=\"Hammergo.Data.MessureValue\" Role=\"MessureParamPartner\" Multiplicity=\"0..1\"" +
-                " /></Association><Association Name=\"Hammergo_Data_CalculateValue_CalculateParam_" +
-                "Hammergo_Data_CalculateParam_CalculateParamPartner\"><End Type=\"Hammergo.Data.Cal" +
-                "culateParam\" Role=\"CalculateParam\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Dat" +
-                "a.CalculateValue\" Role=\"CalculateParamPartner\" Multiplicity=\"0..1\" /></Associati" +
-                "on><Association Name=\"Hammergo_Data_Formula_CalculateParam_Hammergo_Data_Calcula" +
-                "teParam_CalculateParamPartner\"><End Type=\"Hammergo.Data.CalculateParam\" Role=\"Ca" +
-                "lculateParam\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.Formula\" Role=\"Calc" +
-                "ulateParamPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammer" +
-                "go_Data_AppCollection_TaskType_Hammergo_Data_TaskType_TaskTypePartner\"><End Type" +
-                "=\"Hammergo.Data.TaskType\" Role=\"TaskType\" Multiplicity=\"0..1\" /><End Type=\"Hamme" +
-                "rgo.Data.AppCollection\" Role=\"TaskTypePartner\" Multiplicity=\"0..1\" /></Associati" +
-                "on><Association Name=\"Hammergo_Data_AppCollection_TaskApps_Hammergo_Data_TaskApp" +
-                "_TaskAppsPartner\"><End Type=\"Hammergo.Data.TaskApp\" Role=\"TaskApps\" Multiplicity" +
-                "=\"*\" /><End Type=\"Hammergo.Data.AppCollection\" Role=\"TaskAppsPartner\" Multiplici" +
-                "ty=\"0..1\" /></Association><Association Name=\"Hammergo_Data_TaskType_AppCollectio" +
-                "ns_Hammergo_Data_AppCollection_AppCollectionsPartner\"><End Type=\"Hammergo.Data.A" +
-                "ppCollection\" Role=\"AppCollections\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data." +
-                "TaskType\" Role=\"AppCollectionsPartner\" Multiplicity=\"0..1\" /></Association><Asso" +
-                "ciation Name=\"Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_Calcula" +
-                "teValue_CalculateValuesPartner\"><End Type=\"Hammergo.Data.CalculateValue\" Role=\"C" +
-                "alculateValues\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.CalculateParam\" Role" +
-                "=\"CalculateValuesPartner\" Multiplicity=\"0..1\" /></Association><Association Name=" +
-                "\"Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartner\"><E" +
-                "nd Type=\"Hammergo.Data.Formula\" Role=\"Formulae\" Multiplicity=\"*\" /><End Type=\"Ha" +
-                "mmergo.Data.CalculateParam\" Role=\"FormulaePartner\" Multiplicity=\"0..1\" /></Assoc" +
-                "iation><Association Name=\"Hammergo_Data_MessureParam_MessureValues_Hammergo_Data" +
-                "_MessureValue_MessureValuesPartner\"><End Type=\"Hammergo.Data.MessureValue\" Role=" +
-                "\"MessureValues\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.MessureParam\" Role=\"" +
-                "MessureValuesPartner\" Multiplicity=\"0..1\" /></Association></Schema><Schema Names" +
-                "pace=\"Default\" xmlns=\"http://schemas.microsoft.com/ado/2009/11/edm\"><EntityConta" +
-                "iner Name=\"Container\" m:IsDefaultEntityContainer=\"true\"><EntitySet Name=\"Apparat" +
-                "usTypes\" EntityType=\"Hammergo.Data.ApparatusType\" /><EntitySet Name=\"Apps\" Entit" +
-                "yType=\"Hammergo.Data.App\" /><EntitySet Name=\"AppParams\" EntityType=\"Hammergo.Dat" +
-                "a.AppParam\" /><EntitySet Name=\"ProjectParts\" EntityType=\"Hammergo.Data.ProjectPa" +
-                "rt\" /><EntitySet Name=\"Remarks\" EntityType=\"Hammergo.Data.Remark\" /><EntitySet N" +
-                "ame=\"TaskApps\" EntityType=\"Hammergo.Data.TaskApp\" /><EntitySet Name=\"MessureValu" +
-                "es\" EntityType=\"Hammergo.Data.MessureValue\" /><EntitySet Name=\"CalculateValue\" E" +
-                "ntityType=\"Hammergo.Data.CalculateValue\" /><EntitySet Name=\"Formulae\" EntityType" +
-                "=\"Hammergo.Data.Formula\" /><AssociationSet Name=\"Hammergo_Data_ApparatusType_App" +
-                "s_Hammergo_Data_App_AppsPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_App" +
-                "aratusType_Apps_Hammergo_Data_App_AppsPartner\"><End Role=\"AppsPartner\" EntitySet" +
-                "=\"ApparatusTypes\" /><End Role=\"Apps\" EntitySet=\"Apps\" /></AssociationSet><Associ" +
-                "ationSet Name=\"Hammergo_Data_App_ApparatusType_Hammergo_Data_ApparatusType_Appar" +
-                "atusTypePartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_App_ApparatusType_H" +
-                "ammergo_Data_ApparatusType_ApparatusTypePartner\"><End Role=";
+            private const string ModelPart1 = ".AppParam\"><NavigationProperty Name=\"CalculateValues\" Relationship=\"Hammergo.Data" +
+                ".Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_Calcu" +
+                "lateValuesPartner\" ToRole=\"CalculateValues\" FromRole=\"CalculateValuesPartner\" />" +
+                "<NavigationProperty Name=\"Formulae\" Relationship=\"Hammergo.Data.Hammergo_Data_Ca" +
+                "lculateParam_Formulae_Hammergo_Data_Formula_FormulaePartner\" ToRole=\"Formulae\" F" +
+                "romRole=\"FormulaePartner\" /></EntityType><EntityType Name=\"ConstantParam\" BaseTy" +
+                "pe=\"Hammergo.Data.AppParam\"><Property Name=\"Val\" Type=\"Edm.Double\" Nullable=\"fal" +
+                "se\" /></EntityType><EntityType Name=\"MessureParam\" BaseType=\"Hammergo.Data.AppPa" +
+                "ram\"><NavigationProperty Name=\"MessureValues\" Relationship=\"Hammergo.Data.Hammer" +
+                "go_Data_MessureParam_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartn" +
+                "er\" ToRole=\"MessureValues\" FromRole=\"MessureValuesPartner\" /></EntityType><Assoc" +
+                "iation Name=\"Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner\"><En" +
+                "d Type=\"Hammergo.Data.App\" Role=\"Apps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Da" +
+                "ta.ApparatusType\" Role=\"AppsPartner\" Multiplicity=\"0..1\" /></Association><Associ" +
+                "ation Name=\"Hammergo_Data_App_ApparatusType_Hammergo_Data_ApparatusType_Apparatu" +
+                "sTypePartner\"><End Type=\"Hammergo.Data.ApparatusType\" Role=\"ApparatusType\" Multi" +
+                "plicity=\"0..1\" /><End Type=\"Hammergo.Data.App\" Role=\"ApparatusTypePartner\" Multi" +
+                "plicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_App_ProjectPart_" +
+                "Hammergo_Data_ProjectPart_ProjectPartPartner\"><End Type=\"Hammergo.Data.ProjectPa" +
+                "rt\" Role=\"ProjectPart\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.App\" Role=" +
+                "\"ProjectPartPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hamm" +
+                "ergo_Data_App_Remarks_Hammergo_Data_Remark_RemarksPartner\"><End Type=\"Hammergo.D" +
+                "ata.Remark\" Role=\"Remarks\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.App\" Role" +
+                "=\"RemarksPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammerg" +
+                "o_Data_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPartner\"><End Type=\"Hammergo.D" +
+                "ata.TaskApp\" Role=\"TaskApps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.App\" Ro" +
+                "le=\"TaskAppsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hamm" +
+                "ergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartner\"><End Type=\"Hamm" +
+                "ergo.Data.AppParam\" Role=\"AppParams\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data" +
+                ".App\" Role=\"AppParamsPartner\" Multiplicity=\"0..1\" /></Association><Association N" +
+                "ame=\"Hammergo_Data_AppParam_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammerg" +
+                "o.Data.App\" Role=\"App\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.AppParam\" " +
+                "Role=\"AppPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammerg" +
+                "o_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartner\"><End Type=\"Hammergo.Data." +
+                "App\" Role=\"Apps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.ProjectPart\" Role=\"" +
+                "AppsPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Dat" +
+                "a_Remark_App_Hammergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"A" +
+                "pp\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.Remark\" Role=\"AppPartner\" Mul" +
+                "tiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_TaskApp_App_Ha" +
+                "mmergo_Data_App_AppPartner\"><End Type=\"Hammergo.Data.App\" Role=\"App\" Multiplicit" +
+                "y=\"0..1\" /><End Type=\"Hammergo.Data.TaskApp\" Role=\"AppPartner\" Multiplicity=\"0.." +
+                "1\" /></Association><Association Name=\"Hammergo_Data_TaskApp_AppCollection_Hammer" +
+                "go_Data_AppCollection_AppCollectionPartner\"><End Type=\"Hammergo.Data.AppCollecti" +
+                "on\" Role=\"AppCollection\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.TaskApp\"" +
+                " Role=\"AppCollectionPartner\" Multiplicity=\"0..1\" /></Association><Association Na" +
+                "me=\"Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessurePa" +
+                "ramPartner\"><End Type=\"Hammergo.Data.MessureParam\" Role=\"MessureParam\" Multiplic" +
+                "ity=\"0..1\" /><End Type=\"Hammergo.Data.MessureValue\" Role=\"MessureParamPartner\" M" +
+                "ultiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_CalculateVal" +
+                "ue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner\"><End Type=" +
+                "\"Hammergo.Data.CalculateParam\" Role=\"CalculateParam\" Multiplicity=\"0..1\" /><End " +
+                "Type=\"Hammergo.Data.CalculateValue\" Role=\"CalculateParamPartner\" Multiplicity=\"0" +
+                "..1\" /></Association><Association Name=\"Hammergo_Data_Formula_CalculateParam_Ham" +
+                "mergo_Data_CalculateParam_CalculateParamPartner\"><End Type=\"Hammergo.Data.Calcul" +
+                "ateParam\" Role=\"CalculateParam\" Multiplicity=\"0..1\" /><End Type=\"Hammergo.Data.F" +
+                "ormula\" Role=\"CalculateParamPartner\" Multiplicity=\"0..1\" /></Association><Associ" +
+                "ation Name=\"Hammergo_Data_AppCollection_TaskType_Hammergo_Data_TaskType_TaskType" +
+                "Partner\"><End Type=\"Hammergo.Data.TaskType\" Role=\"TaskType\" Multiplicity=\"0..1\" " +
+                "/><End Type=\"Hammergo.Data.AppCollection\" Role=\"TaskTypePartner\" Multiplicity=\"0" +
+                "..1\" /></Association><Association Name=\"Hammergo_Data_AppCollection_TaskApps_Ham" +
+                "mergo_Data_TaskApp_TaskAppsPartner\"><End Type=\"Hammergo.Data.TaskApp\" Role=\"Task" +
+                "Apps\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.AppCollection\" Role=\"TaskAppsP" +
+                "artner\" Multiplicity=\"0..1\" /></Association><Association Name=\"Hammergo_Data_Tas" +
+                "kType_AppCollections_Hammergo_Data_AppCollection_AppCollectionsPartner\"><End Typ" +
+                "e=\"Hammergo.Data.AppCollection\" Role=\"AppCollections\" Multiplicity=\"*\" /><End Ty" +
+                "pe=\"Hammergo.Data.TaskType\" Role=\"AppCollectionsPartner\" Multiplicity=\"0..1\" /><" +
+                "/Association><Association Name=\"Hammergo_Data_CalculateParam_CalculateValues_Ham" +
+                "mergo_Data_CalculateValue_CalculateValuesPartner\"><End Type=\"Hammergo.Data.Calcu" +
+                "lateValue\" Role=\"CalculateValues\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.Ca" +
+                "lculateParam\" Role=\"CalculateValuesPartner\" Multiplicity=\"0..1\" /></Association>" +
+                "<Association Name=\"Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_F" +
+                "ormulaePartner\"><End Type=\"Hammergo.Data.Formula\" Role=\"Formulae\" Multiplicity=\"" +
+                "*\" /><End Type=\"Hammergo.Data.CalculateParam\" Role=\"FormulaePartner\" Multiplicit" +
+                "y=\"0..1\" /></Association><Association Name=\"Hammergo_Data_MessureParam_MessureVa" +
+                "lues_Hammergo_Data_MessureValue_MessureValuesPartner\"><End Type=\"Hammergo.Data.M" +
+                "essureValue\" Role=\"MessureValues\" Multiplicity=\"*\" /><End Type=\"Hammergo.Data.Me" +
+                "ssureParam\" Role=\"MessureValuesPartner\" Multiplicity=\"0..1\" /></Association></Sc" +
+                "hema><Schema Namespace=\"Default\" xmlns=\"http://schemas.microsoft.com/ado/2009/11" +
+                "/edm\"><EntityContainer Name=\"Container\" m:IsDefaultEntityContainer=\"true\"><Entit" +
+                "ySet Name=\"ApparatusTypes\" EntityType=\"Hammergo.Data.ApparatusType\" /><EntitySet" +
+                " Name=\"Apps\" EntityType=\"Hammergo.Data.App\" /><EntitySet Name=\"AppParams\" Entity" +
+                "Type=\"Hammergo.Data.AppParam\" /><EntitySet Name=\"ProjectParts\" EntityType=\"Hamme" +
+                "rgo.Data.ProjectPart\" /><EntitySet Name=\"Remarks\" EntityType=\"Hammergo.Data.Rema" +
+                "rk\" /><EntitySet Name=\"TaskApps\" EntityType=\"Hammergo.Data.TaskApp\" /><EntitySet" +
+                " Name=\"MessureValues\" EntityType=\"Hammergo.Data.MessureValue\" /><EntitySet Name=" +
+                "\"CalculateValue\" EntityType=\"Hammergo.Data.CalculateValue\" /><EntitySet Name=\"Fo" +
+                "rmulae\" EntityType=\"Hammergo.Data.Formula\" /><AssociationSet Name=\"Hammergo_Data" +
+                "_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet\" Association=\"Hammergo.Data" +
+                ".Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner\"><End Role=\"Apps" +
+                "Partner\" EntitySet=\"ApparatusTypes\" /><End Role=\"Apps\" EntitySet=\"Apps\" /></Asso" +
+                "ciationSet><AssociationSet Name=\"Hammergo_Data_App_ApparatusType_Hammergo_Data_A" +
+                "pparatusType_ApparatusTypePartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_A" +
+                "pp_ApparatusType_Hammergo_Data_ApparatusType_ApparatusTypePartner\"><End Role=\"Ap" +
+                "paratusTypePartner\" EntitySet=\"Apps\" /><End Role=\"Apparatus";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart2 = "\"ApparatusTypePartner\" EntitySet=\"Apps\" /><End Role=\"ApparatusType\" EntitySet=\"Ap" +
-                "paratusTypes\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_App_Project" +
-                "Part_Hammergo_Data_ProjectPart_ProjectPartPartnerSet\" Association=\"Hammergo.Data" +
-                ".Hammergo_Data_App_ProjectPart_Hammergo_Data_ProjectPart_ProjectPartPartner\"><En" +
-                "d Role=\"ProjectPartPartner\" EntitySet=\"Apps\" /><End Role=\"ProjectPart\" EntitySet" +
-                "=\"ProjectParts\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_App_Remar" +
-                "ks_Hammergo_Data_Remark_RemarksPartnerSet\" Association=\"Hammergo.Data.Hammergo_D" +
-                "ata_App_Remarks_Hammergo_Data_Remark_RemarksPartner\"><End Role=\"RemarksPartner\" " +
-                "EntitySet=\"Apps\" /><End Role=\"Remarks\" EntitySet=\"Remarks\" /></AssociationSet><A" +
-                "ssociationSet Name=\"Hammergo_Data_App_TaskApps_Hammergo_Data_TaskApp_TaskAppsPar" +
-                "tnerSet\" Association=\"Hammergo.Data.Hammergo_Data_App_TaskApps_Hammergo_Data_Tas" +
-                "kApp_TaskAppsPartner\"><End Role=\"TaskAppsPartner\" EntitySet=\"Apps\" /><End Role=\"" +
-                "TaskApps\" EntitySet=\"TaskApps\" /></AssociationSet><AssociationSet Name=\"Hammergo" +
-                "_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartnerSet\" Association=\"Ham" +
-                "mergo.Data.Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartner\">" +
-                "<End Role=\"AppParamsPartner\" EntitySet=\"Apps\" /><End Role=\"AppParams\" EntitySet=" +
-                "\"AppParams\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_AppParam_App_" +
-                "Hammergo_Data_App_AppPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_AppPar" +
-                "am_App_Hammergo_Data_App_AppPartner\"><End Role=\"AppPartner\" EntitySet=\"AppParams" +
-                "\" /><End Role=\"App\" EntitySet=\"Apps\" /></AssociationSet><AssociationSet Name=\"Ha" +
-                "mmergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_Calculat" +
-                "eValuesPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_CalculateParam_Calcu" +
-                "lateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner\"><End Role=\"Calcu" +
-                "lateValuesPartner\" EntitySet=\"AppParams\" /><End Role=\"CalculateValues\" EntitySet" +
-                "=\"CalculateValue\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_Calcula" +
-                "teParam_Formulae_Hammergo_Data_Formula_FormulaePartnerSet\" Association=\"Hammergo" +
-                ".Data.Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartne" +
-                "r\"><End Role=\"FormulaePartner\" EntitySet=\"AppParams\" /><End Role=\"Formulae\" Enti" +
-                "tySet=\"Formulae\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_MessureP" +
-                "aram_MessureValues_Hammergo_Data_MessureValue_MessureValuesPartnerSet\" Associati" +
-                "on=\"Hammergo.Data.Hammergo_Data_MessureParam_MessureValues_Hammergo_Data_Messure" +
-                "Value_MessureValuesPartner\"><End Role=\"MessureValuesPartner\" EntitySet=\"AppParam" +
-                "s\" /><End Role=\"MessureValues\" EntitySet=\"MessureValues\" /></AssociationSet><Ass" +
-                "ociationSet Name=\"Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_AppsPartnerSe" +
-                "t\" Association=\"Hammergo.Data.Hammergo_Data_ProjectPart_Apps_Hammergo_Data_App_A" +
-                "ppsPartner\"><End Role=\"AppsPartner\" EntitySet=\"ProjectParts\" /><End Role=\"Apps\" " +
-                "EntitySet=\"Apps\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_Remark_A" +
-                "pp_Hammergo_Data_App_AppPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_Rem" +
-                "ark_App_Hammergo_Data_App_AppPartner\"><End Role=\"AppPartner\" EntitySet=\"Remarks\"" +
-                " /><End Role=\"App\" EntitySet=\"Apps\" /></AssociationSet><AssociationSet Name=\"Ham" +
-                "mergo_Data_TaskApp_App_Hammergo_Data_App_AppPartnerSet\" Association=\"Hammergo.Da" +
-                "ta.Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartner\"><End Role=\"AppPartner" +
-                "\" EntitySet=\"TaskApps\" /><End Role=\"App\" EntitySet=\"Apps\" /></AssociationSet><As" +
-                "sociationSet Name=\"Hammergo_Data_MessureValue_MessureParam_Hammergo_Data_Messure" +
-                "Param_MessureParamPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_MessureVa" +
-                "lue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartner\"><End Role=\"Mess" +
-                "ureParamPartner\" EntitySet=\"MessureValues\" /><End Role=\"MessureParam\" EntitySet=" +
-                "\"AppParams\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_CalculateValu" +
-                "e_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartnerSet\" Associat" +
-                "ion=\"Hammergo.Data.Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_Cal" +
-                "culateParam_CalculateParamPartner\"><End Role=\"CalculateParamPartner\" EntitySet=\"" +
-                "CalculateValue\" /><End Role=\"CalculateParam\" EntitySet=\"AppParams\" /></Associati" +
-                "onSet><AssociationSet Name=\"Hammergo_Data_Formula_CalculateParam_Hammergo_Data_C" +
-                "alculateParam_CalculateParamPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data" +
-                "_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner\"><End" +
-                " Role=\"CalculateParamPartner\" EntitySet=\"Formulae\" /><End Role=\"CalculateParam\" " +
-                "EntitySet=\"AppParams\" /></AssociationSet></EntityContainer></Schema></edmx:DataS" +
-                "ervices></edmx:Edmx>";
+            private const string ModelPart2 = "Type\" EntitySet=\"ApparatusTypes\" /></AssociationSet><AssociationSet Name=\"Hammerg" +
+                "o_Data_App_ProjectPart_Hammergo_Data_ProjectPart_ProjectPartPartnerSet\" Associat" +
+                "ion=\"Hammergo.Data.Hammergo_Data_App_ProjectPart_Hammergo_Data_ProjectPart_Proje" +
+                "ctPartPartner\"><End Role=\"ProjectPartPartner\" EntitySet=\"Apps\" /><End Role=\"Proj" +
+                "ectPart\" EntitySet=\"ProjectParts\" /></AssociationSet><AssociationSet Name=\"Hamme" +
+                "rgo_Data_App_Remarks_Hammergo_Data_Remark_RemarksPartnerSet\" Association=\"Hammer" +
+                "go.Data.Hammergo_Data_App_Remarks_Hammergo_Data_Remark_RemarksPartner\"><End Role" +
+                "=\"RemarksPartner\" EntitySet=\"Apps\" /><End Role=\"Remarks\" EntitySet=\"Remarks\" /><" +
+                "/AssociationSet><AssociationSet Name=\"Hammergo_Data_App_TaskApps_Hammergo_Data_T" +
+                "askApp_TaskAppsPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_App_TaskApps" +
+                "_Hammergo_Data_TaskApp_TaskAppsPartner\"><End Role=\"TaskAppsPartner\" EntitySet=\"A" +
+                "pps\" /><End Role=\"TaskApps\" EntitySet=\"TaskApps\" /></AssociationSet><Association" +
+                "Set Name=\"Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_AppParamsPartnerSet" +
+                "\" Association=\"Hammergo.Data.Hammergo_Data_App_AppParams_Hammergo_Data_AppParam_" +
+                "AppParamsPartner\"><End Role=\"AppParamsPartner\" EntitySet=\"Apps\" /><End Role=\"App" +
+                "Params\" EntitySet=\"AppParams\" /></AssociationSet><AssociationSet Name=\"Hammergo_" +
+                "Data_AppParam_App_Hammergo_Data_App_AppPartnerSet\" Association=\"Hammergo.Data.Ha" +
+                "mmergo_Data_AppParam_App_Hammergo_Data_App_AppPartner\"><End Role=\"AppPartner\" En" +
+                "titySet=\"AppParams\" /><End Role=\"App\" EntitySet=\"Apps\" /></AssociationSet><Assoc" +
+                "iationSet Name=\"Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_Calcu" +
+                "lateValue_CalculateValuesPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_Ca" +
+                "lculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner" +
+                "\"><End Role=\"CalculateValuesPartner\" EntitySet=\"AppParams\" /><End Role=\"Calculat" +
+                "eValues\" EntitySet=\"CalculateValue\" /></AssociationSet><AssociationSet Name=\"Ham" +
+                "mergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartnerSet\" Ass" +
+                "ociation=\"Hammergo.Data.Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Form" +
+                "ula_FormulaePartner\"><End Role=\"FormulaePartner\" EntitySet=\"AppParams\" /><End Ro" +
+                "le=\"Formulae\" EntitySet=\"Formulae\" /></AssociationSet><AssociationSet Name=\"Hamm" +
+                "ergo_Data_MessureParam_MessureValues_Hammergo_Data_MessureValue_MessureValuesPar" +
+                "tnerSet\" Association=\"Hammergo.Data.Hammergo_Data_MessureParam_MessureValues_Ham" +
+                "mergo_Data_MessureValue_MessureValuesPartner\"><End Role=\"MessureValuesPartner\" E" +
+                "ntitySet=\"AppParams\" /><End Role=\"MessureValues\" EntitySet=\"MessureValues\" /></A" +
+                "ssociationSet><AssociationSet Name=\"Hammergo_Data_ProjectPart_Apps_Hammergo_Data" +
+                "_App_AppsPartnerSet\" Association=\"Hammergo.Data.Hammergo_Data_ProjectPart_Apps_H" +
+                "ammergo_Data_App_AppsPartner\"><End Role=\"AppsPartner\" EntitySet=\"ProjectParts\" /" +
+                "><End Role=\"Apps\" EntitySet=\"Apps\" /></AssociationSet><AssociationSet Name=\"Hamm" +
+                "ergo_Data_Remark_App_Hammergo_Data_App_AppPartnerSet\" Association=\"Hammergo.Data" +
+                ".Hammergo_Data_Remark_App_Hammergo_Data_App_AppPartner\"><End Role=\"AppPartner\" E" +
+                "ntitySet=\"Remarks\" /><End Role=\"App\" EntitySet=\"Apps\" /></AssociationSet><Associ" +
+                "ationSet Name=\"Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartnerSet\" Associ" +
+                "ation=\"Hammergo.Data.Hammergo_Data_TaskApp_App_Hammergo_Data_App_AppPartner\"><En" +
+                "d Role=\"AppPartner\" EntitySet=\"TaskApps\" /><End Role=\"App\" EntitySet=\"Apps\" /></" +
+                "AssociationSet><AssociationSet Name=\"Hammergo_Data_MessureValue_MessureParam_Ham" +
+                "mergo_Data_MessureParam_MessureParamPartnerSet\" Association=\"Hammergo.Data.Hamme" +
+                "rgo_Data_MessureValue_MessureParam_Hammergo_Data_MessureParam_MessureParamPartne" +
+                "r\"><End Role=\"MessureParamPartner\" EntitySet=\"MessureValues\" /><End Role=\"Messur" +
+                "eParam\" EntitySet=\"AppParams\" /></AssociationSet><AssociationSet Name=\"Hammergo_" +
+                "Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPa" +
+                "rtnerSet\" Association=\"Hammergo.Data.Hammergo_Data_CalculateValue_CalculateParam" +
+                "_Hammergo_Data_CalculateParam_CalculateParamPartner\"><End Role=\"CalculateParamPa" +
+                "rtner\" EntitySet=\"CalculateValue\" /><End Role=\"CalculateParam\" EntitySet=\"AppPar" +
+                "ams\" /></AssociationSet><AssociationSet Name=\"Hammergo_Data_Formula_CalculatePar" +
+                "am_Hammergo_Data_CalculateParam_CalculateParamPartnerSet\" Association=\"Hammergo." +
+                "Data.Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_Calculate" +
+                "ParamPartner\"><End Role=\"CalculateParamPartner\" EntitySet=\"Formulae\" /><End Role" +
+                "=\"CalculateParam\" EntitySet=\"AppParams\" /></AssociationSet></EntityContainer></S" +
+                "chema></edmx:DataServices></edmx:Edmx>";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
             private static string GetConcatenatedEdmxString()
             {
@@ -2535,9 +2534,8 @@ namespace DamServiceV3.Test.DamServiceRef
         /// <param name="paramSymbol">Initial value of ParamSymbol.</param>
         /// <param name="precisionNum">Initial value of PrecisionNum.</param>
         /// <param name="order">Initial value of Order.</param>
-        /// <param name="calcOrder">Initial value of CalcOrder.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public static CalculateParam CreateCalculateParam(global::System.Guid ID, global::System.Guid appId, string paramName, string paramSymbol, byte precisionNum, byte order, byte calcOrder)
+        public static CalculateParam CreateCalculateParam(global::System.Guid ID, global::System.Guid appId, string paramName, string paramSymbol, byte precisionNum, byte order)
         {
             CalculateParam calculateParam = new CalculateParam();
             calculateParam.Id = ID;
@@ -2546,31 +2544,8 @@ namespace DamServiceV3.Test.DamServiceRef
             calculateParam.ParamSymbol = paramSymbol;
             calculateParam.PrecisionNum = precisionNum;
             calculateParam.Order = order;
-            calculateParam.CalcOrder = calcOrder;
             return calculateParam;
         }
-        /// <summary>
-        /// There are no comments for Property CalcOrder in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public byte CalcOrder
-        {
-            get
-            {
-                return this._CalcOrder;
-            }
-            set
-            {
-                this.OnCalcOrderChanging(value);
-                this._CalcOrder = value;
-                this.OnCalcOrderChanged();
-                this.OnPropertyChanged("CalcOrder");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private byte _CalcOrder;
-        partial void OnCalcOrderChanging(byte value);
-        partial void OnCalcOrderChanged();
         /// <summary>
         /// There are no comments for CalculateValues in the schema.
         /// </summary>
