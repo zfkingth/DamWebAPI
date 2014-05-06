@@ -104,7 +104,9 @@
     <Compile Include="Controllers\ApparatusTypesController.cs" />
     <Compile Include="Controllers\AppParamsController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
+    <Compile Include="Controllers\CalculateValuesController.cs" />
     <Compile Include="Controllers\FunctionsController.cs" />
+    <Compile Include="Controllers\MessureValuesController.cs" />
     <Compile Include="Controllers\ParamsDTOsController.cs" />
     <Compile Include="Controllers\ProjectPartsController.cs" />
     <Compile Include="Controllers\RemarksController.cs" />

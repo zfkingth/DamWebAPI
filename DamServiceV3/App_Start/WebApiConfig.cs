@@ -28,7 +28,7 @@ namespace DamServiceV3
             builder.EntitySet<Remark>("Remarks");
             builder.EntitySet<TaskApp>("TaskApps");
             builder.EntitySet<MessureValue>("MessureValues");
-            builder.EntitySet<CalculateValue>("CalculateValue");
+            builder.EntitySet<CalculateValue>("CalculateValues");
             builder.EntitySet<Formula>("Formulae");
       
 
