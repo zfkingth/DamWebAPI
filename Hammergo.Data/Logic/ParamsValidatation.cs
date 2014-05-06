@@ -27,7 +27,7 @@ namespace Hammergo.Data.Logic
         /// <param name="modifiedApp">参数被修改的测点</param>
         /// <param name="paramsEntries">修改的参数entry，可能包含其它测点的entry</param>
         /// <param name="formulaEntries">修改的公式参数entry，可能包含其它测点的entry</param>
-        public ParamsValidatation(DamWCFContext context,App modifiedApp, List<ObjectStateEntry> paramsEntries, List<ObjectStateEntry> formulaEntries)
+        public ParamsValidatation(DamWCFContext context, App modifiedApp, List<ObjectStateEntry> paramsEntries, List<ObjectStateEntry> formulaEntries)
         {
             dbcontext = context;
             _modifiedApp = modifiedApp;
@@ -44,17 +44,17 @@ namespace Hammergo.Data.Logic
 
             //需要验证公式更新的逻辑，这是整个app最复杂的问题之一，其它有公式解析和拓扑排序
             //获取参数列表
-            var paramList = (from i in dbcontext.AppParams
-                             where i.AppId == _modifiedApp.Id
-                             select i).AsNoTracking().ToList();
+            var paramsLocal = (from i in dbcontext.AppParams
+                               where i.AppId == _modifiedApp.Id
+                               select i).AsNoTracking().ToList();
             //获取该测点的所有计算公式
 
             //当前数据库中的参数列表
-            var formulaList = (from p in dbcontext.AppParams.OfType<CalculateParam>()
-                               where p.AppId == _modifiedApp.Id
-                               join f in dbcontext.Formulae
-                               on p.Id equals f.ParamId
-                               select f).ToList(); //需要更新formula的计算次序
+            var formulaeLocal = (from p in dbcontext.AppParams.OfType<CalculateParam>()
+                                 where p.AppId == _modifiedApp.Id
+                                 join f in dbcontext.Formulae
+                                 on p.Id equals f.ParamId
+                                 select f).ToList(); //需要更新formula的计算次序
 
 
             //处理added,modified,deleted
@@ -65,18 +65,18 @@ namespace Hammergo.Data.Logic
                 if (entity.AppId == _modifiedApp.Id)
                 {
                     //只能是modified或deleted
-                    int index = paramList.FindIndex(s => s.Id == entity.Id);
+                    int index = paramsLocal.FindIndex(s => s.Id == entity.Id);
                     if (index >= 0)
-                        paramList.RemoveAt(index);
+                        paramsLocal.RemoveAt(index);
                     if (entry.State == EntityState.Modified || entry.State == EntityState.Added)
                     {
-                        paramList.Add(entity);
+                        paramsLocal.Add(entity);
                     }
                     else if (entry.State == EntityState.Deleted)
                     {
                         //在删除参数时，会级联删除公式
 
-                        formulaList.RemoveAll(s => s.ParamId == entity.Id);
+                        formulaeLocal.RemoveAll(s => s.ParamId == entity.Id);
                     }
                 }
             }
@@ -86,18 +86,18 @@ namespace Hammergo.Data.Logic
                 var entity = entry.Entity as Formula;
                 //公式必须依附于参数
                 //paramList中的参数有可以是新增的参数，即数据库还没有记录
-                if (paramList.Exists(s => s.Id == entity.ParamId))
+                if (paramsLocal.Exists(s => s.Id == entity.ParamId))
                 {
 
-                    int index = formulaList.FindIndex(s => s.ParamId == entity.ParamId&&s.StartDate==entity.StartDate);
+                    int index = formulaeLocal.FindIndex(s => s.ParamId == entity.ParamId && s.StartDate == entity.StartDate);
                     if (index >= 0)
                     {
                         //entity已被修改，或增加，删除，得先从列表中先先移除
-                        formulaList.RemoveAt(index);
+                        formulaeLocal.RemoveAt(index);
                     }
                     if (entry.State == EntityState.Modified || entry.State == EntityState.Added)
                     {
-                        formulaList.Add(entity);
+                        formulaeLocal.Add(entity);
                     }
                 }
 
@@ -105,196 +105,196 @@ namespace Hammergo.Data.Logic
 
 
             //检查名称和符号是否有重复
-            checkParamNames(paramList, nameList, symbolList);
+            checkParamNames(paramsLocal, nameList, symbolList);
 
             //测点公式的时间段必须具备连续性，所以需先对公式进行检查
-            var formulaGroup = (from i in formulaList
+            var formulaGroup = (from i in formulaeLocal
                                 orderby i.StartDate ascending
                                 group i by i.StartDate).ToList();
             int gCnt = formulaGroup.Count();
-            if (gCnt == 0)
+
+            if (gCnt > 0)
             {
-                throw new Exception("测点的计算参数必须带有公式");
-            }
 
-            int calcParamsCnt = paramList.OfType<CalculateParam>().Count();
+                int calcParamsCnt = paramsLocal.OfType<CalculateParam>().Count();
 
-            //每组公式的结束时间
-            DateTimeOffset? endDate = null; ;
-            for (int i = 0; i < gCnt; i++)
-            {
-                var item = formulaGroup[i];
-                var startDate = item.Key;
-                if (endDate != null)
+                //每组公式的结束时间
+                DateTimeOffset? endDate = null; ;
+                for (int i = 0; i < gCnt; i++)
                 {
-                    if (startDate != endDate)
+                    var item = formulaGroup[i];
+                    var startDate = item.Key;
+                    if (endDate != null)
                     {
-                        throw new Exception(string.Format("起始时间为{0}的公式的开始时间与上一分段公式的结束时间没有衔接,\n即上一段公式的结束时间必须是下一段公式的开始时间", startDate));
-                    }
-                }
-
-                //检查个数
-
-                if (item.Count() != calcParamsCnt)
-                {
-                    throw new Exception(string.Format("起始时间为{0}的公式与计算参数的数目不一致", startDate));
-                }
-
-                //公式和参数要一一对应，检查对应关系 
-                var compositList = (from ci in paramList.OfType<CalculateParam>()
-                                    join f in item.AsEnumerable()
-                                    on ci.Id equals f.ParamId
-                                    select new
-                                    {
-                                        Param = ci,
-                                        Formula = f
-                                    }).ToList();
-                if (compositList.Count != calcParamsCnt)
-                {
-
-                    throw new Exception(string.Format("起始时间为{0}的公式没有与计算参数一一对应", startDate));
-                }
-
-
-                endDate = item.ElementAt(0).EndDate;
-
-                if (startDate >=endDate)
-                {
-                    throw new Exception("分段公式的开始时间必须小于结束时间");
-                }
-
-                if (item.Count(s => s.EndDate == endDate) != calcParamsCnt)
-                {
-                    throw new Exception(string.Format("起始时间为{0}的公式结束时间不一致", startDate));
-                }
-
-                //检查每组公式的计算逻辑
-
-                hammergo.caculator.MyList list = new hammergo.caculator.MyList(10);
-
-                int num = 1;//填充一些数据，测试计算的表达式
-                foreach (string s in symbolList)
-                {
-                    list.add(s, num++);
-                }
-
-
-
-               // 简单的判断公式的依赖关系，只能精确到仪器,不能精确的量（如n01cf14.e的依赖关系，过于复杂）
-
-
-                //生成新的图
-                ALGraph.MyGraph graph = new ALGraph.MyGraph();
-                hammergo.caculator.CalcFunction calc = new hammergo.caculator.CalcFunction();
-                //引用测点的编号列表
-                hammergo.caculator.MyList calcNameList = new hammergo.caculator.MyList(5);
-
-
-
-                foreach (var cp in compositList)
-                {
-                    string formulaString = cp.Formula.FormulaExpression;
-                    string symbol = cp.Param.ParamSymbol;
-
-                    if (formulaString == null||formulaString.Trim().Length==0)
-                    {
-                        throw new Exception(string.Format("计算参数 {0} 的计算公式不能为空", cp.Param.ParamName));
+                        if (startDate != endDate)
+                        {
+                            throw new Exception(string.Format("起始时间为{0}的公式的开始时间与上一分段公式的结束时间没有衔接,\n即上一段公式的结束时间必须是下一段公式的开始时间", startDate));
+                        }
                     }
 
-                    ArrayList vars = calc.getVaribles(formulaString);
+                    //检查个数
 
-                    intitalVars(_modifiedApp.CalculateName, vars, graph, calcNameList, symbol);
-                }
-
-
-                ArrayList toplist = graph.topSort();
-                if (toplist.Count != graph.Vexnum)
-                {
-                    throw new Exception("公式存在循环依赖");
-                }
-
-                ArrayList storeTopList = toplist;
-
-                // 刚才是检查仪器内的循环依赖,现在和所有的仪器一起检查
-
-
-                graph = new ALGraph.MyGraph();
-
-                for (int j = 0; j< calcNameList.Length; j++)
-                {
-                    graph.addArcNode(new ALGraph.ArcNode(), calcNameList.getKey(j), _modifiedApp.CalculateName);//全部使用计算名称
-                    var loopCheckList = new List<Guid>(5);
-                    constructGraph( _modifiedApp, graph,loopCheckList);//递归加入其子结点
-                }
-
-                toplist = graph.topSort();
-                if (toplist.Count != graph.Vexnum)
-                {
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder(128);
-                    foreach (ALGraph.VNode node in graph.vertices)
+                    if (item.Count() != calcParamsCnt)
                     {
-                        sb.Append(node.data).Append("  ");
-
-                    }
-                    throw new Exception(sb.ToString() + " 仪器公式存在循环依赖");
-                }
-
-
-                toplist = storeTopList;
-
-                //图不存在回路
-                //引用的其它测点,填充
-                for (int j = 0; j < calcNameList.Length; j++)
-                {
-
-
-                    string calcName = calcNameList.getKey(j);
-
-                    var refApp = dbcontext.Apps.AsNoTracking().FirstOrDefault(s => s.CalculateName == calcName);
-
-                    if (refApp == null)
-                    {
-                        throw new Exception(string.Format("计算名称为{0}的仪器不存在!", calcName));
-                    }
-                    //ArrayList paList = new ArrayList(12);
-                    //paList.AddRange(consBLL.GetListByappName(refApp.AppName));
-                    //paList.AddRange(mesBLL.GetListByappName(refApp.AppName));
-                    //paList.AddRange(calcBLL.GetListByappName(refApp.AppName));
-
-                    var paList = refApp.AppParams.ToList();
-
-                    for (int k = 0; k < paList.Count; k++)
-                    {
-                        var pi = paList[k] ;
-
-                        list.add(calcName + "." + pi.ParamSymbol, k + 1);
-                    }
-                }
-
-
-                foreach (var cp in compositList)
-                {
-                    string formula = cp.Formula.FormulaExpression;
-                    calc.compute(formula, list);
-
-                    string symbol = cp.Param.ParamSymbol;
-
-                    int index = toplist.IndexOf(symbol);
-                    if (index < 0)
-                    {
-                        //此符号不在拓扑图中，没有公式依赖于它
-                        index = toplist.Count;
-
+                        throw new Exception(string.Format("起始时间为{0}的公式与计算参数的数目不一致", startDate));
                     }
 
-                    //cp.CalculateOrder = (byte)index;
-                    //更新计算次序
-                    cp.Formula.CalculateOrder = (byte)index;
+                    //公式和参数要一一对应，检查对应关系 
+                    var compositList = (from ci in paramsLocal.OfType<CalculateParam>()
+                                        join f in item.AsEnumerable()
+                                        on ci.Id equals f.ParamId
+                                        select new
+                                        {
+                                            Param = ci,
+                                            Formula = f
+                                        }).ToList();
+                    if (compositList.Count != calcParamsCnt)
+                    {
+
+                        throw new Exception(string.Format("起始时间为{0}的公式没有与计算参数一一对应", startDate));
+                    }
+
+
+                    endDate = item.ElementAt(0).EndDate;
+
+                    if (startDate >= endDate)
+                    {
+                        throw new Exception("分段公式的开始时间必须小于结束时间");
+                    }
+
+                    if (item.Count(s => s.EndDate == endDate) != calcParamsCnt)
+                    {
+                        throw new Exception(string.Format("起始时间为{0}的公式结束时间不一致", startDate));
+                    }
+
+                    //检查每组公式的计算逻辑
+
+                    hammergo.caculator.MyList list = new hammergo.caculator.MyList(10);
+
+                    int num = 1;//填充一些数据，测试计算的表达式
+                    foreach (string s in symbolList)
+                    {
+                        list.add(s, num++);
+                    }
+
+
+
+                    // 简单的判断公式的依赖关系，只能精确到仪器,不能精确的量（如n01cf14.e的依赖关系，过于复杂）
+
+
+                    //生成新的图
+                    ALGraph.MyGraph graph = new ALGraph.MyGraph();
+                    hammergo.caculator.CalcFunction calc = new hammergo.caculator.CalcFunction();
+                    //引用测点的编号列表
+                    hammergo.caculator.MyList calcNameList = new hammergo.caculator.MyList(5);
+
+
+
+                    foreach (var cp in compositList)
+                    {
+                        string formulaString = cp.Formula.FormulaExpression;
+                        string symbol = cp.Param.ParamSymbol;
+
+                        if (formulaString == null || formulaString.Trim().Length == 0)
+                        {
+                            throw new Exception(string.Format("计算参数 {0} 的计算公式不能为空", cp.Param.ParamName));
+                        }
+
+                        ArrayList vars = calc.getVaribles(formulaString);
+
+                        intitalVars(_modifiedApp.CalculateName, vars, graph, calcNameList, symbol);
+                    }
+
+
+                    ArrayList toplist = graph.topSort();
+                    if (toplist.Count != graph.Vexnum)
+                    {
+                        throw new Exception("公式存在循环依赖");
+                    }
+
+                    ArrayList storeTopList = toplist;
+
+                    // 刚才是检查仪器内的循环依赖,现在和所有的仪器一起检查
+
+
+                    graph = new ALGraph.MyGraph();
+
+                    for (int j = 0; j < calcNameList.Length; j++)
+                    {
+                        graph.addArcNode(new ALGraph.ArcNode(), calcNameList.getKey(j), _modifiedApp.CalculateName);//全部使用计算名称
+                        var loopCheckList = new List<Guid>(5);
+                        constructGraph(_modifiedApp, graph, loopCheckList);//递归加入其子结点
+                    }
+
+                    toplist = graph.topSort();
+                    if (toplist.Count != graph.Vexnum)
+                    {
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder(128);
+                        foreach (ALGraph.VNode node in graph.vertices)
+                        {
+                            sb.Append(node.data).Append("  ");
+
+                        }
+                        throw new Exception(sb.ToString() + " 仪器公式存在循环依赖");
+                    }
+
+
+                    toplist = storeTopList;
+
+                    //图不存在回路
+                    //引用的其它测点,填充
+                    for (int j = 0; j < calcNameList.Length; j++)
+                    {
+
+
+                        string calcName = calcNameList.getKey(j);
+
+                        var refApp = dbcontext.Apps.AsNoTracking().FirstOrDefault(s => s.CalculateName == calcName);
+
+                        if (refApp == null)
+                        {
+                            throw new Exception(string.Format("计算名称为{0}的仪器不存在!", calcName));
+                        }
+                        //ArrayList paList = new ArrayList(12);
+                        //paList.AddRange(consBLL.GetListByappName(refApp.AppName));
+                        //paList.AddRange(mesBLL.GetListByappName(refApp.AppName));
+                        //paList.AddRange(calcBLL.GetListByappName(refApp.AppName));
+
+                        var paList = refApp.AppParams.ToList();
+
+                        for (int k = 0; k < paList.Count; k++)
+                        {
+                            var pi = paList[k];
+
+                            list.add(calcName + "." + pi.ParamSymbol, k + 1);
+                        }
+                    }
+
+
+                    foreach (var cp in compositList)
+                    {
+                        string formula = cp.Formula.FormulaExpression;
+                        calc.compute(formula, list);
+
+                        string symbol = cp.Param.ParamSymbol;
+
+                        int index = toplist.IndexOf(symbol);
+                        if (index < 0)
+                        {
+                            //此符号不在拓扑图中，没有公式依赖于它
+                            index = toplist.Count;
+
+                        }
+
+                        //cp.CalculateOrder = (byte)index;
+                        //更新计算次序
+                        cp.Formula.CalculateOrder = (byte)index;
+
+                    }
+
+
 
                 }
-
-
-
             }
 
         }

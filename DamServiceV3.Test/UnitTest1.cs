@@ -563,8 +563,8 @@ namespace DamServiceV3.Test
                 {
                     Id = Guid.NewGuid(),
                     AppId = appItem.Id,
-                    ParamName = "c1",
-                    ParamSymbol = "c1",
+                    ParamName = "sc1",
+                    ParamSymbol = "sc1",
                     PrecisionNum = 2,
                     UnitSymbol = "no",
                     Val = 1,
@@ -578,8 +578,8 @@ namespace DamServiceV3.Test
                 {
                     Id = Guid.NewGuid(),
                     AppId = appItem.Id,
-                    ParamName = "m1",
-                    ParamSymbol = "m1",
+                    ParamName = "sm1",
+                    ParamSymbol = "sm1",
                     PrecisionNum = 2,
                     UnitSymbol = "no",
                     Order = 1,
@@ -593,8 +593,8 @@ namespace DamServiceV3.Test
                 {
                     Id = Guid.NewGuid(),
                     AppId = appItem.Id,
-                    ParamName = "cal1",
-                    ParamSymbol = "cal1",
+                    ParamName = "scal1",
+                    ParamSymbol = "scal1",
                     PrecisionNum = 2,
                     UnitSymbol = "no",
                     Order = 1,
@@ -611,7 +611,7 @@ namespace DamServiceV3.Test
                     StartDate = DateTimeOffset.MinValue,
                     EndDate = DateTimeOffset.MaxValue,
                     CalculateOrder = 1,
-                    FormulaExpression = "c1+m1"
+                    FormulaExpression = "sc1+sm1"
                 };
 
                 ParamsDTO dto = new ParamsDTO()
@@ -642,7 +642,9 @@ namespace DamServiceV3.Test
                 dto.DeletedParams = new List<AppParam>() { conParam1, mesParam1, calParam1 };
                 dto.DeletedFormulae= new List<Formula>() { formula };
 
-                Assert.IsFalse(response.IsSuccessStatusCode, "delete formulae fail");
+
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+                Assert.IsTrue(response.IsSuccessStatusCode, "delete formulae fail");
 
                 //reload mesparam
 
