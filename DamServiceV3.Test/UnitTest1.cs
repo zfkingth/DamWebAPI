@@ -545,7 +545,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public async Task T_params_Added_Delete()
+        public async Task T_params_Add_Delete()
         {
             using (var client = new HttpClient())
             {
@@ -640,7 +640,7 @@ namespace DamServiceV3.Test
                 };
 
                 dto.DeletedParams = new List<AppParam>() { conParam1, mesParam1, calParam1 };
-                dto.DeletedFormulae= new List<Formula>() { formula };
+                dto.DeletedFormulae = new List<Formula>() { formula };
 
 
                 response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
@@ -651,6 +651,204 @@ namespace DamServiceV3.Test
                 context.Detach(conParam1);
                 context.Detach(mesParam1);
                 context.Detach(calParam1);
+
+
+                var cnt = context.AppParams.Where(s => s.Id == mesParam1.Id).Count();
+
+                Assert.AreEqual(0, cnt, "delete test fail");
+
+
+
+            }
+
+        }
+
+
+        [TestMethod]
+        public async Task T_params_Composite()
+        {
+            using (var client = new HttpClient())
+            {
+                //get app
+
+                Uri uri = new Uri(TestConfig.serviceUrl);
+                var context = new DamServiceRef.Container(uri);
+
+                context.Format.UseJson();
+
+                var appItem = context.Apps.Where(s => s.AppName == "第二支仪器").SingleOrDefault();
+
+
+                var conParam1 = new ConstantParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "sc1",
+                    ParamSymbol = "sc1",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Val = 1,
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+                var mesParam1 = new MessureParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "sm1",
+                    ParamSymbol = "sm1",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+
+                var calParam1 = new CalculateParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "scal1",
+                    ParamSymbol = "scal1",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+
+                var formula1 = new Formula()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId = calParam1.Id,
+                    StartDate = DateTimeOffset.MinValue,
+                    EndDate = DateTimeOffset.MaxValue,
+                    CalculateOrder = 1,
+                    FormulaExpression = "sc1+sm1"
+                };
+
+                ParamsDTO dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                dto.AddedParams = new List<AppParam>() { conParam1, mesParam1, calParam1 };
+                dto.AddedFormulae = new List<Formula>() { formula1 };
+
+
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, " insert param fail");
+
+
+                //add updated ,delete 
+                var mesParam2 = new MessureParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "sm2",
+                    ParamSymbol = "sm2",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+                var calParam2 = new CalculateParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "scal2",
+                    ParamSymbol = "scal2",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+
+                var formula2 = new Formula()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId =  calParam2.Id,
+                    StartDate = DateTimeOffset.MinValue,
+                    EndDate = DateTimeOffset.MaxValue,
+                    CalculateOrder = 1,
+                    FormulaExpression = "sm2+sc1"
+                };
+
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                dto.AddedParams = new List<AppParam>() { calParam2 };
+                dto.AddedFormulae = new List<Formula>() { formula2 };
+
+                //  fail because no corresponding mesparam 
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+                Assert.IsFalse(response.IsSuccessStatusCode, "constraint fail");
+
+                //fail because delete mes1 which cal param1 use
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+                dto.AddedParams = new List<AppParam>() { mesParam2, calParam2 };
+                dto.AddedFormulae = new List<Formula>() { formula2 };
+                dto.DeletedParams = new List<AppParam>() { mesParam1 };
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+                Assert.IsFalse(response.IsSuccessStatusCode, "constraint fail");
+
+                //delete mes1 and calc1 
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                conParam1.Val = 2; 
+
+                dto.AddedParams = new List<AppParam>() { mesParam2, calParam2 };
+                dto.AddedFormulae = new List<Formula>() { formula2 };
+                dto.UpdatedParams = new List<AppParam>() { conParam1 };
+                dto.DeletedParams = new List<AppParam>() { mesParam1,calParam1 };
+                dto.DeletedFormulae = new List<Formula>() { formula1 };
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+                Assert.IsTrue(response.IsSuccessStatusCode, "constraint fail"); 
+
+                //delete all params
+
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                dto.DeletedParams = new List<AppParam>() { conParam1, mesParam2, calParam2 };
+                dto.DeletedFormulae = new List<Formula>() { formula2 };
+
+
+                response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
+                Assert.IsTrue(response.IsSuccessStatusCode, "delete formulae fail");
+
+                //reload mesparam
+
+                context = new DamServiceRef.Container(uri); 
 
 
                 var cnt = context.AppParams.Where(s => s.Id == mesParam1.Id).Count();
