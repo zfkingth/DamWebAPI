@@ -17,7 +17,7 @@ namespace DamServiceV3
 
             IList<IODataRoutingConvention> routingConventions = ODataRoutingConventions.CreateDefault();
             routingConventions.Insert(0, new CountODataRoutingConvention());
-          
+
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<ApparatusType>("ApparatusTypes");
@@ -30,8 +30,10 @@ namespace DamServiceV3
             builder.EntitySet<MessureValue>("MessureValues");
             builder.EntitySet<CalculateValue>("CalculateValues");
             builder.EntitySet<Formula>("Formulae");
-      
 
+            ActionConfiguration rateProduct = builder.Entity<App>().Action("RateProduct");
+            rateProduct.Parameter<Guid>("Rating");
+            rateProduct.Returns<double>();
 
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
 

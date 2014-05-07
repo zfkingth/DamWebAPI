@@ -59,7 +59,22 @@ namespace DamServiceV3.Controllers
             return response;
         }
 
+        [HttpPost]
+        public IHttpActionResult RateProduct([FromODataUri] Guid key, ODataActionParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
+            int rating = (int)parameters["Rating"];
+
+
+
+            double average = rating * 1.2;
+
+            return Ok(average);
+        }
 
         // PUT odata/Apps(5)
         public async Task<IHttpActionResult> Put([FromODataUri] Guid key, App app)
