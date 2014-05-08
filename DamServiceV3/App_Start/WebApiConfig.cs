@@ -33,7 +33,7 @@ namespace DamServiceV3
 
             ActionConfiguration rateProduct = builder.Entity<App>().Action("RateProduct");
             rateProduct.Parameter<int>("Rating");
-            rateProduct.Returns<double>();
+            rateProduct.Returns<int>();
 
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
 

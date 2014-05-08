@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using DamServiceV3.Test.DTO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DamServiceV3.Test
 {
@@ -872,11 +873,21 @@ namespace DamServiceV3.Test
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var data = new { Rating = 2 };
+                int old=3;
+                var data = new { Rating = 3 };
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("odata/Apps(guid'3d76ff71-dab7-4752-b640-009155bc766e')/RateProduct", data);
 
                 Assert.IsTrue(response.IsSuccessStatusCode, "action fail");
+
+                var result = response.Content.ReadAsAsync<JObject>().Result;
+
+                int ret = (int)result["value"];
+
+                Assert.AreEqual(old * 2, ret, "action operate result error");
+                
+               
+                //serialize to an object using Newtonsoft.Json nuget package
 
 
 

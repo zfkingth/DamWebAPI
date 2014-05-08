@@ -71,7 +71,7 @@ namespace DamServiceV3.Controllers
 
 
 
-            double average = rating * 1.2;
+            int average = rating * 2;
 
             return Ok(average);
         }
