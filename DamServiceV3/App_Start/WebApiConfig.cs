@@ -32,7 +32,7 @@ namespace DamServiceV3
             builder.EntitySet<Formula>("Formulae");
 
             ActionConfiguration rateProduct = builder.Entity<App>().Action("RateProduct");
-            rateProduct.Parameter<Guid>("Rating");
+            rateProduct.Parameter<int>("Rating");
             rateProduct.Returns<double>();
 
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
