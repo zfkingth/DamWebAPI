@@ -231,8 +231,12 @@
         <EntitySet Name="Remarks" EntityType="Hammergo.Data.Remark" />
         <EntitySet Name="TaskApps" EntityType="Hammergo.Data.TaskApp" />
         <EntitySet Name="MessureValues" EntityType="Hammergo.Data.MessureValue" />
-        <EntitySet Name="CalculateValue" EntityType="Hammergo.Data.CalculateValue" />
+        <EntitySet Name="CalculateValues" EntityType="Hammergo.Data.CalculateValue" />
         <EntitySet Name="Formulae" EntityType="Hammergo.Data.Formula" />
+        <FunctionImport Name="RateProduct" ReturnType="Edm.Double" IsBindable="true" m:IsAlwaysBindable="true">
+          <Parameter Name="bindingParameter" Type="Hammergo.Data.App" />
+          <Parameter Name="Rating" Type="Edm.Guid" Nullable="false" />
+        </FunctionImport>
         <AssociationSet Name="Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner">
           <End Role="AppsPartner" EntitySet="ApparatusTypes" />
           <End Role="Apps" EntitySet="Apps" />
@@ -263,7 +267,7 @@
         </AssociationSet>
         <AssociationSet Name="Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartnerSet" Association="Hammergo.Data.Hammergo_Data_CalculateParam_CalculateValues_Hammergo_Data_CalculateValue_CalculateValuesPartner">
           <End Role="CalculateValuesPartner" EntitySet="AppParams" />
-          <End Role="CalculateValues" EntitySet="CalculateValue" />
+          <End Role="CalculateValues" EntitySet="CalculateValues" />
         </AssociationSet>
         <AssociationSet Name="Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartnerSet" Association="Hammergo.Data.Hammergo_Data_CalculateParam_Formulae_Hammergo_Data_Formula_FormulaePartner">
           <End Role="FormulaePartner" EntitySet="AppParams" />
@@ -290,7 +294,7 @@
           <End Role="MessureParam" EntitySet="AppParams" />
         </AssociationSet>
         <AssociationSet Name="Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartnerSet" Association="Hammergo.Data.Hammergo_Data_CalculateValue_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">
-          <End Role="CalculateParamPartner" EntitySet="CalculateValue" />
+          <End Role="CalculateParamPartner" EntitySet="CalculateValues" />
           <End Role="CalculateParam" EntitySet="AppParams" />
         </AssociationSet>
         <AssociationSet Name="Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartnerSet" Association="Hammergo.Data.Hammergo_Data_Formula_CalculateParam_Hammergo_Data_CalculateParam_CalculateParamPartner">

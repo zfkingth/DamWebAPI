@@ -786,7 +786,7 @@ namespace DamServiceV3.Test
                 var formula2 = new Formula()
                 {
                     Id = Guid.NewGuid(),
-                    ParamId =  calParam2.Id,
+                    ParamId = calParam2.Id,
                     StartDate = DateTimeOffset.MinValue,
                     EndDate = DateTimeOffset.MaxValue,
                     CalculateOrder = 1,
@@ -822,15 +822,15 @@ namespace DamServiceV3.Test
                     Id = appItem.Id,
                 };
 
-                conParam1.Val = 2; 
+                conParam1.Val = 2;
 
                 dto.AddedParams = new List<AppParam>() { mesParam2, calParam2 };
                 dto.AddedFormulae = new List<Formula>() { formula2 };
                 dto.UpdatedParams = new List<AppParam>() { conParam1 };
-                dto.DeletedParams = new List<AppParam>() { mesParam1,calParam1 };
+                dto.DeletedParams = new List<AppParam>() { mesParam1, calParam1 };
                 dto.DeletedFormulae = new List<Formula>() { formula1 };
                 response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
-                Assert.IsTrue(response.IsSuccessStatusCode, "constraint fail"); 
+                Assert.IsTrue(response.IsSuccessStatusCode, "constraint fail");
 
                 //delete all params
 
@@ -848,7 +848,7 @@ namespace DamServiceV3.Test
 
                 //reload mesparam
 
-                context = new DamServiceRef.Container(uri); 
+                context = new DamServiceRef.Container(uri);
 
 
                 var cnt = context.AppParams.Where(s => s.Id == mesParam1.Id).Count();
@@ -860,5 +860,36 @@ namespace DamServiceV3.Test
             }
 
         }
+
+
+        [TestMethod]
+        public async Task T_app_action()
+        {
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri("http://localhost:53317");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var data = new { Rating = 2 };
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("odata/Apps(guid'3d76ff71-dab7-4752-b640-009155bc766e')/RateProduct", data);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "action fail");
+
+
+
+
+
+            }
+
+
+
+
+        }
+
+
+
     }
 }
