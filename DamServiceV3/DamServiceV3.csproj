@@ -105,6 +105,7 @@
     <Compile Include="Controllers\AppParamsController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
     <Compile Include="Controllers\CalculateValuesController.cs" />
+    <Compile Include="Controllers\FormulaeController.cs" />
     <Compile Include="Controllers\FunctionsController.cs" />
     <Compile Include="Controllers\MessureValuesController.cs" />
     <Compile Include="Controllers\ParamsDTOsController.cs" />
