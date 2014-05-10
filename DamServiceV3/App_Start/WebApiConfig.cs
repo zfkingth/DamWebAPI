@@ -35,6 +35,9 @@ namespace DamServiceV3
             rateProduct.Parameter<int>("Rating");
             rateProduct.Returns<int>();
 
+            ActionConfiguration ActionGetAllFormulaeByAppID = builder.Entity<App>().Action("GetAllFormulaeByAppID");
+            ActionGetAllFormulaeByAppID.ReturnsCollectionFromEntitySet<Formula>("Formulae");
+
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
 
             config.Routes.MapHttpRoute(

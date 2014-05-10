@@ -902,5 +902,24 @@ namespace DamServiceV3.Test
 
 
 
+
+        [TestMethod]
+        public    void T_app_GetAllFormulaeByAppID()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var appItem = context.Apps.Expand("AppParams").Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+            var formula = context.GetAllFormulaeByAppID(appItem.Id) ;
+
+            Assert.IsTrue(formula.Count() > 0, "查询失败");
+
+
+
+        }
     }
 }

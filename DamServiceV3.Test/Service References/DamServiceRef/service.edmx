@@ -233,9 +233,12 @@
         <EntitySet Name="MessureValues" EntityType="Hammergo.Data.MessureValue" />
         <EntitySet Name="CalculateValues" EntityType="Hammergo.Data.CalculateValue" />
         <EntitySet Name="Formulae" EntityType="Hammergo.Data.Formula" />
-        <FunctionImport Name="RateProduct" ReturnType="Edm.Double" IsBindable="true" m:IsAlwaysBindable="true">
+        <FunctionImport Name="RateProduct" ReturnType="Edm.Int32" IsBindable="true" m:IsAlwaysBindable="true">
           <Parameter Name="bindingParameter" Type="Hammergo.Data.App" />
-          <Parameter Name="Rating" Type="Edm.Guid" Nullable="false" />
+          <Parameter Name="Rating" Type="Edm.Int32" Nullable="false" />
+        </FunctionImport>
+        <FunctionImport Name="GetAllFormulaeByAppID" ReturnType="Collection(Hammergo.Data.Formula)" IsBindable="true" EntitySet="Formulae" m:IsAlwaysBindable="true">
+          <Parameter Name="bindingParameter" Type="Hammergo.Data.App" />
         </FunctionImport>
         <AssociationSet Name="Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartnerSet" Association="Hammergo.Data.Hammergo_Data_ApparatusType_Apps_Hammergo_Data_App_AppsPartner">
           <End Role="AppsPartner" EntitySet="ApparatusTypes" />

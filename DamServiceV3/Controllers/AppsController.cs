@@ -59,6 +59,21 @@ namespace DamServiceV3.Controllers
             return response;
         }
 
+
+        [HttpPost]
+        [Queryable]
+        public IQueryable<Formula> GetAllFormulaeByAppID([FromODataUri] Guid key)
+        {
+            var qf = (from p in db.AppParams
+                      where p.AppId == key
+                      join f in db.Formulae
+                      on p.Id equals f.ParamId
+                      select f).AsNoTracking();
+
+            return qf;
+        }
+
+
         [HttpPost]
         public IHttpActionResult RateProduct([FromODataUri] Guid key, ODataActionParameters parameters)
         {
