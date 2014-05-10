@@ -64,6 +64,11 @@ namespace DamServiceV3.Controllers
         [Queryable]
         public IQueryable<Formula> GetAllFormulaeByAppID([FromODataUri] Guid key)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
             var qf = (from p in db.AppParams
                       where p.AppId == key
                       join f in db.Formulae
