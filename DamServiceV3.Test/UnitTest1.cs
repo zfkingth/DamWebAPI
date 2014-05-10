@@ -912,11 +912,36 @@ namespace DamServiceV3.Test
 
             context.Format.UseJson();
 
-            var appItem = context.Apps.Expand("AppParams").Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+            var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
 
             var formula = context.GetAllFormulaeByAppID(appItem.Id) ;
 
             Assert.IsTrue(formula.Count() > 0, "查询失败");
+
+
+
+        }
+
+
+        [TestMethod]
+        public void T_ProjectPart_UpdateAppsProject()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+             //get root project part
+            var partRoot = context.ProjectParts.Where(s => s.ParentPart == null).SingleOrDefault();
+
+            var part1 = context.ProjectParts.Where(s => s.ParentPart ==  partRoot.Id).FirstOrDefault();
+
+            bool ret=  context.UpdateAppsProject(part1.Id,new List<Guid>(){ appItem.Id });
+
+            Assert.IsTrue(ret, "更新测点的工程部位失败");
 
 
 

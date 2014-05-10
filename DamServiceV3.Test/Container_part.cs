@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Services.Client;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,5 +28,24 @@ namespace DamServiceV3.Test.DamServiceRef
 
 
         }
+
+
+        public bool UpdateAppsProject(Guid projectPartID, IEnumerable<Guid> appids)
+        {
+
+            Uri actionUri = new Uri(String.Format("{0}/ProjectParts(guid'{1}')/UpdateAppsProject", this.BaseUri.AbsoluteUri, projectPartID)
+              );
+
+            var result = this.Execute<bool>(
+                                    actionUri,
+                                    "POST",
+                                    true,
+                                    new BodyOperationParameter("appids", appids)
+                                ).First();
+
+            return result;
+        }
+
+
     }
 }

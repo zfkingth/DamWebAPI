@@ -46,6 +46,51 @@ namespace DamServiceV3.Controllers
         }
 
 
+        /// <summary>
+        /// 更新一系列测点的工程部位
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IHttpActionResult UpdateAppsProject([FromODataUri] Guid key, ODataActionParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var appids = (IEnumerable<Guid>)parameters["appids"];
+
+             bool exist =  db.ProjectParts.Any(s => s.Id == key);
+
+            if (exist == false)
+            {
+                throw new Exception("projectPartID,参数错误");
+            }
+
+            exist = db.ProjectParts.Any(s => s.ParentPart == key);
+
+            if (exist)
+            {
+                throw new Exception("所关联的部位不能有子结点");
+            }
+
+            var qapps = from i in db.Apps
+                        where appids.Contains(i.Id)
+                        select i;
+
+            foreach (var item in qapps)
+            {
+                item.ProjectPartID = key;
+            }
+
+            db.SaveChanges();
+
+            return Ok(true);
+        
+ 
+        }
 
         public HttpResponseMessage GetCount(ODataQueryOptions<ProjectPart> queryOptions)
         {
