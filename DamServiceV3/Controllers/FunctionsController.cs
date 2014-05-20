@@ -32,6 +32,13 @@ namespace DamServiceV3.Controllers
             return "value";
         }
 
+
+        [HttpGet]
+        public string Test(int id)
+        {
+            return "value test";
+        }
+
         // POST api/functions
         public void Post([FromBody]string value)
         {
