@@ -521,7 +521,6 @@ namespace DamServiceV3.Test
 
                 mesParam1.ParamSymbol = "modify";
 
-                Exception ex = null;
 
                 response = await client.PostAsJsonAsync("api/ParamsDTOs", dto);
 
@@ -942,7 +941,23 @@ namespace DamServiceV3.Test
 
         }
 
+        [TestMethod]
+        public void T_app_SearcyAppCalcName ()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
 
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+
+            var result = context.SearcyAppCalcName("%FirstApp");
+
+            Assert.IsTrue(result.Count() == 1, "测试失败");
+
+
+
+        }
 
         [TestMethod]
         public void T_app_RateAllProducts()

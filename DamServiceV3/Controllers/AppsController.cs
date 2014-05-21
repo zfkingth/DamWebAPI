@@ -100,6 +100,29 @@ namespace DamServiceV3.Controllers
 
         }
 
+        [HttpPost]
+        public IQueryable<App> SearcyAppCalcName(ODataActionParameters parameters)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            string match = (string)parameters["match"];
+
+            string entitySQL =
+    @"SELECT VALUE c FROM Apps AS c WHERE c.CalculateName like @match;";
+            ObjectParameter[] ps = { new ObjectParameter("match", match) };
+            var query = ((IObjectContextAdapter)db).ObjectContext.CreateQuery<App>(entitySQL, ps);
+
+
+            return query;
+
+
+        }
+
+
 
         [HttpPost]
         public IHttpActionResult RateAllProducts(ODataActionParameters parameters)
