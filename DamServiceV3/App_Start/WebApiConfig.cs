@@ -35,6 +35,12 @@ namespace DamServiceV3
             rateProduct.Parameter<int>("Rating");
             rateProduct.Returns<int>();
 
+
+            ActionConfiguration actionRateAll = builder.Entity<App>().Collection.Action("RateAllProducts");
+            actionRateAll.Parameter<int>("Rating");
+            actionRateAll.Returns<int>();
+
+
             ActionConfiguration actionGetAllFormulaeByAppID = builder.Entity<App>().Action("GetAllFormulaeByAppID");
             actionGetAllFormulaeByAppID.ReturnsCollectionFromEntitySet<Formula>("Formulae");
 
@@ -46,10 +52,7 @@ namespace DamServiceV3
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
 
 
-            config.Routes.MapHttpRoute(
-                  name: "ApiFunctions",
-                  routeTemplate: "func/{controller}/{action}/{id}",
-                  defaults: new { id = RouteParameter.Optional });
+  
 
             config.Routes.MapHttpRoute(
             name: "DefaultApi",

@@ -923,6 +923,26 @@ namespace DamServiceV3.Test
         }
 
 
+
+        [TestMethod]
+        public void T_app_RateAllProducts()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+
+            var val = context.RateAllProducts(2);
+
+            Assert.IsTrue( val==4, "测试失败");
+
+
+
+        }
+
+
         [TestMethod]
         public void T_ProjectPart_UpdateAppsProject()
         {

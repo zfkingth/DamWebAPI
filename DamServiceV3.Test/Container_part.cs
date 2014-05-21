@@ -29,6 +29,21 @@ namespace DamServiceV3.Test.DamServiceRef
 
         }
 
+        public int RateAllProducts(int rate)
+        {
+
+            Uri actionUri = new Uri(String.Format("{0}/Apps/RateAllProducts", this.BaseUri.AbsoluteUri)
+              );
+
+            var result = this.Execute<int>(
+                                    actionUri,
+                                    "POST",
+                                    true,
+                                    new BodyOperationParameter("Rating", 2)
+                                ).First();
+
+            return result;
+        }
 
         public bool UpdateAppsProject(Guid projectPartID, IEnumerable<Guid> appids)
         {

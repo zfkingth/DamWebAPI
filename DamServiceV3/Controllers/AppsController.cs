@@ -78,6 +78,21 @@ namespace DamServiceV3.Controllers
             return qf;
         }
 
+        [HttpPost]
+        public IHttpActionResult RateAllProducts(ODataActionParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            int rating = (int)parameters["Rating"];
+
+            int average = rating * 2;
+
+            return Ok(average);
+        }
+
 
         [HttpPost]
         public IHttpActionResult RateProduct([FromODataUri] Guid key, ODataActionParameters parameters)
