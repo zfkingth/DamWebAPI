@@ -29,6 +29,28 @@ namespace DamServiceV3.Test.DamServiceRef
 
         }
 
+
+        public IEnumerable<App> SearcyAppByName(string match)
+        {
+
+
+            Uri actionUri = new Uri(String.Format("{0}/Apps/SearcyAppByName", this.BaseUri.AbsoluteUri)
+                );
+
+
+            var result = this.Execute<App>(
+                                    actionUri,
+                                    "POST",
+                                    true,
+                                     new BodyOperationParameter("match", match)
+                                );
+
+            return result;
+
+
+        }
+
+
         public int RateAllProducts(int rate)
         {
 

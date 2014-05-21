@@ -925,6 +925,26 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
+        public void T_app_SearcyAppByName()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+
+            var result = context.SearcyAppByName("%第%");
+
+            Assert.IsTrue(result.Count() >=2, "测试失败");
+
+
+
+        }
+
+
+
+        [TestMethod]
         public void T_app_RateAllProducts()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);

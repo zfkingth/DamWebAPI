@@ -14,6 +14,7 @@ using System.Web.Http.OData.Routing;
 using Hammergo.Data;
 using System.Web.Http.OData.Query;
 using System.Text;
+using System.Data.Entity.Core.Objects;
 
 namespace DamServiceV3.Controllers
 {
@@ -77,6 +78,28 @@ namespace DamServiceV3.Controllers
 
             return qf;
         }
+
+        [HttpPost]
+        public IQueryable<App> SearcyAppByName(ODataActionParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            string match = (string)parameters["match"];
+
+            string entitySQL =
+    @"SELECT VALUE c FROM Apps AS c WHERE c.AppName like @match;";
+            ObjectParameter[] ps = { new ObjectParameter("match", match) };
+            var query = ((IObjectContextAdapter)db).ObjectContext.CreateQuery<App>(entitySQL, ps);
+
+
+            return query;
+
+
+        }
+
 
         [HttpPost]
         public IHttpActionResult RateAllProducts(ODataActionParameters parameters)

@@ -41,6 +41,11 @@ namespace DamServiceV3
             actionRateAll.Returns<int>();
 
 
+            ActionConfiguration actionSearcyAppByName = builder.Entity<App>().Collection.Action("SearcyAppByName");
+            actionSearcyAppByName.Parameter<string>("match");
+            actionSearcyAppByName.ReturnsCollectionFromEntitySet<App>("Apps");
+
+
             ActionConfiguration actionGetAllFormulaeByAppID = builder.Entity<App>().Action("GetAllFormulaeByAppID");
             actionGetAllFormulaeByAppID.ReturnsCollectionFromEntitySet<Formula>("Formulae");
 
