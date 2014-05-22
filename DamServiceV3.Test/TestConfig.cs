@@ -9,7 +9,8 @@ namespace DamServiceV3.Test
     internal class TestConfig
     {
         public static readonly string baseAddress = "http://localhost:53317";
-        public static readonly string serviceUrl =baseAddress+ "/odata";
+        public static readonly string serviceUrl =baseAddress+ "/odata/";
 
     }
+}
 }

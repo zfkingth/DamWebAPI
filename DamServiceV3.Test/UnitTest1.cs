@@ -941,7 +941,34 @@ namespace DamServiceV3.Test
 
         }
 
+        [TestMethod]
+        public async Task T_app_GetChildAppCalcName2()
+        {
+            using (var client = new HttpClient())
+            {
 
+                client.BaseAddress = new Uri(TestConfig.serviceUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+               
+                var data = new {  appCalcName= "FirstApp",date=DateTimeOffset.Now };
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("/Apps/GetChildAppCalcName", data);
+
+                Assert.IsTrue(response.IsSuccessStatusCode, "action fail");
+
+                var result = response.Content.ReadAsAsync<JObject>().Result;
+
+                List<string> ret = JsonConvert.DeserializeObject<List<string>>(result["value"].ToString());     
+ 
+
+            }
+
+
+
+
+        }
 
         [TestMethod]
         public void T_app_GetChildAppCalcName()

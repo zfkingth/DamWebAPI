@@ -104,7 +104,7 @@ namespace DamServiceV3.Test.DamServiceRef
                                     "POST",
                                     true,
                                     new BodyOperationParameter("Rating", 2)
-                                ).First();
+                                ).FirstOrDefault();
 
             return result;
         }
@@ -120,7 +120,7 @@ namespace DamServiceV3.Test.DamServiceRef
                                     "POST",
                                     true,
                                     new BodyOperationParameter("appids", appids)
-                                ).First();
+                                ).FirstOrDefault();
 
             return result;
         }
