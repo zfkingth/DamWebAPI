@@ -17,6 +17,9 @@ namespace Hammergo.Data
             Database.SetInitializer<DamWCFContext>(null);
         }
 
+        /// <summary>
+        /// 默认不检查业务逻辑
+        /// </summary>
         public DamWCFContext()
             : this(false)
         {

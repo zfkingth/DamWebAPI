@@ -50,7 +50,7 @@ namespace DamServiceV3.Test.DamServiceRef
 
         }
 
-        public IEnumerable<App>  SearcyAppCalcName(string match)
+        public IEnumerable<App> SearcyAppCalcName(string match)
         {
 
 
@@ -69,6 +69,29 @@ namespace DamServiceV3.Test.DamServiceRef
 
 
         }
+
+
+        public IEnumerable<string> GetChildAppCalcName(string appCalcName, DateTimeOffset date)
+        {
+
+
+            Uri actionUri = new Uri(String.Format("{0}/Apps/GetChildAppCalcName", this.BaseUri.AbsoluteUri)
+                );
+
+
+            var result = this.Execute<string>(
+                                    actionUri,
+                                    "POST",
+                                    true,
+                                     new BodyOperationParameter("appCalcName", appCalcName),
+                                     new BodyOperationParameter("date", date)
+                                );
+
+            return result;
+
+
+        }
+
 
         public int RateAllProducts(int rate)
         {

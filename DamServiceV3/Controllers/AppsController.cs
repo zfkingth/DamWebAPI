@@ -122,6 +122,38 @@ namespace DamServiceV3.Controllers
 
         }
 
+        /// <summary>
+        /// 获取应用该测点的子测点的计算名称
+        /// </summary>
+        /// <param name="appCalcName"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public IEnumerable<string> GetChildAppCalcName(ODataActionParameters parameters)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            string appCalcName = (string)parameters["appCalcName"];
+            DateTimeOffset date = (DateTimeOffset)parameters["date"]; 
+
+            IEnumerable<string> names = null;
+
+            names = from i in db.Apps
+                    join p in db.AppParams.OfType<CalculateParam>()
+                    on i.Id equals p.AppId
+                    join f in db.Formulae
+                    on p.Id equals f.ParamId
+                    where f.FormulaExpression.Contains(appCalcName + ".") && f.StartDate <= date && date < f.EndDate
+                    select i.CalculateName;
+
+
+
+            return names;
+
+        }
 
 
         [HttpPost]

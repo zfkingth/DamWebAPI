@@ -81,8 +81,16 @@ namespace DamService2.Migrations
             app2.CalculateName = "SecondApp";
             app2.AppTypeID = type2.Id;
             app2.ProjectPartID = p2.Id;
+
+
+            var app3 = new App();
+            app3.Id = Guid.NewGuid();
+            app3.AppName = "第三支仪器";
+            app3.CalculateName = "ThirdApp";
+            app3.AppTypeID = type2.Id;
+            app3.ProjectPartID = p2.Id;
  
-            context.Apps.AddOrUpdate(app1, app2);
+            context.Apps.AddOrUpdate(app1, app2,app3);
          
 
             var remark1 = new Remark()
@@ -157,6 +165,54 @@ namespace DamService2.Migrations
 
             context.AppParams.AddOrUpdate(conParam1, mesParam1, calcParam1);
 
+            //添加第三支仪器的参数
+            var conParam1_third = new ConstantParam()
+            {
+                Id = Guid.NewGuid(),
+                AppId = app3.Id,
+                ParamName = "c1",
+                ParamSymbol = "c1",
+                PrecisionNum = 2,
+                UnitSymbol = "no",
+                Val = 1,
+                Order = 1,
+                Description = "no description",
+
+
+            };
+
+            var mesParam1_third = new MessureParam()
+            {
+                Id = Guid.NewGuid(),
+                AppId = app3.Id,
+                ParamName = "m1",
+                ParamSymbol = "m1",
+                PrecisionNum = 2,
+                UnitSymbol = "no",
+                Order = 1,
+                Description = "no description",
+
+
+            };
+
+
+            var calcParam1_third = new CalculateParam()
+            {
+                Id = Guid.NewGuid(),
+                AppId = app3.Id,
+                ParamName = "cal1",
+                ParamSymbol = "cal1",
+                PrecisionNum = 2,
+                UnitSymbol = "no",
+                Order = 1,
+                Description = "no description",
+
+
+            };
+
+            context.AppParams.AddOrUpdate(conParam1_third, mesParam1_third, calcParam1_third);
+
+            ///first app fomula
 
             var formula = new Formula()
             {
@@ -169,6 +225,19 @@ namespace DamService2.Migrations
             };
 
             context.Formulae.AddOrUpdate(formula);
+
+
+            var formula_third = new Formula()
+            {
+                Id = Guid.NewGuid(),
+                ParamId = calcParam1_third.Id,
+                StartDate = DateTimeOffset.MinValue,
+                EndDate = DateTimeOffset.MaxValue,
+                CalculateOrder = 1,
+                FormulaExpression = "c1+m1+FirstApp.cal1"
+            };
+
+            context.Formulae.AddOrUpdate(formula_third);
  
         }
     }

@@ -49,6 +49,12 @@ namespace DamServiceV3
             actionSearcyAppCalcName.Parameter<string>("match");
             actionSearcyAppCalcName.ReturnsCollectionFromEntitySet<App>("Apps");
 
+            ActionConfiguration actionGetChildAppCalcName = builder.Entity<App>().Collection.Action("GetChildAppCalcName");
+            actionGetChildAppCalcName.Parameter<string>("appCalcName");
+            actionGetChildAppCalcName.Parameter<DateTimeOffset>("date");
+            actionGetChildAppCalcName.ReturnsCollection<string>();
+
+
             ActionConfiguration actionGetAllFormulaeByAppID = builder.Entity<App>().Action("GetAllFormulaeByAppID");
             actionGetAllFormulaeByAppID.ReturnsCollectionFromEntitySet<Formula>("Formulae");
 
