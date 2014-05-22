@@ -128,7 +128,8 @@ namespace DamServiceV3.Controllers
         /// <param name="appCalcName"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        public IEnumerable<string> GetChildAppCalcName(ODataActionParameters parameters)
+        [HttpPost]
+        public IQueryable<string> GetChildAppCalcName(ODataActionParameters parameters)
         {
 
             if (!ModelState.IsValid)
@@ -137,9 +138,9 @@ namespace DamServiceV3.Controllers
             }
 
             string appCalcName = (string)parameters["appCalcName"];
-            DateTimeOffset date = (DateTimeOffset)parameters["date"]; 
+            DateTimeOffset date = (DateTimeOffset)parameters["date"];
 
-            IEnumerable<string> names = null;
+            IQueryable<string> names = null;
 
             names = from i in db.Apps
                     join p in db.AppParams.OfType<CalculateParam>()
