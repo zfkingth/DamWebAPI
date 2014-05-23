@@ -872,7 +872,7 @@ namespace DamServiceV3.Test
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                int old=3;
+                int old = 3;
                 var data = new { Rating = 3 };
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("odata/Apps(guid'3d76ff71-dab7-4752-b640-009155bc766e')/RateProduct", data);
@@ -884,8 +884,8 @@ namespace DamServiceV3.Test
                 int ret = (int)result["value"];
 
                 Assert.AreEqual(old * 2, ret, "action operate result error");
-                
-               
+
+
                 //serialize to an object using Newtonsoft.Json nuget package
 
 
@@ -903,7 +903,7 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public    void T_app_GetAllFormulaeByAppID()
+        public void T_app_GetAllFormulaeByAppID()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
 
@@ -913,7 +913,7 @@ namespace DamServiceV3.Test
 
             var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
 
-            var formula = context.GetAllFormulaeByAppID(appItem.Id) ;
+            var formula = context.GetAllFormulaeByAppID(appItem.Id);
 
             Assert.IsTrue(formula.Count() > 0, "查询失败");
 
@@ -935,7 +935,7 @@ namespace DamServiceV3.Test
 
             var result = context.SearcyAppByName("%第%");
 
-            Assert.IsTrue(result.Count() >=2, "测试失败");
+            Assert.IsTrue(result.Count() >= 2, "测试失败");
 
 
 
@@ -984,6 +984,66 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
+        public void T_app_CheckExistData2()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+            context.LoadProperty<AppParam>(app, "AppParams", null);
+
+            //添加测量参数
+
+            DateTimeOffset date = DateTimeOffset.Now;
+
+            List<MessureValue> list = new List<MessureValue>();
+
+            foreach (var param in app.AppParams.OfType<MessureParam>())
+            {
+                var item = new MessureValue()
+                {
+                    Id = Guid.NewGuid(),
+                    Date = date,
+                    ParamId = param.Id,
+                    Val = 1
+
+                };
+                list.Add(item);
+                context.AddToMessureValues(item);
+            }
+
+
+            context.SaveChanges();
+
+            var result = context.CheckExistData(app.Id, date);
+
+            Assert.AreEqual(true, result, "测试失败");
+
+            foreach (var item in list)
+            {
+                context.DeleteObject(item);
+            }
+
+
+
+
+            context.SaveChanges();
+
+            result = context.CheckExistData(app.Id, date);
+
+            Assert.AreEqual(false, result, "测试失败");
+
+
+
+
+        }
+
+
+        [TestMethod]
         public void T_app_GetChildAppCalcName()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
@@ -1003,7 +1063,7 @@ namespace DamServiceV3.Test
         }
 
         [TestMethod]
-        public void T_app_SearcyAppCalcName ()
+        public void T_app_SearcyAppCalcName()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
 
@@ -1032,7 +1092,7 @@ namespace DamServiceV3.Test
 
             var val = context.RateAllProducts(2);
 
-            Assert.IsTrue( val==4, "测试失败");
+            Assert.IsTrue(val == 4, "测试失败");
 
 
 
@@ -1050,12 +1110,12 @@ namespace DamServiceV3.Test
 
             var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
 
-             //get root project part
+            //get root project part
             var partRoot = context.ProjectParts.Where(s => s.ParentPart == null).SingleOrDefault();
 
-            var part1 = context.ProjectParts.Where(s => s.ParentPart ==  partRoot.Id).FirstOrDefault();
+            var part1 = context.ProjectParts.Where(s => s.ParentPart == partRoot.Id).FirstOrDefault();
 
-            bool ret=  context.UpdateAppsProject(part1.Id,new List<Guid>(){ appItem.Id });
+            bool ret = context.UpdateAppsProject(part1.Id, new List<Guid>() { appItem.Id });
 
             Assert.IsTrue(ret, "更新测点的工程部位失败");
 
