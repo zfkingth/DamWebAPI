@@ -66,7 +66,7 @@ namespace DamServiceV3.Test
             context.DeleteObject(type2);
 
             context.SaveChanges();
-            int fCnt = context.Apps.Count();
+            int fCnt = context.ApparatusTypes.Count();
 
             Assert.IsTrue(cnt1 == fCnt, "删除 失败");
 
@@ -89,8 +89,8 @@ namespace DamServiceV3.Test
 
             var newItem = new App();
             newItem.Id = Guid.NewGuid();
-            newItem.AppName = "第三支仪器";
-            newItem.CalculateName = "ThirdApp";
+            newItem.AppName = "新的仪器";
+            newItem.CalculateName = "newCreatedApp";
 
             context.AddToApps(newItem);
             context.SaveChanges();
@@ -125,7 +125,7 @@ namespace DamServiceV3.Test
             context.DeleteObject(itemUpdated);
 
             context.SaveChanges();
-            int fCnt = context.ApparatusTypes.Count();
+            int fCnt = context.Apps.Count();
 
             Assert.IsTrue(cnt1 == fCnt, "删除 失败");
 
@@ -941,34 +941,7 @@ namespace DamServiceV3.Test
 
         }
 
-        [TestMethod]
-        public async Task T_app_GetChildAppCalcName2()
-        {
-            using (var client = new HttpClient())
-            {
-
-                client.BaseAddress = new Uri(TestConfig.serviceUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-               
-                var data = new {  appCalcName= "FirstApp",date=DateTimeOffset.Now };
-
-                HttpResponseMessage response = await client.PostAsJsonAsync("/Apps/GetChildAppCalcName", data);
-
-                Assert.IsTrue(response.IsSuccessStatusCode, "action fail");
-
-                var result = response.Content.ReadAsAsync<JObject>().Result;
-
-                List<string> ret = JsonConvert.DeserializeObject<List<string>>(result["value"].ToString());     
- 
-
-            }
-
-
-
-
-        }
+     
 
         [TestMethod]
         public void T_app_GetChildAppCalcName()
@@ -980,7 +953,7 @@ namespace DamServiceV3.Test
             context.Format.UseJson();
 
 
-            var result = context.GetChildAppCalcName("FirstApp",DateTimeOffset.Now);
+            var result = context.GetChildAppCalcName("FirstApp", DateTimeOffset.Now);
 
             Assert.IsTrue(result.Count() >= 1, "测试失败");
 

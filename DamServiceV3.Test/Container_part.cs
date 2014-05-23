@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,22 +79,38 @@ namespace DamServiceV3.Test.DamServiceRef
         {
 
 
-            Uri actionUri = new Uri(String.Format("{0}/Apps/GetChildAppCalcName", this.BaseUri.AbsoluteUri)
-                );
+
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(TestConfig.serviceUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 
-            var result = this.Execute<string>(
-                                    actionUri,
-                                    "POST",
-                                    true,
-                                     new BodyOperationParameter("appCalcName", appCalcName),
-                                     new BodyOperationParameter("date", date)
-                                );
+                var data = new { appCalcName = appCalcName, date = date };
 
-            return result;
+                HttpResponseMessage response =   client.PostAsJsonAsync("Apps/GetChildAppCalcName", data).Result;
+                List<string> ret = null;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var result = response.Content.ReadAsAsync<JObject>().Result;
+
+                    ret = JsonConvert.DeserializeObject<List<string>>(result["value"].ToString());
+                }
+
+
+                return ret;
+
+            }
 
 
         }
+
+ 
+
+
 
 
         public int RateAllProducts(int rate)
