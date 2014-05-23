@@ -959,7 +959,29 @@ namespace DamServiceV3.Test
 
 
 
-        } 
+        }
+
+
+        [TestMethod]
+        public void T_app_CheckExistData()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+            var result = context.CheckExistData(app.Id, DateTimeOffset.Now);
+
+            Assert.AreEqual(false, result, "测试失败");
+
+
+
+
+
+        }
+
 
         [TestMethod]
         public void T_app_GetChildAppCalcName()

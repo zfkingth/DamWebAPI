@@ -41,7 +41,7 @@ namespace DamServiceV3
             actionRateAll.Returns<int>();
 
 
-            ActionConfiguration actionCheckExistData = builder.Entity<App>().Collection.Action("CheckExistData");
+            ActionConfiguration actionCheckExistData = builder.Entity<App>().Action("CheckExistData");
             actionCheckExistData.Parameter<DateTimeOffset>("date");
             actionCheckExistData.Returns<bool>();
 
