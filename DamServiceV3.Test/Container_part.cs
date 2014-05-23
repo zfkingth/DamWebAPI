@@ -25,7 +25,7 @@ namespace DamServiceV3.Test.DamServiceRef
             var result = this.Execute<Formula>(
                                     actionUri,
                                     "POST",
-                                    true
+                                    false
                                 );
 
             return result;
@@ -45,7 +45,7 @@ namespace DamServiceV3.Test.DamServiceRef
             var result = this.Execute<App>(
                                     actionUri,
                                     "POST",
-                                    true,
+                                    false,
                                      new BodyOperationParameter("match", match)
                                 );
 
@@ -65,7 +65,7 @@ namespace DamServiceV3.Test.DamServiceRef
             var result = this.Execute<App>(
                                     actionUri,
                                     "POST",
-                                    true,
+                                    false,
                                      new BodyOperationParameter("match", match)
                                 );
 
@@ -109,7 +109,23 @@ namespace DamServiceV3.Test.DamServiceRef
         }
 
  
+        public bool CheckExistData(Guid appid,DateTimeOffset date)
+        {
 
+            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/CheckExistData", this.BaseUri.AbsoluteUri, appid)
+               );
+
+
+            var result = this.Execute< bool>(
+                                    actionUri,
+                                    "POST",
+                                    true,
+                                     new BodyOperationParameter("date", date)
+                                ).First();
+
+            return result;
+
+        }
 
 
 

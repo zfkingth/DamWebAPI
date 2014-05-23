@@ -157,6 +157,57 @@ namespace DamServiceV3.Controllers
         }
 
 
+
+        /// <summary>
+        /// 判断测点在某一时刻的数据是否存在
+        /// </summary>
+
+        public IHttpActionResult CheckExistData([FromODataUri] Guid key, ODataActionParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            bool exist = false;
+
+            DateTimeOffset date = (DateTimeOffset)parameters["date"];
+
+            var cnt1 = (from p in  db.AppParams.OfType<MessureParam>()
+                        where p.AppId == key
+                        join val in db.MessureValues
+                         on p.Id equals val.ParamId
+                        where val.Date == date
+                        select val).Count();
+
+            if (cnt1 > 0)
+            {
+                //有数据
+                exist = true;
+            }
+            else
+            {
+                //没有测量数据，判断是否有计算数据，因为存在一种可能，测点只有计算数据
+                var cnt2 = (from p in db.AppParams.OfType<CalculateParam>()
+                            where p.AppId == key
+                            join val in db.CalculateValues
+                             on p.Id equals val.ParamId
+                            where val.Date == date
+                            select val).Count();
+                exist = cnt2 > 0 ? true : false;
+            }
+
+
+
+            return Ok(exist);
+
+        }
+
+
+
+
+
+
         [HttpPost]
         public IHttpActionResult RateAllProducts(ODataActionParameters parameters)
         {

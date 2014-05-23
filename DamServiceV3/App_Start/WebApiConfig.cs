@@ -41,6 +41,11 @@ namespace DamServiceV3
             actionRateAll.Returns<int>();
 
 
+            ActionConfiguration actionCheckExistData = builder.Entity<App>().Collection.Action("CheckExistData");
+            actionCheckExistData.Parameter<DateTimeOffset>("date");
+            actionCheckExistData.Returns<bool>();
+
+
             ActionConfiguration actionSearcyAppByName = builder.Entity<App>().Collection.Action("SearcyAppByName");
             actionSearcyAppByName.Parameter<string>("match");
             actionSearcyAppByName.ReturnsCollectionFromEntitySet<App>("Apps");
@@ -66,7 +71,7 @@ namespace DamServiceV3
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
 
 
-  
+
 
             config.Routes.MapHttpRoute(
             name: "DefaultApi",
