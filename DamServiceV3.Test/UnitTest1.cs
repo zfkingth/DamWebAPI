@@ -983,6 +983,119 @@ namespace DamServiceV3.Test
         }
 
 
+
+
+        [TestMethod]
+        public void TestGetCalcValues1()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+
+            var result = context.GetCalcValues(app.Id, 0, null, null);
+            int cnt = result.Count();
+
+            Assert.AreEqual(true, cnt > 0, "返回的数据数目不对!");
+
+
+        }
+
+
+        [TestMethod]
+        public void TestGetCalcValues2()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+            // Invoke the SayHello action
+            const int num = 10;
+            var result = context.GetCalcValues(app.Id, num,    DateTimeOffset.MinValue, null).ToList();
+            int cnt = result.Count();
+
+            Assert.AreEqual(num, cnt, "返回的数据数目不对!");
+
+
+        }
+
+
+        [TestMethod]
+        public void TestGetCalcValues3()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+            // Invoke the SayHello action
+            const int num = 10;
+            var result = context.GetCalcValues(app.Id, num,  null,  DateTimeOffset.MaxValue).ToList();
+            int cnt = result.Count();
+
+            Assert.AreEqual(num, cnt, "返回的数据数目不对!");
+
+
+        }
+
+
+        [TestMethod]
+        public void TestGetMesValues ()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+            // Invoke the SayHello action
+            const int num = 10;
+            var result = context.GetMesValues(app.Id, num, DateTimeOffset.MinValue, null).ToList();
+            int cnt = result.Count();
+
+            Assert.AreEqual(num, cnt, "返回的数据数目不对!");
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void TestGetRemarks()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+            // Invoke the SayHello action
+            const int num = 10;
+            var result = context.GetRemarks(app.Id, num, DateTimeOffset.MinValue, null).ToList();
+            int cnt = result.Count();
+
+            Assert.AreEqual(num, cnt, "返回的数据数目不对!");
+
+
+        }
+
+
         [TestMethod]
         public void T_app_CheckExistData2()
         {

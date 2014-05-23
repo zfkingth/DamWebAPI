@@ -32,7 +32,7 @@ namespace DamService2.Migrations
             type1.Id = Guid.NewGuid();
             type1.TypeName = "第一种类型";
 
-           
+
 
             var type2 = new ApparatusType();
             type2.Id = Guid.NewGuid();
@@ -89,26 +89,12 @@ namespace DamService2.Migrations
             app3.CalculateName = "ThirdApp";
             app3.AppTypeID = type2.Id;
             app3.ProjectPartID = p2.Id;
- 
-            context.Apps.AddOrUpdate(app1, app2,app3);
+
+            context.Apps.AddOrUpdate(app1, app2, app3);
+
+
          
-
-            var remark1 = new Remark()
-            {
-                Id = Guid.NewGuid(),
-                Date = DateTime.Now,
-                RemarkText = "remark",
-                AppId = app1.Id,
-            };
-
-            var remark2 = new Remark()
-            {
-                Id = Guid.NewGuid(),
-                Date = DateTime.Now,
-                RemarkText = "remark",
-                AppId = app1.Id,
-            };
-
+        
             var remark3 = new Remark()
             {
                 Id = Guid.NewGuid(),
@@ -117,7 +103,7 @@ namespace DamService2.Migrations
                 AppId = app2.Id,
             };
 
-            context.Remarks.AddOrUpdate(remark1, remark2, remark3);
+            context.Remarks.AddOrUpdate( remark3);
 
             var conParam1 = new ConstantParam()
             {
@@ -134,7 +120,7 @@ namespace DamService2.Migrations
 
             };
 
-            var mesParam1 = new  MessureParam()
+            var mesParam1 = new MessureParam()
             {
                 Id = Guid.NewGuid(),
                 AppId = app1.Id,
@@ -164,6 +150,40 @@ namespace DamService2.Migrations
             };
 
             context.AppParams.AddOrUpdate(conParam1, mesParam1, calcParam1);
+            //添加第一支仪器的数据
+            DateTimeOffset date = DateTimeOffset.Now;
+            int count = 20;
+            for (int i = 0; i < count; i++)
+            {
+                MessureValue mv = new MessureValue()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId = mesParam1.Id,
+                    Date = date.AddDays(-i),
+                    Val = i
+                };
+
+                CalculateValue cv = new CalculateValue()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId = calcParam1.Id,
+                    Date = date.AddDays(-i),
+                    Val = i
+                };
+
+                var remark = new Remark()
+                {
+                    Id = Guid.NewGuid(),
+                    Date = date.AddDays(-i),
+                    RemarkText = "remark"+i,
+                    AppId = app1.Id,
+                };
+
+
+                context.MessureValues.AddOrUpdate(mv);
+                context.CalculateValues.AddOrUpdate(cv);
+                context.Remarks.AddOrUpdate(remark);
+            }
 
             //添加第三支仪器的参数
             var conParam1_third = new ConstantParam()
@@ -238,7 +258,7 @@ namespace DamService2.Migrations
             };
 
             context.Formulae.AddOrUpdate(formula_third);
- 
+
         }
     }
 }

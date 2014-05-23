@@ -90,7 +90,7 @@ namespace DamServiceV3.Test.DamServiceRef
 
                 var data = new { appCalcName = appCalcName, date = date };
 
-                HttpResponseMessage response =   client.PostAsJsonAsync("Apps/GetChildAppCalcName", data).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("Apps/GetChildAppCalcName", data).Result;
                 List<string> ret = null;
                 if (response.IsSuccessStatusCode)
                 {
@@ -120,25 +120,25 @@ namespace DamServiceV3.Test.DamServiceRef
                                     actionUri,
                                     "POST",
                                      false,
-                                     new BodyOperationParameter("appCalcName",appCalcName),
+                                     new BodyOperationParameter("appCalcName", appCalcName),
                                      new BodyOperationParameter("date", date)
                                 );
 
             return result;
- 
+
 
 
         }
 
- 
-        public bool CheckExistData(Guid appid,DateTimeOffset date)
+
+        public bool CheckExistData(Guid appid, DateTimeOffset date)
         {
 
             Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/CheckExistData", this.BaseUri.AbsoluteUri, appid)
                );
 
 
-            var result = this.Execute< bool>(
+            var result = this.Execute<bool>(
                                     actionUri,
                                     "POST",
                                     true,
@@ -150,6 +150,54 @@ namespace DamServiceV3.Test.DamServiceRef
         }
 
 
+        public IEnumerable<CalculateValue> GetCalcValues(Guid appId, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
+        {
+            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/GetCalcValues", this.BaseUri.AbsoluteUri, appId)
+              );
+
+            var result = this.Execute<CalculateValue>(
+                                    actionUri,
+                                    "POST",
+                                    false,
+                                    new BodyOperationParameter("topNum", topNum),
+                                    new BodyOperationParameter("startDate", startDate),
+                                    new BodyOperationParameter("endDate", endDate)
+                                );
+            return result;
+        }
+
+        public IEnumerable<MessureValue> GetMesValues(Guid appId, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
+        {
+            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/GetMesValues", this.BaseUri.AbsoluteUri, appId)
+              );
+
+            var result = this.Execute<MessureValue>(
+                                    actionUri,
+                                    "POST",
+                                    false,
+                                    new BodyOperationParameter("topNum", topNum),
+                                    new BodyOperationParameter("startDate", startDate),
+                                    new BodyOperationParameter("endDate", endDate)
+                                );
+            return result;
+        }
+
+
+        public IEnumerable<Remark> GetRemarks(Guid appId, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
+        {
+            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/GetRemarks", this.BaseUri.AbsoluteUri, appId)
+              );
+
+            var result = this.Execute<Remark>(
+                                    actionUri,
+                                    "POST",
+                                    false,
+                                    new BodyOperationParameter("topNum", topNum),
+                                    new BodyOperationParameter("startDate", startDate),
+                                    new BodyOperationParameter("endDate", endDate)
+                                );
+            return result;
+        }
 
         public int RateAllProducts(int rate)
         {

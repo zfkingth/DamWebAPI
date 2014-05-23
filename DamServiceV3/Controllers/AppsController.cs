@@ -156,6 +156,246 @@ namespace DamServiceV3.Controllers
 
         }
 
+        [HttpPost]
+        public IQueryable<CalculateValue> GetCalcValues([FromODataUri] Guid key, ODataActionParameters parameters)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+
+
+            Guid appId = key;
+            int topNum = (int)parameters["topNum"];
+            DateTimeOffset? startDate = (DateTimeOffset?)parameters["startDate"];
+
+            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"];
+
+            IQueryable<CalculateValue> values = null;
+
+            values = from i in db.CalculateValues
+                     join p in db.AppParams.OfType<CalculateParam>()
+                     on i.ParamId equals p.Id
+                     where p.AppId == appId
+                     select i;
+
+            if (startDate.HasValue)
+            {
+
+                if (endDate.HasValue)
+                {
+                    values = values.Where(i => i.Date >= startDate && i.Date <= endDate);
+
+                    // sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and CalculateValue.Date >= @startDate and CalculateValue.Date <= @endDate ", snCondition, SQL_Field);
+                }
+                else if (topNum > 0)
+                {
+                    values = values.Where(i => i.Date >= startDate).OrderBy(i => i.Date).Take(topNum);
+
+                    //   sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} and  CalculateValue.Date>= @startDate order by CalculateValue.Date  asc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+                    values = values.Where(i => i.Date >= startDate);
+                    //  sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and  CalculateValue.Date>= @startDate ", snCondition, SQL_Field);
+                }
+            }
+            else if (endDate.HasValue)
+            {
+
+                if (topNum > 0)
+                {
+                    values = values.Where(i => i.Date <= endDate).OrderByDescending(i => i.Date).Take(topNum);
+                    // sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} and  CalculateValue.Date<= @endDate order by CalculateValue.Date  desc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+                    values = values.Where(i => i.Date <= endDate);
+                    // s = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and  CalculateValue.Date<= @endDate ", snCondition, SQL_Field);
+                }
+            }
+            else
+            {
+                if (topNum > 0)
+                {
+                    values = values.OrderByDescending(i => i.Date).Take(topNum);
+
+                    //   sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} order by CalculateValue.Date desc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+
+                    //   sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} ", snCondition, SQL_Field);
+                }
+
+            }
+
+            return values;
+
+        }
+
+        [HttpPost]
+        public IQueryable<MessureValue> GetMesValues([FromODataUri] Guid key, ODataActionParameters parameters)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+
+
+            Guid appId = key;
+            int topNum = (int)parameters["topNum"];
+            DateTimeOffset? startDate = (DateTimeOffset?)parameters["startDate"];
+
+            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"];
+
+            IQueryable<MessureValue> values = null;
+
+            values = from i in db.MessureValues
+                     join p in db.AppParams.OfType<MessureParam>()
+                     on i.ParamId equals p.Id
+                     where p.AppId == appId
+                     select i;
+
+            if (startDate.HasValue)
+            {
+
+                if (endDate.HasValue)
+                {
+                    values = values.Where(i => i.Date >= startDate && i.Date <= endDate);
+
+                    // sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and CalculateValue.Date >= @startDate and CalculateValue.Date <= @endDate ", snCondition, SQL_Field);
+                }
+                else if (topNum > 0)
+                {
+                    values = values.Where(i => i.Date >= startDate).OrderBy(i => i.Date).Take(topNum);
+
+                    //   sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} and  CalculateValue.Date>= @startDate order by CalculateValue.Date  asc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+                    values = values.Where(i => i.Date >= startDate);
+                    //  sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and  CalculateValue.Date>= @startDate ", snCondition, SQL_Field);
+                }
+            }
+            else if (endDate.HasValue)
+            {
+
+                if (topNum > 0)
+                {
+                    values = values.Where(i => i.Date <= endDate).OrderByDescending(i => i.Date).Take(topNum);
+                    // sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} and  CalculateValue.Date<= @endDate order by CalculateValue.Date  desc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+                    values = values.Where(i => i.Date <= endDate);
+                    // s = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and  CalculateValue.Date<= @endDate ", snCondition, SQL_Field);
+                }
+            }
+            else
+            {
+                if (topNum > 0)
+                {
+                    values = values.OrderByDescending(i => i.Date).Take(topNum);
+
+                    //   sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} order by CalculateValue.Date desc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+
+                    //   sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} ", snCondition, SQL_Field);
+                }
+
+            }
+
+            return values;
+
+
+        }
+
+
+        [HttpPost]
+        public IQueryable<Remark> GetRemarks([FromODataUri] Guid key, ODataActionParameters parameters)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+
+
+            Guid appId = key;
+            int topNum = (int)parameters["topNum"];
+            DateTimeOffset? startDate = (DateTimeOffset?)parameters["startDate"];
+
+            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"];
+
+            IQueryable<Remark> values = null;
+
+            values = from i in db.Remarks
+                     where i.AppId == appId
+                     select i;
+
+            if (startDate.HasValue)
+            {
+
+                if (endDate.HasValue)
+                {
+                    values = values.Where(i => i.Date >= startDate && i.Date <= endDate);
+
+                    // sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and CalculateValue.Date >= @startDate and CalculateValue.Date <= @endDate ", snCondition, SQL_Field);
+                }
+                else if (topNum > 0)
+                {
+                    values = values.Where(i => i.Date >= startDate).OrderBy(i => i.Date).Take(topNum);
+
+                    //   sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} and  CalculateValue.Date>= @startDate order by CalculateValue.Date  asc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+                    values = values.Where(i => i.Date >= startDate);
+                    //  sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and  CalculateValue.Date>= @startDate ", snCondition, SQL_Field);
+                }
+            }
+            else if (endDate.HasValue)
+            {
+
+                if (topNum > 0)
+                {
+                    values = values.Where(i => i.Date <= endDate).OrderByDescending(i => i.Date).Take(topNum);
+                    // sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} and  CalculateValue.Date<= @endDate order by CalculateValue.Date  desc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+                    values = values.Where(i => i.Date <= endDate);
+                    // s = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} and  CalculateValue.Date<= @endDate ", snCondition, SQL_Field);
+                }
+            }
+            else
+            {
+                if (topNum > 0)
+                {
+                    values = values.OrderByDescending(i => i.Date).Take(topNum);
+
+                    //   sql = string.Format("select top {0}  {2} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {1} order by CalculateValue.Date desc", topNum, snCondition, SQL_Field);
+                }
+                else
+                {
+
+                    //   sql = string.Format("select  {1} from CalculateParam INNER JOIN CalculateValue ON CalculateParam.CalculateParamID = CalculateValue.calculateParamID where {0} ", snCondition, SQL_Field);
+                }
+
+            }
+
+            return values;
+
+
+        }
 
 
         /// <summary>
@@ -173,7 +413,7 @@ namespace DamServiceV3.Controllers
 
             DateTimeOffset date = (DateTimeOffset)parameters["date"];
 
-            var cnt1 = (from p in  db.AppParams.OfType<MessureParam>()
+            var cnt1 = (from p in db.AppParams.OfType<MessureParam>()
                         where p.AppId == key
                         join val in db.MessureValues
                          on p.Id equals val.ParamId
