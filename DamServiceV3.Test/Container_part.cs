@@ -75,7 +75,7 @@ namespace DamServiceV3.Test.DamServiceRef
         }
 
 
-        public IEnumerable<string> GetChildAppCalcName(string appCalcName, DateTimeOffset date)
+        public IEnumerable<string> GetChildAppCalcName2(string appCalcName, DateTimeOffset date)
         {
 
 
@@ -104,6 +104,28 @@ namespace DamServiceV3.Test.DamServiceRef
                 return ret;
 
             }
+
+
+        }
+
+
+        public IEnumerable<string> GetChildAppCalcName(string appCalcName, DateTimeOffset date)
+        {
+
+            Uri actionUri = new Uri(String.Format("{0}/Apps/GetChildAppCalcName", this.BaseUri.AbsoluteUri)
+             );
+
+
+            var result = this.Execute<string>(
+                                    actionUri,
+                                    "POST",
+                                     false,
+                                     new BodyOperationParameter("appCalcName",appCalcName),
+                                     new BodyOperationParameter("date", date)
+                                );
+
+            return result;
+ 
 
 
         }

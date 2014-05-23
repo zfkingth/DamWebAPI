@@ -941,7 +941,25 @@ namespace DamServiceV3.Test
 
         }
 
-     
+
+        [TestMethod]
+        public void T_app_GetChildAppCalcName2()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+
+            var result = context.GetChildAppCalcName2("FirstApp", DateTimeOffset.Now);
+
+            Assert.IsTrue(result.Count() >= 1, "测试失败");
+
+
+
+
+        } 
 
         [TestMethod]
         public void T_app_GetChildAppCalcName()
