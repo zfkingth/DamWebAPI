@@ -45,24 +45,27 @@ namespace DamServiceV3
             actionCheckExistData.Parameter<DateTimeOffset>("date");
             actionCheckExistData.Returns<bool>();
 
-            ActionConfiguration actionGetCalcValues = builder.Entity<App>().Action("GetCalcValues");
+            ActionConfiguration actionGetCalcValues = builder.Entity<App>().Collection.Action("GetCalcValues");
             actionGetCalcValues.Parameter<int>("topNum");
             actionGetCalcValues.Parameter<DateTimeOffset?>("startDate");
             actionGetCalcValues.Parameter<DateTimeOffset?>("endDate");
+            actionGetCalcValues.CollectionParameter<Guid>("appids");
             actionGetCalcValues.ReturnsCollectionFromEntitySet<CalculateValue>("CalculateValues");
 
 
-            ActionConfiguration actionGetMesValues = builder.Entity<App>().Action("GetMesValues");
+            ActionConfiguration actionGetMesValues = builder.Entity<App>().Collection.Action("GetMesValues");
             actionGetMesValues.Parameter<int>("topNum");
             actionGetMesValues.Parameter<DateTimeOffset?>("startDate");
             actionGetMesValues.Parameter<DateTimeOffset?>("endDate");
+            actionGetMesValues.CollectionParameter<Guid>("appids");
             actionGetMesValues.ReturnsCollectionFromEntitySet<MessureValue>("MessureValues");
 
 
-            ActionConfiguration actionGetRemarks = builder.Entity<App>().Action("GetRemarks");
+            ActionConfiguration actionGetRemarks = builder.Entity<App>().Collection.Action("GetRemarks");
             actionGetRemarks.Parameter<int>("topNum");
             actionGetRemarks.Parameter<DateTimeOffset?>("startDate");
             actionGetRemarks.Parameter<DateTimeOffset?>("endDate");
+            actionGetRemarks.CollectionParameter<Guid>("appids");
             actionGetRemarks.ReturnsCollectionFromEntitySet<Remark>("Remarks");
 
 

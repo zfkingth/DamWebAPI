@@ -997,7 +997,7 @@ namespace DamServiceV3.Test
 
 
 
-            var result = context.GetCalcValues(app.Id, 0, null, null);
+            var result = context.GetCalcValues(new Guid[]{ app.Id}, 0, null, null);
             int cnt = result.Count();
 
             Assert.AreEqual(true, cnt > 0, "返回的数据数目不对!");
@@ -1019,7 +1019,7 @@ namespace DamServiceV3.Test
 
             // Invoke the SayHello action
             const int num = 10;
-            var result = context.GetCalcValues(app.Id, num,    DateTimeOffset.MinValue, null).ToList();
+            var result = context.GetCalcValues(new Guid[]{ app.Id},num, DateTimeOffset.MinValue, null ).ToList();
             int cnt = result.Count();
 
             Assert.AreEqual(num, cnt, "返回的数据数目不对!");
@@ -1041,10 +1041,37 @@ namespace DamServiceV3.Test
 
             // Invoke the SayHello action
             const int num = 10;
-            var result = context.GetCalcValues(app.Id, num,  null,  DateTimeOffset.MaxValue).ToList();
+            var result = context.GetCalcValues(new Guid[]{ app.Id},num, null, DateTimeOffset.MaxValue ).ToList();
             int cnt = result.Count();
 
             Assert.AreEqual(num, cnt, "返回的数据数目不对!");
+
+
+        }
+
+
+        [TestMethod]
+        public void TestGetCalcValues4()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器" || s.AppName == "第三支仪器").ToList();
+
+
+            var appids =( from i in app
+                         select i.Id).ToList();
+
+            const int num = 15;
+
+            var result = context.GetCalcValues(appids, num, null, null  );
+            int cnt = result.Count();
+
+            //第一支仪器有20个数据
+            //第三支仪器有10个数据
+            Assert.AreEqual( 25, cnt  , "返回的数据数目不对!");
 
 
         }
@@ -1063,7 +1090,7 @@ namespace DamServiceV3.Test
 
             // Invoke the SayHello action
             const int num = 10;
-            var result = context.GetMesValues(app.Id, num, DateTimeOffset.MinValue, null).ToList();
+            var result = context.GetMesValues(new Guid[]{ app.Id}, num, DateTimeOffset.MinValue, null).ToList();
             int cnt = result.Count();
 
             Assert.AreEqual(num, cnt, "返回的数据数目不对!");
@@ -1071,7 +1098,30 @@ namespace DamServiceV3.Test
 
         }
 
+        [TestMethod]
+        public void TestGetMesValues2()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
 
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器" || s.AppName == "第三支仪器").ToList();
+
+
+            var appids = (from i in app
+                          select i.Id).ToList();
+
+            const int num = 15;
+
+            var result = context.GetMesValues(appids, num,  null,  DateTimeOffset.Now);
+            int cnt = result.Count();
+
+            //第一支仪器有20个数据
+            //第三支仪器有10个数据
+            Assert.AreEqual(25, cnt, "返回的数据数目不对!");
+
+
+        }
 
 
         [TestMethod]
@@ -1087,10 +1137,36 @@ namespace DamServiceV3.Test
 
             // Invoke the SayHello action
             const int num = 10;
-            var result = context.GetRemarks(app.Id, num, DateTimeOffset.MinValue, null).ToList();
+            var result = context.GetRemarks(new Guid[] { app.Id }, num, DateTimeOffset.MinValue, null).ToList();
             int cnt = result.Count();
 
             Assert.AreEqual(num, cnt, "返回的数据数目不对!");
+
+
+        }
+
+        [TestMethod]
+        public void TestGetRemarks2()
+        {
+
+            Uri uri = new Uri(TestConfig.serviceUrl);
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+            var app = context.Apps.Where(s => s.AppName == "第一支仪器" || s.AppName == "第三支仪器").ToList();
+
+
+            var appids = (from i in app
+                          select i.Id).ToList();
+
+            const int num = 15;
+
+            var result = context.GetRemarks(appids, num,  DateTimeOffset.MinValue, null);
+            int cnt = result.Count();
+
+            //第一支仪器有20个数据
+            //第三支仪器有10个数据
+            Assert.AreEqual(25, cnt, "返回的数据数目不对!");
 
 
         }

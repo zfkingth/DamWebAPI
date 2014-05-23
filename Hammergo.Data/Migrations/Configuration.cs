@@ -259,6 +259,42 @@ namespace DamService2.Migrations
 
             context.Formulae.AddOrUpdate(formula_third);
 
+
+
+            //添加第三支仪器的数据
+              count = 10;
+            for (int i = 0; i < count; i++)
+            {
+                MessureValue mv = new MessureValue()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId = mesParam1_third.Id,
+                    Date = date.AddDays(-i),
+                    Val = i+1
+                };
+
+                CalculateValue cv = new CalculateValue()
+                {
+                    Id = Guid.NewGuid(),
+                    ParamId = calcParam1_third.Id,
+                    Date = date.AddDays(-i),
+                    Val = i+2
+                };
+
+                var remark = new Remark()
+                {
+                    Id = Guid.NewGuid(),
+                    Date = date.AddDays(-i),
+                    RemarkText = "remark" + i+1,
+                    AppId = app3.Id,
+                };
+
+
+                context.MessureValues.AddOrUpdate(mv);
+                context.CalculateValues.AddOrUpdate(cv);
+                context.Remarks.AddOrUpdate(remark);
+            }
+
         }
     }
 }

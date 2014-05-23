@@ -157,7 +157,7 @@ namespace DamServiceV3.Controllers
         }
 
         [HttpPost]
-        public IQueryable<CalculateValue> GetCalcValues([FromODataUri] Guid key, ODataActionParameters parameters)
+        public IQueryable<CalculateValue> GetCalcValues(ODataActionParameters parameters)
         {
 
             if (!ModelState.IsValid)
@@ -167,7 +167,7 @@ namespace DamServiceV3.Controllers
 
 
 
-            Guid appId = key;
+            var appids = (IEnumerable<Guid>)parameters["appids"];
             int topNum = (int)parameters["topNum"];
             DateTimeOffset? startDate = (DateTimeOffset?)parameters["startDate"];
 
@@ -175,11 +175,35 @@ namespace DamServiceV3.Controllers
 
             IQueryable<CalculateValue> values = null;
 
-            values = from i in db.CalculateValues
-                     join p in db.AppParams.OfType<CalculateParam>()
-                     on i.ParamId equals p.Id
-                     where p.AppId == appId
-                     select i;
+
+            foreach (var id in appids)
+            {
+                var ret = GetCalcValues(topNum, startDate, endDate, id);
+                if (values == null)
+                {
+                    values = ret;
+                }
+                else
+                {
+                    values = values.Union(ret);
+                }
+
+            }
+
+            return values;
+
+
+        }
+
+
+
+        private IQueryable<CalculateValue> GetCalcValues(int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate, Guid appId)
+        {
+            var values = from i in db.CalculateValues
+                         join p in db.AppParams.OfType<CalculateParam>()
+                         on i.ParamId equals p.Id
+                         where p.AppId == appId
+                         select i;
 
             if (startDate.HasValue)
             {
@@ -233,11 +257,10 @@ namespace DamServiceV3.Controllers
             }
 
             return values;
-
         }
 
         [HttpPost]
-        public IQueryable<MessureValue> GetMesValues([FromODataUri] Guid key, ODataActionParameters parameters)
+        public IQueryable<MessureValue> GetMesValues( ODataActionParameters parameters)
         {
 
             if (!ModelState.IsValid)
@@ -246,16 +269,39 @@ namespace DamServiceV3.Controllers
             }
 
 
-
-            Guid appId = key;
+            var appids = (IEnumerable<Guid>)parameters["appids"];
             int topNum = (int)parameters["topNum"];
             DateTimeOffset? startDate = (DateTimeOffset?)parameters["startDate"];
 
-            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"];
+            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"]; ;
 
             IQueryable<MessureValue> values = null;
 
-            values = from i in db.MessureValues
+
+            foreach (var id in appids)
+            {
+                var ret =  GetMesValues(topNum, startDate, endDate, id);
+                if (values == null)
+                {
+                    values = ret;
+                }
+                else
+                {
+                    values = values.Union(ret);
+                }
+
+            }
+
+            return values;
+
+        }
+
+
+
+         private IQueryable<MessureValue> GetMesValues(int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate, Guid appId)
+        {
+
+            var values = from i in db.MessureValues
                      join p in db.AppParams.OfType<MessureParam>()
                      on i.ParamId equals p.Id
                      where p.AppId == appId
@@ -313,13 +359,11 @@ namespace DamServiceV3.Controllers
             }
 
             return values;
-
-
         }
 
 
         [HttpPost]
-        public IQueryable<Remark> GetRemarks([FromODataUri] Guid key, ODataActionParameters parameters)
+        public IQueryable<Remark> GetRemarks( ODataActionParameters parameters)
         {
 
             if (!ModelState.IsValid)
@@ -329,15 +373,36 @@ namespace DamServiceV3.Controllers
 
 
 
-            Guid appId = key;
+            var appids = (IEnumerable<Guid>)parameters["appids"];
             int topNum = (int)parameters["topNum"];
             DateTimeOffset? startDate = (DateTimeOffset?)parameters["startDate"];
 
-            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"];
+            DateTimeOffset? endDate = (DateTimeOffset?)parameters["endDate"]; ; ;
 
             IQueryable<Remark> values = null;
 
-            values = from i in db.Remarks
+            foreach (var id in appids)
+            {
+                var ret =  GetRemarks(topNum, startDate, endDate, id);
+                if (values == null)
+                {
+                    values = ret;
+                }
+                else
+                {
+                    values = values.Union(ret);
+                }
+
+            }
+
+            return values; 
+
+
+        }
+
+        private IQueryable<Remark> GetRemarks(int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate, Guid appId)
+        {
+            var values = from i in db.Remarks
                      where i.AppId == appId
                      select i;
 
@@ -393,10 +458,7 @@ namespace DamServiceV3.Controllers
             }
 
             return values;
-
-
         }
-
 
         /// <summary>
         /// 判断测点在某一时刻的数据是否存在

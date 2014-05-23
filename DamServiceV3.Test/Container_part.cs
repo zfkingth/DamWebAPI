@@ -150,9 +150,9 @@ namespace DamServiceV3.Test.DamServiceRef
         }
 
 
-        public IEnumerable<CalculateValue> GetCalcValues(Guid appId, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
+        public IEnumerable<CalculateValue> GetCalcValues(IEnumerable<Guid> appids, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
-            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/GetCalcValues", this.BaseUri.AbsoluteUri, appId)
+            Uri actionUri = new Uri(String.Format("{0}/Apps/GetCalcValues", this.BaseUri.AbsoluteUri)
               );
 
             var result = this.Execute<CalculateValue>(
@@ -161,14 +161,15 @@ namespace DamServiceV3.Test.DamServiceRef
                                     false,
                                     new BodyOperationParameter("topNum", topNum),
                                     new BodyOperationParameter("startDate", startDate),
-                                    new BodyOperationParameter("endDate", endDate)
+                                    new BodyOperationParameter("endDate", endDate),
+                                    new BodyOperationParameter("appids", appids)
                                 );
             return result;
         }
 
-        public IEnumerable<MessureValue> GetMesValues(Guid appId, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
+        public IEnumerable<MessureValue> GetMesValues(IEnumerable<Guid> appids, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
-            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/GetMesValues", this.BaseUri.AbsoluteUri, appId)
+            Uri actionUri = new Uri(String.Format("{0}/Apps/GetMesValues", this.BaseUri.AbsoluteUri)
               );
 
             var result = this.Execute<MessureValue>(
@@ -177,15 +178,16 @@ namespace DamServiceV3.Test.DamServiceRef
                                     false,
                                     new BodyOperationParameter("topNum", topNum),
                                     new BodyOperationParameter("startDate", startDate),
-                                    new BodyOperationParameter("endDate", endDate)
+                                    new BodyOperationParameter("endDate", endDate),
+                                      new BodyOperationParameter("appids", appids)
                                 );
             return result;
         }
 
 
-        public IEnumerable<Remark> GetRemarks(Guid appId, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
+        public IEnumerable<Remark> GetRemarks(IEnumerable<Guid> appids, int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
-            Uri actionUri = new Uri(String.Format("{0}/Apps(guid'{1}')/GetRemarks", this.BaseUri.AbsoluteUri, appId)
+            Uri actionUri = new Uri(String.Format("{0}/Apps/GetRemarks", this.BaseUri.AbsoluteUri)
               );
 
             var result = this.Execute<Remark>(
@@ -194,7 +196,8 @@ namespace DamServiceV3.Test.DamServiceRef
                                     false,
                                     new BodyOperationParameter("topNum", topNum),
                                     new BodyOperationParameter("startDate", startDate),
-                                    new BodyOperationParameter("endDate", endDate)
+                                    new BodyOperationParameter("endDate", endDate),
+                                      new BodyOperationParameter("appids", appids)
                                 );
             return result;
         }
