@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamServiceV3", "DamServiceV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamServiceV3.Test", "DamServiceV3.Test\DamServiceV3.Test.csproj", "{0B475FDB-1254-4EF8-8239-836B9333EDC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{CC059916-95FC-4479-B4C9-CDE25198EA00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,12 @@ Global
 		{0B475FDB-1254-4EF8-8239-836B9333EDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B475FDB-1254-4EF8-8239-836B9333EDC5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B475FDB-1254-4EF8-8239-836B9333EDC5}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC059916-95FC-4479-B4C9-CDE25198EA00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC059916-95FC-4479-B4C9-CDE25198EA00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC059916-95FC-4479-B4C9-CDE25198EA00}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC059916-95FC-4479-B4C9-CDE25198EA00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC059916-95FC-4479-B4C9-CDE25198EA00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC059916-95FC-4479-B4C9-CDE25198EA00}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

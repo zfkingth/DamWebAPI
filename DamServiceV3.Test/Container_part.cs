@@ -91,13 +91,14 @@ namespace DamServiceV3.Test.DamServiceRef
                 var data = new { appCalcName = appCalcName, date = date };
 
                 HttpResponseMessage response = client.PostAsJsonAsync("Apps/GetChildAppCalcName", data).Result;
-                List<string> ret = null;
+                IEnumerable<string> ret = null;
                 if (response.IsSuccessStatusCode)
                 {
 
                     var result = response.Content.ReadAsAsync<JObject>().Result;
 
                     ret = JsonConvert.DeserializeObject<List<string>>(result["value"].ToString());
+                  //  ret = result["value"].ToObject<IEnumerable<string>>();
                 }
 
 
