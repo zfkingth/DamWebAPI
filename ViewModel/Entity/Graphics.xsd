@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Graphics" targetNamespace="http://tempuri.org/Graphics.xsd" xmlns:mstns="http://tempuri.org/Graphics.xsd" xmlns="http://tempuri.org/Graphics.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Graphics" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Graphics" msprop:Generator_UserDSName="Graphics">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Lines" msprop:Generator_TableClassName="LinesDataTable" msprop:Generator_TableVarName="tableLines" msprop:Generator_TablePropName="Lines" msprop:Generator_RowDeletingName="LinesRowDeleting" msprop:Generator_RowChangingName="LinesRowChanging" msprop:Generator_RowEvHandlerName="LinesRowChangeEventHandler" msprop:Generator_RowDeletedName="LinesRowDeleted" msprop:Generator_UserTableName="Lines" msprop:Generator_RowChangedName="LinesRowChanged" msprop:Generator_RowEvArgName="LinesRowChangeEvent" msprop:Generator_RowClassName="LinesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IsShow" msprop:Generator_ColumnVarNameInTable="columnIsShow" msprop:Generator_ColumnPropNameInRow="IsShow" msprop:Generator_ColumnPropNameInTable="IsShowColumn" msprop:Generator_UserColumnName="IsShow" type="xs:boolean" default="false" />
+              <xs:element name="AppName" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAppName" msprop:Generator_ColumnPropNameInRow="AppName" msprop:Generator_ColumnPropNameInTable="AppNameColumn" msprop:Generator_UserColumnName="AppName" type="xs:string" />
+              <xs:element name="ParamName" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnParamName" msprop:Generator_ColumnPropNameInRow="ParamName" msprop:Generator_ColumnPropNameInTable="ParamNameColumn" msprop:Generator_UserColumnName="ParamName" type="xs:string" />
+              <xs:element name="AxisName" msprop:Generator_ColumnVarNameInTable="columnAxisName" msprop:Generator_ColumnPropNameInRow="AxisName" msprop:Generator_ColumnPropNameInTable="AxisNameColumn" msprop:Generator_UserColumnName="AxisName" type="xs:string" minOccurs="0" />
+              <xs:element name="LegendName" msprop:Generator_ColumnVarNameInTable="columnLegendName" msprop:Generator_ColumnPropNameInRow="LegendName" msprop:Generator_ColumnPropNameInTable="LegendNameColumn" msprop:Generator_UserColumnName="LegendName" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Lines" />
+      <xs:field xpath="mstns:LegendName" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

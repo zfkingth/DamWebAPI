@@ -68,13 +68,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManage\AllAppManageViewModel.cs" />
     <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="Base\RelayCommandGeneric.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Base\WorkspaceViewModel.cs" />
+    <Compile Include="Entity\Graphics.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Graphics.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ProjectPartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entity\Graphics.xsc">
+      <DependentUpon>Graphics.xsd</DependentUpon>
+    </None>
+    <None Include="Entity\Graphics.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Graphics.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Entity\Graphics.xss">
+      <DependentUpon>Graphics.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +101,7 @@
       <Name>DamServiceV3.Test</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
