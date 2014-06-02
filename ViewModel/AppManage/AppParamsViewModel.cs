@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using DamServiceV3.Test.DamServiceRef;
 
-namespace DamWebAPI.ViewModel
+namespace DamWebAPI.ViewModel.AppManage
 {
     public class AppParamsViewModel : WorkspaceViewModel
     {

@@ -13,7 +13,7 @@ using System.Windows;
 using System.Collections;
 using DamServiceV3.Test.DamServiceRef;
 
-namespace DamWebAPI.ViewModel
+namespace DamWebAPI.ViewModel.AppManage
 {
     public class AllAppManageViewModel : WorkspaceViewModel
     {

@@ -71,6 +71,8 @@
   <ItemGroup>
     <Compile Include="AppManage\AllAppManageViewModel.cs" />
     <Compile Include="AppManage\AppParamsViewModel.cs" />
+    <Compile Include="AppManage\AppSearchViewModel.cs" />
+    <Compile Include="AppManage\CreateAppViewModel.cs" />
     <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="Base\RelayCommandGeneric.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
