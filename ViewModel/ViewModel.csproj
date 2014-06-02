@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManage\AllAppManageViewModel.cs" />
+    <Compile Include="AppManage\AppParamsViewModel.cs" />
     <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="Base\RelayCommandGeneric.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
@@ -100,6 +101,10 @@
     <ProjectReference Include="..\DamServiceV3.Test\DamServiceV3.Test.csproj">
       <Project>{0b475fdb-1254-4ef8-8239-836b9333edc5}</Project>
       <Name>DamServiceV3.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalConfig\GlobalConfig.csproj">
+      <Project>{3d62488e-ebc5-45f3-8576-0db33ce74e7f}</Project>
+      <Name>GlobalConfig</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
