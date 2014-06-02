@@ -359,7 +359,7 @@ namespace DamWebAPI.ViewModel
 
                 try
                 {
-                    DbContext.UpdateAppsProject(_currentModel.ProjectPartID,result);
+                    DbContext.UpdateAppsProjectByNames(_currentModel.ProjectPartID, result);
 
                     //refresh current 
                     HandleRefreshApps(_currentModel, true);
@@ -409,7 +409,9 @@ namespace DamWebAPI.ViewModel
 
         private void HandleCreateApp(ProjectPartViewModel model)
         {
+#if  !Hide
             MainWindowViewModel.Instance.ShowCreateApp(DbContext, _currentModel.Entity, _currentApps);
+#endif
         }
 
         /// <summary>
@@ -617,8 +619,10 @@ namespace DamWebAPI.ViewModel
         private void HandleAppParams(App a)
         {
 
+#if  !Hide
             MainWindowViewModel.Instance.ShowAppParams(_selectedApp);
 
+#endif
         }
 
 
@@ -651,8 +655,9 @@ namespace DamWebAPI.ViewModel
         private void HandleAppData(App a)
         {
 
+#if  !Hide
             MainWindowViewModel.Instance.ShowAppData(_selectedApp);
-
+#endif
         }
 
 
@@ -703,7 +708,7 @@ namespace DamWebAPI.ViewModel
                         Messenger.Default.Send<Exception>(ex);
                         //  DbContext.Detach(handelModel);
                         _selectedApp = (from i in DbContext.Apps
-                                        where i.AppId == _selectedApp.AppId
+                                        where i.Id == _selectedApp.Id
                                         select i).First();
                         //HandleRefreshApps(_currentModel, true);
                     }
@@ -837,7 +842,7 @@ namespace DamWebAPI.ViewModel
             if (parent != null)
             {
                 //if entity is null,get the first level nodes
-                parentKey = parent.Entity.ProjectPartID;
+                parentKey = parent.Entity.Id;
             }
 
             var query = from i in DbContext.ProjectParts

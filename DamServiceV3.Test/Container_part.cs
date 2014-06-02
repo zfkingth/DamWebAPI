@@ -235,6 +235,20 @@ namespace DamServiceV3.Test.DamServiceRef
             return result;
         }
 
+        public bool UpdateAppsProjectByNames(Guid projectPartID, IEnumerable<string> names)
+        {
 
+            Uri actionUri = new Uri(String.Format("{0}/ProjectParts(guid'{1}')/UpdateAppsProjectByNames", this.BaseUri.AbsoluteUri, projectPartID)
+              );
+
+            var result = this.Execute<bool>(
+                                    actionUri,
+                                    "POST",
+                                    true,
+                                    new BodyOperationParameter("names", names)
+                                ).FirstOrDefault();
+
+            return result;
+        }
     }
 }

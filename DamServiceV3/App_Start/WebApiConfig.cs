@@ -94,6 +94,11 @@ namespace DamServiceV3
             actionUpdateAppsProject.CollectionParameter<Guid>("appids");
             actionUpdateAppsProject.Returns<bool>();
 
+
+            ActionConfiguration actionUpdateAppsProjectByNames = builder.Entity<ProjectPart>().Action("UpdateAppsProjectByNames");
+            actionUpdateAppsProjectByNames.CollectionParameter<string>("names");
+            actionUpdateAppsProjectByNames.Returns<bool>();
+
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
 
 
