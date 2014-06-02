@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppIntegratedInfo.cs" />
     <Compile Include="AppManage\AllAppManageViewModel.cs" />
     <Compile Include="AppManage\AppParamsViewModel.cs" />
     <Compile Include="AppManage\AppSearchViewModel.cs" />
@@ -100,6 +101,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ALGraph\ALGraph.csproj">
+      <Project>{6b4d92da-b5a5-402e-b25d-39d359960e56}</Project>
+      <Name>ALGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\calculator\calculator.csproj">
+      <Project>{3142f2d7-9a05-480f-a4ce-804b61ad011d}</Project>
+      <Name>calculator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DamServiceV3.Test\DamServiceV3.Test.csproj">
       <Project>{0b475fdb-1254-4ef8-8239-836b9333edc5}</Project>
       <Name>DamServiceV3.Test</Name>
@@ -107,6 +116,10 @@
     <ProjectReference Include="..\GlobalConfig\GlobalConfig.csproj">
       <Project>{3d62488e-ebc5-45f3-8576-0db33ce74e7f}</Project>
       <Name>GlobalConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{7242ad69-97bf-48ef-991f-18394d04cfb4}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
