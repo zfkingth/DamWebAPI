@@ -409,9 +409,7 @@ namespace DamWebAPI.ViewModel.AppManage
 
         private void HandleCreateApp(ProjectPartViewModel model)
         {
-#if  !Hide
             MainWindowViewModel.Instance.ShowCreateApp(DbContext, _currentModel.Entity, _currentApps);
-#endif
         }
 
         /// <summary>
@@ -619,10 +617,8 @@ namespace DamWebAPI.ViewModel.AppManage
         private void HandleAppParams(App a)
         {
 
-#if  !Hide
             MainWindowViewModel.Instance.ShowAppParams(_selectedApp);
 
-#endif
         }
 
 
@@ -655,9 +651,7 @@ namespace DamWebAPI.ViewModel.AppManage
         private void HandleAppData(App a)
         {
 
-#if  !Hide
             MainWindowViewModel.Instance.ShowAppData(_selectedApp);
-#endif
         }
 
 

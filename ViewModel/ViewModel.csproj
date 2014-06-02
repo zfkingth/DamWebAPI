@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;Hide</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AppIntegratedInfo.cs" />
     <Compile Include="AppManage\AllAppManageViewModel.cs" />
+    <Compile Include="AppManage\AppDataViewModel.cs" />
     <Compile Include="AppManage\AppParamsViewModel.cs" />
     <Compile Include="AppManage\AppSearchViewModel.cs" />
     <Compile Include="AppManage\CreateAppViewModel.cs" />
@@ -84,6 +85,10 @@
       <DependentUpon>Graphics.xsd</DependentUpon>
     </Compile>
     <Compile Include="Entity\ProjectPartViewModel.cs" />
+    <Compile Include="Graphics\GraphicsViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -87,10 +87,8 @@ namespace DamWebAPI.ViewModel.AppManage
         private void HandleAppData(App a)
         {
 
-#if  !Hide
             MainWindowViewModel.Instance.ShowAppData(_selectedApp);
 
-#endif
         }
 
 
