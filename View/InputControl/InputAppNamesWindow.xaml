@@ -1,0 +1,57 @@
+﻿<Window x:Class="DamMVVM.View.InputAppNamesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        Title="输入对话框"
+        Width="430.2"
+        Height="343.4"
+        Loaded="DXWindow_Loaded"
+        dx:ThemeManager.ThemeName="Office2010Silver">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MinHeight="188.8" />
+            <RowDefinition Height="Auto" MinHeight="30.4" />
+            <RowDefinition Height="auto" MinHeight="30" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Margin="3"
+                Click="Button_Click2"
+                Content="确定"
+                IsDefault="True" />
+        <Button Grid.Row="3"
+                Grid.Column="2"
+                Margin="3"
+                Click="Button_Click_1"
+                Content="取消"
+                IsCancel="True" />
+        <TextBlock x:Name="textbolckTip"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   Margin="0.2,15,104.4,0.4"
+                   TextWrapping="Wrap" />
+        <ListBox x:Name="deInput"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="3"
+                 Margin="0.2,2,104.4,2" />
+        <Button Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="5.2,6.4,4.6,4.6"
+                Click="Button_Click"
+                Content="粘贴所复制的测点编号"
+                IsDefault="True" />
+
+    </Grid>
+</Window>
