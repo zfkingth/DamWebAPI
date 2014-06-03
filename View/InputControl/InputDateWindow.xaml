@@ -1,4 +1,4 @@
-﻿<Window x:Class="DamMVVM.View.InputDateWindow"
+﻿<Window x:Class="DamWebAPI.View.InputDateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"

@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using DevExpress.Xpf.Core;
 
 
-namespace DamMVVM.View
+namespace DamWebAPI.View
 {
     /// <summary>
     /// Interaction logic for InputWindow.xaml
@@ -40,7 +40,7 @@ namespace DamMVVM.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var date = this.deInput.DateTime;
-            _vals[1] = date.AddMilliseconds(-date.Millisecond);//去掉毫秒部分
+            _vals[1] =new DateTimeOffset( date.AddMilliseconds(-date.Millisecond));//去掉毫秒部分
             this.Close();
         }
 

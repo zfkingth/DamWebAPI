@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using DevExpress.Xpf.Core;
 
 
-namespace DamMVVM.View
+namespace DamWebAPI.View
 {
     /// <summary>
     /// Interaction logic for InputWindow.xaml
