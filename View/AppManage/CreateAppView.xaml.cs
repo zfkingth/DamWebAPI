@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DamMVVM.View.AppManage
+namespace DamWebAPI.View.AppManage
 {
     /// <summary>
     /// CreateAppView.xaml 的交互逻辑

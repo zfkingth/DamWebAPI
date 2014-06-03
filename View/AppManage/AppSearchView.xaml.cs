@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DamMVVM.View.AppManage
+namespace DamWebAPI.View.AppManage
 {
     /// <summary>
     /// AppSearch.xaml 的交互逻辑
@@ -30,7 +30,7 @@ namespace DamMVVM.View.AppManage
         private void gridControl_SelectedItemChanged(object sender, SelectedItemChangedEventArgs e)
         {
 
-            Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChanged", e.NewItem);
+            Hammergo.Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChanged", e.NewItem);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DamMVVM.View.AppManage
+namespace DamWebAPI.View.AppManage
 {
     /// <summary>
     /// AppData.xaml 的交互逻辑
@@ -76,7 +76,7 @@ namespace DamMVVM.View.AppManage
         {
             if (this.DataContext != null)
             {
-                DamMVVM.ViewModel.AppManage.AppDataViewModel context = this.DataContext as DamMVVM.ViewModel.AppManage.AppDataViewModel;
+                DamWebAPI.ViewModel.AppManage.AppDataViewModel context = this.DataContext as DamWebAPI.ViewModel.AppManage.AppDataViewModel;
 
                 var dic = context.DotNumDic;
                 byte pre = 2;
@@ -111,7 +111,7 @@ namespace DamMVVM.View.AppManage
             TableView tv = sender as TableView;
             DataRow row = (e.Row as DataRowView).Row;
             string feildName = e.Column.FieldName;
-            DamMVVM.ViewModel.AppManage.AppDataViewModel context = this.DataContext as DamMVVM.ViewModel.AppManage.AppDataViewModel;
+            DamWebAPI.ViewModel.AppManage.AppDataViewModel context = this.DataContext as DamWebAPI.ViewModel.AppManage.AppDataViewModel;
 
             context.HandleDataRowChanged(row, feildName);
         }

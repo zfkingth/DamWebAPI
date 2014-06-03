@@ -74,8 +74,34 @@
     <Compile Include="AppManage\AllAppManageView.xaml.cs">
       <DependentUpon>AllAppManageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppManage\AppDataView.xaml.cs">
+      <DependentUpon>AppDataView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppManage\AppParamsView.xaml.cs">
+      <DependentUpon>AppParamsView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppManage\AppSearchView.xaml.cs">
+      <DependentUpon>AppSearchView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppManage\CreateAppView.xaml.cs">
+      <DependentUpon>CreateAppView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Common\ProjectPartView.xaml.cs">
       <DependentUpon>ProjectPartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphics\CustomProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Graphics\GraphicProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Graphics\GraphicsView.xaml.cs">
+      <DependentUpon>GraphicsView.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="InputControl\InputAppNamesWindow.xaml.cs">
       <DependentUpon>InputAppNamesWindow.xaml</DependentUpon>
@@ -102,6 +128,14 @@
     <Resource Include="Icons\saveall_32x32.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DamServiceV3.Test\DamServiceV3.Test.csproj">
+      <Project>{0b475fdb-1254-4ef8-8239-836b9333edc5}</Project>
+      <Name>DamServiceV3.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalConfig\GlobalConfig.csproj">
+      <Project>{3d62488e-ebc5-45f3-8576-0db33ce74e7f}</Project>
+      <Name>GlobalConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{7242ad69-97bf-48ef-991f-18394d04cfb4}</Project>
       <Name>Utility</Name>
@@ -116,9 +150,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="AppManage\AppDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppManage\AppParamsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppManage\AppSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppManage\CreateAppView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\ProjectPartView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Graphics\GraphicsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InputControl\InputAppNamesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,9 +194,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graphics\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

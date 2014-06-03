@@ -12,13 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DamMVVM.ViewModel.DamService;
-using DamMVVM.ViewModel;
+using DamWebAPI.ViewModel;
+using DamWebAPI.ViewModel.Graphics;
 using C1.WPF.C1Chart;
 using hammergo.GlobalConfig;
 using DevExpress.Xpf.Grid;
+using DamServiceV3.Test.DamServiceRef;
 
-namespace DamMVVM.View.Graphics
+
+
+namespace DamWebAPI.View.Graphics
 {
     /// <summary>
     /// GraphicsView.xaml 的交互逻辑
@@ -33,7 +36,7 @@ namespace DamMVVM.View.Graphics
             defCol.Width = new GridLength(PubConstant.ConfigData.GraphicWidth);
         }
 
-        DamMVVM.ViewModel.Entity.Graphics graphicDS = new ViewModel.Entity.Graphics();
+        DamWebAPI.ViewModel.Entity.Graphics graphicDS = new ViewModel.Entity.Graphics();
 
 
 
@@ -45,7 +48,7 @@ namespace DamMVVM.View.Graphics
             {
                 App selApp = e.AddedItems[0] as App;
                 AppIntegratedInfo appInfo = new AppIntegratedInfo(selApp, 0, null, null);
-                //DamMVVM.ViewModel.Entity.Graphics graInfo = new ViewModel.Entity.Graphics();
+                //DamWebAPI.ViewModel.Entity.Graphics graInfo = new ViewModel.Entity.Graphics();
                 var results = from i in appInfo.CalcParams
                               group i by i.UnitSymbol;//根据物理量的符号判断是不是同一类量
 
@@ -115,7 +118,7 @@ namespace DamMVVM.View.Graphics
                         XYDataSeries ds = new XYDataSeries();
                         ds.Label = item.ParamName;
                         var valCollection = (from val in appInfo.CalcValues
-                                             where val.ParamId == item.ParamId
+                                             where val.ParamId == item.Id
                                              select val).ToList();
                         //消除异常值
 
@@ -123,7 +126,7 @@ namespace DamMVVM.View.Graphics
                         {
                             if (valItem.Val != null && valItem.Val.HasValue)
                             {
-                                if (Utility.Helper.isErrorValue(valItem.Val.Value))
+                                if (Hammergo.Utility.Helper.isErrorValue(valItem.Val.Value))
                                 {
                                     valItem.Val = double.NaN;
                                 }

@@ -1,5 +1,4 @@
-﻿using DamMVVM.ViewModel.DamService;
-using DevExpress.Xpf.Editors;
+﻿using DevExpress.Xpf.Editors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DamWebAPI.ViewModel.AppManage;
 
-namespace DamMVVM.View
+using DamServiceV3.Test.DamServiceRef;
+
+namespace DamWebAPI.View
 {
     /// <summary>
     /// AppParamsView.xaml 的交互逻辑
@@ -32,7 +34,7 @@ namespace DamMVVM.View
             if (e.Column.FieldName == "Formulae")
             {
                 var id = (Guid)e.GetListSourceFieldValue("ParamId");
-                var context = this.DataContext as DamMVVM.ViewModel.AppParamsViewModel;
+                var context = this.DataContext as  AppParamsViewModel;
                 DateTime date = (DateTime)comboDates.SelectedValue;
 
                 if (e.IsGetData)
@@ -84,7 +86,7 @@ namespace DamMVVM.View
         {
             var cb = sender as ComboBoxEdit;
             var selParam = cb.SelectedItem as hammergo.GlobalConfig.ParamInfo;
-            var cp = grid.GetFocusedRow() as AppParam;
+            var cp = grid.GetFocusedRow() as AppParam ;
 
 
             if (selParam != null)
@@ -110,19 +112,19 @@ namespace DamMVVM.View
 
         private void constGrid_SelectedItemChanged(object sender, DevExpress.Xpf.Grid.SelectedItemChangedEventArgs e)
         {
-            Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedConst", e.NewItem);
+            Hammergo.Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedConst", e.NewItem);
         }
 
         private void mesGrid_SelectedItemChanged(object sender, DevExpress.Xpf.Grid.SelectedItemChangedEventArgs e)
         {
 
-            Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedMes", e.NewItem);
+            Hammergo.Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedMes", e.NewItem);
         }
 
         private void calcGrid_SelectedItemChanged(object sender, DevExpress.Xpf.Grid.SelectedItemChangedEventArgs e)
         {
 
-            Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedCalc", e.NewItem);
+            Hammergo.Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedCalc", e.NewItem);
         }
 
         private void comboDates_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -131,7 +133,7 @@ namespace DamMVVM.View
             if (selval != null)
             {
                 DateTime date = (DateTime)selval;
-                Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedDate", date);
+                Hammergo.Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedDate", date);
                 calcGrid.RefreshData();
             }
         }

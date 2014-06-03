@@ -1,7 +1,6 @@
-﻿<UserControl x:Class="DamMVVM.View.AppParamsView"
+﻿<UserControl x:Class="DamWebAPI.View.AppParamsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:DamService="clr-namespace:DamMVVM.ViewModel.DamService;assembly=DamMVVM.ViewModel"
              xmlns:GlobalConfig="clr-namespace:hammergo.GlobalConfig;assembly=hammergo.GlobalConfig"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:cmd="http://www.galasoft.ch/mvvmlight"
@@ -45,7 +44,7 @@
 
                     <StackPanel Margin="2" Orientation="Vertical">
                         <Button Command="{Binding CmdAddConstParam}" Template="{StaticResource CustomButton}">
-                            <Image Height="24" Source="/DamMVVM.View;component/Icons/add_32x32.png" />
+                            <Image Height="24" Source="/DamWebAPI.View;component/Icons/add_32x32.png" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" Text="新增参数" />
                     </StackPanel>
@@ -53,7 +52,7 @@
 
                     <StackPanel Margin="2" Orientation="Vertical">
                         <Button Command="{Binding CmdDeleteConstParam}" Template="{StaticResource CustomButton}">
-                            <Image Height="24" Source="/DamMVVM.View;component/Icons/delete_32x32.png" />
+                            <Image Height="24" Source="/DamWebAPI.View;component/Icons/delete_32x32.png" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" Text="删除参数" />
                     </StackPanel>
@@ -131,7 +130,7 @@
 
                     <StackPanel Margin="2" Orientation="Vertical">
                         <Button Command="{Binding CmdAddMessureParam}" Template="{StaticResource CustomButton}">
-                            <Image Height="24" Source="/DamMVVM.View;component/Icons/add_32x32.png" />
+                            <Image Height="24" Source="/DamWebAPI.View;component/Icons/add_32x32.png" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" Text="新增参数" />
                     </StackPanel>
@@ -139,7 +138,7 @@
 
                     <StackPanel Margin="2" Orientation="Vertical">
                         <Button Command="{Binding CmdDeleteMessureParam}" Template="{StaticResource CustomButton}">
-                            <Image Height="24" Source="/DamMVVM.View;component/Icons/delete_32x32.png" />
+                            <Image Height="24" Source="/DamWebAPI.View;component/Icons/delete_32x32.png" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" Text="删除参数" />
                     </StackPanel>
@@ -242,7 +241,7 @@
 
                     <StackPanel Margin="2" Orientation="Vertical">
                         <Button Command="{Binding CmdAddCalculateParam}" Template="{StaticResource CustomButton}">
-                            <Image Height="24" Source="/DamMVVM.View;component/Icons/add_32x32.png" />
+                            <Image Height="24" Source="/DamWebAPI.View;component/Icons/add_32x32.png" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" Text="新增参数" />
                     </StackPanel>
@@ -250,7 +249,7 @@
 
                     <StackPanel Margin="2" Orientation="Vertical">
                         <Button Command="{Binding CmdDeleteCalculateParam}" Template="{StaticResource CustomButton}">
-                            <Image Height="24" Source="/DamMVVM.View;component/Icons/delete_32x32.png" />
+                            <Image Height="24" Source="/DamWebAPI.View;component/Icons/delete_32x32.png" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" Text="删除参数" />
                     </StackPanel>
