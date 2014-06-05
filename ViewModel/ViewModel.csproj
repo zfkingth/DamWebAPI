@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC059916-95FC-4479-B4C9-CDE25198EA00}</ProjectGuid>
+    <ProjectGuid>{50B91EFF-139B-4990-B051-F5B3D55136AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DamWebAPI.ViewModel</RootNamespace>
@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -44,7 +44,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.OData.5.6.1\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.1\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
     </Reference>
@@ -79,16 +79,14 @@
     <Compile Include="Base\RelayCommandGeneric.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Base\WorkspaceViewModel.cs" />
-    <Compile Include="Entity\Graphics.Designer.cs">
+    <Compile Include="Entity\Graphics1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Graphics.xsd</DependentUpon>
     </Compile>
     <Compile Include="Entity\ProjectPartViewModel.cs" />
     <Compile Include="Graphics\GraphicsViewModel.cs" />
-    <Compile Include="MainWindowViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +94,9 @@
       <DependentUpon>Graphics.xsd</DependentUpon>
     </None>
     <None Include="Entity\Graphics.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Graphics.Designer.cs</LastGenOutput>
+      <LastGenOutput>Graphics1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Entity\Graphics.xss">
       <DependentUpon>Graphics.xsd</DependentUpon>
@@ -127,7 +125,6 @@
       <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DamServiceV3.Test.DTO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Data.Services.Client;
 
 namespace DamServiceV3.Test
 {
@@ -1309,6 +1310,23 @@ namespace DamServiceV3.Test
             Assert.IsTrue(ret, "更新测点的工程部位失败");
 
 
+
+        }
+
+
+        [TestMethod]
+        public void T_DataServiceCollection()
+        {
+            Uri uri = new Uri(TestConfig.serviceUrl);
+
+            var context = new DamServiceRef.Container(uri);
+
+            context.Format.UseJson();
+
+            var query = from i in context.ApparatusTypes
+                        select i;
+            DataServiceCollection<ApparatusType> types = new DataServiceCollection<ApparatusType>();
+            types.Load(query);
 
         }
 

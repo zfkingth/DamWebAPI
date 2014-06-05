@@ -141,7 +141,7 @@
       <Name>Utility</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{cc059916-95fc-4479-b4c9-cde25198ea00}</Project>
+      <Project>{50b91eff-139b-4990-b051-f5b3d55136ad}</Project>
       <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
@@ -191,6 +191,9 @@
     <EmbeddedResource Include="Properties\Licenses.licx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

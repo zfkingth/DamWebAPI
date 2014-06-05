@@ -5,7 +5,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Data;
 using GalaSoft.MvvmLight.Ioc;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
