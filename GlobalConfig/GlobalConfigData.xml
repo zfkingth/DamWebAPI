@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GlobalConfigData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ServiceURI>http://localhost:12345/Dam.svc</ServiceURI>
+  <ServiceURI>http://localhost:53317/odata</ServiceURI>
   <ConstParamsList>
     <ParamInfo>
       <Name>温度系数</Name>

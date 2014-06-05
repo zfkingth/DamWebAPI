@@ -88,9 +88,12 @@ namespace DamServiceV3.Test.DamServiceRef
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 
+                Uri actionUri = new Uri(String.Format("{0}/Apps/GetChildAppCalcName", this.BaseUri.AbsoluteUri)
+                    );
+
                 var data = new { appCalcName = appCalcName, date = date };
 
-                HttpResponseMessage response = client.PostAsJsonAsync("Apps/GetChildAppCalcName", data).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync(actionUri, data).Result;
                 IEnumerable<string> ret = null;
                 if (response.IsSuccessStatusCode)
                 {
