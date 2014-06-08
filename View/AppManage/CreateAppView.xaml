@@ -114,10 +114,8 @@
                         Margin="3.2,4,0,4"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        SelectedDate="{Binding NewApp.BuriedTime,
-                                               Mode=TwoWay,
-                                               NotifyOnValidationError=true,
-                                               ValidatesOnExceptions=true}" />
+                        SelectedDateChanged="buriedTimeDatePicker_SelectedDateChanged"
+                        SelectedDateFormat="Long" />
             <Label Grid.Row="3"
                    Grid.Column="0"
                    Margin="3"

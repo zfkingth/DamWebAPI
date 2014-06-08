@@ -300,7 +300,7 @@ namespace DamWebAPI.ViewModel.AppManage
 
                 }
 
-                DbContext.SaveChanges(SaveChangesOptions.Batch);
+                DbContext.SaveChanges();
                 _currentApps.Add(needAddApp);
 
 

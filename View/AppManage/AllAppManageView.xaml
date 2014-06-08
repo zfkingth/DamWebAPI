@@ -212,7 +212,7 @@
                         <dxg:GridColumn.EditSettings>
                             <dxe:ComboBoxEditSettings DisplayMember="TypeName"
                                                       ItemsSource="{Binding AppTypes}"
-                                                      ValueMember="ApparatusTypeID" />
+                                                      ValueMember="Id" />
                         </dxg:GridColumn.EditSettings>
                     </dxg:GridColumn>
                     <dxg:GridColumn FieldName="X" />

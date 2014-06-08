@@ -37,5 +37,14 @@ namespace DamWebAPI.View.AppManage
             // }
         }
 
+        private void buriedTimeDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dynamic vm = this.DataContext;
+            DateTime? dt=((DatePicker)sender).SelectedDate;
+
+            if (dt != null)
+                vm.NewApp.BuriedTime = new DateTimeOffset(dt.Value);
+        }
+
     }
 }
