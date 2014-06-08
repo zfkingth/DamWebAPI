@@ -38,6 +38,15 @@ namespace DamWebAPI.View
             gridControl.CopyToClipboard();
         }
 
+        //private void gridControl_CustomUnboundColumnData(object sender, GridColumnDataEventArgs e)
+        //{
+        //    //if (e.IsGetData)
+        //    //{
+        //    //    DateTimeOffset df = (DateTimeOffset)(e.GetListSourceFieldValue("BuriedTime"));
+        //    //    e.Value = df.DateTime;
+        //    //}
+        //}
+
 
     }
 }
