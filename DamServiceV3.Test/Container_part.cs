@@ -75,6 +75,22 @@ namespace DamServiceV3.Test.DamServiceRef
 
         }
 
+        private Uri _baseAddress = null;
+        private Uri BaseAddress
+        {
+            get
+            {
+                if (_baseAddress == null)
+                {
+                    string uri=this.BaseUri.ToString();
+                    //使用odata作为route
+                    int index=uri.IndexOf("/odata");
+                    _baseAddress = new Uri(uri.Substring(0, index));
+                }
+                return _baseAddress;
+            }
+        }
+
         public bool UpdateAppParams(ParamsDTO dto)
         {
 
@@ -82,7 +98,7 @@ namespace DamServiceV3.Test.DamServiceRef
             {
 
                 // New code:
-                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.BaseAddress = BaseAddress;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -122,7 +138,7 @@ namespace DamServiceV3.Test.DamServiceRef
                     var result = response.Content.ReadAsAsync<JObject>().Result;
 
                     ret = JsonConvert.DeserializeObject<List<string>>(result["value"].ToString());
-                  //  ret = result["value"].ToObject<IEnumerable<string>>();
+                    //  ret = result["value"].ToObject<IEnumerable<string>>();
                 }
 
 

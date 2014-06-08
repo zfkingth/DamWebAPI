@@ -304,6 +304,82 @@ namespace DamServiceV3.Test
 
         }
 
+        [TestMethod]
+        public async Task T_paramsConst2()
+        {
+         
+                //get app
+
+                Uri uri = new Uri(TestConfig.serviceUrl);
+                var context = new DamServiceRef.Container(uri);
+
+                context.Format.UseJson();
+
+                var appItem = context.Apps.Where(s => s.AppName == "第一支仪器").SingleOrDefault();
+
+
+
+
+                // New code:
+            
+                ParamsDTO dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                var conParam1 = new ConstantParam()
+                {
+                    Id = Guid.NewGuid(),
+                    AppId = appItem.Id,
+                    ParamName = "c2",
+                    ParamSymbol = "c2",
+                    PrecisionNum = 2,
+                    UnitSymbol = "no",
+                    Val = 1,
+                    Order = 1,
+                    Description = "no description",
+
+
+                };
+
+                dto.AddedParams = new List<AppParam>() { conParam1 };
+
+
+                Assert.IsTrue(context.UpdateAppParams(dto), "add param fail");
+
+
+
+                //modify
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+                conParam1.Order += 1;
+
+                dto.UpdatedParams = new List<AppParam>() { conParam1 };
+
+
+
+                Assert.IsTrue(context.UpdateAppParams(dto), "delete param fail");
+
+
+                //now deleted added param
+                dto = new ParamsDTO()
+                {
+                    Id = appItem.Id,
+                };
+
+
+                dto.DeletedParams = new List<AppParam>() { conParam1 };
+
+
+
+                Assert.IsTrue(context.UpdateAppParams(dto), "delete param fail");
+
+        }
+
+
 
 
 
