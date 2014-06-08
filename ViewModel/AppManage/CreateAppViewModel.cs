@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DamServiceV3.Test.DamServiceRef;
+using DamServiceV3.Test.DTO;
 
 namespace DamWebAPI.ViewModel.AppManage
 {
@@ -222,6 +223,10 @@ namespace DamWebAPI.ViewModel.AppManage
                 DbContext.AddToApps(needAddApp);
                 addedList.Add(needAddApp);
 
+
+                DbContext.SaveChanges();
+                _currentApps.Add(needAddApp);
+
                 if (AllowClone)
                 {
                     //clone app params
@@ -244,6 +249,10 @@ namespace DamWebAPI.ViewModel.AppManage
                     }
 
                     DbContext.LoadProperty(cloneApp, "AppParams");
+
+
+                    var paramsList = new List<AppParam>();
+                    var formulaList = new List<Formula>();
 
                     foreach (var item in cloneApp.AppParams)
                     {
@@ -272,8 +281,10 @@ namespace DamWebAPI.ViewModel.AppManage
                         newParam.Order = item.Order;
                         newParam.Description = item.Description;
 
-                        DbContext.AddToAppParams(newParam);
-                        addedList.Add(newParam);
+                        paramsList.Add(newParam);
+
+                        //DbContext.AddToAppParams(newParam);
+                        //addedList.Add(newParam);
 
                         //clone formules
                         if (item is CalculateParam)
@@ -291,17 +302,28 @@ namespace DamWebAPI.ViewModel.AppManage
                                 newfl.StartDate = fl.StartDate;
                                 newfl.EndDate = fl.EndDate;
                                 newfl.CalculateOrder = fl.CalculateOrder;
-                                DbContext.AddToFormulae(newfl);
-                                addedList.Add(newfl);
+
+                                formulaList.Add(newfl);
+                                //DbContext.AddToFormulae(newfl);
+                                //addedList.Add(newfl);
                             }
                         }
 
                     }
 
+                    ParamsDTO dto = new ParamsDTO();
+                    dto.AddedParams = paramsList;
+                    dto.AddedFormulae = formulaList;
+
+                    DbContext.UpdateAppParams(dto);
+
                 }
 
-                DbContext.SaveChanges();
-                _currentApps.Add(needAddApp);
+
+
+
+
+
 
 
                 var msg = new DialogMessage("测点创建成功并已添加到相关的工程部位中。", result =>
