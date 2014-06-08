@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DamServiceV3.Test.DTO;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,26 @@ namespace DamServiceV3.Test.DamServiceRef
 
         }
 
+        public bool UpdateAppParams(ParamsDTO dto)
+        {
+
+            using (var client = new HttpClient())
+            {
+
+                // New code:
+                client.BaseAddress = new Uri(TestConfig.baseAddress);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync("api/ParamsDTOs", dto).Result;
+
+                return response.IsSuccessStatusCode;
+
+
+
+            }
+
+        }
 
         public IEnumerable<string> GetChildAppCalcName2(string appCalcName, DateTimeOffset date)
         {
