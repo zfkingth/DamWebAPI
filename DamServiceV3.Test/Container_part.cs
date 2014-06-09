@@ -117,7 +117,7 @@ namespace DamServiceV3.Test.DamServiceRef
         /// 只更新对AppParams和Formula的修改，一次提交由服务端进行事物处理
         /// </summary>
         /// <returns></returns>
-        public bool UpdateAppParams()
+        public void UpdateAppParams()
         {
             using (var client = new HttpClient())
             {
@@ -166,11 +166,11 @@ namespace DamServiceV3.Test.DamServiceRef
                             }
                             else if (item.State == EntityStates.Modified)
                             {
-                                dto.AddedFormulae.Add(entity);
+                                dto.UpdatedFormulae.Add(entity);
                             }
                             else if (item.State == EntityStates.Deleted)
                             {
-                                dto.AddedFormulae.Add(entity);
+                                dto.DeletedFormulae.Add(entity);
                             }
 
                             this.Detach(item.Entity);
@@ -188,7 +188,11 @@ namespace DamServiceV3.Test.DamServiceRef
 
                 HttpResponseMessage response = client.PostAsJsonAsync("api/ParamsDTOs", dto).Result;
 
-                return response.IsSuccessStatusCode;
+
+                if (response.IsSuccessStatusCode == false)
+                {
+                    throw new Exception("update app params and formulae error!");
+                }
 
 
 

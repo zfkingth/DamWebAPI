@@ -828,7 +828,6 @@ namespace DamWebAPI.ViewModel.AppManage
 
                         _allFormulae.Add(formulaEntity);
 
-                        DbContext.AddToFormulae(formulaEntity);
 
                         //修改lessDate时刻公式的结束时刻
                         var mf = (from i in _allFormulae
