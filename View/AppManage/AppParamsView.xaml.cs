@@ -33,7 +33,7 @@ namespace DamWebAPI.View
         {
             if (e.Column.FieldName == "Formulae")
             {
-                var id = (Guid)e.GetListSourceFieldValue("ParamId");
+                var id = (Guid)e.GetListSourceFieldValue("Id");
                 var context = this.DataContext as  AppParamsViewModel;
                 DateTime date = (DateTime)comboDates.SelectedValue;
 

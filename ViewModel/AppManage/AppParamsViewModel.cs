@@ -126,8 +126,8 @@ namespace DamWebAPI.ViewModel.AppManage
 
         #endregion // CurrentDate
 
-        ObservableCollection<DateTimeOffset> _dates = null;
-        public ObservableCollection<DateTimeOffset> Dates
+        ObservableCollection<DateTime> _dates = null;
+        public ObservableCollection<DateTime> Dates
         {
             get
             {
@@ -135,8 +135,8 @@ namespace DamWebAPI.ViewModel.AppManage
                 {
                     //dbcontext 只保存当前测点的信息
                     var query = (from i in _allFormulae
-                                 select i.StartDate).Distinct();
-                    _dates = new ObservableCollection<DateTimeOffset>(query);
+                                 select i.StartDate.DateTime).Distinct();
+                    _dates = new ObservableCollection<DateTime>(query);
 
                     if (_dates.Count == 0)
                     {
@@ -233,7 +233,9 @@ namespace DamWebAPI.ViewModel.AppManage
         {
             try
             {
-                DbContext.SaveChanges(SaveChangesOptions.Batch);
+                //DbContext.SaveChanges(SaveChangesOptions.Batch);
+
+
 
                 var msg = new DialogMessage("保存成功!", null);
 
@@ -746,7 +748,7 @@ namespace DamWebAPI.ViewModel.AppManage
                     //首先获取当前的时刻列表，以进行时刻划分
                     var dateList = (from i in _allFormulae
                                     orderby i.StartDate ascending
-                                    select i.StartDate).Distinct().ToList();
+                                    select i.StartDate.DateTime).Distinct().ToList();
 
                     if (dateList.Contains(result))
                     {
@@ -754,19 +756,19 @@ namespace DamWebAPI.ViewModel.AppManage
                     }
 
                     //寻找大于result的最小值
-                    DateTimeOffset greaterDate = (from i in dateList
+                    DateTime greaterDate = (from i in dateList
                                             where i > result
                                             orderby i ascending
                                             select i).FirstOrDefault();
 
 
                     //寻找小于result在最大值
-                    DateTimeOffset lessDate = (from i in dateList
+                    DateTime lessDate = (from i in dateList
                                          where i < result
                                          orderby i descending
                                          select i).FirstOrDefault();
 
-                    DateTimeOffset startDate, endDate;
+                    DateTime startDate, endDate;
 
                     if (greaterDate == DateTime.MinValue && lessDate == DateTime.MinValue)
                     {
