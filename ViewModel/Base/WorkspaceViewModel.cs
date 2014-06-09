@@ -93,7 +93,6 @@ namespace DamWebAPI.ViewModel
                 if (_dbContext == null)
                 {
                     _dbContext = new DamServiceV3.Test.DamServiceRef.Container(SimpleIoc.Default.GetInstance<Uri>());
-
                 }
                 return _dbContext;
             }

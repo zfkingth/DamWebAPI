@@ -82,9 +82,9 @@ namespace DamServiceV3.Test.DamServiceRef
             {
                 if (_baseAddress == null)
                 {
-                    string uri=this.BaseUri.ToString();
+                    string uri = this.BaseUri.ToString();
                     //使用odata作为route
-                    int index=uri.IndexOf("/odata");
+                    int index = uri.IndexOf("/odata");
                     _baseAddress = new Uri(uri.Substring(0, index));
                 }
                 return _baseAddress;
@@ -97,6 +97,90 @@ namespace DamServiceV3.Test.DamServiceRef
             using (var client = new HttpClient())
             {
 
+                // New code:
+                client.BaseAddress = BaseAddress;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync("api/ParamsDTOs", dto).Result;
+
+                return response.IsSuccessStatusCode;
+
+
+
+            }
+
+        }
+
+
+        /// <summary>
+        /// 只更新对AppParams和Formula的修改，一次提交由服务端进行事物处理
+        /// </summary>
+        /// <returns></returns>
+        public bool UpdateAppParams()
+        {
+            using (var client = new HttpClient())
+            {
+
+                ParamsDTO dto = new ParamsDTO();
+                dto.AddedParams = new List<AppParam>();
+                dto.UpdatedParams = new List<AppParam>();
+                dto.DeletedParams = new List<AppParam>();
+
+                dto.AddedFormulae = new List<Formula>();
+                dto.UpdatedFormulae = new List<Formula>();
+                dto.DeletedFormulae = new List<Formula>();
+
+                foreach (var item in this.Entities.ToList())
+                {
+                    if (item.State == EntityStates.Added || item.State == EntityStates.Deleted || item.State == EntityStates.Modified)
+                    {
+
+                        if (item.Entity is AppParam)
+                        {
+                            var entity = item.Entity as AppParam;
+
+                            if (item.State == EntityStates.Added)
+                            {
+                                dto.AddedParams.Add(entity);
+                            }
+                            else if (item.State == EntityStates.Modified)
+                            {
+                                dto.UpdatedParams.Add(entity);
+                            }
+                            else if (item.State == EntityStates.Deleted)
+                            {
+                                dto.DeletedParams.Add(entity);
+                            }
+
+                            this.Detach(item.Entity);
+                        }
+                        else if (item.Entity is Formula)
+                        {
+                            var entity = item.Entity as Formula;
+
+
+                            if (item.State == EntityStates.Added)
+                            {
+                                dto.AddedFormulae.Add(entity);
+                            }
+                            else if (item.State == EntityStates.Modified)
+                            {
+                                dto.AddedFormulae.Add(entity);
+                            }
+                            else if (item.State == EntityStates.Deleted)
+                            {
+                                dto.AddedFormulae.Add(entity);
+                            }
+
+                            this.Detach(item.Entity);
+                        }
+
+                        
+
+                    }
+                }
+                
                 // New code:
                 client.BaseAddress = BaseAddress;
                 client.DefaultRequestHeaders.Accept.Clear();

@@ -17,9 +17,9 @@ namespace hammergo.GlobalConfig
         public const string shortString = "yyyy-MM-dd";
 
 
-        private static DateTime initialTime = new DateTime(1970, 1, 1);
+        private static DateTime initialTime = DateTime.MinValue;
         /// <summary>
-        /// 默认公式的时间刻度，1970年1月1日
+        /// 默认公式的时间刻度最小值
         /// </summary>
         public static DateTime InitialTime
         {
@@ -29,8 +29,10 @@ namespace hammergo.GlobalConfig
             }
         }
 
-
-        private static DateTime overTime = new DateTime(9999, 12, 31);
+        /// <summary>
+        /// 默认公式的时间刻度最大值
+        /// </summary>
+        private static DateTime overTime = DateTime.MaxValue;
         /// <summary>
         /// 默认公式终止时间,9999年12月31日
         /// </summary>

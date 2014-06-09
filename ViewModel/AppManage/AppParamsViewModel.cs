@@ -24,9 +24,18 @@ namespace DamWebAPI.ViewModel.AppManage
         public AppParamsViewModel(string displayName, App app)
         {
 
+            DbContext.MergeOption = System.Data.Services.Client.MergeOption.OverwriteChanges;
             this.DisplayName = displayName;
             this._app = app;
 
+            fetchData();
+        }
+
+        private void fetchData()
+        {
+
+            _allParams.Clear();
+            _allFormulae.Clear();
             //查询所有的数据
             //  Func<string, string> selector 
             var qp = DbContext.AppParams.Where(i => i.AppId == App.Id);
@@ -35,8 +44,19 @@ namespace DamWebAPI.ViewModel.AppManage
 
             _allParams.Load(qp);
             _allFormulae.Load(DbContext.GetAllFormulaeByAppID(App.Id));
-        }
 
+
+            _constantParams = null;
+            _messureParams = null;
+            _calculateParams = null;
+            _dates = null;
+
+
+            RaisePropertyChanged("ConstantParams");
+            RaisePropertyChanged("MessureParams");
+            RaisePropertyChanged("CalculateParams");
+            RaisePropertyChanged("Dates");
+        }
 
 
         private DataServiceCollection<AppParam> _allParams = new DataServiceCollection<AppParam>();
@@ -235,7 +255,9 @@ namespace DamWebAPI.ViewModel.AppManage
             {
                 //DbContext.SaveChanges(SaveChangesOptions.Batch);
 
+                DbContext.UpdateAppParams();
 
+                fetchData();
 
                 var msg = new DialogMessage("保存成功!", null);
 
@@ -805,6 +827,8 @@ namespace DamWebAPI.ViewModel.AppManage
                         formulaEntity.FormulaExpression = "未设置公式";
 
                         _allFormulae.Add(formulaEntity);
+
+                        DbContext.AddToFormulae(formulaEntity);
 
                         //修改lessDate时刻公式的结束时刻
                         var mf = (from i in _allFormulae
