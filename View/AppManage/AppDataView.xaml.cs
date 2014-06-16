@@ -54,14 +54,14 @@ namespace DamWebAPI.View.AppManage
         {
 
 
-            if (e.Value is double || e.Value is DateTime)
+            if (e.Value is double || e.Value is DateTimeOffset)
             {
                 GridControl dg = sender as GridControl;
 
-                if (e.Column.FieldType == typeof(DateTime))
+                if (e.Column.FieldType == typeof(DateTimeOffset))
                 {
 
-                    e.DisplayText = ((DateTime)e.Value).ToString("yyyy-MM-dd HH:mm:ss");
+                    e.DisplayText = ((( DateTimeOffset)e.Value).DateTime).ToString("yyyy-MM-dd HH:mm:ss");
                 }
                 else if (e.Column.FieldType == typeof(double))
                 {
@@ -100,7 +100,7 @@ namespace DamWebAPI.View.AppManage
         {
             GridControl dg = sender as GridControl;
 
-            var col = dg.Columns.First(s => s.FieldType == typeof(DateTime));
+            var col = dg.Columns.First(s => s.FieldType == typeof(DateTimeOffset));
             col.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
             col.AllowEditing = DevExpress.Utils.DefaultBoolean.False;
 

@@ -21,15 +21,17 @@ namespace DamServiceV3.Test
 
 
         [TestMethod]
-        public void A_Date()
+        public void A_Params()
         {
             Uri uri = new Uri(TestConfig.serviceUrl);
             var context = new DamServiceRef.Container(uri);
 
             context.Format.UseJson();
 
-            var typeList = context.ApparatusTypes.ToList();
+            var firstApp = context.Apps.FirstOrDefault();
 
+
+            var paramList = context.AppParams.Where(s => s.AppId == firstApp.Id).ToList();
          
         }
 

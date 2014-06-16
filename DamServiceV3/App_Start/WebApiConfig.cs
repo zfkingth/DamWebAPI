@@ -6,6 +6,7 @@ using System.Web.Http.OData.Builder;
 using Hammergo.Data;
 using System.Web.Http.OData.Routing.Conventions;
 using DamServiceV3.Helper;
+using System.Web.Http.OData.Batch;
 
 namespace DamServiceV3
 {
@@ -99,7 +100,8 @@ namespace DamServiceV3
             actionUpdateAppsProjectByNames.CollectionParameter<string>("names");
             actionUpdateAppsProjectByNames.Returns<bool>();
 
-            config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions);
+            config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel(), new CountODataPathHandler(), routingConventions,
+               new DefaultODataBatchHandler(GlobalConfiguration.DefaultServer));
 
 
 

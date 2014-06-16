@@ -126,6 +126,22 @@ namespace DamWebAPI.ViewModel
             }
         }
 
+
+        private List<AppParam> _allParams = null;
+        public List<AppParam> AllParams
+        {
+            get
+            {
+                if (_allParams == null)
+                {
+                    _allParams = DbContext.AppParams.Where(s => s.AppId == CurrentApp.Id).ToList();
+
+                }
+                return _allParams;
+            }
+        }
+
+
         private List<MessureParam> _mesParams = null;
         public List<MessureParam> MesParams
         {
@@ -133,8 +149,8 @@ namespace DamWebAPI.ViewModel
             {
                 if (_mesParams == null)
                 {
-                    _mesParams = (from i in DbContext.AppParams
-                                  where i.AppId == CurrentApp.Id && i is MessureParam
+                    _mesParams = (from i in AllParams
+                                  where  i is MessureParam
                                   orderby i.Order
                                   select (MessureParam)i).ToList();
 
@@ -150,8 +166,8 @@ namespace DamWebAPI.ViewModel
             {
                 if (_calcParams == null)
                 {
-                    _calcParams = (from i in DbContext.AppParams
-                                   where i.AppId == CurrentApp.Id && i is CalculateParam
+                    _calcParams = (from i in AllParams
+                                   where i is CalculateParam
                                    orderby i.Order
                                    select (CalculateParam)i).ToList();
                 }
@@ -195,8 +211,8 @@ namespace DamWebAPI.ViewModel
             {
                 if (_constantParams == null)
                 {
-                    _constantParams = (from i in DbContext.AppParams
-                                       where i.AppId == CurrentApp.Id && i is ConstantParam
+                    _constantParams = (from i in AllParams
+                                       where   i is ConstantParam
                                        select (ConstantParam)i).ToList();
                 }
                 return _constantParams;
