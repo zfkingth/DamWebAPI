@@ -39,7 +39,11 @@ namespace DamWebAPI.View.Graphics
         DamWebAPI.ViewModel.Entity.Graphics graphicDS = new ViewModel.Entity.Graphics();
 
 
-
+        private void ListBoxItem_MouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            //only for test
+            MessageBox.Show("ListBoxItem被双击");
+        }
 
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,7 +139,7 @@ namespace DamWebAPI.View.Graphics
 
 
                         ds.XValuesSource = (from val in valCollection
-                                            select val.Date).ToArray();
+                                            select val.Date.DateTime).ToArray();
                         ds.ValuesSource = (from val in valCollection
                                            select val.Val).ToArray();
 

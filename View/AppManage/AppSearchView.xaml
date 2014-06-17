@@ -183,20 +183,20 @@
                         <dxg:GridColumn.EditSettings>
                             <dxe:ComboBoxEditSettings DisplayMember="TypeName"
                                                       ItemsSource="{Binding AppTypes}"
-                                                      ValueMember="ApparatusTypeID" />
+                                                      ValueMember="Id" />
                         </dxg:GridColumn.EditSettings>
                     </dxg:GridColumn>
                     <dxg:GridColumn FieldName="X" />
                     <dxg:GridColumn FieldName="Y" />
                     <dxg:GridColumn FieldName="Z" />
-                    <dxg:GridColumn MinWidth="120"
+                    <dxg:GridColumn MinWidth="160"
                                     FieldName="BuriedTime"
                                     Header="埋设时间">
-                        <dxg:GridColumn.EditSettings>
-                            <dxe:DateEditSettings DisplayFormat="yyyy-MM-dd HH:mm"
-                                                  Mask="yyyy-MM-dd HH:mm"
-                                                  MaskType="DateTime" />
-                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.DisplayTemplate>
+                            <ControlTemplate>
+                                <TextBlock Text="{Binding Path=EditValue.DateTime, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
+                            </ControlTemplate>
+                        </dxg:GridColumn.DisplayTemplate>
                     </dxg:GridColumn>
                     <dxg:GridColumn FieldName="OtherInfo" Header="备注" />
                 </dxg:GridControl.Columns>

@@ -43,14 +43,19 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" DataContext="{Binding AppManageViewModel}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" MinWidth="100" />
-                    <ColumnDefinition Width="auto" MinWidth="400" />
+                    <ColumnDefinition Width="auto" MaxWidth="400" MinWidth="300"/>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" MinWidth="250" />
                 </Grid.ColumnDefinitions>
-                <local:ProjectPartView Grid.Column="0"
+                <local:ProjectPartView Margin="5,5,5,2"  Grid.Column="0"
                                        MinWidth="150"
                                        AllowDropPart="False" />
-                <ListBox Grid.Column="1" ItemsSource="{Binding CurrentApps}" SelectionChanged="ListBox_SelectionChanged">
+                <ListBox Grid.Column="1" Margin="2,5,5,2"  ItemsSource="{Binding CurrentApps}" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding AppName, Mode=OneWay}" />
@@ -58,7 +63,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <dxg:GridControl x:Name="lineGrid" Grid.Column="2"  ClipboardCopyMode="ExcludeHeader" AutoGenerateColumns="RemoveOld" SelectionMode="Row" >
+                <dxg:GridControl Margin="2,5,5,5" x:Name="lineGrid" Grid.Column="2"  ClipboardCopyMode="ExcludeHeader" AutoGenerateColumns="RemoveOld" SelectionMode="Row" >
                     <dxg:GridControl.View>
                         <dxg:TableView FocusedRow="{x:Null}" AllowMoveColumnToDropArea="False" AllowChangeBandParent="True" AllowChangeColumnParent="True" IsDetailButtonVisibleBinding="{x:Null}" IsColumnChooserVisible="False" AutoWidth="True" ShowGroupPanel="False">
                             <dxg:TableView.LayoutCalculatorFactory>
@@ -80,7 +85,7 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <c1chart:C1Chart x:Name="c1Chart" Grid.Column="0"
+                    <c1chart:C1Chart x:Name="c1Chart" Grid.Column="0" Margin="5"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch" FontSize="10" MouseMove="c1Chart_MouseMove" MouseDown="c1Chart_MouseDown" >
 
