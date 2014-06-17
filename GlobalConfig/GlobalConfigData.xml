@@ -151,6 +151,7 @@
   </DefaultParamsList>
   <ErrorValList>
     <double>999</double>
+    <double>9999</double>
   </ErrorValList>
   <LineStyleInfoList>
     <LineStyleInfo>
