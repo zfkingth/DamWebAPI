@@ -42,7 +42,6 @@ namespace DamWebAPI.View.Graphics
         private void ListBoxItem_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             //only for test
-            MessageBox.Show("ListBoxItem被双击");
         }
 
 
@@ -56,9 +55,11 @@ namespace DamWebAPI.View.Graphics
                 var results = from i in appInfo.CalcParams
                               group i by i.UnitSymbol;//根据物理量的符号判断是不是同一类量
 
+             
                 c1Chart.BeginUpdate();
                 // Clear current chart c1Chart.Reset(true);
                 c1Chart.Reset(true);
+
                 tby1.Text = tby2.Text = "";
                 // Set chart type c1Chart.ChartType = ChartType.XYPlot; 
                 c1Chart.ChartType = ChartType.Line;
@@ -123,6 +124,7 @@ namespace DamWebAPI.View.Graphics
                         ds.Label = item.ParamName;
                         var valCollection = (from val in appInfo.CalcValues
                                              where val.ParamId == item.Id
+                                             orderby val.Date
                                              select val).ToList();
                         //消除异常值
 
