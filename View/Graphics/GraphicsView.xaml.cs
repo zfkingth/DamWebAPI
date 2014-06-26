@@ -36,12 +36,22 @@ namespace DamWebAPI.View.Graphics
             defCol.Width = new GridLength(PubConstant.ConfigData.GraphicWidth);
         }
 
-        DamWebAPI.ViewModel.Entity.Graphics graphicDS = new ViewModel.Entity.Graphics();
+      
 
 
         private void ListBoxItem_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             //only for test
+
+            var selapp=listBoxApps.SelectedItem as App;
+
+
+            var viewModel = this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel;
+
+            
+
+
+
         }
 
 
@@ -322,7 +332,9 @@ namespace DamWebAPI.View.Graphics
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            lineGrid.SetBinding(GridControl.ItemsSourceProperty, new Binding("Lines") { Source = graphicDS });
+            //var context = this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel;
+
+            lineGrid.SetBinding(GridControl.ItemsSourceProperty, new Binding("GraphicDS.Lines") { Source = this.DataContext });
 
         }
     }

@@ -31,5 +31,16 @@ namespace DamWebAPI.ViewModel.Graphics
             }
         }
 
+        private DamWebAPI.ViewModel.Entity.Graphics graphicDS = new DamWebAPI.ViewModel.Entity.Graphics();
+
+        public DamWebAPI.ViewModel.Entity.Graphics GraphicDS
+        {
+            get
+            {
+                return graphicDS;
+            }
+        }
+
+
     }
 }
