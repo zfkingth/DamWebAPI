@@ -48,8 +48,8 @@ namespace DamWebAPI.View.Graphics
 
             var viewModel = this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel;
 
-            
 
+            viewModel.AddAppInDS(selapp);
 
 
         }

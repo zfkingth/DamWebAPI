@@ -68,8 +68,8 @@
                         <dxg:GridColumn Header="显示" FieldName="IsShow"/>
                         <dxg:GridColumn Header="测点编号" FieldName="AppName" AllowEditing="False"/>
                         <dxg:GridColumn Header="参数名称" FieldName="ParamName" AllowEditing="False"/>
-                        <dxg:GridColumn Header="图例名称" FieldName="AxisName"/>
-                        <dxg:GridColumn Header="坐标轴" FieldName="LegendName"/>
+                        <dxg:GridColumn Header="图例名称" FieldName="LegendName"/>
+                        <dxg:GridColumn Header="坐标轴" FieldName="AxisName"/>
                     </dxg:GridControl.Columns>
                     <dxg:GridControl.View>
                         <dxg:TableView FocusedRow="{x:Null}" AllowMoveColumnToDropArea="False" AllowChangeBandParent="True" AllowChangeColumnParent="True" IsDetailButtonVisibleBinding="{x:Null}" IsColumnChooserVisible="False" AutoWidth="True" ShowGroupPanel="False">
