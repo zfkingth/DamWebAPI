@@ -88,10 +88,18 @@ namespace DamWebAPI.View.Graphics
         {
             get
             {
-                return y2.MajorUnit;
+                if (y2 == null)
+                {
+                    return double.NaN;
+                }
+                else
+                {
+                    return y2.MajorUnit;
+                }
             }
             set
             {
+                if(y2!=null)
                 y2.MajorUnit = value;
             }
         }
@@ -134,12 +142,19 @@ namespace DamWebAPI.View.Graphics
 
             get
             {
-                return y2.Max;
+                if (y2 == null)
+                {
+                    return double.NaN;
+                }
+                else
+                {
+                    return y2.Max;
+                }
             }
             set
             {
-
-                y2.Max = value;
+                if (y2 != null)
+                    y2.Max = value;
             }
         }
 
@@ -150,12 +165,19 @@ namespace DamWebAPI.View.Graphics
         {
             get
             {
-                return y2.Min;
+                if (y2 == null)
+                {
+                    return double.NaN;
+                }
+                else
+                {
+                    return y2.Min;
+                }
             }
             set
             {
-
-                y2.Min = value;
+                if (y2 != null)
+                    y2.Min = value;
             }
 
         }

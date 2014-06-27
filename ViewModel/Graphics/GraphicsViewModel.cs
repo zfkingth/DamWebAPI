@@ -41,7 +41,15 @@ namespace DamWebAPI.ViewModel.Graphics
             }
         }
 
+        private List<string> yAxis = new List<string>() { "y1", "y2", "y3" };
 
+        public List<string> YAxis
+        {
+            get
+            {
+                return yAxis;
+            }
+        }
 
         /// <summary>
         /// 将选中的测点添加到表中
@@ -68,7 +76,7 @@ namespace DamWebAPI.ViewModel.Graphics
 
                     //row.刻度轴 = "主轴";
 
-                    line.AxisName = "主轴";
+                    line.AxisName = "y1";
 
                     //row.线条名称 = cp.ParamName;
                     line.ParamName = cp.ParamName;

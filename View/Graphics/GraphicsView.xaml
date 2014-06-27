@@ -1,13 +1,27 @@
 ﻿<UserControl xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml"  xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"  x:Class="DamWebAPI.View.Graphics.GraphicsView"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c1chart="http://schemas.componentone.com/xaml/c1chart"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:local="clr-namespace:DamWebAPI.View"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="768"
              d:DesignWidth="1024"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+
+     
+
+        <CollectionViewSource x:Key="resAxis" Source="{Binding YAxis}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" MinWidth="200" MaxWidth="600" />
@@ -69,7 +83,13 @@
                         <dxg:GridColumn Header="测点编号" FieldName="AppName" AllowEditing="False"/>
                         <dxg:GridColumn Header="参数名称" FieldName="ParamName" AllowEditing="False"/>
                         <dxg:GridColumn Header="图例名称" FieldName="LegendName"/>
-                        <dxg:GridColumn Header="坐标轴" FieldName="AxisName"/>
+                        <dxg:GridColumn Header="坐标轴" FieldName="AxisName" >
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:ComboBoxEditSettings 
+                              ItemsSource="{Binding Source={StaticResource resAxis}}"
+                                                       />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
                     </dxg:GridControl.Columns>
                     <dxg:GridControl.View>
                         <dxg:TableView FocusedRow="{x:Null}" AllowMoveColumnToDropArea="False" AllowChangeBandParent="True" AllowChangeColumnParent="True" IsDetailButtonVisibleBinding="{x:Null}" IsColumnChooserVisible="False" AutoWidth="True" ShowGroupPanel="False">

@@ -21,6 +21,9 @@
                 <scm:SortDescription />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+
+     
+        
     </UserControl.Resources>
 
     <Grid x:Name="ugrid">
