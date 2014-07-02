@@ -37,9 +37,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button  Grid.Row="0" Margin="5" Grid.Column="0" Click="Button_Click_1">常用属性</Button>
                 <Button  Grid.Row="0" Margin="5" Grid.Column="1" Click="Button_Click">保存配置</Button>
+                <TextBlock Grid.Row="1" Margin="5" Grid.Column="0">起始时间</TextBlock>
+                <TextBlock Grid.Row="2" Margin="5" Grid.Column="0">起始时间</TextBlock>
             </Grid>
             <c1:C1PropertyGrid Name="propertyGrid" Margin="5" />
         </DockPanel>
@@ -53,7 +56,8 @@
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" DataContext="{Binding AppManageViewModel}">
                 <Grid.ColumnDefinitions>
@@ -77,7 +81,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <dxg:GridControl Margin="2,5,5,5" x:Name="lineGrid" Grid.Column="2"  ClipboardCopyMode="ExcludeHeader" AutoGenerateColumns="None" SelectionMode="Row" >
+                <dxg:GridControl Margin="2,5,5,2" x:Name="lineGrid" Grid.Column="2"  ClipboardCopyMode="ExcludeHeader" AutoGenerateColumns="None" SelectionMode="Row" >
                     <dxg:GridControl.Columns>
                         <dxg:GridColumn Header="显示" FieldName="IsShow"/>
                         <dxg:GridColumn Header="测点编号" FieldName="AppName" AllowEditing="False"/>
@@ -100,7 +104,17 @@
                     </dxg:GridControl.View>
                 </dxg:GridControl>
             </Grid>
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="1">
+                <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal">
+                    <TextBlock Margin="5"  >测点编号:</TextBlock>
+                    <TextBox Margin="5"  Width="50"></TextBox>
+                    <Button Margin="5" Width="50">添加</Button>
+                    <Button Margin="5" Width="50">绘制</Button>
+
+                </StackPanel>
+            </Grid>
+        
+            <Grid Grid.Row="2" >
                 <Grid.RowDefinitions>
                     <RowDefinition Name="defRow"  MinHeight="100"/>
                     <RowDefinition Height="auto" />
