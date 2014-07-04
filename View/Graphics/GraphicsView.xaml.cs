@@ -37,7 +37,13 @@ namespace DamWebAPI.View.Graphics
         }
 
       
-
+        private DamWebAPI.ViewModel.Graphics.GraphicsViewModel  ViewModel
+        {
+            get
+            {
+                return this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel; 
+            }
+        }
 
         private void ListBoxItem_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
@@ -46,10 +52,9 @@ namespace DamWebAPI.View.Graphics
             var selapp=listBoxApps.SelectedItem as App;
 
 
-            var viewModel = this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel;
 
 
-            viewModel.AddAppInDS(selapp);
+            ViewModel.AddAppInDS(selapp);
 
 
         }
@@ -337,5 +342,7 @@ namespace DamWebAPI.View.Graphics
             lineGrid.SetBinding(GridControl.ItemsSourceProperty, new Binding("GraphicDS.Lines") { Source = this.DataContext });
 
         }
+
+      
     }
 }

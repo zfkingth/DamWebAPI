@@ -107,5 +107,111 @@ namespace DamWebAPI.ViewModel.Graphics
                 GraphicDS.RejectChanges();
             }
         }
+
+
+        #region StartDate
+
+        private DateTime? _startDate;
+        /// <summary>
+        /// Returns the user-friendly name of this object.
+        /// Child classes can set this property to a new value,
+        /// or override it to determine the value on-demand.
+        /// </summary>
+        public DateTime? StartDate
+        {
+            get { return _startDate; }
+            set
+            {
+                if (_startDate != value)
+                {
+                    _startDate = value;
+                    RaisePropertyChanged("StartDate");
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region EndDate
+
+        private DateTime? _endDate;
+        /// <summary>
+        /// Returns the user-friendly name of this object.
+        /// Child classes can set this property to a new value,
+        /// or override it to determine the value on-demand.
+        /// </summary>
+        public DateTime? EndDate
+        {
+            get { return _endDate; }
+            set
+            {
+                if (_endDate != value)
+                {
+                    _endDate = value;
+                    RaisePropertyChanged("EndDate");
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region AddedAppName
+
+        private string _addedAppName;
+        /// <summary>
+        /// Returns the user-friendly name of this object.
+        /// Child classes can set this property to a new value,
+        /// or override it to determine the value on-demand.
+        /// </summary>
+        public string AddedAppName
+        {
+            get { return _addedAppName; }
+            set
+            {
+                if (_addedAppName != value)
+                {
+                    _addedAppName = value;
+                    RaisePropertyChanged("AddedAppName");
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region AddedAppName
+        private ICommand _cmdAddApp;
+        public ICommand CmdAddApp
+        {
+            get
+            {
+                if (_cmdAddApp == null)
+                {
+                    _cmdAddApp = new RelayCommand(param => HandleAddApp(param));
+                }
+                return _cmdAddApp;
+            }
+            protected set { _cmdAddApp = value; }
+        }
+
+
+        private void HandleAddApp(object param)
+        {
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Messenger.Default.Send<Exception>(ex);
+            }
+
+        }
+
+        #endregion
+
     }
 }
