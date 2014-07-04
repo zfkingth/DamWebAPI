@@ -173,8 +173,19 @@
             <Grid Grid.Row="1">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <TextBlock Margin="5">测点编号:</TextBlock>
-                    <TextBox Width="100" Margin="5" Text="{Binding AddedAppName}" />
-                    <Button Width="50" Margin="5"  Command="{Binding CmdAddApp}" >添加</Button>
+                    <TextBox Width="100"
+                             Margin="5"
+                            Text="{Binding FeildAppName,UpdateSourceTrigger=PropertyChanged}" >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding CmdAddApp}"/>
+                        </TextBox.InputBindings>
+
+                    </TextBox>
+                    <Button Width="50"
+                            Margin="5"
+                            Command="{Binding CmdAddApp}">
+                        添加
+                    </Button>
                     <Button Width="50" Margin="5">绘制</Button>
 
                 </StackPanel>

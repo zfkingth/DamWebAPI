@@ -343,6 +343,18 @@ namespace DamWebAPI.View.Graphics
 
         }
 
+        //private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if((Keyboard.GetKeyStates(Key.Return) & KeyStates.Down) > 0)
+        //    {
+        //        ViewModel.CmdAddApp.Execute(null);
+
+        //        e.Handled = true;
+        //    }
+
+           
+        //}
+
       
     }
 }

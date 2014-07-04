@@ -51,6 +51,7 @@ namespace DamWebAPI.ViewModel.Graphics
             }
         }
 
+        #region AddAppInDS
         /// <summary>
         /// 将选中的测点添加到表中
         /// </summary>
@@ -108,6 +109,7 @@ namespace DamWebAPI.ViewModel.Graphics
             }
         }
 
+        #endregion
 
         #region StartDate
 
@@ -157,23 +159,23 @@ namespace DamWebAPI.ViewModel.Graphics
         #endregion
 
 
-        #region AddedAppName
+        #region FeildAppName
 
-        private string _addedAppName;
+        private string _feildAppName;
         /// <summary>
         /// Returns the user-friendly name of this object.
         /// Child classes can set this property to a new value,
         /// or override it to determine the value on-demand.
         /// </summary>
-        public string AddedAppName
+        public string FeildAppName
         {
-            get { return _addedAppName; }
+            get { return _feildAppName; }
             set
             {
-                if (_addedAppName != value)
+                if (_feildAppName != value)
                 {
-                    _addedAppName = value;
-                    RaisePropertyChanged("AddedAppName");
+                    _feildAppName = value;
+                    RaisePropertyChanged("FeildAppName");
                 }
             }
         }
@@ -181,7 +183,7 @@ namespace DamWebAPI.ViewModel.Graphics
         #endregion
 
 
-        #region AddedAppName
+        #region CmdAddApp 
         private ICommand _cmdAddApp;
         public ICommand CmdAddApp
         {
@@ -202,7 +204,17 @@ namespace DamWebAPI.ViewModel.Graphics
 
             try
             {
+                var fapp = DbContext.Apps.Where(s => s.AppName == FeildAppName).FirstOrDefault();
+                if(fapp==null)
+                {
+                    throw new Exception("测点不存在");
+                }
+                if (AppManageViewModel.CurrentApps.Contains(fapp))
+                {
+                    throw new Exception("已存在");
+                }
 
+                AppManageViewModel.CurrentApps.Add(fapp);
             }
             catch (Exception ex)
             {
