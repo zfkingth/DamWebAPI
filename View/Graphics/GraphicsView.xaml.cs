@@ -65,7 +65,7 @@ namespace DamWebAPI.View.Graphics
             if (e.AddedItems.Count != 0)
             {
                 App selApp = e.AddedItems[0] as App;
-                AppIntegratedInfo appInfo = new AppIntegratedInfo(selApp, 0, null, null);
+                AppIntegratedInfo appInfo = new AppIntegratedInfo(selApp, 0,  ViewModel.OffsetStart, ViewModel.OffsetEnd);
                 //DamWebAPI.ViewModel.Entity.Graphics graInfo = new ViewModel.Entity.Graphics();
                 var results = from i in appInfo.CalcParams
                               group i by i.UnitSymbol;//根据物理量的符号判断是不是同一类量

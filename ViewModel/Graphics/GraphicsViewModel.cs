@@ -134,6 +134,39 @@ namespace DamWebAPI.ViewModel.Graphics
 
         #endregion
 
+        #region OffsetStart
+        public DateTimeOffset? OffsetStart
+        {
+            get
+            {
+                DateTimeOffset? date=null;
+                if(StartDate!=null)
+                {
+                    date = new DateTimeOffset(StartDate.Value);
+                }
+
+                return date;
+            }
+        }
+        #endregion
+
+
+        #region OffsetEnd
+        public DateTimeOffset? OffsetEnd
+        {
+            get
+            {
+                DateTimeOffset? date = null;
+                if (EndDate != null)
+                {
+                    date = new DateTimeOffset(EndDate.Value);
+                }
+
+                return date;
+            }
+        }
+        #endregion
+
 
         #region EndDate
 
