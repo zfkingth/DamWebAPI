@@ -41,15 +41,7 @@ namespace DamWebAPI.ViewModel.Graphics
             }
         }
 
-        private List<string> yAxis = new List<string>() { "y1", "y2", "y3" };
-
-        public List<string> YAxis
-        {
-            get
-            {
-                return yAxis;
-            }
-        }
+  
 
         #region AddAppInDS
         /// <summary>
@@ -68,29 +60,25 @@ namespace DamWebAPI.ViewModel.Graphics
                 // appInfo.CalcParams默认已排序
                 foreach (CalculateParam cp in appInfo.CalcParams)
                 {
-                    //Graphics.图形Row row = graphics.图形.New图形Row();
 
                     var line = GraphicDS.Lines.NewLinesRow();
 
-                    //row.测点编号 = appName;
                     line.AppName = appName;
 
-                    //row.刻度轴 = "主轴";
 
-                    line.AxisName = "y1";
+                    line.UnitSymbol = cp.UnitSymbol;
 
-                    //row.线条名称 = cp.ParamName;
+                    line.AppId = cp.AppId;
+                    line.ParamId = cp.Id;
+
                     line.ParamName = cp.ParamName;
 
-                    //row.图例名称 = appName + "." + cp.ParamName;
 
                     line.LegendName = appName + "." + cp.ParamName;
 
-                    //row.EndEdit();
 
                     line.EndEdit();
 
-                    //graphics.图形.Add图形Row(row);
 
                     GraphicDS.Lines.AddLinesRow(line);
 
@@ -98,7 +86,6 @@ namespace DamWebAPI.ViewModel.Graphics
 
                 GraphicDS.AcceptChanges();
 
-                //graphics.AcceptChanges()
 
             }
             catch (Exception ex)
@@ -139,8 +126,8 @@ namespace DamWebAPI.ViewModel.Graphics
         {
             get
             {
-                DateTimeOffset? date=null;
-                if(StartDate!=null)
+                DateTimeOffset? date = null;
+                if (StartDate != null)
                 {
                     date = new DateTimeOffset(StartDate.Value);
                 }
@@ -216,7 +203,7 @@ namespace DamWebAPI.ViewModel.Graphics
         #endregion
 
 
-        #region CmdAddApp 
+        #region CmdAddApp
         private ICommand _cmdAddApp;
         public ICommand CmdAddApp
         {
@@ -238,7 +225,7 @@ namespace DamWebAPI.ViewModel.Graphics
             try
             {
                 var fapp = DbContext.Apps.Where(s => s.AppName == FeildAppName).FirstOrDefault();
-                if(fapp==null)
+                if (fapp == null)
                 {
                     throw new Exception("测点不存在");
                 }
@@ -258,5 +245,42 @@ namespace DamWebAPI.ViewModel.Graphics
 
         #endregion
 
+
+        public  IEnumerable<CalculateValue>   GetAllCalcValues(Entity.Graphics graDS)
+        {
+            var appids = (from i in graDS.Lines
+                          where i.IsShow == true
+                          select i.AppId).Distinct().ToList();
+
+            var values = DbContext.GetCalcValues(appids, 0, OffsetStart, OffsetEnd);
+
+            return values;
+        }
+
+        public Entity.Graphics CreateNewGraphicDS(App selApp)
+        {
+            string appName = selApp.AppName;
+
+            AppIntegratedInfo appInfo = new AppIntegratedInfo(selApp, 0, null, null);
+            var graDS = new Entity.Graphics();
+            // appInfo.CalcParams默认已排序
+            for (int i = 0; i < appInfo.CalcParams.Count; i++)
+            {
+                CalculateParam cp = appInfo.CalcParams[i];
+                var line = graDS.Lines.NewLinesRow();
+                line.AppName = appName;
+                line.UnitSymbol = cp.UnitSymbol;
+                line.AppId = cp.AppId;
+                line.ParamName = cp.ParamName;
+                line.LegendName = cp.ParamName;
+                line.IsShow = true;
+                line.ParamId = cp.Id;
+                line.EndEdit();
+                graDS.Lines.AddLinesRow(line);
+            }
+            graDS.AcceptChanges();
+
+            return graDS;
+        }
     }
 }

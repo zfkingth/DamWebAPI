@@ -285,9 +285,13 @@ namespace DamWebAPI.ViewModel.Entity {
             
             private global::System.Data.DataColumn columnParamName;
             
-            private global::System.Data.DataColumn columnAxisName;
+            private global::System.Data.DataColumn columnUnitSymbol;
             
             private global::System.Data.DataColumn columnLegendName;
+            
+            private global::System.Data.DataColumn columnAppId;
+            
+            private global::System.Data.DataColumn columnParamId;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -348,9 +352,9 @@ namespace DamWebAPI.ViewModel.Entity {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn AxisNameColumn {
+            public global::System.Data.DataColumn UnitSymbolColumn {
                 get {
-                    return this.columnAxisName;
+                    return this.columnUnitSymbol;
                 }
             }
             
@@ -359,6 +363,22 @@ namespace DamWebAPI.ViewModel.Entity {
             public global::System.Data.DataColumn LegendNameColumn {
                 get {
                     return this.columnLegendName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AppIdColumn {
+                get {
+                    return this.columnAppId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ParamIdColumn {
+                get {
+                    return this.columnParamId;
                 }
             }
             
@@ -399,14 +419,16 @@ namespace DamWebAPI.ViewModel.Entity {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LinesRow AddLinesRow(bool IsShow, string AppName, string ParamName, string AxisName, string LegendName) {
+            public LinesRow AddLinesRow(bool IsShow, string AppName, string ParamName, string UnitSymbol, string LegendName, System.Guid AppId, System.Guid ParamId) {
                 LinesRow rowLinesRow = ((LinesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IsShow,
                         AppName,
                         ParamName,
-                        AxisName,
-                        LegendName};
+                        UnitSymbol,
+                        LegendName,
+                        AppId,
+                        ParamId};
                 rowLinesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowLinesRow);
                 return rowLinesRow;
@@ -439,8 +461,10 @@ namespace DamWebAPI.ViewModel.Entity {
                 this.columnIsShow = base.Columns["IsShow"];
                 this.columnAppName = base.Columns["AppName"];
                 this.columnParamName = base.Columns["ParamName"];
-                this.columnAxisName = base.Columns["AxisName"];
+                this.columnUnitSymbol = base.Columns["UnitSymbol"];
                 this.columnLegendName = base.Columns["LegendName"];
+                this.columnAppId = base.Columns["AppId"];
+                this.columnParamId = base.Columns["ParamId"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -452,10 +476,14 @@ namespace DamWebAPI.ViewModel.Entity {
                 base.Columns.Add(this.columnAppName);
                 this.columnParamName = new global::System.Data.DataColumn("ParamName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParamName);
-                this.columnAxisName = new global::System.Data.DataColumn("AxisName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAxisName);
+                this.columnUnitSymbol = new global::System.Data.DataColumn("UnitSymbol", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnitSymbol);
                 this.columnLegendName = new global::System.Data.DataColumn("LegendName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLegendName);
+                this.columnAppId = new global::System.Data.DataColumn("AppId", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAppId);
+                this.columnParamId = new global::System.Data.DataColumn("ParamId", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnParamId);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnLegendName}, true));
                 this.columnIsShow.AllowDBNull = false;
@@ -466,6 +494,8 @@ namespace DamWebAPI.ViewModel.Entity {
                 this.columnParamName.ReadOnly = true;
                 this.columnLegendName.AllowDBNull = false;
                 this.columnLegendName.Unique = true;
+                this.columnAppId.AllowDBNull = false;
+                this.columnParamId.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,17 +671,17 @@ namespace DamWebAPI.ViewModel.Entity {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string AxisName {
+            public string UnitSymbol {
                 get {
                     try {
-                        return ((string)(this[this.tableLines.AxisNameColumn]));
+                        return ((string)(this[this.tableLines.UnitSymbolColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AxisName\' in table \'Lines\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnitSymbol\' in table \'Lines\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableLines.AxisNameColumn] = value;
+                    this[this.tableLines.UnitSymbolColumn] = value;
                 }
             }
             
@@ -668,14 +698,36 @@ namespace DamWebAPI.ViewModel.Entity {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsAxisNameNull() {
-                return this.IsNull(this.tableLines.AxisNameColumn);
+            public System.Guid AppId {
+                get {
+                    return ((global::System.Guid)(this[this.tableLines.AppIdColumn]));
+                }
+                set {
+                    this[this.tableLines.AppIdColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetAxisNameNull() {
-                this[this.tableLines.AxisNameColumn] = global::System.Convert.DBNull;
+            public System.Guid ParamId {
+                get {
+                    return ((global::System.Guid)(this[this.tableLines.ParamIdColumn]));
+                }
+                set {
+                    this[this.tableLines.ParamIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUnitSymbolNull() {
+                return this.IsNull(this.tableLines.UnitSymbolColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUnitSymbolNull() {
+                this[this.tableLines.UnitSymbolColumn] = global::System.Convert.DBNull;
             }
         }
         

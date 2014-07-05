@@ -36,12 +36,12 @@ namespace DamWebAPI.View.Graphics
             defCol.Width = new GridLength(PubConstant.ConfigData.GraphicWidth);
         }
 
-      
-        private DamWebAPI.ViewModel.Graphics.GraphicsViewModel  ViewModel
+
+        private DamWebAPI.ViewModel.Graphics.GraphicsViewModel ViewModel
         {
             get
             {
-                return this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel; 
+                return this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel;
             }
         }
 
@@ -49,7 +49,7 @@ namespace DamWebAPI.View.Graphics
         {
             //only for test
 
-            var selapp=listBoxApps.SelectedItem as App;
+            var selapp = listBoxApps.SelectedItem as App;
 
 
 
@@ -60,129 +60,21 @@ namespace DamWebAPI.View.Graphics
         }
 
 
+
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count != 0)
             {
                 App selApp = e.AddedItems[0] as App;
-                AppIntegratedInfo appInfo = new AppIntegratedInfo(selApp, 0,  ViewModel.OffsetStart, ViewModel.OffsetEnd);
-                //DamWebAPI.ViewModel.Entity.Graphics graInfo = new ViewModel.Entity.Graphics();
-                var results = from i in appInfo.CalcParams
-                              group i by i.UnitSymbol;//根据物理量的符号判断是不是同一类量
+                DamWebAPI.ViewModel.Entity.Graphics graInfo = ViewModel.CreateNewGraphicDS(selApp);
 
-             
-                c1Chart.BeginUpdate();
-                // Clear current chart c1Chart.Reset(true);
-                c1Chart.Reset(true);
+                CreateGhpics(graInfo);
 
-                tby1.Text = tby2.Text = "";
-                // Set chart type c1Chart.ChartType = ChartType.XYPlot; 
-                c1Chart.ChartType = ChartType.Line;
-                // get axes
-                var xAxis = c1Chart.View.AxisX;
+                //只有显示一支仪器时才显示这条信息
 
-                const double dashPixels = 3;
-
-                xAxis.IsTime = true;
-                xAxis.MajorGridStrokeDashes = new DoubleCollection(new double[] { dashPixels, dashPixels });
+                tbcaption.Text = string.Format("{0} {1} {2} {3}", selApp.AppName, selApp.X, selApp.Y, selApp.Z);
 
 
-
-                var y1Axis = c1Chart.View.AxisY;
-                y1Axis.Name = "y1";
-                // configure Y axis
-
-                //set legend position
-
-                int lineIndex = 0;
-                for (int i = 0; i < results.Count(); i++)
-                {
-                    //有N个Y轴
-                    Axis yAxis = null;
-                    TextBlock tbTitle = null;
-                    if (i == 0)
-                    {
-                        yAxis = y1Axis;
-                        //set axis title
-                        tbTitle = tby1;
-
-                        yAxis.MajorGridStrokeDashes = new DoubleCollection(new double[] { dashPixels, dashPixels });
-
-
-                    }
-                    else
-                    {
-                        //创建新的axis
-                        yAxis = new Axis
-                        {
-                            AxisType = AxisType.Y,
-                            Position = AxisPosition.Far,
-                            Name = "y" + (i + 1).ToString(),
-                        };
-
-                        c1Chart.View.Axes.Add(yAxis);
-                        tbTitle = tby2;
-
-                        //hid grid lines
-                        yAxis.MajorGridStroke = Brushes.White;
-                        yAxis.MinorGridStroke = Brushes.White;
-
-                    }
-
-
-
-                    foreach (var item in results.ElementAt(i))
-                    {
-                        // tbTitle.Text += " 单位:" + results.ElementAt(i).Key;
-                        tbTitle.Text = string.Format("{0} {1}: {2}", tbTitle.Text, item.ParamName, results.ElementAt(i).Key);
-                        XYDataSeries ds = new XYDataSeries();
-                        ds.Label = item.ParamName;
-                        var valCollection = (from val in appInfo.CalcValues
-                                             where val.ParamId == item.Id
-                                             orderby val.Date
-                                             select val).ToList();
-                        //消除异常值
-
-                        foreach (var valItem in valCollection)
-                        {
-                            if (valItem.Val != null && valItem.Val.HasValue)
-                            {
-                                if (Hammergo.Utility.Helper.isErrorValue(valItem.Val.Value))
-                                {
-                                    valItem.Val = double.NaN;
-                                }
-                            }
-                        }
-
-
-                        ds.XValuesSource = (from val in valCollection
-                                            select val.Date.DateTime).ToArray();
-                        ds.ValuesSource = (from val in valCollection
-                                           select val.Val).ToArray();
-
-                        ds.AxisY = yAxis.Name;
-                        //set line style
-                        if (lineIndex < PubConstant.ConfigData.LineStyleInfoList.Count)
-                        {
-                            var lineInfo = hammergo.GlobalConfig.PubConstant.ConfigData.LineStyleInfoList[i];
-                            ds.ConnectionStroke = lineInfo.ConnectionStroke;
-                            ds.ConnectionStrokeThickness = lineInfo.LineThickness;
-                            ds.ConnectionStrokeDashes = lineInfo.ConnectionStrokeDashes;
-                            ds.SymbolMarker = lineInfo.SymbolMarker;
-                            ds.SymbolSize = lineInfo.SymbolSize;
-                            ds.SymbolFill = lineInfo.SymbolFill;
-                            ds.SymbolStroke = lineInfo.SymbolStroke;
-                            ds.SymbolStrokeThickness = lineInfo.SymbolStrokeThickness;
-                            lineIndex++;
-                        }
-                        c1Chart.Data.Children.Add(ds);
-                    }
-
-                }
-
-                tbcaption.Text = appInfo.CurrentApp.AppName;
-
-                c1Chart.EndUpdate();
 
 
                 propertyGrid.SelectedObject = new GraphicProperty(c1Chart, tby1, tby2, tbcaption);
@@ -190,7 +82,145 @@ namespace DamWebAPI.View.Graphics
             }
         }
 
+        private void CreateGhpics(DamWebAPI.ViewModel.Entity.Graphics graInfo)
+        {
+            c1Chart.BeginUpdate();
 
+            double dashPixels = ResetChart();
+
+            //一次性查询所有的数据
+            var allCalcValues = ViewModel.GetAllCalcValues(graInfo).ToList();
+            var results = from i in graInfo.Lines
+                          where i.IsShow == true
+                          group i by i.ParamName;  //根据 物理量单位 判断是不是同一类量
+
+
+
+            tby1.Text = tby2.Text = tbcaption.Text = "";
+
+            int lineIndex = 0;
+            //根据多少个Y轴进行循环
+            for (int i = 0; i < results.Count(); i++)
+            {
+                //有N个Y轴
+                Axis yAxis = null;
+                TextBlock tbTitle = null;
+                if (i == 0)
+                {
+                    yAxis = c1Chart.View.AxisY;
+                    yAxis.Name = "y1";
+
+                    //set axis title
+                    tbTitle = tby1;
+
+                    yAxis.MajorGridStrokeDashes = new DoubleCollection(new double[] { dashPixels, dashPixels });
+
+
+                }
+                else
+                {
+                    //创建新的axis
+                    yAxis = new Axis
+                    {
+                        AxisType = AxisType.Y,
+                        Position = AxisPosition.Far,
+                        Name = "y" + (i + 1).ToString(),
+                    };
+
+                    c1Chart.View.Axes.Add(yAxis);
+                    tbTitle = tby2;
+
+                    //hid grid lines
+                    yAxis.MajorGridStroke = Brushes.White;
+                    yAxis.MinorGridStroke = Brushes.White;
+
+                }
+
+                string paramName = results.ElementAt(i).Key;
+
+                var groupItems = results.ElementAt(i).ToList();
+
+                tbTitle.Text = string.Format("{0} {1}: {2}", tbTitle.Text, paramName, groupItems.First().UnitSymbol);
+
+
+                foreach (var item in groupItems)
+                {
+                    XYDataSeries ds = new XYDataSeries();
+                    ds.Label = item.LegendName;
+                    var valCollection = (from val in allCalcValues
+                                         where val.ParamId == item.ParamId
+                                         orderby val.Date
+                                         select val).ToList();
+                    //消除异常值
+
+                    HandleErrorValue(valCollection);
+
+
+                    ds.XValuesSource = (from val in valCollection
+                                        select val.Date.DateTime).ToArray();
+                    ds.ValuesSource = (from val in valCollection
+                                       select val.Val).ToArray();
+
+                    ds.AxisY = yAxis.Name;
+                    //set line style
+                    lineIndex = setLineStyle(lineIndex, ds);
+                    c1Chart.Data.Children.Add(ds);
+                }
+
+            }
+            c1Chart.EndUpdate();
+        }
+
+        private double ResetChart()
+        {
+
+            // Clear current chart c1Chart.Reset(true);
+            c1Chart.Reset(true);
+
+            c1Chart.ChartType = ChartType.Line;
+
+            var xAxis = c1Chart.View.AxisX;
+            double dashPixels = 3;
+
+            xAxis.IsTime = true;
+            xAxis.MajorGridStrokeDashes = new DoubleCollection(new double[] { dashPixels, dashPixels });
+            return dashPixels;
+        }
+
+        private static void HandleErrorValue(List<CalculateValue> valCollection)
+        {
+            foreach (var valItem in valCollection)
+            {
+                if (valItem.Val != null && valItem.Val.HasValue)
+                {
+                    if (Hammergo.Utility.Helper.isErrorValue(valItem.Val.Value))
+                    {
+                        valItem.Val = double.NaN;
+                    }
+                }
+            }
+        }
+
+        private static int setLineStyle(int lineIndex, XYDataSeries ds)
+        {
+            if (lineIndex < PubConstant.ConfigData.LineStyleInfoList.Count)
+            {
+                var lineInfo = hammergo.GlobalConfig.PubConstant.ConfigData.LineStyleInfoList[lineIndex];
+                ds.ConnectionStroke = lineInfo.ConnectionStroke;
+                ds.ConnectionStrokeThickness = lineInfo.LineThickness;
+                ds.ConnectionStrokeDashes = lineInfo.ConnectionStrokeDashes;
+                ds.SymbolMarker = lineInfo.SymbolMarker;
+                ds.SymbolSize = lineInfo.SymbolSize;
+                ds.SymbolFill = lineInfo.SymbolFill;
+                ds.SymbolStroke = lineInfo.SymbolStroke;
+                ds.SymbolStrokeThickness = lineInfo.SymbolStrokeThickness;
+                lineIndex++;
+            }
+            return lineIndex;
+        }
+
+
+        #region handle mouse on chart
         ToolTip m_toolTip = null;
         private void c1Chart_MouseMove(object sender, MouseEventArgs e)
         {
@@ -281,6 +311,7 @@ namespace DamWebAPI.View.Graphics
 
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int cha = c1Chart.Data.Children.Count - PubConstant.ConfigData.LineStyleInfoList.Count;
@@ -328,6 +359,8 @@ namespace DamWebAPI.View.Graphics
             PubConstant.updateConfigData();
         }
 
+        #endregion
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
@@ -343,18 +376,15 @@ namespace DamWebAPI.View.Graphics
 
         }
 
-        //private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if((Keyboard.GetKeyStates(Key.Return) & KeyStates.Down) > 0)
-        //    {
-        //        ViewModel.CmdAddApp.Execute(null);
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            CreateGhpics(ViewModel.GraphicDS);
 
-        //        e.Handled = true;
-        //    }
 
-           
-        //}
+            propertyGrid.SelectedObject = new GraphicProperty(c1Chart, tby1, tby2, tbcaption);
+        }
 
-      
+
+
     }
 }
