@@ -184,7 +184,7 @@ namespace DamWebAPI.ViewModel
             {
                 if (_messureValues == null)
                 {
-                    _messureValues = DbContext.GetMesValues(new Guid[]{ CurrentApp.Id}, MesParams.Count * _topNum, _startDate, _endDate).ToList();//MesValueBLL.GetList(appName, topNum * MessureParams.Count, startDate, endDate);
+                    _messureValues = DbContext.GetMesValues(new Guid[]{ CurrentApp.Id},  _topNum, _startDate, _endDate).ToList();//MesValueBLL.GetList(appName, topNum * MessureParams.Count, startDate, endDate);
                 }
                 return _messureValues;
             }
@@ -197,7 +197,7 @@ namespace DamWebAPI.ViewModel
             {
                 if (_calcValues == null)
                 {
-                    _calcValues = DbContext.GetCalcValues(new Guid[]{ CurrentApp.Id}, CalcParams.Count * _topNum, _startDate, _endDate).ToList();
+                    _calcValues = DbContext.GetCalcValues(new Guid[]{ CurrentApp.Id},  _topNum, _startDate, _endDate).ToList();
                 }
                 return _calcValues;
             }

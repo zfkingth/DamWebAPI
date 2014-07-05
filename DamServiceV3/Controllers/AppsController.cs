@@ -178,7 +178,12 @@ namespace DamServiceV3.Controllers
 
             foreach (var id in appids)
             {
-                var ret = GetCalcValues(topNum, startDate, endDate, id);
+                var calcParamsCount = (from i in db.AppParams
+                                       where i.AppId == id && i is CalculateParam
+                                       select i).Count();
+
+
+                var ret = GetCalcValues(calcParamsCount * topNum, startDate, endDate, id);
                 if (values == null)
                 {
                     values = ret;
@@ -260,7 +265,7 @@ namespace DamServiceV3.Controllers
         }
 
         [HttpPost]
-        public IQueryable<MessureValue> GetMesValues( ODataActionParameters parameters)
+        public IQueryable<MessureValue> GetMesValues(ODataActionParameters parameters)
         {
 
             if (!ModelState.IsValid)
@@ -280,7 +285,11 @@ namespace DamServiceV3.Controllers
 
             foreach (var id in appids)
             {
-                var ret =  GetMesValues(topNum, startDate, endDate, id);
+                var mesParamsCount = (from i in db.AppParams
+                                      where i.AppId == id && i is MessureParam
+                                      select i).Count();
+
+                var ret = GetMesValues(mesParamsCount * topNum, startDate, endDate, id);
                 if (values == null)
                 {
                     values = ret;
@@ -298,14 +307,14 @@ namespace DamServiceV3.Controllers
 
 
 
-         private IQueryable<MessureValue> GetMesValues(int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate, Guid appId)
+        private IQueryable<MessureValue> GetMesValues(int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate, Guid appId)
         {
 
             var values = from i in db.MessureValues
-                     join p in db.AppParams.OfType<MessureParam>()
-                     on i.ParamId equals p.Id
-                     where p.AppId == appId
-                     select i;
+                         join p in db.AppParams.OfType<MessureParam>()
+                         on i.ParamId equals p.Id
+                         where p.AppId == appId
+                         select i;
 
             if (startDate.HasValue)
             {
@@ -363,7 +372,7 @@ namespace DamServiceV3.Controllers
 
 
         [HttpPost]
-        public IQueryable<Remark> GetRemarks( ODataActionParameters parameters)
+        public IQueryable<Remark> GetRemarks(ODataActionParameters parameters)
         {
 
             if (!ModelState.IsValid)
@@ -383,7 +392,7 @@ namespace DamServiceV3.Controllers
 
             foreach (var id in appids)
             {
-                var ret =  GetRemarks(topNum, startDate, endDate, id);
+                var ret = GetRemarks(topNum, startDate, endDate, id);
                 if (values == null)
                 {
                     values = ret;
@@ -395,7 +404,7 @@ namespace DamServiceV3.Controllers
 
             }
 
-            return values; 
+            return values;
 
 
         }
@@ -403,8 +412,8 @@ namespace DamServiceV3.Controllers
         private IQueryable<Remark> GetRemarks(int topNum, DateTimeOffset? startDate, DateTimeOffset? endDate, Guid appId)
         {
             var values = from i in db.Remarks
-                     where i.AppId == appId
-                     select i;
+                         where i.AppId == appId
+                         select i;
 
             if (startDate.HasValue)
             {
