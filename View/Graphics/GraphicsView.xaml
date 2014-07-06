@@ -250,9 +250,9 @@
                                      ClipboardCopyMode="ExcludeHeader"
                                      SelectionMode="Cell">
                         <dxg:GridControl.Columns>
-                            <dxg:GridColumn FieldName="Date"
-                                            Header="时间"
-                                            AllowEditing="False">
+                            <dxg:GridColumn AllowEditing="False"
+                                            FieldName="Date"
+                                            Header="时间">
                                 <dxg:GridColumn.DisplayTemplate>
                                     <ControlTemplate>
                                         <TextBlock Text="{Binding Path=EditValue.DateTime, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
@@ -261,6 +261,13 @@
                             </dxg:GridColumn>
 
                             <dxg:GridColumn FieldName="Val" Header="数值" />
+                            <dxg:GridColumn Header="删除" >
+                                <dxg:GridColumn.DisplayTemplate>
+                                    <ControlTemplate>
+                                        <Button Click="Button_Click_5">删除</Button>
+                                    </ControlTemplate>
+                                </dxg:GridColumn.DisplayTemplate>
+                            </dxg:GridColumn>
 
                         </dxg:GridControl.Columns>
                         <dxg:GridControl.View>

@@ -423,6 +423,16 @@ namespace DamWebAPI.View.Graphics
 
         }
 
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+
+            CalculateValue val = dataGrid.CurrentItem as CalculateValue;
+
+            ObservableCollection<CalculateValue> collection = dataGrid.ItemsSource as ObservableCollection<CalculateValue>;
+            collection.Remove(val);
+            
+        }
+
 
 
     }
