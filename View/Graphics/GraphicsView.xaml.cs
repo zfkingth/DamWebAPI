@@ -198,6 +198,7 @@ namespace DamWebAPI.View.Graphics
 
             // Clear current chart c1Chart.Reset(true);
             c1Chart.Reset(true);
+            dataGrid.ItemsSource = null;
 
             c1Chart.ChartType = ChartType.Line;
 
@@ -330,7 +331,11 @@ namespace DamWebAPI.View.Graphics
 
                 if (find)
                 {
-                    propertyGrid.SelectedObject = new CustomProperty(c1Chart.Data.Children[si]);
+                    var serial=c1Chart.Data.Children[si];
+                    propertyGrid.SelectedObject = new CustomProperty(serial);
+                    //设置相应的数据
+
+                    dataGrid.ItemsSource = serial.ItemsSource;
                 }
 
             }
@@ -396,9 +401,8 @@ namespace DamWebAPI.View.Graphics
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //var context = this.DataContext as DamWebAPI.ViewModel.Graphics.GraphicsViewModel;
 
-            lineGrid.SetBinding(GridControl.ItemsSourceProperty, new Binding("GraphicDS.Lines") { Source = this.DataContext });
+            //lineGrid.SetBinding(GridControl.ItemsSourceProperty, new Binding("GraphicDS.Lines") { Source = this.DataContext });
 
         }
 
