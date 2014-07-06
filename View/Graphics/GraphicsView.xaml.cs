@@ -18,6 +18,7 @@ using C1.WPF.C1Chart;
 using hammergo.GlobalConfig;
 using DevExpress.Xpf.Grid;
 using DamServiceV3.Test.DamServiceRef;
+using System.Collections.ObjectModel;
 
 
 
@@ -89,7 +90,7 @@ namespace DamWebAPI.View.Graphics
             double dashPixels = ResetChart();
 
             //一次性查询所有的数据
-           
+
             var results = from i in graInfo.Lines
                           where i.IsShow == true
                           group i by i.UnitSymbol;  //根据 物理量单位 判断是不是同一类量
@@ -102,7 +103,7 @@ namespace DamWebAPI.View.Graphics
             //根据多少个Y轴进行循环
             for (int i = 0; i < results.Count(); i++)
             {
-                if(allCalcValues==null)
+                if (allCalcValues == null)
                 {
                     //避免多个枚举
                     allCalcValues = ViewModel.GetAllCalcValues(graInfo).ToList();
@@ -147,12 +148,12 @@ namespace DamWebAPI.View.Graphics
                 var groupItems = results.ElementAt(i).ToList();
 
                 //物理量名称
-                string calcName=groupItems.First().ParamName;
+                string calcName = groupItems.First().ParamName;
 
-                if(groupItems.Count>1)
+                if (groupItems.Count > 1)
                 {
                     //有多个相同单位的物理量
-                    calcName="单位";
+                    calcName = "单位";
                 }
 
                 tbTitle.Text = string.Format("{0} {1}: {2}", tbTitle.Text, calcName, unitSymbol);
@@ -165,16 +166,22 @@ namespace DamWebAPI.View.Graphics
                     var valCollection = (from val in allCalcValues
                                          where val.ParamId == item.ParamId
                                          orderby val.Date
-                                         select val).ToList();
+                                         select val);
+
+                    ObservableCollection<CalculateValue> collection = new ObservableCollection<CalculateValue>(valCollection);
                     //消除异常值
 
-                    HandleErrorValue(valCollection);
+                    HandleErrorValue(collection);
 
+                    ds.ItemsSource = collection;
 
-                    ds.XValuesSource = (from val in valCollection
-                                        select val.Date.DateTime).ToArray();
-                    ds.ValuesSource = (from val in valCollection
-                                       select val.Val).ToArray();
+                    ds.XValueBinding = new Binding("Date.DateTime");
+                    ds.ValueBinding = new Binding("Val");
+
+                    //ds.XValuesSource = (from val in valCollection
+                    //                    select val.Date.DateTime).ToArray();
+                    //ds.ValuesSource = (from val in valCollection
+                    //                   select val.Val).ToArray();
 
                     ds.AxisY = yAxis.Name;
                     //set line style
@@ -202,7 +209,7 @@ namespace DamWebAPI.View.Graphics
             return dashPixels;
         }
 
-        private static void HandleErrorValue(List<CalculateValue> valCollection)
+        private static void HandleErrorValue(IEnumerable<CalculateValue> valCollection)
         {
             foreach (var valItem in valCollection)
             {
@@ -270,11 +277,15 @@ namespace DamWebAPI.View.Graphics
                 Cursor = Cursors.Cross;
                 var ds = c1Chart.Data.Children[si] as XYDataSeries;
 
-                var xArray = ds.XValuesSource as System.DateTime[];
-                var yArray = ds.ValuesSource as double?[];
-                if (xArray != null && yArray != null)
+                //var xArray = ds.XValuesSource as System.DateTime[];
+                //var yArray = ds.ValuesSource as double?[];
+
+                IEnumerable<CalculateValue> source = ds.ItemsSource as IEnumerable<CalculateValue>;
+
+                if (source != null && source.Count() > 0)
                 {
-                    string info = string.Format("{0}:{1} 日期:{2}", ds.Label, yArray[index], (xArray[index]).ToString("yyyy-MM-dd"));
+                    var val = source.ElementAt(index);
+                    string info = string.Format("{0}:{1} 日期:{2}", ds.Label, val.Val, (val.Date.DateTime).ToString("yyyy-MM-dd"));
 
                     m_toolTip.Content = new TextBlock { Text = info, TextWrapping = TextWrapping.Wrap };
                     m_toolTip.PlacementTarget = c1Chart;
@@ -397,6 +408,15 @@ namespace DamWebAPI.View.Graphics
 
 
             propertyGrid.SelectedObject = new GraphicProperty(c1Chart, tby1, tby2, tbcaption);
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
