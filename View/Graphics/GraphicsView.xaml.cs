@@ -89,12 +89,12 @@ namespace DamWebAPI.View.Graphics
             double dashPixels = ResetChart();
 
             //一次性查询所有的数据
-            var allCalcValues = ViewModel.GetAllCalcValues(graInfo).ToList();
+           
             var results = from i in graInfo.Lines
                           where i.IsShow == true
-                          group i by i.ParamName;  //根据 物理量单位 判断是不是同一类量
+                          group i by i.UnitSymbol;  //根据 物理量单位 判断是不是同一类量
 
-
+            List<CalculateValue> allCalcValues = null;
 
             tby1.Text = tby2.Text = tbcaption.Text = "";
 
@@ -102,6 +102,12 @@ namespace DamWebAPI.View.Graphics
             //根据多少个Y轴进行循环
             for (int i = 0; i < results.Count(); i++)
             {
+                if(allCalcValues==null)
+                {
+                    //避免多个枚举
+                    allCalcValues = ViewModel.GetAllCalcValues(graInfo).ToList();
+                }
+
                 //有N个Y轴
                 Axis yAxis = null;
                 TextBlock tbTitle = null;
@@ -136,11 +142,20 @@ namespace DamWebAPI.View.Graphics
 
                 }
 
-                string paramName = results.ElementAt(i).Key;
+                string unitSymbol = results.ElementAt(i).Key;
 
                 var groupItems = results.ElementAt(i).ToList();
 
-                tbTitle.Text = string.Format("{0} {1}: {2}", tbTitle.Text, paramName, groupItems.First().UnitSymbol);
+                //物理量名称
+                string calcName=groupItems.First().ParamName;
+
+                if(groupItems.Count>1)
+                {
+                    //有多个相同单位的物理量
+                    calcName="单位";
+                }
+
+                tbTitle.Text = string.Format("{0} {1}: {2}", tbTitle.Text, calcName, unitSymbol);
 
 
                 foreach (var item in groupItems)

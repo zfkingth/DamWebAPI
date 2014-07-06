@@ -90,9 +90,9 @@
 
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="4*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" DataContext="{Binding AppManageViewModel}">
                 <Grid.ColumnDefinitions>
