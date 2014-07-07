@@ -278,8 +278,6 @@ namespace DamWebAPI.View.Graphics
                 Cursor = Cursors.Cross;
                 var ds = c1Chart.Data.Children[si] as XYDataSeries;
 
-                //var xArray = ds.XValuesSource as System.DateTime[];
-                //var yArray = ds.ValuesSource as double?[];
 
                 IEnumerable<CalculateValue> source = ds.ItemsSource as IEnumerable<CalculateValue>;
 
@@ -331,11 +329,24 @@ namespace DamWebAPI.View.Graphics
 
                 if (find)
                 {
-                    var serial=c1Chart.Data.Children[si];
+                    var serial = c1Chart.Data.Children[si];
                     propertyGrid.SelectedObject = new CustomProperty(serial);
                     //设置相应的数据
 
                     dataGrid.ItemsSource = serial.ItemsSource;
+
+
+                    var ds = c1Chart.Data.Children[si] as XYDataSeries;
+
+
+                    IEnumerable<CalculateValue> source = serial.ItemsSource as IEnumerable<CalculateValue>;
+
+                    if (source != null && source.Count() > 0)
+                    {
+
+                        var val = source.ElementAt(index);
+                        dataGrid.CurrentItem = val;
+                    }
                 }
 
             }
@@ -430,7 +441,7 @@ namespace DamWebAPI.View.Graphics
 
             ObservableCollection<CalculateValue> collection = dataGrid.ItemsSource as ObservableCollection<CalculateValue>;
             collection.Remove(val);
-            
+
         }
 
 
