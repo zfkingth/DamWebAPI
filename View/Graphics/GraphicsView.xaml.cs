@@ -425,12 +425,50 @@ namespace DamWebAPI.View.Graphics
             propertyGrid.SelectedObject = new GraphicProperty(c1Chart, tby1, tby2, tbcaption);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-        }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+
+        private void Button_Year(object sender, RoutedEventArgs e)
         {
+            ////ChartPanel pnl = new ChartPanel();
+
+            ////Point p = new Point(0, double.NaN);
+
+            ////var dt = (DataTemplate)Resources["line"];
+            ////var cpo = (ChartPanelObject)dt.LoadContent();
+            ////cpo.DataPoint = p;
+            ////cpo.Action = ChartPanelAction.MouseMove;
+            ////cpo.Attach = ChartPanelAttach.DataXY;
+            ////pnl.Children.Add(cpo);
+
+            ////c1Chart.View.Layers.Add(pnl);
+
+
+            var pnl = new ChartPanel();
+            var obj = new ChartPanelObject();
+          
+
+            var myLine = new Line();
+            myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+            myLine.X1 = 0;
+            myLine.X2 = 50;
+            myLine.Y1 = 0;
+            myLine.Y2 = 50;
+            myLine.HorizontalAlignment = HorizontalAlignment.Left;
+            myLine.VerticalAlignment = VerticalAlignment.Top;
+            myLine.StrokeThickness = 2;
+
+          
+
+            obj.Content = myLine;
+            obj.DataPoint = c1Chart.View.PointToData( new Point(0,0));
+            
+            obj.Attach = ChartPanelAttach.DataXY;
+
+            obj.Action = ChartPanelAction.MouseMove;
+
+            pnl.Children.Add(obj);
+
+            c1Chart.View.Layers.Add(pnl); ;
 
         }
 

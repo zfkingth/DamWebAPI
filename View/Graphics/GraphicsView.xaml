@@ -14,7 +14,27 @@
              d:DesignHeight="768"
              d:DesignWidth="1024"
              mc:Ignorable="d">
+    <UserControl.Resources>
 
+        <DataTemplate x:Key="line">
+            <c1:ChartPanelObject x:Name="obj"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Stretch"
+                                 VerticalContentAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="1"
+                               Width="3"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Stretch"
+                               Fill="Red" />
+                </Grid>
+            </c1:ChartPanelObject>
+        </DataTemplate>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -53,13 +73,13 @@
                 <Button Grid.Row="1"
                         Grid.Column="0"
                         Margin="5"
-                        Click="Button_Click_3">
+                         >
                     高级属性
                 </Button>
                 <Button Grid.Row="1"
                         Grid.Column="1"
                         Margin="5"
-                        Click="Button_Click_4">
+                        Click="Button_Year">
                     划分年度
                 </Button>
                 <TextBlock Grid.Row="2"
