@@ -14,27 +14,7 @@
              d:DesignHeight="768"
              d:DesignWidth="1024"
              mc:Ignorable="d">
-    <UserControl.Resources>
-
-        <DataTemplate x:Key="line">
-            <c1:ChartPanelObject x:Name="obj"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Stretch"
-                                 VerticalContentAlignment="Stretch">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Rectangle Grid.Row="1"
-                               Width="3"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Stretch"
-                               Fill="Red" />
-                </Grid>
-            </c1:ChartPanelObject>
-        </DataTemplate>
-    </UserControl.Resources>
+ 
 
     <Grid>
         <Grid.ColumnDefinitions>

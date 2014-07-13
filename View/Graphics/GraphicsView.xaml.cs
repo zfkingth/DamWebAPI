@@ -158,10 +158,14 @@ namespace DamWebAPI.View.Graphics
 
                 tbTitle.Text = string.Format("{0} {1}: {2}", tbTitle.Text, calcName, unitSymbol);
 
-
-                foreach (var item in groupItems)
+                for (int gi = 0; gi < groupItems.Count; gi++)
                 {
+                    var item = groupItems.ElementAt(gi);
                     XYDataSeries ds = new XYDataSeries();
+                    if (gi == 0)
+                        ds.PlotElementLoaded += ds_PlotElementLoaded;
+
+
                     ds.Label = item.LegendName;
                     var valCollection = (from val in allCalcValues
                                          where val.ParamId == item.ParamId
@@ -191,6 +195,49 @@ namespace DamWebAPI.View.Graphics
 
             }
             c1Chart.EndUpdate();
+        }
+
+        private ChartPanel cp = new ChartPanel();
+
+        void ds_PlotElementLoaded(object sender, EventArgs e)
+        {
+            PlotElement pe = sender as PlotElement;
+            if (pe != null)
+            {
+                // get datapoint which includes series and series index info
+                var dataPoint = pe.DataPoint;
+
+                cp.Children.Clear();
+
+                var obj = new ChartPanelObject();
+
+
+                var myLine = new Line();
+                myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+                myLine.X1 = 0;
+                myLine.X2 = 50;
+                myLine.Y1 = 0;
+                myLine.Y2 = 50;
+                myLine.HorizontalAlignment = HorizontalAlignment.Left;
+                myLine.VerticalAlignment = VerticalAlignment.Top;
+                myLine.StrokeThickness = 2;
+
+
+
+                obj.Content = myLine;
+                obj.DataPoint = c1Chart.View.PointToData(new Point(0, 0));
+
+                obj.Attach = ChartPanelAttach.DataXY;
+
+                obj.Action = ChartPanelAction.None;
+
+                cp.Children.Add(obj);
+
+                
+
+                if (c1Chart.View.Layers.Contains(cp) == false)
+                    c1Chart.View.Layers.Add(cp); ;
+            }
         }
 
         private double ResetChart()
@@ -429,23 +476,12 @@ namespace DamWebAPI.View.Graphics
 
         private void Button_Year(object sender, RoutedEventArgs e)
         {
-            ////ChartPanel pnl = new ChartPanel();
 
-            ////Point p = new Point(0, double.NaN);
-
-            ////var dt = (DataTemplate)Resources["line"];
-            ////var cpo = (ChartPanelObject)dt.LoadContent();
-            ////cpo.DataPoint = p;
-            ////cpo.Action = ChartPanelAction.MouseMove;
-            ////cpo.Attach = ChartPanelAttach.DataXY;
-            ////pnl.Children.Add(cpo);
-
-            ////c1Chart.View.Layers.Add(pnl);
 
 
             var pnl = new ChartPanel();
             var obj = new ChartPanelObject();
-          
+
 
             var myLine = new Line();
             myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
@@ -457,11 +493,11 @@ namespace DamWebAPI.View.Graphics
             myLine.VerticalAlignment = VerticalAlignment.Top;
             myLine.StrokeThickness = 2;
 
-          
+
 
             obj.Content = myLine;
-            obj.DataPoint = c1Chart.View.PointToData( new Point(0,0));
-            
+            obj.DataPoint = c1Chart.View.PointToData(new Point(0, 0));
+
             obj.Attach = ChartPanelAttach.DataXY;
 
             obj.Action = ChartPanelAction.MouseMove;
