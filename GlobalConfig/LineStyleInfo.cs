@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Media;
 using System.Xml.Serialization;
 
-namespace hammergo.GlobalConfig
+namespace Hammergo.GlobalConfig
 {
     [XmlInclude(typeof(System.Windows.Media.SolidColorBrush))]
     [XmlInclude(typeof(System.Windows.Media.MatrixTransform))]

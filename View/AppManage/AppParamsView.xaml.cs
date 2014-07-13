@@ -48,14 +48,14 @@ namespace DamWebAPI.View
             }
         }
 
-        List<hammergo.GlobalConfig.ParamInfo> tempParamList = new List<hammergo.GlobalConfig.ParamInfo>();
+        List<Hammergo.GlobalConfig.ParamInfo> tempParamList = new List<Hammergo.GlobalConfig.ParamInfo>();
 
         private void PART_Editor_ProcessNewValue(DependencyObject sender, DevExpress.Xpf.Editors.ProcessNewValueEventArgs e)
         {
             ComboBoxEdit ic = sender as ComboBoxEdit;
-            var list = ic.ItemsSource as List<hammergo.GlobalConfig.ParamInfo>;
+            var list = ic.ItemsSource as List<Hammergo.GlobalConfig.ParamInfo>;
 
-            hammergo.GlobalConfig.ParamInfo np = new hammergo.GlobalConfig.ParamInfo();
+            Hammergo.GlobalConfig.ParamInfo np = new Hammergo.GlobalConfig.ParamInfo();
             np.Name = e.DisplayText;
 
 
@@ -85,7 +85,7 @@ namespace DamWebAPI.View
         private void setParamValue(object sender, DevExpress.Xpf.Grid.GridControl grid)
         {
             var cb = sender as ComboBoxEdit;
-            var selParam = cb.SelectedItem as hammergo.GlobalConfig.ParamInfo;
+            var selParam = cb.SelectedItem as Hammergo.GlobalConfig.ParamInfo;
             var cp = grid.GetFocusedRow() as AppParam ;
 
 

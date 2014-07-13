@@ -217,7 +217,7 @@
                                      VerticalAlignment="Stretch"
                                      FontSize="11"
                                      MouseDown="c1Chart_MouseDown"
-                                     MouseMove="c1Chart_MouseMove">
+                                     MouseMove="c1Chart_MouseMove"   >
 
                         <c1chart:C1ChartLegend DockPanel.Dock="Bottom" Orientation="Horizontal" />
                         <TextBlock Name="tbcaption"

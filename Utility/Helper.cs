@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows.Input;
-using hammergo.GlobalConfig;
+using Hammergo.GlobalConfig;
+using System.Windows;
+using System.Windows.Media;
+using System.Globalization;
 
 namespace Hammergo.Utility
 {
@@ -52,6 +55,47 @@ namespace Hammergo.Utility
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// 将数字转化为时间
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static DateTime NumToDateTime(double num)
+        {
+            DateTime origin = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+
+
+
+            return origin.AddDays(num);
+
+        }
+
+        /// <summary>
+        /// 将时间转化为数字
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static double DateTimeToNum(DateTime date)
+        {
+
+            DateTime origin = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+
+            return (date.Ticks - origin.Ticks) / TimeSpan.TicksPerDay;
+
+        }
+
+
+        public static Size MeasureTextSize(string text, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)
+        {
+            FormattedText ft = new FormattedText(text,
+                                                 CultureInfo.CurrentCulture,
+                                                 FlowDirection.LeftToRight,
+                                                 new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
+                                                 fontSize,
+                                                 Brushes.Black);
+            return new Size(ft.Width, ft.Height);
         }
 
     }

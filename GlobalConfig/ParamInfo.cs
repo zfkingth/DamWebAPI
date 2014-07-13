@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace hammergo.GlobalConfig
+namespace Hammergo.GlobalConfig
 {
     public class ParamInfo
     {

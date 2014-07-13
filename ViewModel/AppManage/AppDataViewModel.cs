@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using hammergo.GlobalConfig;
+using Hammergo.GlobalConfig;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

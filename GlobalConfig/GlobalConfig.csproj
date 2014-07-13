@@ -8,8 +8,8 @@
     <ProjectGuid>{3D62488E-EBC5-45F3-8576-0DB33CE74E7F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>hammergo.GlobalConfig</RootNamespace>
-    <AssemblyName>hammergo.GlobalConfig</AssemblyName>
+    <RootNamespace>Hammergo.GlobalConfig</RootNamespace>
+    <AssemblyName>Hammergo.GlobalConfig</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -129,6 +129,7 @@
   <ItemGroup>
     <Content Include="GlobalConfigData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

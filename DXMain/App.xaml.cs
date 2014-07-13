@@ -33,7 +33,7 @@ namespace DXMain
             //initial simple ioc
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             //load app.config
-            Uri serviceUri = new Uri(hammergo.GlobalConfig.PubConstant.ConfigData.ServiceURI);
+            Uri serviceUri = new Uri(Hammergo.GlobalConfig.PubConstant.ConfigData.ServiceURI);
             SimpleIoc.Default.Register<Uri>(() => serviceUri);
         }
 

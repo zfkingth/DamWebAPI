@@ -160,7 +160,7 @@ namespace DamWebAPI.ViewModel.AppManage
 
                     if (_dates.Count == 0)
                     {
-                        _dates.Add(hammergo.GlobalConfig.PubConstant.InitialTime);
+                        _dates.Add(Hammergo.GlobalConfig.PubConstant.InitialTime);
                     }
                 }
                 return _dates;
@@ -207,7 +207,7 @@ namespace DamWebAPI.ViewModel.AppManage
                 if (nextEntity == null)
                 {
                     //没有下一个时间段的公式，
-                    formulaEntity.EndDate = hammergo.GlobalConfig.PubConstant.OverTime;//默认终止时间
+                    formulaEntity.EndDate = Hammergo.GlobalConfig.PubConstant.OverTime;//默认终止时间
                 }
                 else
                 {
@@ -275,14 +275,14 @@ namespace DamWebAPI.ViewModel.AppManage
 
         }
 
-        List<hammergo.GlobalConfig.ParamInfo> _configConstParamsList = null;
-        public List<hammergo.GlobalConfig.ParamInfo> ConfigConstParamsList
+        List<Hammergo.GlobalConfig.ParamInfo> _configConstParamsList = null;
+        public List<Hammergo.GlobalConfig.ParamInfo> ConfigConstParamsList
         {
             get
             {
                 if (_configConstParamsList == null)
                 {
-                    _configConstParamsList = new List<hammergo.GlobalConfig.ParamInfo>(hammergo.GlobalConfig.PubConstant.ConfigData.ConstParamsList);
+                    _configConstParamsList = new List<Hammergo.GlobalConfig.ParamInfo>(Hammergo.GlobalConfig.PubConstant.ConfigData.ConstParamsList);
 
                 }
                 return _configConstParamsList;
@@ -290,14 +290,14 @@ namespace DamWebAPI.ViewModel.AppManage
         }
 
 
-        List<hammergo.GlobalConfig.ParamInfo> _configDefaultParamsList = null;
-        public List<hammergo.GlobalConfig.ParamInfo> ConfigDefaultParamsList
+        List<Hammergo.GlobalConfig.ParamInfo> _configDefaultParamsList = null;
+        public List<Hammergo.GlobalConfig.ParamInfo> ConfigDefaultParamsList
         {
             get
             {
                 if (_configDefaultParamsList == null)
                 {
-                    _configDefaultParamsList = new List<hammergo.GlobalConfig.ParamInfo>(hammergo.GlobalConfig.PubConstant.ConfigData.DefaultParamsList);
+                    _configDefaultParamsList = new List<Hammergo.GlobalConfig.ParamInfo>(Hammergo.GlobalConfig.PubConstant.ConfigData.DefaultParamsList);
 
                 }
                 return _configDefaultParamsList;
@@ -761,9 +761,9 @@ namespace DamWebAPI.ViewModel.AppManage
 
                 try
                 {
-                    if (result < hammergo.GlobalConfig.PubConstant.InitialTime)
+                    if (result < Hammergo.GlobalConfig.PubConstant.InitialTime)
                     {
-                        throw new Exception("要插入的时刻不能小于" + hammergo.GlobalConfig.PubConstant.InitialTime.ToString("u"));
+                        throw new Exception("要插入的时刻不能小于" + Hammergo.GlobalConfig.PubConstant.InitialTime.ToString("u"));
 
                     }
 
@@ -796,7 +796,7 @@ namespace DamWebAPI.ViewModel.AppManage
                     {
                         //没有任何计算公式
                         startDate = result;
-                        endDate = hammergo.GlobalConfig.PubConstant.OverTime;
+                        endDate = Hammergo.GlobalConfig.PubConstant.OverTime;
                     }
                     else if (lessDate == DateTime.MinValue)
                     {
@@ -808,7 +808,7 @@ namespace DamWebAPI.ViewModel.AppManage
                     {
                         //要插入的时刻在所有时刻之后
                         startDate = result;
-                        endDate = hammergo.GlobalConfig.PubConstant.OverTime;
+                        endDate = Hammergo.GlobalConfig.PubConstant.OverTime;
                     }
                     else
                     {
@@ -907,7 +907,7 @@ namespace DamWebAPI.ViewModel.AppManage
                         if (suffixDate == DateTime.MinValue)
                         {
                             //没有后缀的时间，要删除的项为最为一个时刻
-                            suffixDate = hammergo.GlobalConfig.PubConstant.OverTime;
+                            suffixDate = Hammergo.GlobalConfig.PubConstant.OverTime;
                         }
 
                         //删除

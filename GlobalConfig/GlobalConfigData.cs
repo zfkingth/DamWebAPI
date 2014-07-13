@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace hammergo.GlobalConfig
+namespace Hammergo.GlobalConfig
 {
 
     public class GlobalConfigData

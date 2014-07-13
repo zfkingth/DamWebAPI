@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-namespace hammergo.GlobalConfig
+namespace Hammergo.GlobalConfig
 {
 
     public class PubConstant

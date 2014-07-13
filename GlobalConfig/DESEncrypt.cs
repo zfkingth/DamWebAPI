@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;  
 using System.Text;
-namespace hammergo.GlobalConfig
+namespace Hammergo.GlobalConfig
 {
 	/// <summary>
 	/// DESº”√‹/Ω‚√‹¿‡°£
