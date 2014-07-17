@@ -593,10 +593,9 @@ namespace DamWebAPI.View.Graphics
 
                 //myLine.X2 = xcor2;
                 //myLine.Y2 = ycor2 + stringSize.Height; 
-                myLine.X1 = 0;
-                myLine.X2 = 50;
-                myLine.Y1 = 0;
-                myLine.Y2 = 50;
+                myLine.X1 = myLine.Y1 = 0;
+                myLine.X2 = xcor2;
+                myLine.Y2 = ycor2 + stringSize.Height; 
 
                 myLine.HorizontalAlignment = HorizontalAlignment.Left;
                 myLine.VerticalAlignment = VerticalAlignment.Top;
@@ -612,7 +611,6 @@ namespace DamWebAPI.View.Graphics
                 obj.Action = ChartPanelAction.None;
 
                 cp.Children.Add(obj);
-
 
 
                 if (c1Chart.View.Layers.Contains(cp) == false)
