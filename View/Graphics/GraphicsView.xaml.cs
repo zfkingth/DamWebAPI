@@ -515,6 +515,8 @@ namespace DamWebAPI.View.Graphics
             //hide auto label
             var txtblock = e.Label as TextBlock;
             txtblock.Foreground = e.Canvas.Background;
+
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -526,7 +528,7 @@ namespace DamWebAPI.View.Graphics
         }
 
 
- 
+
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
@@ -545,12 +547,18 @@ namespace DamWebAPI.View.Graphics
         {
             if (c1Chart.Data.Children.Count > 0)
             {
+
+                clearMajorGrid();
+
                 cp.Children.Clear();
+
+
 
                 var obj = new ChartPanelObject();
 
 
                 Size stringSize = Hammergo.Utility.Helper.MeasureTextSize("1983", c1Chart.FontFamily, c1Chart.FontStyle, c1Chart.FontWeight, c1Chart.FontStretch, c1Chart.FontSize);
+                double stringWidth = stringSize.Width;
 
                 //计算坐标
                 calcAxis();
@@ -560,18 +568,21 @@ namespace DamWebAPI.View.Graphics
                 Canvas canvas = new Canvas();
                 canvas.Width = rect.Width;
                 canvas.Height = rect.Height;
-                Canvas.SetLeft(canvas, 0);
-                //矩形对象相对于父容器对象Canvas的位置，左边距、上边距
-                Canvas.SetTop(canvas, 0);
+                //Canvas.SetLeft(canvas, 0);
+                ////矩形对象相对于父容器对象Canvas的位置，左边距、上边距
+                //Canvas.SetTop(canvas, 0);
+
+                obj.Content = canvas;
 
                 Rectangle rectangle = new Rectangle();//矩形对象
                 //属性设置，填充颜色、边粗细、边颜色、宽、高等
                 rectangle.StrokeThickness = c1Chart.View.AxisX.AxisLine.StrokeThickness;
                 rectangle.Stroke = c1Chart.View.AxisX.AxisLine.Stroke;
-                rectangle.Width = rect.Width;
+
+                rectangle.Width = rect.Width + 2 * c1Chart.View.AxisY.AxisLine.StrokeThickness;
                 rectangle.Height = rect.Height;
                 //矩形对象相对于父容器对象Canvas的位置，左边距、上边距
-                Canvas.SetLeft(rectangle, 0);
+                Canvas.SetLeft(rectangle, -1);
                 Canvas.SetTop(rectangle, 0);
 
                 canvas.Children.Add(rectangle);
@@ -580,54 +591,72 @@ namespace DamWebAPI.View.Graphics
                 //draw line 
                 for (int i = 0; i < cors.GetLength(0); i++)
                 {
-                    Line line = new Line();
+                    //第一个和最后一个竖线不画
+                    if (i > 0 && i < cors.GetLength(0) - 1)
+                    {
+                        Line line = new Line();
+                        line.Stroke = c1Chart.View.AxisX.AxisLine.Stroke;
+                        line.StrokeThickness = c1Chart.View.AxisX.AxisLine.StrokeThickness;
 
-                    //PointF beforePoint1 = new PointF(cors[i, 0], ycor1);
-                    //PointF beforePoint2 = new PointF(cors[i, 0], ycor1 + height);
+                        //相对于canvas的坐标
 
-                    //PointF beforeHighPoint = new PointF(cors[i, 0], ycor_yMax);
+                        line.X1 = cors[i, 0] - rect.Left;
 
-                    //PointF lastHighPoint = new PointF(cors[i, 1], ycor_yMax);
+                        line.Y1 = 0;
+                        line.X2 = line.X1;
+                        line.Y2 = line.Y1 + rect.Height;
 
+                        //Canvas.SetLeft(line, 0);
+                        //Canvas.SetTop(line, 0);
 
+                        canvas.Children.Add(line);
 
-                    //PointF lastPoint1 = new PointF(cors[i, 1], ycor1);
-                    //PointF lastPoint2 = new PointF(cors[i, 1], ycor1 + height);
+                        Line dashLine = new Line();
+                        dashLine.Stroke = Brushes.Gray;
+                        dashLine.StrokeThickness = 1;
+                        dashLine.StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
 
+                        dashLine.X1 = line.X1;
+                        dashLine.Y1 = line.Y1;
+                        dashLine.X2 = line.X2;
+                        dashLine.Y2 = -c1Chart.View.AxisY.GetAxisRect().Height;
+                        canvas.Children.Add(dashLine);
 
+                    }
 
-                    //ghs.DrawLine(pen, beforePoint1, beforePoint2);
-                    //ghs.DrawLine(pen, lastPoint1, lastPoint2);
-
-
-
-                    //ghs.DrawLine(dashPen, beforeHighPoint, beforePoint1);
-
-                    //ghs.DrawLine(dashPen, lastHighPoint, lastPoint1);
 
                     //显示年份
                     double distance = cors[i, 1] - cors[i, 0];
                     if (distance >= stringWidth)
                     {
 
+                        //相对于canvas的坐标系
+                        double startXCor = cors[i, 0] + (distance - stringWidth) / 2.0f - rect.Left;
+                        double startYCor = (rect.Height - stringSize.Height) / 2.0f;
 
-                        float startXCor = cors[i, 0] + (distance - stringWidth) / 2.0f;
-                        float startYCor = ycor1 + 0.2f;
+                        TextBlock tb = new TextBlock();
+                        tb.Text = (minYear + i).ToString();
 
-                        ghs.DrawString((minYear + i).ToString(), smallFont, Brushes.Black, new PointF(startXCor, startYCor));
+                        Canvas.SetTop(tb, startYCor);
+                        Canvas.SetLeft(tb, startXCor);
+
+                        canvas.Children.Add(tb);
+
+
+                        //ghs.DrawString((minYear + i).ToString(), smallFont, Brushes.Black, new PointF(startXCor, startYCor));
                     }
                 }
 
 
 
-                obj.Content = canvas;
- 
+
+
 
                 obj.Action = ChartPanelAction.None;
 
                 cp.Children.Add(obj);
 
-                
+
 
 
 
@@ -645,6 +674,16 @@ namespace DamWebAPI.View.Graphics
 
             }
 
+        }
+
+        private void clearMajorGrid()
+        {
+            c1Chart.View.AxisX.MajorGridFill = null;
+            c1Chart.View.AxisX.MajorGridStroke = null;
+            c1Chart.View.AxisX.MajorGridStrokeThickness = 0;
+            c1Chart.View.AxisX.MajorTickHeight = 0;
+            c1Chart.View.AxisX.MajorTickOverlap = 0;
+            c1Chart.View.AxisX.MajorTickThickness = 0;
         }
 
 
