@@ -50,18 +50,7 @@
                         Click="Button_Click">
                     保存配置
                 </Button>
-                <Button Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="5"
-                         >
-                    高级属性
-                </Button>
-                <Button Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="5"
-                        Click="Button_Year">
-                    划分年度
-                </Button>
+         
                 <TextBlock Grid.Row="2"
                            Grid.Column="0"
                            Margin="10,5,10,5">
@@ -90,6 +79,7 @@
                               Mask="yyyy-MM-dd HH:mm:ss"
                               MaskType="DateTimeAdvancingCaret"
                               MaskUseAsDisplayFormat="True" />
+                <CheckBox Content="划分年度" Grid.Column="0"  Grid.Row="1" VerticalAlignment="Center" Margin="5"/>
 
             </Grid>
             <c1:C1PropertyGrid Name="propertyGrid" Margin="5" />

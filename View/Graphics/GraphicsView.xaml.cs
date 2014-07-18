@@ -273,7 +273,7 @@ namespace DamWebAPI.View.Graphics
                 var tp = c1Chart.View.PointFromData(new Point(_snum, yMin));
                 cors[i, 0] = tp.X;
 
-                c1Chart.View.PointFromData(new Point(_enum, yMin));
+                tp = c1Chart.View.PointFromData(new Point(_enum, yMin));
                 cors[i, 1] = tp.X;
 
                 //c1Chart1.ChartGroups[0].DataCoordToCoord(_snum, yMin, ref cors[i, 0], ref temp);
@@ -507,7 +507,14 @@ namespace DamWebAPI.View.Graphics
         {
 
             //lineGrid.SetBinding(GridControl.ItemsSourceProperty, new Binding("GraphicDS.Lines") { Source = this.DataContext });
+            c1Chart.View.AxisX.AnnoCreated += AxisX_AnnoCreated;
+        }
 
+        void AxisX_AnnoCreated(object sender, AnnoCreatedEventArgs e)
+        {
+            //hide auto label
+            var txtblock = e.Label as TextBlock;
+            txtblock.Foreground = e.Canvas.Background;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -519,45 +526,7 @@ namespace DamWebAPI.View.Graphics
         }
 
 
-
-        private void Button_Year(object sender, RoutedEventArgs e)
-        {
-
-
-
-            //var pnl = new ChartPanel();
-            //var obj = new ChartPanelObject();
-
-
-            //var myLine = new Line();
-            //myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            //myLine.X1 = 0;
-            //myLine.X2 = 50;
-            //myLine.Y1 = 0;
-            //myLine.Y2 = 50;
-            //myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            //myLine.VerticalAlignment = VerticalAlignment.Top;
-            //myLine.StrokeThickness = 2;
-
-
-
-            //obj.Content = myLine;
-            //obj.DataPoint = c1Chart.View.PointToData(new Point(0, 0));
-
-            //obj.Attach = ChartPanelAttach.DataXY;
-
-            //obj.Action = ChartPanelAction.MouseMove;
-
-            //pnl.Children.Add(obj);
-
-            //c1Chart.View.Layers.Add(pnl); ;
-
-            c1Chart.BeginUpdate();
-            handleDraw();
-
-            c1Chart.EndUpdate();
-
-        }
+ 
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
@@ -586,36 +555,93 @@ namespace DamWebAPI.View.Graphics
                 //计算坐标
                 calcAxis();
 
-                var myLine = new Line();
-                myLine.Stroke = System.Windows.Media.Brushes.Red;
-                //myLine.X1 = xcor1;
-                //myLine.Y1 = ycor1 + stringSize.Height;
+                var rect = c1Chart.View.AxisX.GetAxisRect();
 
-                //myLine.X2 = xcor2;
-                //myLine.Y2 = ycor2 + stringSize.Height; 
-                myLine.X1 = myLine.Y1 = 0;
-                myLine.X2 = xcor2;
-                myLine.Y2 = ycor2 + stringSize.Height; 
+                Canvas canvas = new Canvas();
+                canvas.Width = rect.Width;
+                canvas.Height = rect.Height;
+                Canvas.SetLeft(canvas, 0);
+                //矩形对象相对于父容器对象Canvas的位置，左边距、上边距
+                Canvas.SetTop(canvas, 0);
 
-                myLine.HorizontalAlignment = HorizontalAlignment.Left;
-                myLine.VerticalAlignment = VerticalAlignment.Top;
-                myLine.StrokeThickness = 2;
+                Rectangle rectangle = new Rectangle();//矩形对象
+                //属性设置，填充颜色、边粗细、边颜色、宽、高等
+                rectangle.StrokeThickness = c1Chart.View.AxisX.AxisLine.StrokeThickness;
+                rectangle.Stroke = c1Chart.View.AxisX.AxisLine.Stroke;
+                rectangle.Width = rect.Width;
+                rectangle.Height = rect.Height;
+                //矩形对象相对于父容器对象Canvas的位置，左边距、上边距
+                Canvas.SetLeft(rectangle, 0);
+                Canvas.SetTop(rectangle, 0);
+
+                canvas.Children.Add(rectangle);
+
+
+                //draw line 
+                for (int i = 0; i < cors.GetLength(0); i++)
+                {
+                    Line line = new Line();
+
+                    //PointF beforePoint1 = new PointF(cors[i, 0], ycor1);
+                    //PointF beforePoint2 = new PointF(cors[i, 0], ycor1 + height);
+
+                    //PointF beforeHighPoint = new PointF(cors[i, 0], ycor_yMax);
+
+                    //PointF lastHighPoint = new PointF(cors[i, 1], ycor_yMax);
 
 
 
-                obj.Content = myLine;
-                obj.DataPoint = c1Chart.View.PointToData(new Point(0, 0));
+                    //PointF lastPoint1 = new PointF(cors[i, 1], ycor1);
+                    //PointF lastPoint2 = new PointF(cors[i, 1], ycor1 + height);
 
-                obj.Attach = ChartPanelAttach.DataXY;
+
+
+                    //ghs.DrawLine(pen, beforePoint1, beforePoint2);
+                    //ghs.DrawLine(pen, lastPoint1, lastPoint2);
+
+
+
+                    //ghs.DrawLine(dashPen, beforeHighPoint, beforePoint1);
+
+                    //ghs.DrawLine(dashPen, lastHighPoint, lastPoint1);
+
+                    //显示年份
+                    double distance = cors[i, 1] - cors[i, 0];
+                    if (distance >= stringWidth)
+                    {
+
+
+                        float startXCor = cors[i, 0] + (distance - stringWidth) / 2.0f;
+                        float startYCor = ycor1 + 0.2f;
+
+                        ghs.DrawString((minYear + i).ToString(), smallFont, Brushes.Black, new PointF(startXCor, startYCor));
+                    }
+                }
+
+
+
+                obj.Content = canvas;
+ 
 
                 obj.Action = ChartPanelAction.None;
 
                 cp.Children.Add(obj);
 
+                
+
+
+
 
                 if (c1Chart.View.Layers.Contains(cp) == false)
                     c1Chart.View.Layers.Add(cp);
 
+
+
+                cp.SetValue(Canvas.LeftProperty, rect.Left);
+                cp.SetValue(Canvas.TopProperty, rect.Top);
+
+                cp.Height = rect.Height;
+                cp.Width = rect.Width;
 
             }
 
