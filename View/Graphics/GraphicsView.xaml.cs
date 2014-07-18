@@ -204,6 +204,7 @@ namespace DamWebAPI.View.Graphics
 
         void ds_PlotElementLoaded(object sender, EventArgs e)
         {
+            if(divideYear)
             handleDraw();
         }
 
@@ -291,6 +292,7 @@ namespace DamWebAPI.View.Graphics
 
             // Clear current chart c1Chart.Reset(true);
             c1Chart.Reset(true);
+            cp.Children.Clear();
             dataGrid.ItemsSource = null;
 
             c1Chart.ChartType = ChartType.Line;
@@ -512,9 +514,12 @@ namespace DamWebAPI.View.Graphics
 
         void AxisX_AnnoCreated(object sender, AnnoCreatedEventArgs e)
         {
-            //hide auto label
-            var txtblock = e.Label as TextBlock;
-            txtblock.Foreground = e.Canvas.Background;
+            if (divideYear)
+            {
+                //hide auto label
+                var txtblock = e.Label as TextBlock;
+                txtblock.Foreground = e.Canvas.Background;
+            }
 
 
         }
@@ -684,6 +689,19 @@ namespace DamWebAPI.View.Graphics
             c1Chart.View.AxisX.MajorTickHeight = 0;
             c1Chart.View.AxisX.MajorTickOverlap = 0;
             c1Chart.View.AxisX.MajorTickThickness = 0;
+        }
+
+        bool divideYear = false;
+        private void chkYear_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            divideYear = cb.IsChecked.Value;
+        }
+
+        private void chkYear_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            divideYear = cb.IsChecked.Value;
         }
 
 

@@ -14,7 +14,7 @@
              d:DesignHeight="768"
              d:DesignWidth="1024"
              mc:Ignorable="d">
- 
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -50,7 +50,7 @@
                         Click="Button_Click">
                     保存配置
                 </Button>
-         
+
                 <TextBlock Grid.Row="2"
                            Grid.Column="0"
                            Margin="10,5,10,5">
@@ -79,7 +79,14 @@
                               Mask="yyyy-MM-dd HH:mm:ss"
                               MaskType="DateTimeAdvancingCaret"
                               MaskUseAsDisplayFormat="True" />
-                <CheckBox Content="划分年度" Grid.Column="0"  Grid.Row="1" VerticalAlignment="Center" Margin="5"/>
+                <CheckBox Name="chkYear"
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          Margin="5"
+                          VerticalAlignment="Center"
+                          Checked="chkYear_Checked"
+                          Content="划分年度"
+                          Unchecked="chkYear_Unchecked" />
 
             </Grid>
             <c1:C1PropertyGrid Name="propertyGrid" Margin="5" />
@@ -207,7 +214,7 @@
                                      VerticalAlignment="Stretch"
                                      FontSize="11"
                                      MouseDown="c1Chart_MouseDown"
-                                     MouseMove="c1Chart_MouseMove"   >
+                                     MouseMove="c1Chart_MouseMove">
 
                         <c1chart:C1ChartLegend DockPanel.Dock="Bottom" Orientation="Horizontal" />
                         <TextBlock Name="tbcaption"
@@ -238,6 +245,7 @@
                                      Margin="2,5,5,2"
                                      AutoGenerateColumns="None"
                                      ClipboardCopyMode="ExcludeHeader"
+                                     FontSize="11"
                                      SelectionMode="Cell">
                         <dxg:GridControl.Columns>
                             <dxg:GridColumn AllowEditing="False"
@@ -251,7 +259,7 @@
                             </dxg:GridColumn>
 
                             <dxg:GridColumn FieldName="Val" Header="数值" />
-                            <dxg:GridColumn Header="删除" >
+                            <dxg:GridColumn Header="删除">
                                 <dxg:GridColumn.DisplayTemplate>
                                     <ControlTemplate>
                                         <Button Click="Button_Click_5">删除</Button>
