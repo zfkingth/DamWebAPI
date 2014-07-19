@@ -71,7 +71,9 @@ namespace DamWebAPI.View.Graphics
                 App selApp = e.AddedItems[0] as App;
                 DamWebAPI.ViewModel.Entity.Graphics graInfo = ViewModel.CreateNewGraphicDS(selApp);
 
-                CreateGhpics(graInfo);
+                DrawGhpics(graInfo);
+
+                tbExtreamInfo.Text = ViewModel.GetAppsInfo(graInfo) + getExtreamInfo();
 
                 //只有显示一支仪器时才显示这条信息
 
@@ -85,8 +87,10 @@ namespace DamWebAPI.View.Graphics
             }
         }
 
-        private void CreateGhpics(DamWebAPI.ViewModel.Entity.Graphics graInfo)
+
+        private void DrawGhpics(DamWebAPI.ViewModel.Entity.Graphics graInfo)
         {
+
             c1Chart.BeginUpdate();
 
             double dashPixels = ResetChart();
@@ -206,8 +210,8 @@ namespace DamWebAPI.View.Graphics
 
         void ds_PlotElementLoaded(object sender, EventArgs e)
         {
-            if(divideYear)
-            handleDraw();
+            if (divideYear)
+                handleDraw();
         }
 
 
@@ -528,8 +532,8 @@ namespace DamWebAPI.View.Graphics
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            CreateGhpics(ViewModel.GraphicDS);
-
+            DrawGhpics(ViewModel.GraphicDS);
+            tbExtreamInfo.Text = ViewModel.GetAppsInfo(ViewModel.GraphicDS) + getExtreamInfo();
 
             propertyGrid.SelectedObject = new GraphicProperty(c1Chart, tby1, tby2, tbcaption);
         }
@@ -728,7 +732,7 @@ namespace DamWebAPI.View.Graphics
             DataObject dataObject = new DataObject();
             //lets start with the text representation 
             //to make is easy we will just assume the object set as the DataContext has the ToString method overrideen and we use that as the text
-           // dataObject.SetData(DataFormats.Text, element.DataContext.ToString(), true);
+            // dataObject.SetData(DataFormats.Text, element.DataContext.ToString(), true);
 
             //now lets do the image representation 
             double width = element.ActualWidth;
@@ -752,13 +756,43 @@ namespace DamWebAPI.View.Graphics
         {
             MemoryStream ms = new MemoryStream();
             c1Chart.SaveImage(ms, ImageFormat.Png);
-            
-            var data = new DataObject("PNG",ms);
+
+            var data = new DataObject("PNG", ms);
             Clipboard.Clear();
             Clipboard.SetDataObject(data, true);
 
         }
 
+
+
+        private string getExtreamInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var ds in c1Chart.Data.Children)
+            {
+                ObservableCollection<CalculateValue> oc = ds.ItemsSource as ObservableCollection<CalculateValue>;
+
+                var qmax = (from i in oc
+                            select i.Val).Max();
+                var qmin = (from i in oc
+                            select i.Val).Min();
+                var dateMax =( from i in oc
+                              where i.Val == qmax
+                              select i.Date).FirstOrDefault();
+                var dateMin =( from i in oc
+                              where i.Val == qmin
+                              select i.Date).FirstOrDefault();
+
+                sb.Append(ds.Label).Append(":");
+                sb.Append(" 最小值：").Append(qmin).Append(" 日期：").Append(dateMin);
+                sb.Append(" 最大值：").Append(qmax).Append(" 日期：").Append(dateMax);
+                sb.Append("\n");
+
+            }
+
+            return sb.ToString();
+        }
 
 
 

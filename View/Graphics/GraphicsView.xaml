@@ -297,6 +297,10 @@
                               VerticalAlignment="Center"
                               Background="Transparent"
                               ShowsPreview="True" />
+                <TextBox Name="tbExtreamInfo"
+                         Grid.Row="2"
+                         HorizontalScrollBarVisibility="Auto"
+                         VerticalScrollBarVisibility="Auto" />
             </Grid>
             <Grid />
         </Grid>

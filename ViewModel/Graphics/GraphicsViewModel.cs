@@ -257,6 +257,36 @@ namespace DamWebAPI.ViewModel.Graphics
             return values;
         }
 
+        public string GetAppsInfo(Entity.Graphics graDS)
+        {
+            var appids = (from i in graDS.Lines
+                          where i.IsShow == true
+                          select i.AppId).Distinct();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("测点信息:\n");
+
+            foreach(var id in appids)
+            {
+                App app=DbContext.Apps.Where(s=>s.Id==id).FirstOrDefault();
+
+                sb.Append(app.AppName).Append("  ");
+                sb.Append("坐标 x y z：");
+                sb.Append(app.X).Append("  ");
+                sb.Append(app.Y).Append("  ");
+                sb.Append(app.Z).Append("  ");
+                
+                sb.Append("埋设时间:");
+                sb.Append(app.BuriedTime);
+                sb.Append("  备注：");
+                sb.Append(app.OtherInfo);
+                sb.Append("\n");
+            }
+
+            return sb.ToString();
+
+
+        }
+
         public Entity.Graphics CreateNewGraphicDS(App selApp)
         {
             string appName = selApp.AppName;
