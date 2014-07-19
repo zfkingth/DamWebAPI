@@ -19,6 +19,8 @@ using Hammergo.GlobalConfig;
 using DevExpress.Xpf.Grid;
 using DamServiceV3.Test.DamServiceRef;
 using System.Collections.ObjectModel;
+using System.IO;
+using C1.WPF.C1Chart.Extended;
 
 
 
@@ -702,6 +704,59 @@ namespace DamWebAPI.View.Graphics
         {
             CheckBox cb = sender as CheckBox;
             divideYear = cb.IsChecked.Value;
+        }
+
+        private void MenuItem_Click_bmp(object sender, RoutedEventArgs e)
+        {
+
+            //MemoryStream ms = new MemoryStream();
+            //c1Chart.SaveImage(ms, ImageFormat.Bmp);
+
+            //var data = new DataObject(DataFormats.Bitmap, ms);
+            //Clipboard.Clear();
+            //Clipboard.SetDataObject(data, true);
+            CopyUIElementToClipboard(c1Chart);
+        }
+
+        /// <summary> 
+        /// Copies a UI element to the clipboard as an image, and as text. 
+        /// </summary> 
+        /// <param name="element">The element to copy.</param> 
+        public static void CopyUIElementToClipboard(FrameworkElement element)
+        {
+            //data object to hold our different formats representing the element
+            DataObject dataObject = new DataObject();
+            //lets start with the text representation 
+            //to make is easy we will just assume the object set as the DataContext has the ToString method overrideen and we use that as the text
+           // dataObject.SetData(DataFormats.Text, element.DataContext.ToString(), true);
+
+            //now lets do the image representation 
+            double width = element.ActualWidth;
+            double height = element.ActualHeight;
+            RenderTargetBitmap bmpCopied = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), 96, 96, PixelFormats.Default);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(element);
+                dc.DrawRectangle(vb, null, new Rect(new Point(), new Size(width, height)));
+            }
+            bmpCopied.Render(dv);
+            dataObject.SetData(DataFormats.Bitmap, bmpCopied, true);
+
+            //now place our object in the clipboard 
+            Clipboard.SetDataObject(dataObject, true);
+        }
+
+
+        private void MenuItem_Click_png(object sender, RoutedEventArgs e)
+        {
+            MemoryStream ms = new MemoryStream();
+            c1Chart.SaveImage(ms, ImageFormat.Png);
+
+            var data = new DataObject("PNG",ms);
+            Clipboard.Clear();
+            Clipboard.SetDataObject(data, true);
+
         }
 
 

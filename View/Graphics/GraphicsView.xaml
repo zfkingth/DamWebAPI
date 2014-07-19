@@ -215,6 +215,12 @@
                                      FontSize="11"
                                      MouseDown="c1Chart_MouseDown"
                                      MouseMove="c1Chart_MouseMove">
+                        <c1chart:C1Chart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Click="MenuItem_Click_bmp" Header="复制(bmp格式)" />
+                                <MenuItem Click="MenuItem_Click_png" Header="复制(png格式)" />
+                            </ContextMenu>
+                        </c1chart:C1Chart.ContextMenu>
 
                         <c1chart:C1ChartLegend DockPanel.Dock="Bottom" Orientation="Horizontal" />
                         <TextBlock Name="tbcaption"

@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="C1.WPF.4, Version=4.0.20133.375, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
     <Reference Include="C1.WPF.C1Chart.4, Version=4.0.20141.189, Culture=neutral, PublicKeyToken=f63432dd4d20448b, processorArchitecture=MSIL" />
+    <Reference Include="C1.WPF.C1Chart.Extended.4, Version=4.0.20141.189, Culture=neutral, PublicKeyToken=f63432dd4d20448b, processorArchitecture=MSIL" />
     <Reference Include="C1.WPF.Extended.4, Version=4.0.20133.375, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Images.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
