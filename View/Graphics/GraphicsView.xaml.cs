@@ -752,7 +752,7 @@ namespace DamWebAPI.View.Graphics
         {
             MemoryStream ms = new MemoryStream();
             c1Chart.SaveImage(ms, ImageFormat.Png);
-
+            
             var data = new DataObject("PNG",ms);
             Clipboard.Clear();
             Clipboard.SetDataObject(data, true);
