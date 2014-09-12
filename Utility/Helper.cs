@@ -34,6 +34,8 @@ namespace Hammergo.Utility
         }
 
 
+ 
+
         public static double Round(double value, int decimals)
         {
             if (value < 0)

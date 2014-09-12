@@ -48,6 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.1\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -79,6 +82,8 @@
     <Compile Include="Base\RelayCommandGeneric.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Base\WorkspaceViewModel.cs" />
+    <Compile Include="DataImport\ExcelHelper.cs" />
+    <Compile Include="DataImport\ExcelImporter.cs" />
     <Compile Include="DataImport\ImportExcelDataViewModel.cs" />
     <Compile Include="Entity\Graphics1.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -150,7 +150,7 @@ namespace DamWebAPI.ViewModel
                 if (_mesParams == null)
                 {
                     _mesParams = (from i in AllParams
-                                  where  i is MessureParam
+                                  where i is MessureParam
                                   orderby i.Order
                                   select (MessureParam)i).ToList();
 
@@ -184,7 +184,7 @@ namespace DamWebAPI.ViewModel
             {
                 if (_messureValues == null)
                 {
-                    _messureValues = DbContext.GetMesValues(new Guid[]{ CurrentApp.Id},  _topNum, _startDate, _endDate).ToList();//MesValueBLL.GetList(appName, topNum * MessureParams.Count, startDate, endDate);
+                    _messureValues = DbContext.GetMesValues(new Guid[] { CurrentApp.Id }, _topNum, _startDate, _endDate).ToList();//MesValueBLL.GetList(appName, topNum * MessureParams.Count, startDate, endDate);
                 }
                 return _messureValues;
             }
@@ -197,7 +197,7 @@ namespace DamWebAPI.ViewModel
             {
                 if (_calcValues == null)
                 {
-                    _calcValues = DbContext.GetCalcValues(new Guid[]{ CurrentApp.Id},  _topNum, _startDate, _endDate).ToList();
+                    _calcValues = DbContext.GetCalcValues(new Guid[] { CurrentApp.Id }, _topNum, _startDate, _endDate).ToList();
                 }
                 return _calcValues;
             }
@@ -212,7 +212,7 @@ namespace DamWebAPI.ViewModel
                 if (_constantParams == null)
                 {
                     _constantParams = (from i in AllParams
-                                       where   i is ConstantParam
+                                       where i is ConstantParam
                                        select (ConstantParam)i).ToList();
                 }
                 return _constantParams;
@@ -228,7 +228,7 @@ namespace DamWebAPI.ViewModel
             {
                 if (_remarks == null)
                 {
-                    _remarks = DbContext.GetRemarks(new Guid[]{ CurrentApp.Id}, _topNum, _startDate, _endDate).ToList();// RemarkBLL.GetList(appName, topNum, startDate, endDate);
+                    _remarks = DbContext.GetRemarks(new Guid[] { CurrentApp.Id }, _topNum, _startDate, _endDate).ToList();// RemarkBLL.GetList(appName, topNum, startDate, endDate);
                 }
                 return _remarks;
             }
@@ -377,7 +377,11 @@ namespace DamWebAPI.ViewModel
             return dt;
         }
 
-        private DataTable createDataTableSchema()
+        /// <summary>
+        /// 创建表构架
+        /// </summary>
+        /// <returns></returns>
+        internal DataTable createDataTableSchema()
         {
 
             DataTable dt = new DataTable();

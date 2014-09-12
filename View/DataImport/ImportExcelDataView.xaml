@@ -7,46 +7,41 @@
              d:DesignWidth="800"
              mc:Ignorable="d">
     <Grid>
-        <DockPanel>
-            <ProgressBar Name="pbar"
-                         Height="20"
-                         DockPanel.Dock="Bottom" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
 
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="2"
-                       Grid.Column="0"
-                       Grid.ColumnSpan="4"
-                       Margin="10"
-                       Content="结果" />
-                <GroupBox Grid.Row="1"
-                          Grid.Column="1"
-                          Header="导入选项">
-                    <StackPanel>
-                        <RadioButton Margin="10" IsChecked="True">单层目录</RadioButton>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Margin="10"
+               Content="结果" />
+        <GroupBox Grid.Row="1"
+                  Grid.Column="1"
+                  VerticalAlignment="Center"
+                  Header="导入选项">
+            <StackPanel>
+                <RadioButton Margin="8" IsChecked="True">单层目录</RadioButton>
 
-                        <RadioButton Margin="5">目录及所有子目录</RadioButton>
-                    </StackPanel>
+                <RadioButton Margin="8">目录及所有子目录</RadioButton>
 
-                </GroupBox>
-
-                <StackPanel Grid.Row="1" Grid.Column="2">
-                    <Button Margin="10" Command="{Binding CmdChoosePath}">选择路径</Button>
-                    <Button Margin="10">开始导入</Button>
+                <StackPanel>
+                    <Button Margin="8" Command="{Binding CmdChoosePath}">选择路径</Button>
+                    <Button Margin="8">开始导入</Button>
                 </StackPanel>
+            </StackPanel>
 
-            </Grid>
-        </DockPanel>
+        </GroupBox>
+
+
+
     </Grid>
 </UserControl>

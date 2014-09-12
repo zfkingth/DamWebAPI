@@ -46,8 +46,23 @@ namespace DXMain
 
                 Messenger.Default.Register<DialogMessage>(this,m=>Getchoose(m));
 
+                Messenger.Default.Register<NotificationMessageAction<System.IO.DirectoryInfo>>(this, msg => GetDirectory(msg));
+
             }
         }
+
+        private void GetDirectory(NotificationMessageAction<DirectoryInfo> msg)
+        {
+            System.Windows.Forms.FolderBrowserDialog folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var result = new System.IO.DirectoryInfo(folderBrowser.SelectedPath);
+
+                msg.Execute(result);
+            }
+        }
+
+        
 
         private void GetInputStrings(NotificationMessageAction<List<string>> msg)
         {
