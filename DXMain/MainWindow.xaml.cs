@@ -23,6 +23,7 @@ using DamWebAPI.ViewModel.AppManage;
 using DamWebAPI.View.AppManage;
 using DamWebAPI.ViewModel.Graphics;
 using DamWebAPI.View.Graphics;
+using System.Threading;
 
 namespace DXMain
 {
@@ -122,29 +123,15 @@ namespace DXMain
         private void ShowMessage(Exception ex)
         {
             string message = ex.Message;
-            //if (ex is System.Data.Services.Client.DataServiceRequestException)
-            //{
-            if (ex.InnerException != null)
+ 
+            new Thread(() =>
             {
-                var sr = new StringReader(ex.InnerException.Message);
-                XElement root = XElement.Load(sr);
-                IEnumerable<XElement> mesElements =
-                  from el in root.Elements()
-                  where el.Name.LocalName == "innererror"
-                  select el;
-                var mesElements2 =
-                    from el in mesElements.Elements()
-                    where el.Name.LocalName == "message"
-                    select el;
-                message = "";
-                foreach (XElement el in mesElements2)
-                    message += el.Value;
-            }
-            //}
-
-            MessageBox.Show(this, message,"提示",MessageBoxButton.OK,MessageBoxImage.Asterisk);
-
-            //  MessageBox.Show(this, this,message);
+                this.Dispatcher.Invoke(new Action(() =>
+                {
+                   MessageBox.Show(this, message,"提示",MessageBoxButton.OK,MessageBoxImage.Asterisk); 
+                }));
+            }).Start();
+           
         }
 
         private void tabControl1_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

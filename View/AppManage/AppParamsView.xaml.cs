@@ -35,7 +35,7 @@ namespace DamWebAPI.View
             {
                 var id = (Guid)e.GetListSourceFieldValue("Id");
                 var context = this.DataContext as  AppParamsViewModel;
-                DateTime date = (DateTime)comboDates.SelectedValue;
+                DateTimeOffset date = (DateTimeOffset)comboDates.SelectedValue;
 
                 if (e.IsGetData)
                 {
@@ -132,7 +132,7 @@ namespace DamWebAPI.View
             var selval = (sender as ComboBox).SelectedValue;
             if (selval != null)
             {
-                DateTime date = (DateTime)selval;
+                DateTimeOffset date = (DateTimeOffset)selval;
                 Hammergo.Utility.Helper.InvodeCmd(this.DataContext, "CmdSelectedItemChangedDate", date);
                 calcGrid.RefreshData();
             }

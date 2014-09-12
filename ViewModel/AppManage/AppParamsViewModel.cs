@@ -130,8 +130,8 @@ namespace DamWebAPI.ViewModel.AppManage
 
         #region CurrentDate
 
-        private DateTime _currentDate;
-        public DateTime CurrentDate
+        private DateTimeOffset _currentDate;
+        public DateTimeOffset CurrentDate
         {
             get { return _currentDate; }
             set
@@ -146,8 +146,8 @@ namespace DamWebAPI.ViewModel.AppManage
 
         #endregion // CurrentDate
 
-        ObservableCollection<DateTime> _dates = null;
-        public ObservableCollection<DateTime> Dates
+        ObservableCollection<DateTimeOffset> _dates = null;
+        public ObservableCollection<DateTimeOffset> Dates
         {
             get
             {
@@ -155,19 +155,19 @@ namespace DamWebAPI.ViewModel.AppManage
                 {
                     //dbcontext 只保存当前测点的信息
                     var query = (from i in _allFormulae
-                                 select i.StartDate.DateTime).Distinct();
-                    _dates = new ObservableCollection<DateTime>(query);
+                                 select i.StartDate).Distinct();
+                    _dates = new ObservableCollection<DateTimeOffset>(query);
 
                     if (_dates.Count == 0)
                     {
-                        _dates.Add(Hammergo.GlobalConfig.PubConstant.InitialTime);
+                        _dates.Add(DateTimeOffset.MinValue);
                     }
                 }
                 return _dates;
             }
         }
 
-        public string GetFormulaString(Guid calcParamId, DateTime startDate)
+        public string GetFormulaString(Guid calcParamId, DateTimeOffset startDate)
         {
 
             var f = (from i in _allFormulae
@@ -183,7 +183,7 @@ namespace DamWebAPI.ViewModel.AppManage
             }
         }
 
-        public void SetFormulaString(Guid calcParamId, DateTime startDate, string formula)
+        public void SetFormulaString(Guid calcParamId, DateTimeOffset startDate, string formula)
         {
 
             var formulaEntity = (from i in _allFormulae
@@ -207,7 +207,7 @@ namespace DamWebAPI.ViewModel.AppManage
                 if (nextEntity == null)
                 {
                     //没有下一个时间段的公式，
-                    formulaEntity.EndDate = Hammergo.GlobalConfig.PubConstant.OverTime;//默认终止时间
+                    formulaEntity.EndDate =  DateTimeOffset.MaxValue;//默认终止时间
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace DamWebAPI.ViewModel.AppManage
             }
             catch (Exception ex)
             {
-                Messenger.Default.Send(ex);
+                Messenger.Default.Send<Exception>(ex);
             }
 
         }
@@ -713,7 +713,7 @@ namespace DamWebAPI.ViewModel.AppManage
             {
                 if (_cmdSelectedItemChangedDate == null)
                 {
-                    _cmdSelectedItemChangedDate = new RelayCommand<DateTime?>(param => HandleSelectedItemChangedDate(param), CanSelectedItemChangedDate);
+                    _cmdSelectedItemChangedDate = new RelayCommand<DateTimeOffset?>(param => HandleSelectedItemChangedDate(param), CanSelectedItemChangedDate);
                 }
                 return _cmdSelectedItemChangedDate;
             }
@@ -721,7 +721,7 @@ namespace DamWebAPI.ViewModel.AppManage
         }
 
 
-        private bool CanSelectedItemChangedDate(DateTime? obj)
+        private bool CanSelectedItemChangedDate(DateTimeOffset? obj)
         {
             return true;
         }
@@ -729,8 +729,8 @@ namespace DamWebAPI.ViewModel.AppManage
         /// <summary>
         /// 被选中
         /// </summary>
-        DateTime? _selectedDate = null;
-        private void HandleSelectedItemChangedDate(DateTime? a)
+        DateTimeOffset? _selectedDate = null;
+        private void HandleSelectedItemChangedDate(DateTimeOffset? a)
         {
 
             _selectedDate = a;
@@ -756,12 +756,14 @@ namespace DamWebAPI.ViewModel.AppManage
 
 
 
-            var msg = new NotificationMessageAction<DateTime>("请输入新的分段公式起始时刻", (result) =>
+            var msg = new NotificationMessageAction<DateTime>("请输入新的分段公式起始时刻", (inputDate) =>
             {
 
                 try
                 {
-                    if (result < Hammergo.GlobalConfig.PubConstant.InitialTime)
+                    var result = new DateTimeOffset(inputDate);
+
+                    if (result <  DateTimeOffset.MinValue)
                     {
                         throw new Exception("要插入的时刻不能小于" + Hammergo.GlobalConfig.PubConstant.InitialTime.ToString("u"));
 
@@ -770,7 +772,7 @@ namespace DamWebAPI.ViewModel.AppManage
                     //首先获取当前的时刻列表，以进行时刻划分
                     var dateList = (from i in _allFormulae
                                     orderby i.StartDate ascending
-                                    select i.StartDate.DateTime).Distinct().ToList();
+                                    select i.StartDate).Distinct().ToList();
 
                     if (dateList.Contains(result))
                     {
@@ -778,37 +780,37 @@ namespace DamWebAPI.ViewModel.AppManage
                     }
 
                     //寻找大于result的最小值
-                    DateTime greaterDate = (from i in dateList
+                    DateTimeOffset greaterDate = (from i in dateList
                                             where i > result
                                             orderby i ascending
                                             select i).FirstOrDefault();
 
 
                     //寻找小于result在最大值
-                    DateTime lessDate = (from i in dateList
+                    DateTimeOffset lessDate = (from i in dateList
                                          where i < result
                                          orderby i descending
                                          select i).FirstOrDefault();
 
-                    DateTime startDate, endDate;
+                    DateTimeOffset startDate, endDate;
 
-                    if (greaterDate == DateTime.MinValue && lessDate == DateTime.MinValue)
+                    if (greaterDate == DateTimeOffset.MinValue && lessDate == DateTimeOffset.MinValue)
                     {
                         //没有任何计算公式
                         startDate = result;
-                        endDate = Hammergo.GlobalConfig.PubConstant.OverTime;
+                        endDate = DateTimeOffset.MaxValue;
                     }
-                    else if (lessDate == DateTime.MinValue)
+                    else if (lessDate == DateTimeOffset.MinValue)
                     {
                         //要插入的时刻在所有时刻之前
                         startDate = result;
                         endDate = greaterDate;
                     }
-                    else if (greaterDate == DateTime.MinValue)
+                    else if (greaterDate == DateTimeOffset.MinValue)
                     {
                         //要插入的时刻在所有时刻之后
                         startDate = result;
-                        endDate = Hammergo.GlobalConfig.PubConstant.OverTime;
+                        endDate = DateTimeOffset.MaxValue;
                     }
                     else
                     {
@@ -904,7 +906,7 @@ namespace DamWebAPI.ViewModel.AppManage
                                                orderby i ascending
                                                select i).FirstOrDefault();
 
-                        if (suffixDate == DateTime.MinValue)
+                        if (suffixDate == DateTimeOffset.MinValue)
                         {
                             //没有后缀的时间，要删除的项为最为一个时刻
                             suffixDate = Hammergo.GlobalConfig.PubConstant.OverTime;

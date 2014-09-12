@@ -6,7 +6,7 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data;
 using Hammergo.Utility;
-using  Hammergo.GlobalConfig;
+using Hammergo.GlobalConfig;
 using System.Collections;
 using DamServiceV3.Test.DamServiceRef;
 
@@ -45,7 +45,7 @@ namespace DamWebAPI.ViewModel.DataImport
                     workSheetName = ws.Name;
                     //可获取最大日期
                     //最后一次数据
-                    AppIntegratedInfo appInfo = new AppIntegratedInfo(appName, 1, null,  DateTimeOffset.MaxValue);
+                    AppIntegratedInfo appInfo = new AppIntegratedInfo(appName, 1, null, DateTimeOffset.MaxValue);
                     if (appInfo.CurrentApp != null)
                     {
                         //创建构架表
@@ -267,7 +267,7 @@ namespace DamWebAPI.ViewModel.DataImport
                 {
                     if (key == PubConstant.timeColumnName)
                     {
-                        row[key] =new DateTimeOffset( listDates[i]);//转换
+                        row[key] = new DateTimeOffset(listDates[i]);//转换
                     }
                     else if (key == PubConstant.remarkColumnName)
                     {
@@ -303,7 +303,7 @@ namespace DamWebAPI.ViewModel.DataImport
                             if (cp != null && cp.PrecisionNum != null)
                             {
 
-                                ret =Hammergo.Utility.Helper.Round(ret.Value, cp.PrecisionNum);
+                                ret = Hammergo.Utility.Helper.Round(ret.Value, cp.PrecisionNum);
                             }
 
                             row[key] = ret;
@@ -333,7 +333,7 @@ namespace DamWebAPI.ViewModel.DataImport
                 DateTimeOffset date = (DateTimeOffset)row[PubConstant.timeColumnName];
                 if (date > maxDate)
                 {
-                
+
 
                     foreach (MessureParam item in appInfo.MesParams)
                     {
@@ -343,7 +343,7 @@ namespace DamWebAPI.ViewModel.DataImport
                         mv.ParamId = item.Id;
                         mv.Val = row[item.ParamName] as double?;
 
-                         appInfo.MesValues.Add(mv);
+                        appInfo.DbContext.AddToMessureValues(mv);
                     }
 
                     foreach (CalculateParam item in appInfo.CalcParams)
@@ -354,8 +354,8 @@ namespace DamWebAPI.ViewModel.DataImport
                         mv.ParamId = item.Id;
                         mv.Val = row[item.ParamName] as double?;
 
-                      
-                        appInfo.CalcValues.Add(mv);
+
+                        appInfo.DbContext.AddToCalculateValues(mv);
                     }
 
                     object remarkVal = row[PubConstant.remarkColumnName];
@@ -366,13 +366,15 @@ namespace DamWebAPI.ViewModel.DataImport
                         remark.AppId = appInfo.CurrentApp.Id;
                         remark.Date = date;
                         remark.RemarkText = remarkVal.ToString().Trim();
-                        appInfo.Remarks.Add(remark);
+
+                        appInfo.DbContext.AddToRemarks(remark);
                     }
 
-                    appInfo.Update();
+
 
                 }
             }
+            appInfo.Update();
         }
 
 

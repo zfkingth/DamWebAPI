@@ -91,7 +91,7 @@ namespace DamWebAPI.ViewModel.Graphics
             catch (Exception ex)
             {
 
-                Messenger.Default.Send(ex);
+                Messenger.Default.Send<Exception>(ex);
                 GraphicDS.RejectChanges();
             }
         }

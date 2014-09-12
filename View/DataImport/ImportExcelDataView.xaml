@@ -19,11 +19,11 @@
             <ColumnDefinition />
 
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="2"
-               Grid.Column="0"
-               Grid.ColumnSpan="3"
-               Margin="10"
-               Content="结果" />
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   Margin="10"
+                   Text="{Binding HandleInfo}" />
         <GroupBox Grid.Row="1"
                   Grid.Column="1"
                   VerticalAlignment="Center"
@@ -33,9 +33,14 @@
 
                 <RadioButton Margin="8">目录及所有子目录</RadioButton>
 
+
                 <StackPanel>
                     <Button Margin="8" Command="{Binding CmdChoosePath}">选择路径</Button>
-                    <Button Margin="8">开始导入</Button>
+                    <Button Margin="8"
+                            Command="{Binding CmdHandleImportData}"
+                            IsEnabled="{Binding Handling}">
+                        开始导入
+                    </Button>
                 </StackPanel>
             </StackPanel>
 

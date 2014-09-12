@@ -19,8 +19,8 @@ namespace DamWebAPI.ViewModel
         public DateTimeOffset? _startDate, _endDate;
 
         #region DbContex
-        protected Container _dbContext = null;
-        protected Container DbContext
+        internal Container _dbContext = null;
+        internal Container DbContext
         {
             get
             {

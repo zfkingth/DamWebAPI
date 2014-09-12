@@ -151,8 +151,8 @@ namespace DamWebAPI.ViewModel.AppManage
 
 
 
+                Messenger.Default.Send<Exception>(ex);
 
-                Messenger.Default.Send(ex);
             }
             // targetModel
             // Messenger.Default.Send<Exception>(new Exception("Hello world!"));
@@ -544,8 +544,8 @@ namespace DamWebAPI.ViewModel.AppManage
 
 
 
+                Messenger.Default.Send<Exception>(ex);
 
-                Messenger.Default.Send(ex);
             }
             // targetModel
             // Messenger.Default.Send<Exception>(new Exception("Hello world!"));

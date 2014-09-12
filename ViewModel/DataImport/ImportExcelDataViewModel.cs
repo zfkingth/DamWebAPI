@@ -17,22 +17,35 @@ using System.ComponentModel;
 
 namespace DamWebAPI.ViewModel.DataImport
 {
-    public class ImportExcelDataViewModel : WorkspaceViewModel,IDisposable
+    public class ImportExcelDataViewModel : WorkspaceViewModel
     {
         public ImportExcelDataViewModel()
         {
-            DisplayName = "测点管理";
+            DisplayName = "数据导入";
 
+            this.RequestClose += ImportExcelDataViewModel_RequestClose;
+
+            backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
 
         }
 
+        void ImportExcelDataViewModel_RequestClose(object sender, EventArgs e)
+        {
+            if (importer != null && importer.excelHelper != null)
+            {
+                importer.excelHelper.Dispose();
+                this.Dispose();
+
+            }
+        }
+
         void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             HandleInfo = "导入完成";
-            Handling = false;
+            Handled = true;
         }
 
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -108,9 +121,11 @@ namespace DamWebAPI.ViewModel.DataImport
             catch (Exception ex)
             {
                 if (exInfo != null)
-                    throw new Exception(exInfo.FullName + "\n" + ex.Message);
-                else
-                    throw new Exception(ex.Message);
+                    ex= new Exception(exInfo.FullName + "\n" + ex.Message);
+                HandleInfo = ex.Message;
+
+                Messenger.Default.Send<Exception>(ex);
+               
 
             }
         }
@@ -148,6 +163,7 @@ namespace DamWebAPI.ViewModel.DataImport
                 try
                 {
                     Dir = result;
+                    HandleInfo = "导入目录: " + Dir.FullName;
                 }
                 catch (Exception ex)
                 {
@@ -179,7 +195,7 @@ namespace DamWebAPI.ViewModel.DataImport
         private bool CanHandleImportData(object obj)
         {
 
-            return !Handling;
+            return Handled;
         }
 
         private void HandleHandleImportData(object obj)
@@ -187,7 +203,7 @@ namespace DamWebAPI.ViewModel.DataImport
 
             try
             {
-                Handling = true;
+                Handled = false;
                 if (SingleFolder)
                 {
 
@@ -206,9 +222,9 @@ namespace DamWebAPI.ViewModel.DataImport
             catch (Exception ex)
             {
 
-                Messenger.Default.Send(ex);
+                Messenger.Default.Send<Exception>(ex);
                 HandleInfo = ex.Message;
-                Handling = false;
+                Handled = true;
             }
 
         }
@@ -249,19 +265,19 @@ namespace DamWebAPI.ViewModel.DataImport
             }
         }
 
-        private bool _handling = false;
-        public bool Handling
+        private bool _handled = true;
+        public bool Handled
         {
             get
             {
-                return _handling;
+                return _handled;
             }
             set
             {
-                if(_handling!=value)
+                if(_handled!=value)
                 {
-                    _handling = value;
-                    RaisePropertyChanged("Handling");
+                    _handled = value;
+                    RaisePropertyChanged("Handled");
                 }
             }
         }
@@ -283,5 +299,9 @@ namespace DamWebAPI.ViewModel.DataImport
                 }
             }
         }
+
+
+
+ 
     }
 }
