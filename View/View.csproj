@@ -94,6 +94,9 @@
     <Compile Include="Common\ProjectPartView.xaml.cs">
       <DependentUpon>ProjectPartView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataImport\ImportExcelDataView.xaml.cs">
+      <DependentUpon>ImportExcelDataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Graphics\CustomProperty.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -170,6 +173,10 @@
     <Page Include="Common\ProjectPartView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataImport\ImportExcelDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Graphics\GraphicsView.xaml">
       <SubType>Designer</SubType>

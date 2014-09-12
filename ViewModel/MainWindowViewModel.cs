@@ -165,6 +165,53 @@ namespace DamWebAPI.ViewModel
             this.SetActiveWorkspace(workspace);
         }
 
+
+
+        private ICommand _cmdImportExcelData;
+
+        public ICommand CmdImportExcelData
+        {
+            get
+            {
+                if (_cmdImportExcelData == null)
+                {
+                    _cmdImportExcelData = new RelayCommand(param => this.HandleImportExcelData());
+                }
+                return _cmdImportExcelData;
+            }
+        }
+
+        void HandleImportExcelData()
+        {
+            //具有唯一性
+            var workspace =
+             this.Workspaces.FirstOrDefault(vm =>
+             {
+                 var item = vm as DataImport.ImportExcelDataViewModel;
+                 if (item != null  )
+                 {
+                     return true;
+                 }
+                 else
+                 {
+                     return false;
+                 }
+
+             }
+             ) as DataImport.ImportExcelDataViewModel;
+
+
+            if (workspace == null)
+            {
+                workspace = new DataImport.ImportExcelDataViewModel();
+                this.Workspaces.Add(workspace);
+            }
+
+            this.SetActiveWorkspace(workspace); ;
+        }
+
+
+
         #endregion // Commands
 
         #region Workspaces

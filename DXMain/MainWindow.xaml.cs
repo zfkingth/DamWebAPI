@@ -179,6 +179,9 @@ namespace DXMain
             else if (type == typeof(GraphicsViewModel))
             {
                 control = new GraphicsView();
+            }else if(type==typeof(DamWebAPI.ViewModel.DataImport.ImportExcelDataViewModel))
+            {
+                control = new DamWebAPI.View.DataImport.ImportExcelDataView();
             }
 
             

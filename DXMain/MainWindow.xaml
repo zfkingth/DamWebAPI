@@ -48,6 +48,11 @@
                                    Content="过程线"
                                    LargeGlyph="Images\line_32x32.png" />
 
+                <dxb:BarButtonItem x:Name="impoartExcel"
+                                   Command="{Binding CmdImportExcelData}"
+                                   Content="Excel导入"
+                                   LargeGlyph="Images\importimage_32x32.png" />
+
 
             </dxb:BarManager.Items>
             <Grid>
@@ -74,16 +79,24 @@
                             </dxr:RibbonPageGroup>
 
                         </dxr:RibbonPage>
+
+                        <dxr:RibbonPage Caption="导入导出">
+                            <dxr:RibbonPageGroup Caption=" ">
+
+                                <dxb:BarButtonItemLink BarItemName="impoartExcel" RibbonStyle="Large" />
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
                     </dxr:RibbonDefaultPageCategory>
+
+
                 </dxr:RibbonControl>
 
                 <TabControl Name="tabControl1"
                             Grid.Row="1"
                             Background="{StaticResource bckBrush}"
+                            DataContextChanged="tabControl1_DataContextChanged"
                             ItemContainerStyle="{StaticResource tabItemStyle}"
-                            Padding="0" DataContextChanged="tabControl1_DataContextChanged" >
-               
-                </TabControl>
+                            Padding="0" />
             </Grid>
         </dxb:BarManager>
     </Grid>
