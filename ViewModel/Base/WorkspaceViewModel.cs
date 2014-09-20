@@ -86,7 +86,7 @@ namespace DamWebAPI.ViewModel
 
         #region DbContex
         protected DamServiceV3.Test.DamServiceRef.Container _dbContext = null;
-        protected DamServiceV3.Test.DamServiceRef.Container DbContext
+        public DamServiceV3.Test.DamServiceRef.Container DbContext
         {
             get
             {
@@ -95,6 +95,14 @@ namespace DamWebAPI.ViewModel
                     _dbContext = new DamServiceV3.Test.DamServiceRef.Container(SimpleIoc.Default.GetInstance<Uri>());
                 }
                 return _dbContext;
+            }
+            set
+            {
+                if(_dbContext!=value)
+                {
+                    _dbContext = value;
+                    RaisePropertyChanged("DbContex");
+                }
             }
         }
         #endregion
