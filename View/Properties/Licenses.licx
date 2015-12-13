@@ -1,5 +1,2 @@
-DevExpress.Patch.InMemoryPatch, DevExpress.Patch.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7fc7bfca2443de66
 C1.WPF.C1Chart.C1Chart, C1.WPF.C1Chart.4
 C1.WPF.Extended.C1PropertyGrid, C1.WPF.Extended.4, Version=4.0.20133.375, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce
-DevExpress.Xpf.Grid.GridControl, DevExpress.Xpf.Grid.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
-DevExpress.Xpf.Editors.DateEdit, DevExpress.Xpf.Core.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
